@@ -9,7 +9,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
   const lines = children.split("\n")
-
   return (
     <div className="relative group">
       <button
@@ -24,77 +23,44 @@ function CodeBlock({ children }: { children: string }) {
       </button>
       <Card className="p-4 bg-slate-950 text-slate-50 border-slate-800 overflow-hidden">
         <pre className="text-sm overflow-x-auto font-mono">
-          <code>
-            {lines.map((line, i) => (
-              <div key={i} className="flex">
-                <span className="inline-block w-8 text-right pr-4 text-slate-600 select-none">{i + 1}</span>
-                <span>{line}</span>
-              </div>
-            ))}
-          </code>
+          <code>{lines.map((line, i) => (<div key={i} className="flex"><span className="inline-block w-8 text-right pr-4 text-slate-600 select-none">{i + 1}</span><span>{line}</span></div>))}</code>
         </pre>
       </Card>
     </div>
   )
 }
 
-function Preview({ children }: { children: React.ReactNode }) {
-  return (
-    <Card className="p-8 border bg-white flex items-center justify-center min-h-40 rounded-lg">
-      {children}
-    </Card>
-  )
-}
-
-export default function ComponentPage() {
-  const title = "Uform"
-  
+export default function FormComponentPage() {
   return (
     <div className="flex gap-12">
       <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
-        <div className="space-y-2">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><a href="#examples" className="hover:text-foreground">Examples</a></li>
-          </ul>
-        </div>
+        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
       </div>
 
       <div className="flex-1 max-w-2xl space-y-8">
         <section className="space-y-4">
-          <h1 className="text-5xl font-bold tracking-tight">{title}</h1>
-          <p className="text-lg text-muted-foreground">
-            Component combination and pattern
-          </p>
+          <h1 className="text-5xl font-bold tracking-tight">Form</h1>
+          <p className="text-lg text-muted-foreground">Form pattern with inputs, labels, validation</p>
         </section>
 
-        <section id="examples" className="space-y-4">
-          <h2 className="text-2xl font-bold">Examples</h2>
-          <Tabs defaultValue="code" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="preview">Preview</TabsTrigger>
-              <TabsTrigger value="code">Code</TabsTrigger>
-            </TabsList>
-            <TabsContent value="preview">
-              <Preview>
-                <div className="text-center text-muted-foreground">
-                  Examples coming soon
-                </div>
-              </Preview>
-            </TabsContent>
-            <TabsContent value="code">
-              <CodeBlock>{`export function Example() {
-  return (
-    <div>
-      {/* Component example */}
-    </div>
-  )
-}`}</CodeBlock>
-            </TabsContent>
-          </Tabs>
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold">Example</h2>
+          <Card className="p-8 border bg-white">
+            <form className="space-y-4 max-w-sm">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Email</label>
+                <input type="email" placeholder="user@example.com" className="w-full px-3 py-2 border rounded-md text-sm" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Password</label>
+                <input type="password" placeholder="••••••" className="w-full px-3 py-2 border rounded-md text-sm" />
+              </div>
+              <Button className="w-full">Sign In</Button>
+            </form>
+          </Card>
         </section>
 
-        <section className="flex items-center justify-between pt-8 border-t">
+        <section className="pt-8 border-t">
           <div className="text-sm text-muted-foreground">Last updated: June 26, 2025</div>
         </section>
       </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { Card } from "@/primitives/card"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/primitives/card"
 import { Button } from "@/primitives/button"
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
@@ -46,9 +46,7 @@ function Preview({ children }: { children: React.ReactNode }) {
   )
 }
 
-export default function ComponentPage() {
-  const title = "Ucard"
-  
+export default function CardComponentPage() {
   return (
     <div className="flex gap-12">
       <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
@@ -62,32 +60,50 @@ export default function ComponentPage() {
 
       <div className="flex-1 max-w-2xl space-y-8">
         <section className="space-y-4">
-          <h1 className="text-5xl font-bold tracking-tight">{title}</h1>
-          <p className="text-lg text-muted-foreground">
-            Component combination and pattern
-          </p>
+          <h1 className="text-5xl font-bold tracking-tight">Card</h1>
+          <p className="text-lg text-muted-foreground">Card container pattern with header, content, footer</p>
         </section>
 
         <section id="examples" className="space-y-4">
           <h2 className="text-2xl font-bold">Examples</h2>
-          <Tabs defaultValue="code" className="w-full">
+          <Tabs defaultValue="preview" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="preview">Preview</TabsTrigger>
               <TabsTrigger value="code">Code</TabsTrigger>
             </TabsList>
             <TabsContent value="preview">
               <Preview>
-                <div className="text-center text-muted-foreground">
-                  Examples coming soon
-                </div>
+                <Card className="w-full max-w-sm">
+                  <CardHeader>
+                    <CardTitle>Settings</CardTitle>
+                    <CardDescription>Manage your preferences</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-muted-foreground">Configure your settings here</p>
+                  </CardContent>
+                  <CardFooter className="flex gap-2">
+                    <Button variant="outline">Cancel</Button>
+                    <Button>Save</Button>
+                  </CardFooter>
+                </Card>
               </Preview>
             </TabsContent>
             <TabsContent value="code">
-              <CodeBlock>{`export function Example() {
+              <CodeBlock>{`import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/primitives/card"
+import { Button } from "@/primitives/button"
+
+export function CardExample() {
   return (
-    <div>
-      {/* Component example */}
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Title</CardTitle>
+        <CardDescription>Description</CardDescription>
+      </CardHeader>
+      <CardContent>Content</CardContent>
+      <CardFooter>
+        <Button>Action</Button>
+      </CardFooter>
+    </Card>
   )
 }`}</CodeBlock>
             </TabsContent>

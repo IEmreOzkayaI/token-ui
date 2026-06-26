@@ -1,7 +1,8 @@
 "use client"
 
-import { Card } from "@/primitives/card"
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/primitives/dialog"
 import { Button } from "@/primitives/button"
+import { Card } from "@/primitives/card"
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
@@ -9,7 +10,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
   const lines = children.split("\n")
-
   return (
     <div className="relative group">
       <button
@@ -46,50 +46,62 @@ function Preview({ children }: { children: React.ReactNode }) {
   )
 }
 
-export default function ComponentPage() {
-  const title = "Udialog"
-  
+export default function DialogComponentPage() {
   return (
     <div className="flex gap-12">
       <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
-        <div className="space-y-2">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><a href="#examples" className="hover:text-foreground">Examples</a></li>
-          </ul>
-        </div>
+        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
+        <ul className="space-y-2 text-sm text-muted-foreground mt-2">
+          <li><a href="#examples" className="hover:text-foreground">Examples</a></li>
+        </ul>
       </div>
 
       <div className="flex-1 max-w-2xl space-y-8">
         <section className="space-y-4">
-          <h1 className="text-5xl font-bold tracking-tight">{title}</h1>
-          <p className="text-lg text-muted-foreground">
-            Component combination and pattern
-          </p>
+          <h1 className="text-5xl font-bold tracking-tight">Dialog</h1>
+          <p className="text-lg text-muted-foreground">Modal dialog pattern with buttons and actions</p>
         </section>
 
         <section id="examples" className="space-y-4">
           <h2 className="text-2xl font-bold">Examples</h2>
-          <Tabs defaultValue="code" className="w-full">
+          <Tabs defaultValue="preview" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="preview">Preview</TabsTrigger>
               <TabsTrigger value="code">Code</TabsTrigger>
             </TabsList>
             <TabsContent value="preview">
               <Preview>
-                <div className="text-center text-muted-foreground">
-                  Examples coming soon
-                </div>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button>Open Dialog</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Confirm Action</DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-muted-foreground">Are you sure?</p>
+                    <DialogFooter>
+                      <Button variant="outline">Cancel</Button>
+                      <Button>Confirm</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </Preview>
             </TabsContent>
             <TabsContent value="code">
-              <CodeBlock>{`export function Example() {
-  return (
-    <div>
-      {/* Component example */}
-    </div>
-  )
-}`}</CodeBlock>
+              <CodeBlock>{`<Dialog>
+  <DialogTrigger asChild>
+    <Button>Open</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Title</DialogTitle>
+    </DialogHeader>
+    <DialogFooter>
+      <Button>Confirm</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>`}</CodeBlock>
             </TabsContent>
           </Tabs>
         </section>
