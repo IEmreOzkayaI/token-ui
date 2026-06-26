@@ -1,10 +1,10 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { TextareaButton } from "@/ui/components/textarea-button"
+import TextareaButton from "@/ui/components/textarea-button"
 import TextareaDemo from "@/ui/components/textarea-demo"
-import { TextareaDisabled } from "@/ui/components/textarea-disabled"
-import { TextareaField } from "@/ui/components/textarea-field"
-import { TextareaInvalid } from "@/ui/components/textarea-invalid"
+import TextareaDisabled from "@/ui/components/textarea-disabled"
+import TextareaField from "@/ui/components/textarea-field"
+import TextareaInvalid from "@/ui/components/textarea-invalid"
 
 const examples = [
   {

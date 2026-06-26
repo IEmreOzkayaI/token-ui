@@ -19,7 +19,7 @@ import {
 import { Field, FieldGroup, FieldLabel } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function CollapsibleSettings() {
+export default function CollapsibleSettings() {
   const [isOpen, setIsOpen] = React.useState(false)
 
   return (

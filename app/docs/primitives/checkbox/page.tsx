@@ -1,12 +1,12 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { CheckboxBasic } from "@/ui/components/checkbox-basic"
+import CheckboxBasic from "@/ui/components/checkbox-basic"
 import CheckboxDemo from "@/ui/components/checkbox-demo"
-import { CheckboxDescription } from "@/ui/components/checkbox-description"
-import { CheckboxDisabled } from "@/ui/components/checkbox-disabled"
-import { CheckboxGroup } from "@/ui/components/checkbox-group"
-import { CheckboxInvalid } from "@/ui/components/checkbox-invalid"
-import { CheckboxInTable } from "@/ui/components/checkbox-table"
+import CheckboxDescription from "@/ui/components/checkbox-description"
+import CheckboxDisabled from "@/ui/components/checkbox-disabled"
+import CheckboxGroup from "@/ui/components/checkbox-group"
+import CheckboxInvalid from "@/ui/components/checkbox-invalid"
+import CheckboxInTable from "@/ui/components/checkbox-table"
 
 const examples = [
   {

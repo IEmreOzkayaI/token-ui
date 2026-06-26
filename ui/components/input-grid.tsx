@@ -1,7 +1,7 @@
 import { Field, FieldGroup, FieldLabel } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function InputGrid() {
+export default function InputGrid() {
   return (
     <FieldGroup className="grid max-w-sm grid-cols-2">
       <Field>

@@ -1,7 +1,7 @@
 import { Label } from "@/primitives/label"
 import { Switch } from "@/primitives/switch"
 
-export function SwitchDemo() {
+export default function SwitchDemo() {
   return (
     <div className="flex items-center space-x-2">
       <Switch id="airplane-mode" />

@@ -1,7 +1,7 @@
 import { Button } from "@/primitives/button"
 import { Textarea } from "@/primitives/textarea"
 
-export function TextareaButton() {
+export default function TextareaButton() {
   return (
     <div className="grid w-full gap-2">
       <Textarea placeholder="Type your message here." />

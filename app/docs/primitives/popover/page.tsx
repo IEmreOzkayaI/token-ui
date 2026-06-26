@@ -1,9 +1,9 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { PopoverAlignments } from "@/ui/components/popover-alignments"
-import { PopoverBasic } from "@/ui/components/popover-basic"
+import PopoverAlignments from "@/ui/components/popover-alignments"
+import PopoverBasic from "@/ui/components/popover-basic"
 import PopoverDemo from "@/ui/components/popover-demo"
-import { PopoverForm } from "@/ui/components/popover-form"
+import PopoverForm from "@/ui/components/popover-form"
 
 const examples = [
   {

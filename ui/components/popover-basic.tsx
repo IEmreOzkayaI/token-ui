@@ -8,7 +8,7 @@ import {
   PopoverTrigger,
 } from "@/primitives/popover"
 
-export function PopoverBasic() {
+export default function PopoverBasic() {
   return (
     <Popover>
       <PopoverTrigger asChild>

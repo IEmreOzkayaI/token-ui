@@ -5,7 +5,7 @@ import {
 } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function InputRequired() {
+export default function InputRequired() {
   return (
     <Field>
       <FieldLabel htmlFor="input-required">

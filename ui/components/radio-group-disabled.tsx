@@ -1,7 +1,7 @@
 import { Field, FieldLabel } from "@/primitives/field"
 import { RadioGroup, RadioGroupItem } from "@/primitives/radio-group"
 
-export function RadioGroupDisabled() {
+export default function RadioGroupDisabled() {
   return (
     <RadioGroup defaultValue="option2" className="w-fit">
       <Field orientation="horizontal" data-disabled>

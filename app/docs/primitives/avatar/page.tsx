@@ -1,13 +1,13 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { AvatarBadgeIconExample } from "@/ui/components/avatar-badge-icon"
-import { AvatarWithBadge } from "@/ui/components/avatar-badge"
+import AvatarBadgeIconExample from "@/ui/components/avatar-badge-icon"
+import AvatarWithBadge from "@/ui/components/avatar-badge"
 import AvatarDemo from "@/ui/components/avatar-basic"
-import { AvatarDropdown } from "@/ui/components/avatar-dropdown"
-import { AvatarGroupCountIconExample } from "@/ui/components/avatar-group-count-icon"
-import { AvatarGroupCountExample } from "@/ui/components/avatar-group-count"
-import { AvatarGroupExample } from "@/ui/components/avatar-group"
-import { AvatarSizeExample } from "@/ui/components/avatar-size"
+import AvatarDropdown from "@/ui/components/avatar-dropdown"
+import AvatarGroupCountIconExample from "@/ui/components/avatar-group-count-icon"
+import AvatarGroupCountExample from "@/ui/components/avatar-group-count"
+import AvatarGroupExample from "@/ui/components/avatar-group"
+import AvatarSizeExample from "@/ui/components/avatar-size"
 
 const examples = [
   {

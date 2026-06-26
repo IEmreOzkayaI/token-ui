@@ -5,7 +5,7 @@ import {
   InputOTPSlot,
 } from "@/primitives/input-otp"
 
-export function InputOTPDisabled() {
+export default function InputOTPDisabled() {
   return (
     <InputOTP id="disabled" maxLength={6} disabled value="123456">
       <InputOTPGroup>

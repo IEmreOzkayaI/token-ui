@@ -14,7 +14,7 @@ import {
   TooltipTrigger,
 } from "@/primitives/tooltip"
 
-export function ButtonGroupNested() {
+export default function ButtonGroupNested() {
   return (
     <ButtonGroup>
       <ButtonGroup>

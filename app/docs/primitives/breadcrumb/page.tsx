@@ -1,11 +1,11 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { BreadcrumbBasic } from "@/ui/components/breadcrumb-basic"
-import { BreadcrumbDemo } from "@/ui/components/breadcrumb-demo"
-import { BreadcrumbDropdown } from "@/ui/components/breadcrumb-dropdown"
-import { BreadcrumbEllipsisDemo } from "@/ui/components/breadcrumb-ellipsis"
-import { BreadcrumbLinkDemo } from "@/ui/components/breadcrumb-link"
-import { BreadcrumbSeparatorDemo } from "@/ui/components/breadcrumb-separator"
+import BreadcrumbBasic from "@/ui/components/breadcrumb-basic"
+import BreadcrumbDemo from "@/ui/components/breadcrumb-demo"
+import BreadcrumbDropdown from "@/ui/components/breadcrumb-dropdown"
+import BreadcrumbEllipsisDemo from "@/ui/components/breadcrumb-ellipsis"
+import BreadcrumbLinkDemo from "@/ui/components/breadcrumb-link"
+import BreadcrumbSeparatorDemo from "@/ui/components/breadcrumb-separator"
 
 const examples = [
   {

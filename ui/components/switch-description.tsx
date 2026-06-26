@@ -6,7 +6,7 @@ import {
 } from "@/primitives/field"
 import { Switch } from "@/primitives/switch"
 
-export function SwitchDescription() {
+export default function SwitchDescription() {
   return (
     <Field orientation="horizontal" className="max-w-sm">
       <FieldContent>

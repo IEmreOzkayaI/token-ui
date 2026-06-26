@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
 } from "@/primitives/carousel"
 
-export function CarouselMultiple() {
+export default function CarouselMultiple() {
   return (
     <Carousel
       className="mx-auto max-w-xs sm:max-w-sm"

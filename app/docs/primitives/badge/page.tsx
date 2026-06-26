@@ -1,11 +1,11 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { BadgeCustomColors } from "@/ui/components/badge-colors"
+import BadgeCustomColors from "@/ui/components/badge-colors"
 import BadgeDemo from "@/ui/components/badge-demo"
-import { BadgeWithIconLeft } from "@/ui/components/badge-icon"
-import { BadgeAsLink } from "@/ui/components/badge-link"
-import { BadgeWithSpinner } from "@/ui/components/badge-spinner"
-import { BadgeVariants } from "@/ui/components/badge-variants"
+import BadgeWithIconLeft from "@/ui/components/badge-icon"
+import BadgeAsLink from "@/ui/components/badge-link"
+import BadgeWithSpinner from "@/ui/components/badge-spinner"
+import BadgeVariants from "@/ui/components/badge-variants"
 
 const examples = [
   {

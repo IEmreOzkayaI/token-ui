@@ -1,9 +1,9 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { SonnerDemo } from "@/ui/components/sonner-demo"
-import { SonnerDescription } from "@/ui/components/sonner-description"
-import { SonnerPosition } from "@/ui/components/sonner-position"
-import { SonnerTypes } from "@/ui/components/sonner-types"
+import SonnerDemo from "@/ui/components/sonner-demo"
+import SonnerDescription from "@/ui/components/sonner-description"
+import SonnerPosition from "@/ui/components/sonner-position"
+import SonnerTypes from "@/ui/components/sonner-types"
 
 const examples = [
   {

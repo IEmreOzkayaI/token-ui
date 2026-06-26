@@ -14,7 +14,7 @@ import {
 } from "@/primitives/alert-dialog"
 import { Button } from "@/primitives/button"
 
-export function AlertDialogWithMedia() {
+export default function AlertDialogWithMedia() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>

@@ -1,6 +1,6 @@
 import { Tabs, TabsList, TabsTrigger } from "@/primitives/tabs"
 
-export function TabsVertical() {
+export default function TabsVertical() {
   return (
     <Tabs defaultValue="account" orientation="vertical">
       <TabsList>

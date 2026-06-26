@@ -1,10 +1,10 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { TabsDemo } from "@/ui/components/tabs-demo"
-import { TabsDisabled } from "@/ui/components/tabs-disabled"
-import { TabsIcons } from "@/ui/components/tabs-icons"
-import { TabsLine } from "@/ui/components/tabs-line"
-import { TabsVertical } from "@/ui/components/tabs-vertical"
+import TabsDemo from "@/ui/components/tabs-demo"
+import TabsDisabled from "@/ui/components/tabs-disabled"
+import TabsIcons from "@/ui/components/tabs-icons"
+import TabsLine from "@/ui/components/tabs-line"
+import TabsVertical from "@/ui/components/tabs-vertical"
 
 const examples = [
   {

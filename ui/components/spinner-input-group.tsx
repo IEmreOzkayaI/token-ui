@@ -9,7 +9,7 @@ import {
 } from "@/primitives/input-group"
 import { Spinner } from "@/primitives/spinner"
 
-export function SpinnerInputGroup() {
+export default function SpinnerInputGroup() {
   return (
     <div className="flex w-full max-w-md flex-col gap-4">
       <InputGroup>

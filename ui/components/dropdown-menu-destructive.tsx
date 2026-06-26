@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/primitives/dropdown-menu"
 
-export function DropdownMenuDestructive() {
+export default function DropdownMenuDestructive() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

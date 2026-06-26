@@ -6,7 +6,7 @@ import {
 } from "@/primitives/field"
 import { Switch } from "@/primitives/switch"
 
-export function SwitchInvalid() {
+export default function SwitchInvalid() {
   return (
     <Field orientation="horizontal" className="max-w-sm" data-invalid>
       <FieldContent>

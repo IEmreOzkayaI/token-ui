@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/primitives/card"
 
-export function CardSmall() {
+export default function CardSmall() {
   return (
     <Card size="sm" className="mx-auto w-full max-w-sm">
       <CardHeader>

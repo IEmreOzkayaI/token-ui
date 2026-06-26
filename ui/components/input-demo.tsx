@@ -5,7 +5,7 @@ import {
 } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function InputDemo() {
+export default function InputDemo() {
   return (
     <Field>
       <FieldLabel htmlFor="input-demo-api-key">API Key</FieldLabel>

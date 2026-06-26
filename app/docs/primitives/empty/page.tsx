@@ -2,7 +2,7 @@ import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
 import EmptyAvatarGroup from "@/ui/components/empty-avatar-group"
 import EmptyAvatar from "@/ui/components/empty-avatar"
-import { EmptyInCard } from "@/ui/components/empty-card"
+import EmptyInCard from "@/ui/components/empty-card"
 import EmptyInputGroup from "@/ui/components/empty-input-group"
 
 const examples = [

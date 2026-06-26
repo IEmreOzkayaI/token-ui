@@ -6,7 +6,7 @@ import {
 } from "@/primitives/field"
 import { RadioGroup, RadioGroupItem } from "@/primitives/radio-group"
 
-export function RadioGroupDescription() {
+export default function RadioGroupDescription() {
   return (
     <RadioGroup defaultValue="comfortable" className="w-fit">
       <Field orientation="horizontal">

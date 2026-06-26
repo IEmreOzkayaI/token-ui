@@ -10,7 +10,7 @@ import {
 } from "@/primitives/field"
 import { RadioGroup, RadioGroupItem } from "@/primitives/radio-group"
 
-export function RadioFields() {
+export default function RadioFields() {
   return (
     <FieldGroup>
       <FieldSet>

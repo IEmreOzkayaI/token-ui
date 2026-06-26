@@ -1,7 +1,7 @@
 import { Field, FieldGroup, FieldLabel } from "@/primitives/field"
 import { Switch } from "@/primitives/switch"
 
-export function SwitchSizes() {
+export default function SwitchSizes() {
   return (
     <FieldGroup className="w-full max-w-[10rem]">
       <Field orientation="horizontal">

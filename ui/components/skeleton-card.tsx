@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from "@/primitives/card"
 import { Skeleton } from "@/primitives/skeleton"
 
-export function SkeletonCard() {
+export default function SkeletonCard() {
   return (
     <Card className="w-full max-w-xs">
       <CardHeader>

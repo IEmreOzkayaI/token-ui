@@ -12,7 +12,7 @@ import {
   TabsTrigger,
 } from "@/primitives/tabs"
 
-export function TabsDemo() {
+export default function TabsDemo() {
   return (
     <Tabs defaultValue="overview" className="w-[400px]">
       <TabsList>

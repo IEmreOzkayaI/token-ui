@@ -8,7 +8,7 @@ import {
 } from "@/primitives/field"
 import { Switch } from "@/primitives/switch"
 
-export function SwitchChoiceCard() {
+export default function SwitchChoiceCard() {
   return (
     <FieldGroup className="w-full max-w-sm">
       <FieldLabel htmlFor="switch-share">

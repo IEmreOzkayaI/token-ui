@@ -7,7 +7,7 @@ import {
   AvatarImage,
 } from "@/primitives/avatar"
 
-export function AvatarBadgeIconExample() {
+export default function AvatarBadgeIconExample() {
   return (
     <Avatar className="grayscale">
       <AvatarImage src="https://github.com/pranathip.png" alt="@pranathip" />

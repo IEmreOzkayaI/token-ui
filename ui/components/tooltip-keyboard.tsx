@@ -8,7 +8,7 @@ import {
   TooltipTrigger,
 } from "@/primitives/tooltip"
 
-export function TooltipKeyboard() {
+export default function TooltipKeyboard() {
   return (
     <Tooltip>
       <TooltipTrigger asChild>

@@ -13,7 +13,7 @@ import {
   ContextMenuTrigger,
 } from "@/primitives/context-menu"
 
-export function ContextMenuRadio() {
+export default function ContextMenuRadio() {
   const [user, setUser] = React.useState("pedro")
   const [theme, setTheme] = React.useState("light")
 

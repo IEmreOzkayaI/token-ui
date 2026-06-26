@@ -1,7 +1,7 @@
 import { Label } from "@/primitives/label"
 import { RadioGroup, RadioGroupItem } from "@/primitives/radio-group"
 
-export function RadioGroupDemo() {
+export default function RadioGroupDemo() {
   return (
     <RadioGroup defaultValue="comfortable" className="w-fit">
       <div className="flex items-center gap-3">

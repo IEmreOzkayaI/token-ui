@@ -5,7 +5,7 @@ import {
 } from "@/primitives/field"
 import { Textarea } from "@/primitives/textarea"
 
-export function TextareaField() {
+export default function TextareaField() {
   return (
     <Field>
       <FieldLabel htmlFor="textarea-message">Message</FieldLabel>

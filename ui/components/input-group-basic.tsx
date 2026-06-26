@@ -2,7 +2,7 @@ import { Field, FieldGroup, FieldLabel } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 import { InputGroup, InputGroupInput } from "@/primitives/input-group"
 
-export function InputGroupBasic() {
+export default function InputGroupBasic() {
   return (
     <FieldGroup>
       <Field>

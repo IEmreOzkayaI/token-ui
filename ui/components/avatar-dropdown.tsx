@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/primitives/dropdown-menu"
 
-export function AvatarDropdown() {
+export default function AvatarDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

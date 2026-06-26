@@ -25,7 +25,7 @@ import {
   InputGroupText,
 } from "@/primitives/input-group"
 
-export function InputGroupWithAddons() {
+export default function InputGroupWithAddons() {
   return (
     <FieldGroup>
       <Field>

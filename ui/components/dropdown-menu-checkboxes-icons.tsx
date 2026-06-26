@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/primitives/dropdown-menu"
 
-export function DropdownMenuCheckboxesIcons() {
+export default function DropdownMenuCheckboxesIcons() {
   const [notifications, setNotifications] = React.useState({
     email: true,
     sms: false,

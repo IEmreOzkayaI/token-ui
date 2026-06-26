@@ -1,11 +1,11 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { AlertDialogBasic } from "@/ui/components/alert-dialog-basic"
+import AlertDialogBasic from "@/ui/components/alert-dialog-basic"
 import AlertDialogDemo from "@/ui/components/alert-dialog-demo"
-import { AlertDialogDestructive } from "@/ui/components/alert-dialog-destructive"
-import { AlertDialogWithMedia } from "@/ui/components/alert-dialog-media"
-import { AlertDialogSmallWithMedia } from "@/ui/components/alert-dialog-small-media"
-import { AlertDialogSmall } from "@/ui/components/alert-dialog-small"
+import AlertDialogDestructive from "@/ui/components/alert-dialog-destructive"
+import AlertDialogWithMedia from "@/ui/components/alert-dialog-media"
+import AlertDialogSmallWithMedia from "@/ui/components/alert-dialog-small-media"
+import AlertDialogSmall from "@/ui/components/alert-dialog-small"
 
 const examples = [
   {

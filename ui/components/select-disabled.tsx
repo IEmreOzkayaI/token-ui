@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/primitives/select"
 
-export function SelectDisabled() {
+export default function SelectDisabled() {
   return (
     <Select disabled>
       <SelectTrigger className="w-full max-w-48">

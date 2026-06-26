@@ -10,7 +10,7 @@ import {
   BreadcrumbSeparator,
 } from "@/primitives/breadcrumb"
 
-export function BreadcrumbSeparatorDemo() {
+export default function BreadcrumbSeparatorDemo() {
   return (
     <Breadcrumb>
       <BreadcrumbList>

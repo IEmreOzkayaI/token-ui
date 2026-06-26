@@ -5,12 +5,12 @@ import AlertBasic from "@/ui/components/alert-basic"
 import AlertColors from "@/ui/components/alert-colors"
 import AlertDemo from "@/ui/components/alert-demo"
 import AlertDestructive from "@/ui/components/alert-destructive"
-import { AlertDialogBasic } from "@/ui/components/alert-dialog-basic"
+import AlertDialogBasic from "@/ui/components/alert-dialog-basic"
 import AlertDialogDemo from "@/ui/components/alert-dialog-demo"
-import { AlertDialogDestructive } from "@/ui/components/alert-dialog-destructive"
-import { AlertDialogWithMedia } from "@/ui/components/alert-dialog-media"
-import { AlertDialogSmallWithMedia } from "@/ui/components/alert-dialog-small-media"
-import { AlertDialogSmall } from "@/ui/components/alert-dialog-small"
+import AlertDialogDestructive from "@/ui/components/alert-dialog-destructive"
+import AlertDialogWithMedia from "@/ui/components/alert-dialog-media"
+import AlertDialogSmallWithMedia from "@/ui/components/alert-dialog-small-media"
+import AlertDialogSmall from "@/ui/components/alert-dialog-small"
 
 const examples = [
   {

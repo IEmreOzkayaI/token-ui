@@ -1,7 +1,7 @@
 import { Badge } from "@/primitives/badge"
 import { Spinner } from "@/primitives/spinner"
 
-export function SpinnerBadge() {
+export default function SpinnerBadge() {
   return (
     <div className="flex items-center gap-4 [--radius:1.2rem]">
       <Badge>

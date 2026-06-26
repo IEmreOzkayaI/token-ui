@@ -1,11 +1,11 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { RadioGroupChoiceCard } from "@/ui/components/radio-group-choice-card"
-import { RadioGroupDemo } from "@/ui/components/radio-group-demo"
-import { RadioGroupDescription } from "@/ui/components/radio-group-description"
-import { RadioGroupDisabled } from "@/ui/components/radio-group-disabled"
-import { RadioGroupFieldset } from "@/ui/components/radio-group-fieldset"
-import { RadioGroupInvalid } from "@/ui/components/radio-group-invalid"
+import RadioGroupChoiceCard from "@/ui/components/radio-group-choice-card"
+import RadioGroupDemo from "@/ui/components/radio-group-demo"
+import RadioGroupDescription from "@/ui/components/radio-group-description"
+import RadioGroupDisabled from "@/ui/components/radio-group-disabled"
+import RadioGroupFieldset from "@/ui/components/radio-group-fieldset"
+import RadioGroupInvalid from "@/ui/components/radio-group-invalid"
 
 const examples = [
   {

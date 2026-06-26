@@ -1,7 +1,7 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
 import HoverCardDemo from "@/ui/components/hover-card-demo"
-import { HoverCardSides } from "@/ui/components/hover-card-sides"
+import HoverCardSides from "@/ui/components/hover-card-sides"
 
 const examples = [
   {

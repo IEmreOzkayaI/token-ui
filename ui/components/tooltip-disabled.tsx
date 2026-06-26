@@ -5,7 +5,7 @@ import {
   TooltipTrigger,
 } from "@/primitives/tooltip"
 
-export function TooltipDisabled() {
+export default function TooltipDisabled() {
   return (
     <Tooltip>
       <TooltipTrigger asChild>

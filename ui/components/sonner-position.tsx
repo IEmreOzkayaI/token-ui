@@ -4,7 +4,7 @@ import { toast } from "sonner"
 
 import { Button } from "@/primitives/button"
 
-export function SonnerPosition() {
+export default function SonnerPosition() {
   return (
     <div className="flex flex-wrap justify-center gap-2">
       <Button

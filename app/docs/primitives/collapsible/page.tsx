@@ -1,8 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
 import CollapsibleDemo from "@/ui/components/collapsible-demo"
-import { CollapsibleFileTree } from "@/ui/components/collapsible-file-tree"
-import { CollapsibleSettings } from "@/ui/components/collapsible-settings"
+import CollapsibleFileTree from "@/ui/components/collapsible-file-tree"
+import CollapsibleSettings from "@/ui/components/collapsible-settings"
 
 const examples = [
   {

@@ -6,7 +6,7 @@ import {
   AvatarImage,
 } from "@/primitives/avatar"
 
-export function AvatarGroupCountExample() {
+export default function AvatarGroupCountExample() {
   return (
     <AvatarGroup className="grayscale">
       <Avatar>

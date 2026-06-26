@@ -10,7 +10,7 @@ import {
   DrawerTrigger,
 } from "@/primitives/drawer"
 
-export function DrawerScrollableContent() {
+export default function DrawerScrollableContent() {
   return (
     <Drawer direction="right">
       <DrawerTrigger asChild>

@@ -8,7 +8,7 @@ import {
   ItemTitle,
 } from "@/primitives/item"
 
-export function MutedItemGroup() {
+export default function MutedItemGroup() {
   return (
     <ItemGroup>
       <Item variant="muted">

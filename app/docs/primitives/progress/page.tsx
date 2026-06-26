@@ -1,8 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { ProgressControlled } from "@/ui/components/progress-controlled"
+import ProgressControlled from "@/ui/components/progress-controlled"
 import ProgressDemo from "@/ui/components/progress-demo"
-import { ProgressWithLabel } from "@/ui/components/progress-label"
+import ProgressWithLabel from "@/ui/components/progress-label"
 
 const examples = [
   {

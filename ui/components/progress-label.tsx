@@ -1,7 +1,7 @@
 import { Field, FieldLabel } from "@/primitives/field"
 import { Progress } from "@/primitives/progress"
 
-export function ProgressWithLabel() {
+export default function ProgressWithLabel() {
   return (
     <Field className="w-full max-w-sm">
       <FieldLabel htmlFor="progress-upload">

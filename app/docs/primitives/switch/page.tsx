@@ -1,11 +1,11 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { SwitchChoiceCard } from "@/ui/components/switch-choice-card"
-import { SwitchDemo } from "@/ui/components/switch-demo"
-import { SwitchDescription } from "@/ui/components/switch-description"
-import { SwitchDisabled } from "@/ui/components/switch-disabled"
-import { SwitchInvalid } from "@/ui/components/switch-invalid"
-import { SwitchSizes } from "@/ui/components/switch-sizes"
+import SwitchChoiceCard from "@/ui/components/switch-choice-card"
+import SwitchDemo from "@/ui/components/switch-demo"
+import SwitchDescription from "@/ui/components/switch-description"
+import SwitchDisabled from "@/ui/components/switch-disabled"
+import SwitchInvalid from "@/ui/components/switch-invalid"
+import SwitchSizes from "@/ui/components/switch-sizes"
 
 const examples = [
   {

@@ -11,7 +11,7 @@ import {
 } from "@/primitives/alert-dialog"
 import { Button } from "@/primitives/button"
 
-export function AlertDialogSmall() {
+export default function AlertDialogSmall() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>

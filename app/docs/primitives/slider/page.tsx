@@ -1,11 +1,11 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { SliderControlled } from "@/ui/components/slider-controlled"
-import { SliderDemo } from "@/ui/components/slider-demo"
-import { SliderDisabled } from "@/ui/components/slider-disabled"
-import { SliderMultiple } from "@/ui/components/slider-multiple"
-import { SliderRange } from "@/ui/components/slider-range"
-import { SliderVertical } from "@/ui/components/slider-vertical"
+import SliderControlled from "@/ui/components/slider-controlled"
+import SliderDemo from "@/ui/components/slider-demo"
+import SliderDisabled from "@/ui/components/slider-disabled"
+import SliderMultiple from "@/ui/components/slider-multiple"
+import SliderRange from "@/ui/components/slider-range"
+import SliderVertical from "@/ui/components/slider-vertical"
 
 const examples = [
   {

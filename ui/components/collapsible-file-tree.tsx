@@ -11,7 +11,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/primitives/tabs"
 
 type FileTreeItem = { name: string } | { name: string; items: FileTreeItem[] }
 
-export function CollapsibleFileTree() {
+export default function CollapsibleFileTree() {
   const fileTree: FileTreeItem[] = [
     {
       name: "components",

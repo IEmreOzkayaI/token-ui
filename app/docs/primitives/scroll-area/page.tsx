@@ -1,7 +1,7 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { ScrollAreaDemo } from "@/ui/components/scroll-area-demo"
-import { ScrollAreaHorizontalDemo } from "@/ui/components/scroll-area-horizontal-demo"
+import ScrollAreaDemo from "@/ui/components/scroll-area-demo"
+import ScrollAreaHorizontalDemo from "@/ui/components/scroll-area-horizontal-demo"
 
 const examples = [
   {

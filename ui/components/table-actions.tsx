@@ -17,7 +17,7 @@ import {
   TableRow,
 } from "@/primitives/table"
 
-export function TableActions() {
+export default function TableActions() {
   return (
     <Table>
       <TableHeader>

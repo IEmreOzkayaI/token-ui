@@ -1,7 +1,7 @@
 import { Checkbox } from "@/primitives/checkbox"
 import { Field, FieldGroup, FieldLabel } from "@/primitives/field"
 
-export function CheckboxBasic() {
+export default function CheckboxBasic() {
   return (
     <FieldGroup className="mx-auto w-56">
       <Field orientation="horizontal">

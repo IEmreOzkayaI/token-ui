@@ -5,7 +5,7 @@ import {
 } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function InputFile() {
+export default function InputFile() {
   return (
     <Field>
       <FieldLabel htmlFor="picture">Picture</FieldLabel>

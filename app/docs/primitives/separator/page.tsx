@@ -1,9 +1,9 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
 import SeparatorDemo from "@/ui/components/separator-demo"
-import { SeparatorList } from "@/ui/components/separator-list"
-import { SeparatorMenu } from "@/ui/components/separator-menu"
-import { SeparatorVertical } from "@/ui/components/separator-vertical"
+import SeparatorList from "@/ui/components/separator-list"
+import SeparatorMenu from "@/ui/components/separator-menu"
+import SeparatorVertical from "@/ui/components/separator-vertical"
 
 const examples = [
   {

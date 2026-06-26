@@ -1,6 +1,6 @@
 import { Toggle } from "@/primitives/toggle"
 
-export function ToggleDisabled() {
+export default function ToggleDisabled() {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <Toggle aria-label="Toggle disabled" disabled>

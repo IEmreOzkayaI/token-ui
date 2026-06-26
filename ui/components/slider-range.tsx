@@ -1,6 +1,6 @@
 import { Slider } from "@/primitives/slider"
 
-export function SliderRange() {
+export default function SliderRange() {
   return (
     <Slider
       defaultValue={[25, 50]}

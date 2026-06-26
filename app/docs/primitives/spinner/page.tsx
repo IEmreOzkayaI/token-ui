@@ -1,12 +1,12 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { SpinnerBadge } from "@/ui/components/spinner-badge"
-import { SpinnerButton } from "@/ui/components/spinner-button"
-import { SpinnerCustom } from "@/ui/components/spinner-custom"
-import { SpinnerDemo } from "@/ui/components/spinner-demo"
-import { SpinnerEmpty } from "@/ui/components/spinner-empty"
-import { SpinnerInputGroup } from "@/ui/components/spinner-input-group"
-import { SpinnerSize } from "@/ui/components/spinner-size"
+import SpinnerBadge from "@/ui/components/spinner-badge"
+import SpinnerButton from "@/ui/components/spinner-button"
+import SpinnerCustom from "@/ui/components/spinner-custom"
+import SpinnerDemo from "@/ui/components/spinner-demo"
+import SpinnerEmpty from "@/ui/components/spinner-empty"
+import SpinnerInputGroup from "@/ui/components/spinner-input-group"
+import SpinnerSize from "@/ui/components/spinner-size"
 
 const examples = [
   {

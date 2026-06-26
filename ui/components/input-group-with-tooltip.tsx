@@ -41,7 +41,7 @@ import {
   TooltipTrigger,
 } from "@/primitives/tooltip"
 
-export function InputGroupWithTooltip({
+export default function InputGroupWithTooltip({
   country,
   setCountry,
 }: {

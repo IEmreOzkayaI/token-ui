@@ -10,7 +10,7 @@ import {
   InputGroupInput,
 } from "@/primitives/input-group"
 
-export function InputGroupWithButtons() {
+export default function InputGroupWithButtons() {
   return (
     <FieldGroup>
       <Field>

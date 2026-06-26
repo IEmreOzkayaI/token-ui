@@ -1,10 +1,10 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { MenubarCheckbox } from "@/ui/components/menubar-checkbox"
+import MenubarCheckbox from "@/ui/components/menubar-checkbox"
 import MenubarDemo from "@/ui/components/menubar-demo"
-import { MenubarIcons } from "@/ui/components/menubar-icons"
-import { MenubarRadio } from "@/ui/components/menubar-radio"
-import { MenubarSubmenu } from "@/ui/components/menubar-submenu"
+import MenubarIcons from "@/ui/components/menubar-icons"
+import MenubarRadio from "@/ui/components/menubar-radio"
+import MenubarSubmenu from "@/ui/components/menubar-submenu"
 
 const examples = [
   {

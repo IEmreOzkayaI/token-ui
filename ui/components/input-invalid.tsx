@@ -5,7 +5,7 @@ import {
 } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function InputInvalid() {
+export default function InputInvalid() {
   return (
     <Field data-invalid>
       <FieldLabel htmlFor="input-invalid">Invalid Input</FieldLabel>

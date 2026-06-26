@@ -1,11 +1,11 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { SelectAlignItem } from "@/ui/components/select-align-item"
-import { SelectDemo } from "@/ui/components/select-demo"
-import { SelectDisabled } from "@/ui/components/select-disabled"
-import { SelectGroups } from "@/ui/components/select-groups"
-import { SelectInvalid } from "@/ui/components/select-invalid"
-import { SelectScrollable } from "@/ui/components/select-scrollable"
+import SelectAlignItem from "@/ui/components/select-align-item"
+import SelectDemo from "@/ui/components/select-demo"
+import SelectDisabled from "@/ui/components/select-disabled"
+import SelectGroups from "@/ui/components/select-groups"
+import SelectInvalid from "@/ui/components/select-invalid"
+import SelectScrollable from "@/ui/components/select-scrollable"
 
 const examples = [
   {

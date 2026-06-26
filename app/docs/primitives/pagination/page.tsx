@@ -1,8 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
 import PaginationDemo from "@/ui/components/pagination-demo"
-import { PaginationIconsOnly } from "@/ui/components/pagination-icons-only"
-import { PaginationSimple } from "@/ui/components/pagination-simple"
+import PaginationIconsOnly from "@/ui/components/pagination-icons-only"
+import PaginationSimple from "@/ui/components/pagination-simple"
 
 const examples = [
   {

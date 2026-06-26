@@ -1,6 +1,6 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { ChartTooltipDemo } from "@/ui/components/chart-tooltip"
+import ChartTooltipDemo from "@/ui/components/chart-tooltip"
 
 const examples = [
   {

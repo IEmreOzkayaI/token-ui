@@ -18,7 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/primitives/dropdown-menu"
 
-export function BreadcrumbDemo() {
+export default function BreadcrumbDemo() {
   return (
     <Breadcrumb>
       <BreadcrumbList>

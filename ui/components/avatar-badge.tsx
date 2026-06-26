@@ -5,7 +5,7 @@ import {
   AvatarImage,
 } from "@/primitives/avatar"
 
-export function AvatarWithBadge() {
+export default function AvatarWithBadge() {
   return (
     <Avatar>
       <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />

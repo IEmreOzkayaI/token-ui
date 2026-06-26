@@ -3,7 +3,7 @@ import { ButtonGroup } from "@/primitives/button-group"
 import { Field, FieldLabel } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function InputButtonGroup() {
+export default function InputButtonGroup() {
   return (
     <Field>
       <FieldLabel htmlFor="input-button-group">Search</FieldLabel>

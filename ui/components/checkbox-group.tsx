@@ -8,7 +8,7 @@ import {
   FieldSet,
 } from "@/primitives/field"
 
-export function CheckboxGroup() {
+export default function CheckboxGroup() {
   return (
     <FieldSet>
       <FieldLegend variant="label">

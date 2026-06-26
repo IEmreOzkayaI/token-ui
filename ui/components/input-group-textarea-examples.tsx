@@ -22,7 +22,7 @@ import {
 } from "@/primitives/input-group"
 import { Textarea } from "@/primitives/textarea"
 
-export function InputGroupTextareaExamples() {
+export default function InputGroupTextareaExamples() {
   return (
     <FieldGroup>
       <Field>

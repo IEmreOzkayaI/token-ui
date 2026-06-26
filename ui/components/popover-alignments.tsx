@@ -5,7 +5,7 @@ import {
   PopoverTrigger,
 } from "@/primitives/popover"
 
-export function PopoverAlignments() {
+export default function PopoverAlignments() {
   return (
     <div className="flex gap-6">
       <Popover>

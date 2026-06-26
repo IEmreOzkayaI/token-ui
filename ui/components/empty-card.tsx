@@ -10,7 +10,7 @@ import {
   EmptyTitle,
 } from "@/primitives/empty"
 
-export function EmptyInCard() {
+export default function EmptyInCard() {
   return (
     <Empty>
       <EmptyHeader>

@@ -1,7 +1,7 @@
 import { Field, FieldLabel } from "@/primitives/field"
 import { Textarea } from "@/primitives/textarea"
 
-export function TextareaDisabled() {
+export default function TextareaDisabled() {
   return (
     <Field data-disabled>
       <FieldLabel htmlFor="textarea-disabled">Message</FieldLabel>

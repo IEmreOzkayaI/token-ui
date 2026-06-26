@@ -5,7 +5,7 @@ import * as React from "react"
 import { Progress } from "@/primitives/progress"
 import { Slider } from "@/primitives/slider"
 
-export function ProgressControlled() {
+export default function ProgressControlled() {
   const [value, setValue] = React.useState([50])
 
   return (

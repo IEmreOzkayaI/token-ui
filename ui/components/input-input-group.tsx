@@ -8,7 +8,7 @@ import {
   InputGroupText,
 } from "@/primitives/input-group"
 
-export function InputInputGroup() {
+export default function InputInputGroup() {
   return (
     <Field>
       <FieldLabel htmlFor="input-group-url">Website URL</FieldLabel>

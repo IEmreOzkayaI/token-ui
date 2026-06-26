@@ -10,7 +10,7 @@ import {
 } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function FieldResponsive() {
+export default function FieldResponsive() {
   return (
     <div className="w-full max-w-lg">
       <form>

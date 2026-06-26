@@ -1,10 +1,10 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { DialogCloseButton } from "@/ui/components/dialog-close-button"
-import { DialogDemo } from "@/ui/components/dialog-demo"
-import { DialogNoCloseButton } from "@/ui/components/dialog-no-close-button"
-import { DialogScrollableContent } from "@/ui/components/dialog-scrollable-content"
-import { DialogStickyFooter } from "@/ui/components/dialog-sticky-footer"
+import DialogCloseButton from "@/ui/components/dialog-close-button"
+import DialogDemo from "@/ui/components/dialog-demo"
+import DialogNoCloseButton from "@/ui/components/dialog-no-close-button"
+import DialogScrollableContent from "@/ui/components/dialog-scrollable-content"
+import DialogStickyFooter from "@/ui/components/dialog-sticky-footer"
 
 const examples = [
   {

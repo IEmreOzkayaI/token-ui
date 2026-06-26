@@ -2,7 +2,7 @@ import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
 import ResizableDemo from "@/ui/components/resizable-demo"
 import ResizableHandleDemo from "@/ui/components/resizable-handle"
-import { ResizableVertical } from "@/ui/components/resizable-vertical"
+import ResizableVertical from "@/ui/components/resizable-vertical"
 
 const examples = [
   {

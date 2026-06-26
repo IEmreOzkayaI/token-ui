@@ -4,7 +4,7 @@ import {
   ResizablePanelGroup,
 } from "@/primitives/resizable"
 
-export function ResizableVertical() {
+export default function ResizableVertical() {
   return (
     <ResizablePanelGroup
       orientation="vertical"

@@ -5,7 +5,7 @@ import {
 } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function InputField() {
+export default function InputField() {
   return (
     <Field>
       <FieldLabel htmlFor="input-field-username">Username</FieldLabel>

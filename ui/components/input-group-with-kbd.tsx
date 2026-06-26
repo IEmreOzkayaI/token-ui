@@ -15,7 +15,7 @@ import {
 import { Kbd, KbdGroup } from "@/primitives/kbd"
 import { Spinner } from "@/primitives/spinner"
 
-export function InputGroupWithKbd() {
+export default function InputGroupWithKbd() {
   return (
     <FieldGroup>
       <Field>

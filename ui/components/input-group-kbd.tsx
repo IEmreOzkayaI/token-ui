@@ -7,7 +7,7 @@ import {
 } from "@/primitives/input-group"
 import { Kbd } from "@/primitives/kbd"
 
-export function InputGroupKbd() {
+export default function InputGroupKbd() {
   return (
     <InputGroup className="max-w-sm">
       <InputGroupInput placeholder="Search..." />

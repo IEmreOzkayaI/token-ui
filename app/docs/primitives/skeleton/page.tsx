@@ -1,11 +1,11 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { SkeletonAvatar } from "@/ui/components/skeleton-avatar"
-import { SkeletonCard } from "@/ui/components/skeleton-card"
-import { SkeletonDemo } from "@/ui/components/skeleton-demo"
-import { SkeletonForm } from "@/ui/components/skeleton-form"
-import { SkeletonTable } from "@/ui/components/skeleton-table"
-import { SkeletonText } from "@/ui/components/skeleton-text"
+import SkeletonAvatar from "@/ui/components/skeleton-avatar"
+import SkeletonCard from "@/ui/components/skeleton-card"
+import SkeletonDemo from "@/ui/components/skeleton-demo"
+import SkeletonForm from "@/ui/components/skeleton-form"
+import SkeletonTable from "@/ui/components/skeleton-table"
+import SkeletonText from "@/ui/components/skeleton-text"
 
 const examples = [
   {

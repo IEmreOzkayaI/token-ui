@@ -18,7 +18,7 @@ import {
   MenubarTrigger,
 } from "@/primitives/menubar"
 
-export function MenubarIcons() {
+export default function MenubarIcons() {
   return (
     <Menubar className="w-72">
       <MenubarMenu>

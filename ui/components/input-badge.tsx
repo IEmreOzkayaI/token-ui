@@ -2,7 +2,7 @@ import { Badge } from "@/primitives/badge"
 import { Field, FieldLabel } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function InputBadge() {
+export default function InputBadge() {
   return (
     <Field>
       <FieldLabel htmlFor="input-badge">

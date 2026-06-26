@@ -13,7 +13,7 @@ import {
 } from "@/primitives/item"
 import { Progress } from "@/primitives/progress"
 
-export function FileUploadList() {
+export default function FileUploadList() {
   const files = React.useMemo(
     () => [
       {

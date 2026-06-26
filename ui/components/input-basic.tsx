@@ -1,5 +1,5 @@
 import { Input } from "@/primitives/input"
 
-export function InputBasic() {
+export default function InputBasic() {
   return <Input placeholder="Enter text" />
 }

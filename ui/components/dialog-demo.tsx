@@ -13,7 +13,7 @@ import { Field, FieldGroup } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 import { Label } from "@/primitives/label"
 
-export function DialogDemo() {
+export default function DialogDemo() {
   return (
     <Dialog>
       <form>

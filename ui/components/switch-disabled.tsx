@@ -1,7 +1,7 @@
 import { Field, FieldLabel } from "@/primitives/field"
 import { Switch } from "@/primitives/switch"
 
-export function SwitchDisabled() {
+export default function SwitchDisabled() {
   return (
     <Field orientation="horizontal" data-disabled className="w-fit">
       <Switch id="switch-disabled-unchecked" disabled />

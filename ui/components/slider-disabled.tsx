@@ -1,6 +1,6 @@
 import { Slider } from "@/primitives/slider"
 
-export function SliderDisabled() {
+export default function SliderDisabled() {
   return (
     <Slider
       defaultValue={[50]}

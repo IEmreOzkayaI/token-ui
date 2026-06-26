@@ -3,7 +3,7 @@ import {
   ToggleGroupItem,
 } from "@/primitives/toggle-group"
 
-export function ToggleGroupSizes() {
+export default function ToggleGroupSizes() {
   return (
     <div className="flex flex-col gap-4">
       <ToggleGroup type="single" size="sm" defaultValue="top" variant="outline">

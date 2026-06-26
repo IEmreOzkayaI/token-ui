@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/primitives/select"
 
-export function SelectGroups() {
+export default function SelectGroups() {
   return (
     <Select>
       <SelectTrigger className="w-full max-w-48">

@@ -1,7 +1,7 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { DrawerScrollableContent } from "@/ui/components/drawer-scrollable-content"
-import { DrawerWithSides } from "@/ui/components/drawer-sides"
+import DrawerScrollableContent from "@/ui/components/drawer-scrollable-content"
+import DrawerWithSides from "@/ui/components/drawer-sides"
 
 const examples = [
   {

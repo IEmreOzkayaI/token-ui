@@ -1,8 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
 import AspectRatioDemo from "@/ui/components/aspect-ratio-demo"
-import { AspectRatioPortrait } from "@/ui/components/aspect-ratio-portrait"
-import { AspectRatioSquare } from "@/ui/components/aspect-ratio-square"
+import AspectRatioPortrait from "@/ui/components/aspect-ratio-portrait"
+import AspectRatioSquare from "@/ui/components/aspect-ratio-square"
 
 const examples = [
   {

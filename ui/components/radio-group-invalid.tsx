@@ -7,7 +7,7 @@ import {
 } from "@/primitives/field"
 import { RadioGroup, RadioGroupItem } from "@/primitives/radio-group"
 
-export function RadioGroupInvalid() {
+export default function RadioGroupInvalid() {
   return (
     <FieldSet className="w-full max-w-xs">
       <FieldLegend variant="label">Notification Preferences</FieldLegend>

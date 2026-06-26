@@ -8,7 +8,7 @@ import {
 } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function FieldFieldset() {
+export default function FieldFieldset() {
   return (
     <FieldSet className="w-full max-w-sm">
       <FieldLegend>Address Information</FieldLegend>

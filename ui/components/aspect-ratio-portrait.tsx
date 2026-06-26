@@ -2,7 +2,7 @@ import Image from "next/image"
 
 import { AspectRatio } from "@/primitives/aspect-ratio"
 
-export function AspectRatioPortrait() {
+export default function AspectRatioPortrait() {
   return (
     <div className="w-full max-w-[10rem]">
       <AspectRatio ratio={9 / 16} className="rounded-lg bg-muted">

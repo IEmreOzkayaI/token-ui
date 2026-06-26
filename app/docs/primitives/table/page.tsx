@@ -1,8 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { TableActions } from "@/ui/components/table-actions"
-import { TableDemo } from "@/ui/components/table-demo"
-import { TableFooterExample } from "@/ui/components/table-footer"
+import TableActions from "@/ui/components/table-actions"
+import TableDemo from "@/ui/components/table-demo"
+import TableFooterExample from "@/ui/components/table-footer"
 
 const examples = [
   {

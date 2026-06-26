@@ -5,7 +5,7 @@ import {
   TooltipTrigger,
 } from "@/primitives/tooltip"
 
-export function TooltipSides() {
+export default function TooltipSides() {
   return (
     <div className="flex flex-wrap gap-2">
       {(["left", "top", "bottom", "right"] as const).map((side) => (

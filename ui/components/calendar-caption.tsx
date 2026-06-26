@@ -2,7 +2,7 @@
 
 import { Calendar } from "@/primitives/calendar"
 
-export function CalendarCaption() {
+export default function CalendarCaption() {
   return (
     <Calendar
       mode="single"

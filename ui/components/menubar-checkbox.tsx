@@ -9,7 +9,7 @@ import {
   MenubarTrigger,
 } from "@/primitives/menubar"
 
-export function MenubarCheckbox() {
+export default function MenubarCheckbox() {
   return (
     <Menubar className="w-72">
       <MenubarMenu>

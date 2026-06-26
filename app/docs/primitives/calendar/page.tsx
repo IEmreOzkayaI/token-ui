@@ -1,11 +1,11 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
 import CalendarBasic from "@/ui/components/calendar-basic"
-import { CalendarCaption } from "@/ui/components/calendar-caption"
+import CalendarCaption from "@/ui/components/calendar-caption"
 import CalendarDemo from "@/ui/components/calendar-demo"
-import { CalendarMultiple } from "@/ui/components/calendar-multiple"
-import { CalendarWithTime } from "@/ui/components/calendar-time"
-import { CalendarWeekNumbers } from "@/ui/components/calendar-week-numbers"
+import CalendarMultiple from "@/ui/components/calendar-multiple"
+import CalendarWithTime from "@/ui/components/calendar-time"
+import CalendarWeekNumbers from "@/ui/components/calendar-week-numbers"
 
 const examples = [
   {

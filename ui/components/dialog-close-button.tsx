@@ -12,7 +12,7 @@ import {
 import { Input } from "@/primitives/input"
 import { Label } from "@/primitives/label"
 
-export function DialogCloseButton() {
+export default function DialogCloseButton() {
   return (
     <Dialog>
       <DialogTrigger asChild>

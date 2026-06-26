@@ -1,9 +1,9 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
 import NativeSelectDemo from "@/ui/components/native-select-demo"
-import { NativeSelectDisabled } from "@/ui/components/native-select-disabled"
+import NativeSelectDisabled from "@/ui/components/native-select-disabled"
 import NativeSelectGroups from "@/ui/components/native-select-groups"
-import { NativeSelectInvalid } from "@/ui/components/native-select-invalid"
+import NativeSelectInvalid from "@/ui/components/native-select-invalid"
 
 const examples = [
   {

@@ -2,7 +2,7 @@ import { Button } from "@/primitives/button"
 import { Field } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function InputInline() {
+export default function InputInline() {
   return (
     <Field orientation="horizontal">
       <Input type="search" placeholder="Search..." />

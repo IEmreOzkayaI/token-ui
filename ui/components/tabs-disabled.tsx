@@ -1,6 +1,6 @@
 import { Tabs, TabsList, TabsTrigger } from "@/primitives/tabs"
 
-export function TabsDisabled() {
+export default function TabsDisabled() {
   return (
     <Tabs defaultValue="home">
       <TabsList>

@@ -40,7 +40,7 @@ import {
   CommandShortcut,
 } from "@/primitives/command"
 
-export function CommandManyItems() {
+export default function CommandManyItems() {
   const [open, setOpen] = React.useState(false)
 
   return (

@@ -5,7 +5,7 @@ import {
 } from "@/primitives/field"
 import { Input } from "@/primitives/input"
 
-export function InputDisabled() {
+export default function InputDisabled() {
   return (
     <Field data-disabled>
       <FieldLabel htmlFor="input-demo-disabled">Email</FieldLabel>

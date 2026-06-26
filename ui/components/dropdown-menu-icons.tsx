@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/primitives/dropdown-menu"
 
-export function DropdownMenuIcons() {
+export default function DropdownMenuIcons() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

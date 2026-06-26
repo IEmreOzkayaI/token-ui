@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/primitives/dialog"
 
-export function DialogScrollableContent() {
+export default function DialogScrollableContent() {
   return (
     <Dialog>
       <DialogTrigger asChild>

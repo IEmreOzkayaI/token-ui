@@ -1,12 +1,12 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { ToggleGroupDemo } from "@/ui/components/toggle-group-demo"
-import { ToggleGroupDisabled } from "@/ui/components/toggle-group-disabled"
-import { ToggleGroupFontWeightSelector } from "@/ui/components/toggle-group-font-weight-selector"
-import { ToggleGroupOutline } from "@/ui/components/toggle-group-outline"
-import { ToggleGroupSizes } from "@/ui/components/toggle-group-sizes"
-import { ToggleGroupSpacing } from "@/ui/components/toggle-group-spacing"
-import { ToggleGroupVertical } from "@/ui/components/toggle-group-vertical"
+import ToggleGroupDemo from "@/ui/components/toggle-group-demo"
+import ToggleGroupDisabled from "@/ui/components/toggle-group-disabled"
+import ToggleGroupFontWeightSelector from "@/ui/components/toggle-group-font-weight-selector"
+import ToggleGroupOutline from "@/ui/components/toggle-group-outline"
+import ToggleGroupSizes from "@/ui/components/toggle-group-sizes"
+import ToggleGroupSpacing from "@/ui/components/toggle-group-spacing"
+import ToggleGroupVertical from "@/ui/components/toggle-group-vertical"
 
 const examples = [
   {

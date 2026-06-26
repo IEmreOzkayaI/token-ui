@@ -7,7 +7,7 @@ import {
 } from "@/primitives/field"
 import { RadioGroup, RadioGroupItem } from "@/primitives/radio-group"
 
-export function FieldRadio() {
+export default function FieldRadio() {
   return (
     <FieldSet className="w-full max-w-xs">
       <FieldLegend variant="label">Subscription Plan</FieldLegend>

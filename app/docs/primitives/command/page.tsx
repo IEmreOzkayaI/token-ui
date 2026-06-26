@@ -1,11 +1,11 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { CommandBasic } from "@/ui/components/command-basic"
-import { CommandDemo } from "@/ui/components/command-demo"
-import { CommandDialogDemo } from "@/ui/components/command-dialog"
-import { CommandWithGroups } from "@/ui/components/command-groups"
-import { CommandManyItems } from "@/ui/components/command-scrollable"
-import { CommandWithShortcuts } from "@/ui/components/command-shortcuts"
+import CommandBasic from "@/ui/components/command-basic"
+import CommandDemo from "@/ui/components/command-demo"
+import CommandDialogDemo from "@/ui/components/command-dialog"
+import CommandWithGroups from "@/ui/components/command-groups"
+import CommandManyItems from "@/ui/components/command-scrollable"
+import CommandWithShortcuts from "@/ui/components/command-shortcuts"
 
 const examples = [
   {

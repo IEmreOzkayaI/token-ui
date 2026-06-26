@@ -1,7 +1,7 @@
 import { Badge } from "@/primitives/badge"
 import { Spinner } from "@/primitives/spinner"
 
-export function BadgeWithSpinner() {
+export default function BadgeWithSpinner() {
   return (
     <div className="flex flex-wrap gap-2">
       <Badge variant="destructive">

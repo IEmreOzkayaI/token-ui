@@ -1,9 +1,9 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
 import { readSource } from "@/app/docs/_lib/read-source"
-import { TooltipDemo } from "@/ui/components/tooltip-demo"
-import { TooltipDisabled } from "@/ui/components/tooltip-disabled"
-import { TooltipKeyboard } from "@/ui/components/tooltip-keyboard"
-import { TooltipSides } from "@/ui/components/tooltip-sides"
+import TooltipDemo from "@/ui/components/tooltip-demo"
+import TooltipDisabled from "@/ui/components/tooltip-disabled"
+import TooltipKeyboard from "@/ui/components/tooltip-keyboard"
+import TooltipSides from "@/ui/components/tooltip-sides"
 
 const examples = [
   {

@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from "@/primitives/select"
 
-export function InputForm() {
+export default function InputForm() {
   return (
     <form className="w-full max-w-sm">
       <FieldGroup>

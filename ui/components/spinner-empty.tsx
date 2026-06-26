@@ -9,7 +9,7 @@ import {
 } from "@/primitives/empty"
 import { Spinner } from "@/primitives/spinner"
 
-export function SpinnerEmpty() {
+export default function SpinnerEmpty() {
   return (
     <Empty className="w-full">
       <EmptyHeader>

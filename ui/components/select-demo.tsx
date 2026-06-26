@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/primitives/select"
 
-export function SelectDemo() {
+export default function SelectDemo() {
   return (
     <Select>
       <SelectTrigger className="w-full max-w-48">
