@@ -16,7 +16,7 @@ export function ComponentPreview({
       <div
         className={
           className ??
-          "flex w-full items-center justify-center bg-background p-8 md:p-10"
+          "docs-component-preview flex w-full items-center justify-center bg-background p-8 md:p-10"
         }
       >
         {children}

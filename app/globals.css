@@ -178,6 +178,20 @@
     @apply text-foreground underline underline-offset-4 hover:text-foreground/80;
   }
 
+  /* Component examples ship their own list/link styles */
+  .docs-component-preview ol,
+  .docs-component-preview ul {
+    @apply m-0 ml-0 list-none space-y-0 p-0;
+  }
+
+  .docs-component-preview li {
+    @apply leading-normal;
+  }
+
+  .docs-component-preview a {
+    @apply no-underline;
+  }
+
   .container-wrapper {
     @apply mx-auto w-full max-w-screen-2xl;
   }

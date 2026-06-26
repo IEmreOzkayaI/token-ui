@@ -20,12 +20,9 @@ export function DocsLogo({ showLabel = true, className }: DocsLogoProps) {
         alt=""
         width={28}
         height={28}
-        className="size-7 rounded-md"
+        className="size-7 rounded-sm"
         priority
       />
-      {showLabel && (
-        <span className="hidden font-semibold sm:inline">Token UI</span>
-      )}
     </Link>
   )
 }

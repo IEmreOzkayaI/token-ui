@@ -15,7 +15,6 @@ import {
   CommandItem,
   CommandList,
 } from "@/primitives/command"
-import { cn } from "@/lib/utils"
 
 const searchItems = getSearchItems()
 
@@ -55,25 +54,22 @@ export function DocsSearch() {
 
   return (
     <>
-      <Button
-        variant="outline"
-        size="sm"
-        className={cn(
-          "hidden h-8 w-44 justify-start gap-2 px-2.5 text-muted-foreground lg:flex xl:w-52"
-        )}
+      <button
+        type="button"
         onClick={() => setOpen(true)}
+        className="hidden h-8 w-80 items-center gap-2 rounded-sm border bg-muted/40 px-3 text-sm text-muted-foreground transition-colors hover:bg-muted/60 md:flex"
       >
         <Search className="size-3.5 shrink-0 opacity-50" />
-        <span className="truncate text-sm">Search documentation...</span>
-        <kbd className="pointer-events-none ml-auto hidden h-5 select-none items-center gap-0.5 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium xl:flex">
+        <span className="flex-1 text-left">Search documentation...</span>
+        <kbd className="pointer-events-none hidden select-none items-center gap-0.5 rounded border bg-background px-1.5 font-mono text-[10px] font-medium lg:flex">
           <span>⌘</span>K
         </kbd>
-      </Button>
+      </button>
 
       <Button
         variant="ghost"
         size="icon-sm"
-        className="lg:hidden"
+        className="md:hidden"
         aria-label="Search documentation"
         onClick={() => setOpen(true)}
       >

@@ -22,9 +22,9 @@ export const docsTopNav: TopNavLink[] = [
     isActive: (pathname) => pathname.startsWith("/docs/foundations"),
   },
   {
-    label: "Examples",
-    href: "/docs/components/button",
-    isActive: (pathname) => pathname.startsWith("/docs/components"),
+    label: "Prompts",
+    href: "/docs/prompts",
+    isActive: (pathname) => pathname.startsWith("/docs/prompts"),
   },
   {
     label: "Changelog",

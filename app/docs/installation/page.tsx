@@ -40,15 +40,14 @@ export default function InstallationPage() {
 
       <DocsSection id="overview" title="Overview">
         <p className="text-muted-foreground">
-          Token UI is distributed as source files, not a published npm component
-          library. You copy primitives into your codebase and wire them to your
-          Tailwind theme. The setup takes roughly 15 minutes for a greenfield
-          Next.js app.
+          Token UI is a design system distributed as source code, not an npm package. You copy components and design tokens into your codebase — no runtime dependency, full ownership. Setup is manual but straightforward: 15 minutes for a greenfield Next.js app.
         </p>
+        <DocsCallout title="Future: CLI automation" variant="tip">
+          A CLI tool is planned (<code>token-ui add button</code>) to automate copying components and syncing tokens. For now, this guide covers manual setup.
+        </DocsCallout>
         <DocsCallout title="Already using shadcn/ui?" variant="tip">
-          Token UI uses the <code>radix-nova</code> preset from shadcn/ui. The
-          same mental model applies: Radix primitives, Tailwind styling,{" "}
-          <code>cn()</code> helper, and CSS variable tokens.
+          Token UI follows the same model: Radix primitives, Tailwind styling,{" "}
+          <code>cn()</code> helper, and CSS variable tokens. The radix-nova preset is compatible.
         </DocsCallout>
       </DocsSection>
 

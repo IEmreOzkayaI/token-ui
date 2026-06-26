@@ -13,13 +13,15 @@ type DocsPageProps = {
 
 export function DocsPage({ children, toc = [], className }: DocsPageProps) {
   return (
-    <div className={cn("mx-auto flex w-full max-w-[1400px] gap-10", className)}>
+    <div className={cn("relative mx-auto flex w-full max-w-5xl gap-12", className)}>
       <div className="min-w-0 flex-1 space-y-8">
         <div className="docs-prose">{children}</div>
         <DocsPager />
       </div>
       <div className="hidden w-56 shrink-0 xl:block">
-        <DocsToc items={toc} />
+        <div className="sticky top-20">
+          <DocsToc items={toc} />
+        </div>
       </div>
     </div>
   )

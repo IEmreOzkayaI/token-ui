@@ -9,6 +9,7 @@ import MenubarDemo from "@/ui/components/menubar/demo"
 import MenubarIcons from "@/ui/components/menubar/icons"
 import MenubarRadio from "@/ui/components/menubar/radio"
 import MenubarSubmenu from "@/ui/components/menubar/submenu"
+import MenubarIconized from "@/ui/components/menubar/iconized"
 
 const examples = [
   {
@@ -41,6 +42,12 @@ const examples = [
     component: MenubarSubmenu,
     sourcePath: "ui/components/menubar/submenu.tsx",
   },
+  {
+    id: "iconized",
+    title: "Iconized",
+    component: MenubarIconized,
+    sourcePath: "ui/components/menubar/iconized.tsx",
+  },
 ] as const
 
 const toc = [
@@ -52,6 +59,7 @@ const toc = [
   { id: "icons", title: "Icons", depth: 3 },
   { id: "radio", title: "Radio", depth: 3 },
   { id: "submenu", title: "Submenu", depth: 3 },
+  { id: "iconized", title: "Iconized", depth: 3 },
 ]
 
 export default function MenubarPage() {

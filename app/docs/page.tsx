@@ -181,14 +181,17 @@ export default function DocsHome() {
 
       <DocsSection id="quick-start" title="Quick Start">
         <p className="text-muted-foreground">
-          Three steps to render your first component in a new or existing Next.js
-          project.
+          Install Token UI in a new or existing Next.js project. Manual copy-paste setup takes 15 minutes. A CLI tool is planned to automate this.
         </p>
         <ol className="my-4 list-decimal space-y-2 pl-6 text-muted-foreground">
-          <li>Follow the <Link href="/docs/installation" className="text-foreground underline underline-offset-4">installation guide</Link> to configure Tailwind and tokens.</li>
-          <li>Copy a primitive from <code>ui/primitives/</code> into your project.</li>
-          <li>Import and render it in any React component.</li>
+          <li>Set up Tailwind CSS v4+ and configure path aliases.</li>
+          <li>Copy design tokens from <code>app/globals.css</code> into your global stylesheet.</li>
+          <li>Copy primitives from <code>ui/primitives/</code> as needed — each file is independent.</li>
+          <li>Import and use in your React components.</li>
         </ol>
+        <DocsCallout title="CLI coming soon" variant="info">
+          Future versions will include a CLI tool to automate component copying and token syncing: <code>token-ui add button table input</code>. For now, use the manual process below.
+        </DocsCallout>
         <div className="flex flex-wrap gap-3">
           <Button asChild>
             <Link href="/docs/installation" className="gap-2">
@@ -197,7 +200,7 @@ export default function DocsHome() {
             </Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/docs/primitives/button">View Components</Link>
+            <Link href="/docs/ui/components/button">View Components</Link>
           </Button>
         </div>
         <CodeBlock

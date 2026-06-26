@@ -7,6 +7,7 @@ import { readSource } from "@/app/docs/_lib/read-source"
 import TableActions from "@/ui/components/table/actions"
 import TableDemo from "@/ui/components/table/demo"
 import TableFooterExample from "@/ui/components/table/footer"
+import TableCustom from "@/ui/components/table/custom"
 
 const examples = [
   {
@@ -27,6 +28,12 @@ const examples = [
     component: TableFooterExample,
     sourcePath: "ui/components/table/footer.tsx",
   },
+  {
+    id: "custom",
+    title: "Custom",
+    component: TableCustom,
+    sourcePath: "ui/components/table/custom.tsx",
+  },
 ] as const
 
 const toc = [
@@ -36,6 +43,7 @@ const toc = [
   { id: "actions", title: "Actions", depth: 3 },
   { id: "demo", title: "Demo", depth: 3 },
   { id: "footer", title: "Footer", depth: 3 },
+  { id: "custom", title: "Custom", depth: 3 },
 ]
 
 export default function TablePage() {

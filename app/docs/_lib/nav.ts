@@ -87,16 +87,14 @@ export const docsNav: NavSection[] = [
     ],
   },
   {
-    title: "Examples",
+    title: "Prompts",
     items: [
-      { label: "Button", href: "/docs/components/button" },
-      { label: "Card", href: "/docs/components/card" },
-      { label: "Dialog", href: "/docs/components/dialog" },
-      { label: "Form", href: "/docs/components/form" },
-      { label: "Navigation", href: "/docs/components/navigation" },
+      { label: "Derive variant", href: "/docs/prompts/derive-variant" },
+      { label: "Modify existing", href: "/docs/prompts/modify-existing" },
+      { label: "From scratch", href: "/docs/prompts/from-scratch" },
     ],
   },
-  {
+{
     title: "Changelog",
     items: [
       { label: "Overview", href: "/docs/changelog" },

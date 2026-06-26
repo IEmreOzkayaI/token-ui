@@ -4,11 +4,17 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
+import CardCargoTracker from "@/ui/components/card/cargo-tracker"
 import CardDemo from "@/ui/components/card/demo"
+import CardDeviceStatus from "@/ui/components/card/device-status"
 import CardEdgeToEdge from "@/ui/components/card/edge-to-edge"
 import CardImage from "@/ui/components/card/image"
+import CardMonthlyOverview from "@/ui/components/card/monthly-overview"
+import CardPaymentMethod from "@/ui/components/card/payment-method"
 import CardSmall from "@/ui/components/card/small"
 import CardSpacing from "@/ui/components/card/spacing"
+import CardWalletSummary from "@/ui/components/card/wallet-summary"
+import CardWeather from "@/ui/components/card/weather"
 
 const examples = [
   {
@@ -41,16 +47,59 @@ const examples = [
     component: CardSpacing,
     sourcePath: "ui/components/card/spacing.tsx",
   },
+  {
+    id: "wallet-summary",
+    title: "Wallet Summary",
+    component: CardWalletSummary,
+    sourcePath: "ui/components/card/wallet-summary.tsx",
+  },
+  {
+    id: "weather",
+    title: "Weather",
+    component: CardWeather,
+    sourcePath: "ui/components/card/weather.tsx",
+  },
+  {
+    id: "cargo-tracker",
+    title: "Cargo Tracker",
+    component: CardCargoTracker,
+    sourcePath: "ui/components/card/cargo-tracker.tsx",
+  },
+  {
+    id: "device-status",
+    title: "Device Status",
+    component: CardDeviceStatus,
+    sourcePath: "ui/components/card/device-status.tsx",
+  },
+  {
+    id: "payment-method",
+    title: "Payment Method",
+    component: CardPaymentMethod,
+    sourcePath: "ui/components/card/payment-method.tsx",
+  },
+  {
+    id: "monthly-overview",
+    title: "Monthly Overview",
+    component: CardMonthlyOverview,
+    sourcePath: "ui/components/card/monthly-overview.tsx",
+  },
 ] as const
 
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "demo", title: "Demo" },
-    { id: "edge-to-edge", title: "Edge To Edge" },
-    { id: "image", title: "Image" },
-    { id: "small", title: "Small" },
-    { id: "spacing", title: "Spacing" },
+  { id: "examples", title: "Examples" },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "edge-to-edge", title: "Edge To Edge", depth: 3 },
+  { id: "image", title: "Image", depth: 3 },
+  { id: "small", title: "Small", depth: 3 },
+  { id: "spacing", title: "Spacing", depth: 3 },
+  { id: "wallet-summary", title: "Wallet Summary", depth: 3 },
+  { id: "weather", title: "Weather", depth: 3 },
+  { id: "cargo-tracker", title: "Cargo Tracker", depth: 3 },
+  { id: "device-status", title: "Device Status", depth: 3 },
+  { id: "payment-method", title: "Payment Method", depth: 3 },
+  { id: "monthly-overview", title: "Monthly Overview", depth: 3 },
 ]
 
 export default function CardPage() {
@@ -58,7 +107,7 @@ export default function CardPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Card"
-        description="Card component"
+        description="Displays a card with header, content, and footer."
       />
 
       <DocsSection
@@ -75,29 +124,37 @@ export default function CardPage() {
         description="Import and use the Card component."
       >
         <CodeBlock
-          code={`import { Card } from "@/primitives/card"`}
+          code={`import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/primitives/card"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }
