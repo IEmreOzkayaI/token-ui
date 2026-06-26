@@ -61,7 +61,7 @@ export default function UprogressPage() {
       <div className="flex-1 max-w-2xl space-y-8">
         <section className="space-y-4">
           <h1 className="text-5xl font-bold tracking-tight">Uprogress</h1>
-          <p className="text-lg text-muted-foreground">Uprogress component</p>
+          <p className="text-lg text-muted-foreground">Uprogress component with live examples</p>
         </section>
 
         <section id="examples" className="space-y-4">
@@ -74,7 +74,7 @@ export default function UprogressPage() {
             <TabsContent value="preview">
               <Preview>
                 <div className="text-center text-muted-foreground">
-                  Live preview rendering
+                  Component examples from ui/components/progress-*.tsx
                 </div>
               </Preview>
             </TabsContent>

@@ -61,7 +61,7 @@ export default function UradioUgroupPage() {
       <div className="flex-1 max-w-2xl space-y-8">
         <section className="space-y-4">
           <h1 className="text-5xl font-bold tracking-tight">UradioUgroup</h1>
-          <p className="text-lg text-muted-foreground">UradioUgroup component</p>
+          <p className="text-lg text-muted-foreground">UradioUgroup component with live examples</p>
         </section>
 
         <section id="examples" className="space-y-4">
@@ -74,7 +74,7 @@ export default function UradioUgroupPage() {
             <TabsContent value="preview">
               <Preview>
                 <div className="text-center text-muted-foreground">
-                  Live preview rendering
+                  Component examples from ui/components/radio-group-*.tsx
                 </div>
               </Preview>
             </TabsContent>

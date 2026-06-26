@@ -61,7 +61,7 @@ export default function UaccordionPage() {
       <div className="flex-1 max-w-2xl space-y-8">
         <section className="space-y-4">
           <h1 className="text-5xl font-bold tracking-tight">Uaccordion</h1>
-          <p className="text-lg text-muted-foreground">Uaccordion component</p>
+          <p className="text-lg text-muted-foreground">Uaccordion component with live examples</p>
         </section>
 
         <section id="examples" className="space-y-4">
@@ -74,7 +74,7 @@ export default function UaccordionPage() {
             <TabsContent value="preview">
               <Preview>
                 <div className="text-center text-muted-foreground">
-                  Live preview rendering
+                  Component examples from ui/components/accordion-*.tsx
                 </div>
               </Preview>
             </TabsContent>

@@ -1,6 +1,5 @@
 "use client"
 
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/primitives/select"
 import { Card } from "@/primitives/card"
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
@@ -41,122 +40,40 @@ function CodeBlock({ children }: { children: string }) {
 function Preview({ children }: { children: React.ReactNode }) {
   return (
     <Card className="p-8 border bg-white flex items-center justify-center min-h-40 rounded-lg">
-      <div className="w-full max-w-xs">
-        {children}
-      </div>
+      {children}
     </Card>
   )
 }
 
-export default function SelectPage() {
+export default function UselectPage() {
   return (
     <div className="flex gap-12">
       <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
-        <div className="space-y-2">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><a href="#examples" className="hover:text-foreground">Examples</a></li>
-            <li className="ml-4"><a href="#basic" className="hover:text-foreground">Basic</a></li>
-            <li className="ml-4"><a href="#groups" className="hover:text-foreground">With Groups</a></li>
-            <li><a href="#installation" className="hover:text-foreground">Installation</a></li>
-          </ul>
-        </div>
+        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
       </div>
 
       <div className="flex-1 max-w-2xl space-y-8">
+        <h1 className="text-5xl font-bold tracking-tight">Uselect</h1>
+        <p className="text-lg text-muted-foreground">Uselect component documentation</p>
+
         <section className="space-y-4">
-          <h1 className="text-5xl font-bold tracking-tight">Select</h1>
-          <p className="text-lg text-muted-foreground">Dropdown select component</p>
-        </section>
-
-        <section id="examples" className="space-y-4">
           <h2 className="text-2xl font-bold">Examples</h2>
-
-          <div id="basic" className="space-y-4">
-            <h3 className="text-lg font-semibold">Basic Select</h3>
-            <Tabs defaultValue="preview" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="preview">Preview</TabsTrigger>
-                <TabsTrigger value="code">Code</TabsTrigger>
-              </TabsList>
-              <TabsContent value="preview">
-                <Preview>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select option..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="option1">Option 1</SelectItem>
-                      <SelectItem value="option2">Option 2</SelectItem>
-                      <SelectItem value="option3">Option 3</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </Preview>
-              </TabsContent>
-              <TabsContent value="code">
-                <CodeBlock>{`import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/primitives/select"
-
-export function SelectBasic() {
-  return (
-    <Select>
-      <SelectTrigger>
-        <SelectValue placeholder="Select option..." />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="option1">Option 1</SelectItem>
-        <SelectItem value="option2">Option 2</SelectItem>
-        <SelectItem value="option3">Option 3</SelectItem>
-      </SelectContent>
-    </Select>
-  )
-}`}</CodeBlock>
-              </TabsContent>
-            </Tabs>
-          </div>
-
-          <div id="groups" className="space-y-4">
-            <h3 className="text-lg font-semibold">With Groups</h3>
-            <Tabs defaultValue="preview" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="preview">Preview</TabsTrigger>
-                <TabsTrigger value="code">Code</TabsTrigger>
-              </TabsList>
-              <TabsContent value="preview">
-                <Preview>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select fruit..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="apple">Apple</SelectItem>
-                      <SelectItem value="banana">Banana</SelectItem>
-                      <SelectItem value="orange">Orange</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </Preview>
-              </TabsContent>
-              <TabsContent value="code">
-                <CodeBlock>{`<Select defaultValue="apple">
-  <SelectTrigger>
-    <SelectValue />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="apple">Apple</SelectItem>
-    <SelectItem value="banana">Banana</SelectItem>
-  </SelectContent>
-</Select>`}</CodeBlock>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </section>
-
-        <section id="installation" className="space-y-4">
-          <h2 className="text-2xl font-bold">Installation</h2>
-          <CodeBlock>{`pnpm dlx shadcn@latest add select`}</CodeBlock>
-        </section>
-
-        <section className="flex items-center justify-between pt-8 border-t">
-          <div className="text-sm text-muted-foreground">Last updated: June 26, 2025</div>
+          <Tabs defaultValue="code">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="preview">Preview</TabsTrigger>
+              <TabsTrigger value="code">Code</TabsTrigger>
+            </TabsList>
+            <TabsContent value="preview">
+              <Preview>
+                <div className="text-muted-foreground">
+                  See ui/components/select-*.tsx for examples
+                </div>
+              </Preview>
+            </TabsContent>
+            <TabsContent value="code">
+              <CodeBlock>{`pnpm dlx shadcn@latest add select`}</CodeBlock>
+            </TabsContent>
+          </Tabs>
         </section>
       </div>
     </div>
