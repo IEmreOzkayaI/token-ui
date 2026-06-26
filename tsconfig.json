@@ -20,10 +20,12 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@/primitives": ["./components/ui/primitives"],
-      "@/primitives/*": ["./components/ui/primitives/*"],
-      "@/examples": ["./components/ui/components"],
-      "@/examples/*": ["./components/ui/components/*"]
+      "@/primitives": ["./ui/primitives"],
+      "@/primitives/*": ["./ui/primitives/*"],
+      "@/examples": ["./ui/components"],
+      "@/examples/*": ["./ui/components/*"],
+      "@/ui": ["./ui"],
+      "@/ui/*": ["./ui/*"]
     }
   },
   "include": [
