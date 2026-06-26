@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import ToggleDemo from "@/ui/components/toggle-demo"
 import ToggleDisabled from "@/ui/components/toggle-disabled"
@@ -15,98 +19,141 @@ import ToggleText from "@/ui/components/toggle-text"
 
 const examples = [
   {
-    title: "Toggle Demo",
+    id: "demo",
+    title: "Demo",
     component: ToggleDemo,
     sourcePath: "ui/components/toggle-demo.tsx",
   },
   {
-    title: "Toggle Disabled",
+    id: "disabled",
+    title: "Disabled",
     component: ToggleDisabled,
     sourcePath: "ui/components/toggle-disabled.tsx",
   },
   {
-    title: "Toggle Group Demo",
+    id: "group-demo",
+    title: "Group Demo",
     component: ToggleGroupDemo,
     sourcePath: "ui/components/toggle-group-demo.tsx",
   },
   {
-    title: "Toggle Group Disabled",
+    id: "group-disabled",
+    title: "Group Disabled",
     component: ToggleGroupDisabled,
     sourcePath: "ui/components/toggle-group-disabled.tsx",
   },
   {
-    title: "Toggle Group Font Weight Selector",
+    id: "group-font-weight-selector",
+    title: "Group Font Weight Selector",
     component: ToggleGroupFontWeightSelector,
     sourcePath: "ui/components/toggle-group-font-weight-selector.tsx",
   },
   {
-    title: "Toggle Group Outline",
+    id: "group-outline",
+    title: "Group Outline",
     component: ToggleGroupOutline,
     sourcePath: "ui/components/toggle-group-outline.tsx",
   },
   {
-    title: "Toggle Group Sizes",
+    id: "group-sizes",
+    title: "Group Sizes",
     component: ToggleGroupSizes,
     sourcePath: "ui/components/toggle-group-sizes.tsx",
   },
   {
-    title: "Toggle Group Spacing",
+    id: "group-spacing",
+    title: "Group Spacing",
     component: ToggleGroupSpacing,
     sourcePath: "ui/components/toggle-group-spacing.tsx",
   },
   {
-    title: "Toggle Group Vertical",
+    id: "group-vertical",
+    title: "Group Vertical",
     component: ToggleGroupVertical,
     sourcePath: "ui/components/toggle-group-vertical.tsx",
   },
   {
-    title: "Toggle Outline",
+    id: "outline",
+    title: "Outline",
     component: ToggleOutline,
     sourcePath: "ui/components/toggle-outline.tsx",
   },
   {
-    title: "Toggle Sizes",
+    id: "sizes",
+    title: "Sizes",
     component: ToggleSizes,
     sourcePath: "ui/components/toggle-sizes.tsx",
   },
   {
-    title: "Toggle Text",
+    id: "text",
+    title: "Text",
     component: ToggleText,
     sourcePath: "ui/components/toggle-text.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "demo", title: "Demo" },
+    { id: "disabled", title: "Disabled" },
+    { id: "group-demo", title: "Group Demo" },
+    { id: "group-disabled", title: "Group Disabled" },
+    { id: "group-font-weight-selector", title: "Group Font Weight Selector" },
+    { id: "group-outline", title: "Group Outline" },
+    { id: "group-sizes", title: "Group Sizes" },
+    { id: "group-spacing", title: "Group Spacing" },
+    { id: "group-vertical", title: "Group Vertical" },
+    { id: "outline", title: "Outline" },
+    { id: "sizes", title: "Sizes" },
+    { id: "text", title: "Text" },
+]
+
 export default function TogglePage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Toggle"
+        description="Toggle component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Toggle</h1>
-        <p className="text-lg text-muted-foreground">
-          Toggle component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the toggle primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add toggle" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the Toggle component."
+      >
+        <CodeBlock
+          code={`import { Toggle } from "@/primitives/toggle"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

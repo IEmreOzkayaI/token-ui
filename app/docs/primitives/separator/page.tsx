@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import SeparatorDemo from "@/ui/components/separator-demo"
 import SeparatorList from "@/ui/components/separator-list"
@@ -7,58 +11,85 @@ import SeparatorVertical from "@/ui/components/separator-vertical"
 
 const examples = [
   {
-    title: "Separator Demo",
+    id: "demo",
+    title: "Demo",
     component: SeparatorDemo,
     sourcePath: "ui/components/separator-demo.tsx",
   },
   {
-    title: "Separator List",
+    id: "list",
+    title: "List",
     component: SeparatorList,
     sourcePath: "ui/components/separator-list.tsx",
   },
   {
-    title: "Separator Menu",
+    id: "menu",
+    title: "Menu",
     component: SeparatorMenu,
     sourcePath: "ui/components/separator-menu.tsx",
   },
   {
-    title: "Separator Vertical",
+    id: "vertical",
+    title: "Vertical",
     component: SeparatorVertical,
     sourcePath: "ui/components/separator-vertical.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "demo", title: "Demo" },
+    { id: "list", title: "List" },
+    { id: "menu", title: "Menu" },
+    { id: "vertical", title: "Vertical" },
+]
+
 export default function SeparatorPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Separator"
+        description="Separator component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Separator</h1>
-        <p className="text-lg text-muted-foreground">
-          Separator component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the separator primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add separator" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the Separator component."
+      >
+        <CodeBlock
+          code={`import { Separator } from "@/primitives/separator"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

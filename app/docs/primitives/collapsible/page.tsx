@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import CollapsibleDemo from "@/ui/components/collapsible-demo"
 import CollapsibleFileTree from "@/ui/components/collapsible-file-tree"
@@ -6,53 +10,78 @@ import CollapsibleSettings from "@/ui/components/collapsible-settings"
 
 const examples = [
   {
-    title: "Collapsible Demo",
+    id: "demo",
+    title: "Demo",
     component: CollapsibleDemo,
     sourcePath: "ui/components/collapsible-demo.tsx",
   },
   {
-    title: "Collapsible File Tree",
+    id: "file-tree",
+    title: "File Tree",
     component: CollapsibleFileTree,
     sourcePath: "ui/components/collapsible-file-tree.tsx",
   },
   {
-    title: "Collapsible Settings",
+    id: "settings",
+    title: "Settings",
     component: CollapsibleSettings,
     sourcePath: "ui/components/collapsible-settings.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "demo", title: "Demo" },
+    { id: "file-tree", title: "File Tree" },
+    { id: "settings", title: "Settings" },
+]
+
 export default function CollapsiblePage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Collapsible"
+        description="Collapsible component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Collapsible</h1>
-        <p className="text-lg text-muted-foreground">
-          Collapsible component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the collapsible primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add collapsible" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the Collapsible component."
+      >
+        <CodeBlock
+          code={`import { Collapsible } from "@/primitives/collapsible"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import AvatarBadgeIconExample from "@/ui/components/avatar-badge-icon"
 import AvatarWithBadge from "@/ui/components/avatar-badge"
@@ -11,78 +15,113 @@ import AvatarSizeExample from "@/ui/components/avatar-size"
 
 const examples = [
   {
-    title: "Avatar Badge Icon",
+    id: "badge-icon",
+    title: "Badge Icon",
     component: AvatarBadgeIconExample,
     sourcePath: "ui/components/avatar-badge-icon.tsx",
   },
   {
-    title: "Avatar Badge",
+    id: "badge",
+    title: "Badge",
     component: AvatarWithBadge,
     sourcePath: "ui/components/avatar-badge.tsx",
   },
   {
-    title: "Avatar Basic",
+    id: "basic",
+    title: "Basic",
     component: AvatarDemo,
     sourcePath: "ui/components/avatar-basic.tsx",
   },
   {
-    title: "Avatar Dropdown",
+    id: "dropdown",
+    title: "Dropdown",
     component: AvatarDropdown,
     sourcePath: "ui/components/avatar-dropdown.tsx",
   },
   {
-    title: "Avatar Group Count Icon",
+    id: "group-count-icon",
+    title: "Group Count Icon",
     component: AvatarGroupCountIconExample,
     sourcePath: "ui/components/avatar-group-count-icon.tsx",
   },
   {
-    title: "Avatar Group Count",
+    id: "group-count",
+    title: "Group Count",
     component: AvatarGroupCountExample,
     sourcePath: "ui/components/avatar-group-count.tsx",
   },
   {
-    title: "Avatar Group",
+    id: "group",
+    title: "Group",
     component: AvatarGroupExample,
     sourcePath: "ui/components/avatar-group.tsx",
   },
   {
-    title: "Avatar Size",
+    id: "size",
+    title: "Size",
     component: AvatarSizeExample,
     sourcePath: "ui/components/avatar-size.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "badge-icon", title: "Badge Icon" },
+    { id: "badge", title: "Badge" },
+    { id: "basic", title: "Basic" },
+    { id: "dropdown", title: "Dropdown" },
+    { id: "group-count-icon", title: "Group Count Icon" },
+    { id: "group-count", title: "Group Count" },
+    { id: "group", title: "Group" },
+    { id: "size", title: "Size" },
+]
+
 export default function AvatarPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Avatar"
+        description="Avatar component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Avatar</h1>
-        <p className="text-lg text-muted-foreground">
-          Avatar component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the avatar primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add avatar" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the Avatar component."
+      >
+        <CodeBlock
+          code={`import { Avatar } from "@/primitives/avatar"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

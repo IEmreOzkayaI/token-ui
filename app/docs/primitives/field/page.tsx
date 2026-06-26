@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import FieldCheckbox from "@/ui/components/field-checkbox"
 import FieldChoiceCard from "@/ui/components/field-choice-card"
@@ -15,98 +19,141 @@ import FieldTextarea from "@/ui/components/field-textarea"
 
 const examples = [
   {
-    title: "Field Checkbox",
+    id: "checkbox",
+    title: "Checkbox",
     component: FieldCheckbox,
     sourcePath: "ui/components/field-checkbox.tsx",
   },
   {
-    title: "Field Choice Card",
+    id: "choice-card",
+    title: "Choice Card",
     component: FieldChoiceCard,
     sourcePath: "ui/components/field-choice-card.tsx",
   },
   {
-    title: "Field Demo",
+    id: "demo",
+    title: "Demo",
     component: FieldDemo,
     sourcePath: "ui/components/field-demo.tsx",
   },
   {
-    title: "Field Fieldset",
+    id: "fieldset",
+    title: "Fieldset",
     component: FieldFieldset,
     sourcePath: "ui/components/field-fieldset.tsx",
   },
   {
-    title: "Field Group",
+    id: "group",
+    title: "Group",
     component: FieldGroupExample,
     sourcePath: "ui/components/field-group.tsx",
   },
   {
-    title: "Field Input",
+    id: "input",
+    title: "Input",
     component: FieldInput,
     sourcePath: "ui/components/field-input.tsx",
   },
   {
-    title: "Field Radio",
+    id: "radio",
+    title: "Radio",
     component: FieldRadio,
     sourcePath: "ui/components/field-radio.tsx",
   },
   {
-    title: "Field Responsive",
+    id: "responsive",
+    title: "Responsive",
     component: FieldResponsive,
     sourcePath: "ui/components/field-responsive.tsx",
   },
   {
-    title: "Field Select",
+    id: "select",
+    title: "Select",
     component: FieldSelect,
     sourcePath: "ui/components/field-select.tsx",
   },
   {
-    title: "Field Slider",
+    id: "slider",
+    title: "Slider",
     component: FieldSlider,
     sourcePath: "ui/components/field-slider.tsx",
   },
   {
-    title: "Field Switch",
+    id: "switch",
+    title: "Switch",
     component: FieldSwitch,
     sourcePath: "ui/components/field-switch.tsx",
   },
   {
-    title: "Field Textarea",
+    id: "textarea",
+    title: "Textarea",
     component: FieldTextarea,
     sourcePath: "ui/components/field-textarea.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "checkbox", title: "Checkbox" },
+    { id: "choice-card", title: "Choice Card" },
+    { id: "demo", title: "Demo" },
+    { id: "fieldset", title: "Fieldset" },
+    { id: "group", title: "Group" },
+    { id: "input", title: "Input" },
+    { id: "radio", title: "Radio" },
+    { id: "responsive", title: "Responsive" },
+    { id: "select", title: "Select" },
+    { id: "slider", title: "Slider" },
+    { id: "switch", title: "Switch" },
+    { id: "textarea", title: "Textarea" },
+]
+
 export default function FieldPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Field"
+        description="Field component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Field</h1>
-        <p className="text-lg text-muted-foreground">
-          Field component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the field primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add field" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the Field component."
+      >
+        <CodeBlock
+          code={`import { Field } from "@/primitives/field"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

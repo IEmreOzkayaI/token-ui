@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import BadgeCustomColors from "@/ui/components/badge-colors"
 import BadgeDemo from "@/ui/components/badge-demo"
@@ -9,68 +13,99 @@ import BadgeVariants from "@/ui/components/badge-variants"
 
 const examples = [
   {
-    title: "Badge Colors",
+    id: "colors",
+    title: "Colors",
     component: BadgeCustomColors,
     sourcePath: "ui/components/badge-colors.tsx",
   },
   {
-    title: "Badge Demo",
+    id: "demo",
+    title: "Demo",
     component: BadgeDemo,
     sourcePath: "ui/components/badge-demo.tsx",
   },
   {
-    title: "Badge Icon",
+    id: "icon",
+    title: "Icon",
     component: BadgeWithIconLeft,
     sourcePath: "ui/components/badge-icon.tsx",
   },
   {
-    title: "Badge Link",
+    id: "link",
+    title: "Link",
     component: BadgeAsLink,
     sourcePath: "ui/components/badge-link.tsx",
   },
   {
-    title: "Badge Spinner",
+    id: "spinner",
+    title: "Spinner",
     component: BadgeWithSpinner,
     sourcePath: "ui/components/badge-spinner.tsx",
   },
   {
-    title: "Badge Variants",
+    id: "variants",
+    title: "Variants",
     component: BadgeVariants,
     sourcePath: "ui/components/badge-variants.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "colors", title: "Colors" },
+    { id: "demo", title: "Demo" },
+    { id: "icon", title: "Icon" },
+    { id: "link", title: "Link" },
+    { id: "spinner", title: "Spinner" },
+    { id: "variants", title: "Variants" },
+]
+
 export default function BadgePage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Badge"
+        description="Badge component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Badge</h1>
-        <p className="text-lg text-muted-foreground">
-          Badge component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the badge primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add badge" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the Badge component."
+      >
+        <CodeBlock
+          code={`import { Badge } from "@/primitives/badge"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

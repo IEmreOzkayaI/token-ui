@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import SonnerDemo from "@/ui/components/sonner-demo"
 import SonnerDescription from "@/ui/components/sonner-description"
@@ -7,58 +11,85 @@ import SonnerTypes from "@/ui/components/sonner-types"
 
 const examples = [
   {
-    title: "Sonner Demo",
+    id: "demo",
+    title: "Demo",
     component: SonnerDemo,
     sourcePath: "ui/components/sonner-demo.tsx",
   },
   {
-    title: "Sonner Description",
+    id: "description",
+    title: "Description",
     component: SonnerDescription,
     sourcePath: "ui/components/sonner-description.tsx",
   },
   {
-    title: "Sonner Position",
+    id: "position",
+    title: "Position",
     component: SonnerPosition,
     sourcePath: "ui/components/sonner-position.tsx",
   },
   {
-    title: "Sonner Types",
+    id: "types",
+    title: "Types",
     component: SonnerTypes,
     sourcePath: "ui/components/sonner-types.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "demo", title: "Demo" },
+    { id: "description", title: "Description" },
+    { id: "position", title: "Position" },
+    { id: "types", title: "Types" },
+]
+
 export default function SonnerPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Sonner"
+        description="Sonner component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Sonner</h1>
-        <p className="text-lg text-muted-foreground">
-          Sonner component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the sonner primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add sonner" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the Sonner component."
+      >
+        <CodeBlock
+          code={`import { Sonner } from "@/primitives/sonner"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

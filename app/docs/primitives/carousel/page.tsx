@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import CarouselDApiDemo from "@/ui/components/carousel-api"
 import CarouselDemo from "@/ui/components/carousel-demo"
@@ -9,68 +13,99 @@ import CarouselSpacing from "@/ui/components/carousel-spacing"
 
 const examples = [
   {
-    title: "Carousel Api",
+    id: "api",
+    title: "Api",
     component: CarouselDApiDemo,
     sourcePath: "ui/components/carousel-api.tsx",
   },
   {
-    title: "Carousel Demo",
+    id: "demo",
+    title: "Demo",
     component: CarouselDemo,
     sourcePath: "ui/components/carousel-demo.tsx",
   },
   {
-    title: "Carousel Multiple",
+    id: "multiple",
+    title: "Multiple",
     component: CarouselMultiple,
     sourcePath: "ui/components/carousel-multiple.tsx",
   },
   {
-    title: "Carousel Orientation",
+    id: "orientation",
+    title: "Orientation",
     component: CarouselOrientation,
     sourcePath: "ui/components/carousel-orientation.tsx",
   },
   {
-    title: "Carousel Size",
+    id: "size",
+    title: "Size",
     component: CarouselSize,
     sourcePath: "ui/components/carousel-size.tsx",
   },
   {
-    title: "Carousel Spacing",
+    id: "spacing",
+    title: "Spacing",
     component: CarouselSpacing,
     sourcePath: "ui/components/carousel-spacing.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "api", title: "Api" },
+    { id: "demo", title: "Demo" },
+    { id: "multiple", title: "Multiple" },
+    { id: "orientation", title: "Orientation" },
+    { id: "size", title: "Size" },
+    { id: "spacing", title: "Spacing" },
+]
+
 export default function CarouselPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Carousel"
+        description="Carousel component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Carousel</h1>
-        <p className="text-lg text-muted-foreground">
-          Carousel component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the carousel primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add carousel" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the Carousel component."
+      >
+        <CodeBlock
+          code={`import { Carousel } from "@/primitives/carousel"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

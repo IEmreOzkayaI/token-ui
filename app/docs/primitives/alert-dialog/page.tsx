@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import AlertDialogBasic from "@/ui/components/alert-dialog-basic"
 import AlertDialogDemo from "@/ui/components/alert-dialog-demo"
@@ -9,68 +13,99 @@ import AlertDialogSmall from "@/ui/components/alert-dialog-small"
 
 const examples = [
   {
-    title: "AlertDialog Basic",
+    id: "basic",
+    title: "Basic",
     component: AlertDialogBasic,
     sourcePath: "ui/components/alert-dialog-basic.tsx",
   },
   {
-    title: "AlertDialog Demo",
+    id: "demo",
+    title: "Demo",
     component: AlertDialogDemo,
     sourcePath: "ui/components/alert-dialog-demo.tsx",
   },
   {
-    title: "AlertDialog Destructive",
+    id: "destructive",
+    title: "Destructive",
     component: AlertDialogDestructive,
     sourcePath: "ui/components/alert-dialog-destructive.tsx",
   },
   {
-    title: "AlertDialog Media",
+    id: "media",
+    title: "Media",
     component: AlertDialogWithMedia,
     sourcePath: "ui/components/alert-dialog-media.tsx",
   },
   {
-    title: "AlertDialog Small Media",
+    id: "small-media",
+    title: "Small Media",
     component: AlertDialogSmallWithMedia,
     sourcePath: "ui/components/alert-dialog-small-media.tsx",
   },
   {
-    title: "AlertDialog Small",
+    id: "small",
+    title: "Small",
     component: AlertDialogSmall,
     sourcePath: "ui/components/alert-dialog-small.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "basic", title: "Basic" },
+    { id: "demo", title: "Demo" },
+    { id: "destructive", title: "Destructive" },
+    { id: "media", title: "Media" },
+    { id: "small-media", title: "Small Media" },
+    { id: "small", title: "Small" },
+]
+
 export default function AlertDialogPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="AlertDialog"
+        description="AlertDialog component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">AlertDialog</h1>
-        <p className="text-lg text-muted-foreground">
-          AlertDialog component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the alert-dialog primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add alert-dialog" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the AlertDialog component."
+      >
+        <CodeBlock
+          code={`import { AlertDialog } from "@/primitives/alert-dialog"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

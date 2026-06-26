@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import InputBadge from "@/ui/components/input-badge"
 import InputBasic from "@/ui/components/input-basic"
@@ -45,248 +49,351 @@ import InputRequired from "@/ui/components/input-required"
 
 const examples = [
   {
-    title: "Input Badge",
+    id: "badge",
+    title: "Badge",
     component: InputBadge,
     sourcePath: "ui/components/input-badge.tsx",
   },
   {
-    title: "Input Basic",
+    id: "basic",
+    title: "Basic",
     component: InputBasic,
     sourcePath: "ui/components/input-basic.tsx",
   },
   {
-    title: "Input Button Group",
+    id: "button-group",
+    title: "Button Group",
     component: InputButtonGroup,
     sourcePath: "ui/components/input-button-group.tsx",
   },
   {
-    title: "Input Demo",
+    id: "demo",
+    title: "Demo",
     component: InputDemo,
     sourcePath: "ui/components/input-demo.tsx",
   },
   {
-    title: "Input Disabled",
+    id: "disabled",
+    title: "Disabled",
     component: InputDisabled,
     sourcePath: "ui/components/input-disabled.tsx",
   },
   {
-    title: "Input Field",
+    id: "field",
+    title: "Field",
     component: InputField,
     sourcePath: "ui/components/input-field.tsx",
   },
   {
-    title: "Input Fieldgroup",
+    id: "fieldgroup",
+    title: "Fieldgroup",
     component: InputFieldgroup,
     sourcePath: "ui/components/input-fieldgroup.tsx",
   },
   {
-    title: "Input File",
+    id: "file",
+    title: "File",
     component: InputFile,
     sourcePath: "ui/components/input-file.tsx",
   },
   {
-    title: "Input Form",
+    id: "form",
+    title: "Form",
     component: InputForm,
     sourcePath: "ui/components/input-form.tsx",
   },
   {
-    title: "Input Grid",
+    id: "grid",
+    title: "Grid",
     component: InputGrid,
     sourcePath: "ui/components/input-grid.tsx",
   },
   {
-    title: "Input Group Basic",
+    id: "group-basic",
+    title: "Group Basic",
     component: InputGroupBasic,
     sourcePath: "ui/components/input-group-basic.tsx",
   },
   {
-    title: "Input Group Block End",
+    id: "group-block-end",
+    title: "Group Block End",
     component: InputGroupBlockEnd,
     sourcePath: "ui/components/input-group-block-end.tsx",
   },
   {
-    title: "Input Group Block Start",
+    id: "group-block-start",
+    title: "Group Block Start",
     component: InputGroupBlockStart,
     sourcePath: "ui/components/input-group-block-start.tsx",
   },
   {
-    title: "Input Group Button Group",
+    id: "group-button-group",
+    title: "Group Button Group",
     component: InputGroupButtonGroup,
     sourcePath: "ui/components/input-group-button-group.tsx",
   },
   {
-    title: "Input Group Demo",
+    id: "group-demo",
+    title: "Group Demo",
     component: InputGroupDemo,
     sourcePath: "ui/components/input-group-demo.tsx",
   },
   {
-    title: "Input Group Dropdown",
+    id: "group-dropdown",
+    title: "Group Dropdown",
     component: InputGroupDropdown,
     sourcePath: "ui/components/input-group-dropdown.tsx",
   },
   {
-    title: "Input Group In Card",
+    id: "group-in-card",
+    title: "Group In Card",
     component: InputGroupInCard,
     sourcePath: "ui/components/input-group-in-card.tsx",
   },
   {
-    title: "Input Group Inline End",
+    id: "group-inline-end",
+    title: "Group Inline End",
     component: InputGroupInlineEnd,
     sourcePath: "ui/components/input-group-inline-end.tsx",
   },
   {
-    title: "Input Group Inline Start",
+    id: "group-inline-start",
+    title: "Group Inline Start",
     component: InputGroupInlineStart,
     sourcePath: "ui/components/input-group-inline-start.tsx",
   },
   {
-    title: "Input Group Kbd",
+    id: "group-kbd",
+    title: "Group Kbd",
     component: InputGroupKbd,
     sourcePath: "ui/components/input-group-kbd.tsx",
   },
   {
-    title: "Input Group Label",
+    id: "group-label",
+    title: "Group Label",
     component: InputGroupLabel,
     sourcePath: "ui/components/input-group-label.tsx",
   },
   {
-    title: "Input Group Spinner",
+    id: "group-spinner",
+    title: "Group Spinner",
     component: InputGroupSpinner,
     sourcePath: "ui/components/input-group-spinner.tsx",
   },
   {
-    title: "Input Group Text",
+    id: "group-text",
+    title: "Group Text",
     component: InputGroupTextExample,
     sourcePath: "ui/components/input-group-text.tsx",
   },
   {
-    title: "Input Group Textarea Examples",
+    id: "group-textarea-examples",
+    title: "Group Textarea Examples",
     component: InputGroupTextareaExamples,
     sourcePath: "ui/components/input-group-textarea-examples.tsx",
   },
   {
-    title: "Input Group Tooltip",
+    id: "group-tooltip",
+    title: "Group Tooltip",
     component: InputGroupTooltip,
     sourcePath: "ui/components/input-group-tooltip.tsx",
   },
   {
-    title: "Input Group With Addons",
+    id: "group-with-addons",
+    title: "Group With Addons",
     component: InputGroupWithAddons,
     sourcePath: "ui/components/input-group-with-addons.tsx",
   },
   {
-    title: "Input Group With Buttons",
+    id: "group-with-buttons",
+    title: "Group With Buttons",
     component: InputGroupWithButtons,
     sourcePath: "ui/components/input-group-with-buttons.tsx",
   },
   {
-    title: "Input Group With Kbd",
+    id: "group-with-kbd",
+    title: "Group With Kbd",
     component: InputGroupWithKbd,
     sourcePath: "ui/components/input-group-with-kbd.tsx",
   },
   {
-    title: "Input Group With Tooltip",
+    id: "group-with-tooltip",
+    title: "Group With Tooltip",
     component: InputGroupWithTooltip,
     sourcePath: "ui/components/input-group-with-tooltip.tsx",
   },
   {
-    title: "Input Inline",
+    id: "inline",
+    title: "Inline",
     component: InputInline,
     sourcePath: "ui/components/input-inline.tsx",
   },
   {
-    title: "Input Input Group",
+    id: "input-group",
+    title: "Input Group",
     component: InputInputGroup,
     sourcePath: "ui/components/input-input-group.tsx",
   },
   {
-    title: "Input Invalid",
+    id: "invalid",
+    title: "Invalid",
     component: InputInvalid,
     sourcePath: "ui/components/input-invalid.tsx",
   },
   {
-    title: "Input Otp Alphanumeric",
+    id: "otp-alphanumeric",
+    title: "Otp Alphanumeric",
     component: InputOTPAlphanumeric,
     sourcePath: "ui/components/input-otp-alphanumeric.tsx",
   },
   {
-    title: "Input Otp Controlled",
+    id: "otp-controlled",
+    title: "Otp Controlled",
     component: InputOTPControlled,
     sourcePath: "ui/components/input-otp-controlled.tsx",
   },
   {
-    title: "Input Otp Demo",
+    id: "otp-demo",
+    title: "Otp Demo",
     component: InputOTPDemo,
     sourcePath: "ui/components/input-otp-demo.tsx",
   },
   {
-    title: "Input Otp Disabled",
+    id: "otp-disabled",
+    title: "Otp Disabled",
     component: InputOTPDisabled,
     sourcePath: "ui/components/input-otp-disabled.tsx",
   },
   {
-    title: "Input Otp Form",
+    id: "otp-form",
+    title: "Otp Form",
     component: InputOTPForm,
     sourcePath: "ui/components/input-otp-form.tsx",
   },
   {
-    title: "Input Otp Four Digits",
+    id: "otp-four-digits",
+    title: "Otp Four Digits",
     component: InputOTPFourDigits,
     sourcePath: "ui/components/input-otp-four-digits.tsx",
   },
   {
-    title: "Input Otp Invalid",
+    id: "otp-invalid",
+    title: "Otp Invalid",
     component: InputOTPInvalid,
     sourcePath: "ui/components/input-otp-invalid.tsx",
   },
   {
-    title: "Input Otp Pattern",
+    id: "otp-pattern",
+    title: "Otp Pattern",
     component: InputOTPPattern,
     sourcePath: "ui/components/input-otp-pattern.tsx",
   },
   {
-    title: "Input Otp Separator",
+    id: "otp-separator",
+    title: "Otp Separator",
     component: InputOTPWithSeparator,
     sourcePath: "ui/components/input-otp-separator.tsx",
   },
   {
-    title: "Input Required",
+    id: "required",
+    title: "Required",
     component: InputRequired,
     sourcePath: "ui/components/input-required.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "badge", title: "Badge" },
+    { id: "basic", title: "Basic" },
+    { id: "button-group", title: "Button Group" },
+    { id: "demo", title: "Demo" },
+    { id: "disabled", title: "Disabled" },
+    { id: "field", title: "Field" },
+    { id: "fieldgroup", title: "Fieldgroup" },
+    { id: "file", title: "File" },
+    { id: "form", title: "Form" },
+    { id: "grid", title: "Grid" },
+    { id: "group-basic", title: "Group Basic" },
+    { id: "group-block-end", title: "Group Block End" },
+    { id: "group-block-start", title: "Group Block Start" },
+    { id: "group-button-group", title: "Group Button Group" },
+    { id: "group-demo", title: "Group Demo" },
+    { id: "group-dropdown", title: "Group Dropdown" },
+    { id: "group-in-card", title: "Group In Card" },
+    { id: "group-inline-end", title: "Group Inline End" },
+    { id: "group-inline-start", title: "Group Inline Start" },
+    { id: "group-kbd", title: "Group Kbd" },
+    { id: "group-label", title: "Group Label" },
+    { id: "group-spinner", title: "Group Spinner" },
+    { id: "group-text", title: "Group Text" },
+    { id: "group-textarea-examples", title: "Group Textarea Examples" },
+    { id: "group-tooltip", title: "Group Tooltip" },
+    { id: "group-with-addons", title: "Group With Addons" },
+    { id: "group-with-buttons", title: "Group With Buttons" },
+    { id: "group-with-kbd", title: "Group With Kbd" },
+    { id: "group-with-tooltip", title: "Group With Tooltip" },
+    { id: "inline", title: "Inline" },
+    { id: "input-group", title: "Input Group" },
+    { id: "invalid", title: "Invalid" },
+    { id: "otp-alphanumeric", title: "Otp Alphanumeric" },
+    { id: "otp-controlled", title: "Otp Controlled" },
+    { id: "otp-demo", title: "Otp Demo" },
+    { id: "otp-disabled", title: "Otp Disabled" },
+    { id: "otp-form", title: "Otp Form" },
+    { id: "otp-four-digits", title: "Otp Four Digits" },
+    { id: "otp-invalid", title: "Otp Invalid" },
+    { id: "otp-pattern", title: "Otp Pattern" },
+    { id: "otp-separator", title: "Otp Separator" },
+    { id: "required", title: "Required" },
+]
+
 export default function InputPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Input"
+        description="Input component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Input</h1>
-        <p className="text-lg text-muted-foreground">
-          Input component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the input primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add input" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the Input component."
+      >
+        <CodeBlock
+          code={`import { Input } from "@/primitives/input"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

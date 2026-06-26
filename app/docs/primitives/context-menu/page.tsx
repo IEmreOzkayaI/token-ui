@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import ContextMenuBasic from "@/ui/components/context-menu-basic"
 import ContextMenuCheckboxes from "@/ui/components/context-menu-checkboxes"
@@ -13,88 +17,127 @@ import ContextMenuSubmenu from "@/ui/components/context-menu-submenu"
 
 const examples = [
   {
-    title: "ContextMenu Basic",
+    id: "basic",
+    title: "Basic",
     component: ContextMenuBasic,
     sourcePath: "ui/components/context-menu-basic.tsx",
   },
   {
-    title: "ContextMenu Checkboxes",
+    id: "checkboxes",
+    title: "Checkboxes",
     component: ContextMenuCheckboxes,
     sourcePath: "ui/components/context-menu-checkboxes.tsx",
   },
   {
-    title: "ContextMenu Demo",
+    id: "demo",
+    title: "Demo",
     component: ContextMenuDemo,
     sourcePath: "ui/components/context-menu-demo.tsx",
   },
   {
-    title: "ContextMenu Destructive",
+    id: "destructive",
+    title: "Destructive",
     component: ContextMenuDestructive,
     sourcePath: "ui/components/context-menu-destructive.tsx",
   },
   {
-    title: "ContextMenu Groups",
+    id: "groups",
+    title: "Groups",
     component: ContextMenuGroups,
     sourcePath: "ui/components/context-menu-groups.tsx",
   },
   {
-    title: "ContextMenu Icons",
+    id: "icons",
+    title: "Icons",
     component: ContextMenuIcons,
     sourcePath: "ui/components/context-menu-icons.tsx",
   },
   {
-    title: "ContextMenu Radio",
+    id: "radio",
+    title: "Radio",
     component: ContextMenuRadio,
     sourcePath: "ui/components/context-menu-radio.tsx",
   },
   {
-    title: "ContextMenu Shortcuts",
+    id: "shortcuts",
+    title: "Shortcuts",
     component: ContextMenuShortcuts,
     sourcePath: "ui/components/context-menu-shortcuts.tsx",
   },
   {
-    title: "ContextMenu Sides",
+    id: "sides",
+    title: "Sides",
     component: ContextMenuSides,
     sourcePath: "ui/components/context-menu-sides.tsx",
   },
   {
-    title: "ContextMenu Submenu",
+    id: "submenu",
+    title: "Submenu",
     component: ContextMenuSubmenu,
     sourcePath: "ui/components/context-menu-submenu.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "basic", title: "Basic" },
+    { id: "checkboxes", title: "Checkboxes" },
+    { id: "demo", title: "Demo" },
+    { id: "destructive", title: "Destructive" },
+    { id: "groups", title: "Groups" },
+    { id: "icons", title: "Icons" },
+    { id: "radio", title: "Radio" },
+    { id: "shortcuts", title: "Shortcuts" },
+    { id: "sides", title: "Sides" },
+    { id: "submenu", title: "Submenu" },
+]
+
 export default function ContextMenuPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="ContextMenu"
+        description="ContextMenu component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">ContextMenu</h1>
-        <p className="text-lg text-muted-foreground">
-          ContextMenu component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the context-menu primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add context-menu" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the ContextMenu component."
+      >
+        <CodeBlock
+          code={`import { ContextMenu } from "@/primitives/context-menu"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

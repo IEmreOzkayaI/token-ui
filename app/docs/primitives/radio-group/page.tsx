@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import RadioGroupChoiceCard from "@/ui/components/radio-group-choice-card"
 import RadioGroupDemo from "@/ui/components/radio-group-demo"
@@ -9,68 +13,99 @@ import RadioGroupInvalid from "@/ui/components/radio-group-invalid"
 
 const examples = [
   {
-    title: "RadioGroup Choice Card",
+    id: "choice-card",
+    title: "Choice Card",
     component: RadioGroupChoiceCard,
     sourcePath: "ui/components/radio-group-choice-card.tsx",
   },
   {
-    title: "RadioGroup Demo",
+    id: "demo",
+    title: "Demo",
     component: RadioGroupDemo,
     sourcePath: "ui/components/radio-group-demo.tsx",
   },
   {
-    title: "RadioGroup Description",
+    id: "description",
+    title: "Description",
     component: RadioGroupDescription,
     sourcePath: "ui/components/radio-group-description.tsx",
   },
   {
-    title: "RadioGroup Disabled",
+    id: "disabled",
+    title: "Disabled",
     component: RadioGroupDisabled,
     sourcePath: "ui/components/radio-group-disabled.tsx",
   },
   {
-    title: "RadioGroup Fieldset",
+    id: "fieldset",
+    title: "Fieldset",
     component: RadioGroupFieldset,
     sourcePath: "ui/components/radio-group-fieldset.tsx",
   },
   {
-    title: "RadioGroup Invalid",
+    id: "invalid",
+    title: "Invalid",
     component: RadioGroupInvalid,
     sourcePath: "ui/components/radio-group-invalid.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "choice-card", title: "Choice Card" },
+    { id: "demo", title: "Demo" },
+    { id: "description", title: "Description" },
+    { id: "disabled", title: "Disabled" },
+    { id: "fieldset", title: "Fieldset" },
+    { id: "invalid", title: "Invalid" },
+]
+
 export default function RadioGroupPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="RadioGroup"
+        description="RadioGroup component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">RadioGroup</h1>
-        <p className="text-lg text-muted-foreground">
-          RadioGroup component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the radio-group primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add radio-group" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the RadioGroup component."
+      >
+        <CodeBlock
+          code={`import { RadioGroup } from "@/primitives/radio-group"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

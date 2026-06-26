@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import NativeSelectDemo from "@/ui/components/native-select-demo"
 import NativeSelectDisabled from "@/ui/components/native-select-disabled"
@@ -7,58 +11,85 @@ import NativeSelectInvalid from "@/ui/components/native-select-invalid"
 
 const examples = [
   {
-    title: "NativeSelect Demo",
+    id: "demo",
+    title: "Demo",
     component: NativeSelectDemo,
     sourcePath: "ui/components/native-select-demo.tsx",
   },
   {
-    title: "NativeSelect Disabled",
+    id: "disabled",
+    title: "Disabled",
     component: NativeSelectDisabled,
     sourcePath: "ui/components/native-select-disabled.tsx",
   },
   {
-    title: "NativeSelect Groups",
+    id: "groups",
+    title: "Groups",
     component: NativeSelectGroups,
     sourcePath: "ui/components/native-select-groups.tsx",
   },
   {
-    title: "NativeSelect Invalid",
+    id: "invalid",
+    title: "Invalid",
     component: NativeSelectInvalid,
     sourcePath: "ui/components/native-select-invalid.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "demo", title: "Demo" },
+    { id: "disabled", title: "Disabled" },
+    { id: "groups", title: "Groups" },
+    { id: "invalid", title: "Invalid" },
+]
+
 export default function NativeSelectPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="NativeSelect"
+        description="NativeSelect component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">NativeSelect</h1>
-        <p className="text-lg text-muted-foreground">
-          NativeSelect component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the native-select primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add native-select" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the NativeSelect component."
+      >
+        <CodeBlock
+          code={`import { NativeSelect } from "@/primitives/native-select"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

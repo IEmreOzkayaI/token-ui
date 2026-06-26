@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import ToggleGroupDemo from "@/ui/components/toggle-group-demo"
 import ToggleGroupDisabled from "@/ui/components/toggle-group-disabled"
@@ -10,73 +14,106 @@ import ToggleGroupVertical from "@/ui/components/toggle-group-vertical"
 
 const examples = [
   {
-    title: "ToggleGroup Demo",
+    id: "demo",
+    title: "Demo",
     component: ToggleGroupDemo,
     sourcePath: "ui/components/toggle-group-demo.tsx",
   },
   {
-    title: "ToggleGroup Disabled",
+    id: "disabled",
+    title: "Disabled",
     component: ToggleGroupDisabled,
     sourcePath: "ui/components/toggle-group-disabled.tsx",
   },
   {
-    title: "ToggleGroup Font Weight Selector",
+    id: "font-weight-selector",
+    title: "Font Weight Selector",
     component: ToggleGroupFontWeightSelector,
     sourcePath: "ui/components/toggle-group-font-weight-selector.tsx",
   },
   {
-    title: "ToggleGroup Outline",
+    id: "outline",
+    title: "Outline",
     component: ToggleGroupOutline,
     sourcePath: "ui/components/toggle-group-outline.tsx",
   },
   {
-    title: "ToggleGroup Sizes",
+    id: "sizes",
+    title: "Sizes",
     component: ToggleGroupSizes,
     sourcePath: "ui/components/toggle-group-sizes.tsx",
   },
   {
-    title: "ToggleGroup Spacing",
+    id: "spacing",
+    title: "Spacing",
     component: ToggleGroupSpacing,
     sourcePath: "ui/components/toggle-group-spacing.tsx",
   },
   {
-    title: "ToggleGroup Vertical",
+    id: "vertical",
+    title: "Vertical",
     component: ToggleGroupVertical,
     sourcePath: "ui/components/toggle-group-vertical.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "demo", title: "Demo" },
+    { id: "disabled", title: "Disabled" },
+    { id: "font-weight-selector", title: "Font Weight Selector" },
+    { id: "outline", title: "Outline" },
+    { id: "sizes", title: "Sizes" },
+    { id: "spacing", title: "Spacing" },
+    { id: "vertical", title: "Vertical" },
+]
+
 export default function ToggleGroupPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="ToggleGroup"
+        description="ToggleGroup component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">ToggleGroup</h1>
-        <p className="text-lg text-muted-foreground">
-          ToggleGroup component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the toggle-group primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add toggle-group" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the ToggleGroup component."
+      >
+        <CodeBlock
+          code={`import { ToggleGroup } from "@/primitives/toggle-group"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import SpinnerBadge from "@/ui/components/spinner-badge"
 import SpinnerButton from "@/ui/components/spinner-button"
@@ -10,73 +14,106 @@ import SpinnerSize from "@/ui/components/spinner-size"
 
 const examples = [
   {
-    title: "Spinner Badge",
+    id: "badge",
+    title: "Badge",
     component: SpinnerBadge,
     sourcePath: "ui/components/spinner-badge.tsx",
   },
   {
-    title: "Spinner Button",
+    id: "button",
+    title: "Button",
     component: SpinnerButton,
     sourcePath: "ui/components/spinner-button.tsx",
   },
   {
-    title: "Spinner Custom",
+    id: "custom",
+    title: "Custom",
     component: SpinnerCustom,
     sourcePath: "ui/components/spinner-custom.tsx",
   },
   {
-    title: "Spinner Demo",
+    id: "demo",
+    title: "Demo",
     component: SpinnerDemo,
     sourcePath: "ui/components/spinner-demo.tsx",
   },
   {
-    title: "Spinner Empty",
+    id: "empty",
+    title: "Empty",
     component: SpinnerEmpty,
     sourcePath: "ui/components/spinner-empty.tsx",
   },
   {
-    title: "Spinner Input Group",
+    id: "input-group",
+    title: "Input Group",
     component: SpinnerInputGroup,
     sourcePath: "ui/components/spinner-input-group.tsx",
   },
   {
-    title: "Spinner Size",
+    id: "size",
+    title: "Size",
     component: SpinnerSize,
     sourcePath: "ui/components/spinner-size.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "badge", title: "Badge" },
+    { id: "button", title: "Button" },
+    { id: "custom", title: "Custom" },
+    { id: "demo", title: "Demo" },
+    { id: "empty", title: "Empty" },
+    { id: "input-group", title: "Input Group" },
+    { id: "size", title: "Size" },
+]
+
 export default function SpinnerPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Spinner"
+        description="Spinner component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Spinner</h1>
-        <p className="text-lg text-muted-foreground">
-          Spinner component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the spinner primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add spinner" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the Spinner component."
+      >
+        <CodeBlock
+          code={`import { Spinner } from "@/primitives/spinner"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

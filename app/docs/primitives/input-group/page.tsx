@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import InputGroupBasic from "@/ui/components/input-group-basic"
 import InputGroupBlockEnd from "@/ui/components/input-group-block-end"
@@ -22,133 +26,190 @@ import InputGroupWithTooltip from "@/ui/components/input-group-with-tooltip"
 
 const examples = [
   {
-    title: "InputGroup Basic",
+    id: "basic",
+    title: "Basic",
     component: InputGroupBasic,
     sourcePath: "ui/components/input-group-basic.tsx",
   },
   {
-    title: "InputGroup Block End",
+    id: "block-end",
+    title: "Block End",
     component: InputGroupBlockEnd,
     sourcePath: "ui/components/input-group-block-end.tsx",
   },
   {
-    title: "InputGroup Block Start",
+    id: "block-start",
+    title: "Block Start",
     component: InputGroupBlockStart,
     sourcePath: "ui/components/input-group-block-start.tsx",
   },
   {
-    title: "InputGroup Button Group",
+    id: "button-group",
+    title: "Button Group",
     component: InputGroupButtonGroup,
     sourcePath: "ui/components/input-group-button-group.tsx",
   },
   {
-    title: "InputGroup Demo",
+    id: "demo",
+    title: "Demo",
     component: InputGroupDemo,
     sourcePath: "ui/components/input-group-demo.tsx",
   },
   {
-    title: "InputGroup Dropdown",
+    id: "dropdown",
+    title: "Dropdown",
     component: InputGroupDropdown,
     sourcePath: "ui/components/input-group-dropdown.tsx",
   },
   {
-    title: "InputGroup In Card",
+    id: "in-card",
+    title: "In Card",
     component: InputGroupInCard,
     sourcePath: "ui/components/input-group-in-card.tsx",
   },
   {
-    title: "InputGroup Inline End",
+    id: "inline-end",
+    title: "Inline End",
     component: InputGroupInlineEnd,
     sourcePath: "ui/components/input-group-inline-end.tsx",
   },
   {
-    title: "InputGroup Inline Start",
+    id: "inline-start",
+    title: "Inline Start",
     component: InputGroupInlineStart,
     sourcePath: "ui/components/input-group-inline-start.tsx",
   },
   {
-    title: "InputGroup Kbd",
+    id: "kbd",
+    title: "Kbd",
     component: InputGroupKbd,
     sourcePath: "ui/components/input-group-kbd.tsx",
   },
   {
-    title: "InputGroup Label",
+    id: "label",
+    title: "Label",
     component: InputGroupLabel,
     sourcePath: "ui/components/input-group-label.tsx",
   },
   {
-    title: "InputGroup Spinner",
+    id: "spinner",
+    title: "Spinner",
     component: InputGroupSpinner,
     sourcePath: "ui/components/input-group-spinner.tsx",
   },
   {
-    title: "InputGroup Text",
+    id: "text",
+    title: "Text",
     component: InputGroupTextExample,
     sourcePath: "ui/components/input-group-text.tsx",
   },
   {
-    title: "InputGroup Textarea Examples",
+    id: "textarea-examples",
+    title: "Textarea Examples",
     component: InputGroupTextareaExamples,
     sourcePath: "ui/components/input-group-textarea-examples.tsx",
   },
   {
-    title: "InputGroup Tooltip",
+    id: "tooltip",
+    title: "Tooltip",
     component: InputGroupTooltip,
     sourcePath: "ui/components/input-group-tooltip.tsx",
   },
   {
-    title: "InputGroup With Addons",
+    id: "with-addons",
+    title: "With Addons",
     component: InputGroupWithAddons,
     sourcePath: "ui/components/input-group-with-addons.tsx",
   },
   {
-    title: "InputGroup With Buttons",
+    id: "with-buttons",
+    title: "With Buttons",
     component: InputGroupWithButtons,
     sourcePath: "ui/components/input-group-with-buttons.tsx",
   },
   {
-    title: "InputGroup With Kbd",
+    id: "with-kbd",
+    title: "With Kbd",
     component: InputGroupWithKbd,
     sourcePath: "ui/components/input-group-with-kbd.tsx",
   },
   {
-    title: "InputGroup With Tooltip",
+    id: "with-tooltip",
+    title: "With Tooltip",
     component: InputGroupWithTooltip,
     sourcePath: "ui/components/input-group-with-tooltip.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "basic", title: "Basic" },
+    { id: "block-end", title: "Block End" },
+    { id: "block-start", title: "Block Start" },
+    { id: "button-group", title: "Button Group" },
+    { id: "demo", title: "Demo" },
+    { id: "dropdown", title: "Dropdown" },
+    { id: "in-card", title: "In Card" },
+    { id: "inline-end", title: "Inline End" },
+    { id: "inline-start", title: "Inline Start" },
+    { id: "kbd", title: "Kbd" },
+    { id: "label", title: "Label" },
+    { id: "spinner", title: "Spinner" },
+    { id: "text", title: "Text" },
+    { id: "textarea-examples", title: "Textarea Examples" },
+    { id: "tooltip", title: "Tooltip" },
+    { id: "with-addons", title: "With Addons" },
+    { id: "with-buttons", title: "With Buttons" },
+    { id: "with-kbd", title: "With Kbd" },
+    { id: "with-tooltip", title: "With Tooltip" },
+]
+
 export default function InputGroupPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="InputGroup"
+        description="InputGroup component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">InputGroup</h1>
-        <p className="text-lg text-muted-foreground">
-          InputGroup component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the input-group primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add input-group" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the InputGroup component."
+      >
+        <CodeBlock
+          code={`import { InputGroup } from "@/primitives/input-group"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import DialogCloseButton from "@/ui/components/dialog-close-button"
 import DialogDemo from "@/ui/components/dialog-demo"
@@ -8,63 +12,92 @@ import DialogStickyFooter from "@/ui/components/dialog-sticky-footer"
 
 const examples = [
   {
-    title: "Dialog Close Button",
+    id: "close-button",
+    title: "Close Button",
     component: DialogCloseButton,
     sourcePath: "ui/components/dialog-close-button.tsx",
   },
   {
-    title: "Dialog Demo",
+    id: "demo",
+    title: "Demo",
     component: DialogDemo,
     sourcePath: "ui/components/dialog-demo.tsx",
   },
   {
-    title: "Dialog No Close Button",
+    id: "no-close-button",
+    title: "No Close Button",
     component: DialogNoCloseButton,
     sourcePath: "ui/components/dialog-no-close-button.tsx",
   },
   {
-    title: "Dialog Scrollable Content",
+    id: "scrollable-content",
+    title: "Scrollable Content",
     component: DialogScrollableContent,
     sourcePath: "ui/components/dialog-scrollable-content.tsx",
   },
   {
-    title: "Dialog Sticky Footer",
+    id: "sticky-footer",
+    title: "Sticky Footer",
     component: DialogStickyFooter,
     sourcePath: "ui/components/dialog-sticky-footer.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "close-button", title: "Close Button" },
+    { id: "demo", title: "Demo" },
+    { id: "no-close-button", title: "No Close Button" },
+    { id: "scrollable-content", title: "Scrollable Content" },
+    { id: "sticky-footer", title: "Sticky Footer" },
+]
+
 export default function DialogPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Dialog"
+        description="Dialog component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Dialog</h1>
-        <p className="text-lg text-muted-foreground">
-          Dialog component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the dialog primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add dialog" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the Dialog component."
+      >
+        <CodeBlock
+          code={`import { Dialog } from "@/primitives/dialog"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }

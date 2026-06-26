@@ -1,4 +1,8 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
 import ButtonAsChild from "@/ui/components/button-aschild"
 import ButtonDefault from "@/ui/components/button-default"
@@ -25,148 +29,211 @@ import ButtonSpinner from "@/ui/components/button-spinner"
 
 const examples = [
   {
-    title: "Button Aschild",
+    id: "aschild",
+    title: "Aschild",
     component: ButtonAsChild,
     sourcePath: "ui/components/button-aschild.tsx",
   },
   {
-    title: "Button Default",
+    id: "default",
+    title: "Default",
     component: ButtonDefault,
     sourcePath: "ui/components/button-default.tsx",
   },
   {
-    title: "Button Demo",
+    id: "demo",
+    title: "Demo",
     component: ButtonDemo,
     sourcePath: "ui/components/button-demo.tsx",
   },
   {
-    title: "Button Destructive",
+    id: "destructive",
+    title: "Destructive",
     component: ButtonDestructive,
     sourcePath: "ui/components/button-destructive.tsx",
   },
   {
-    title: "Button Ghost",
+    id: "ghost",
+    title: "Ghost",
     component: ButtonGhost,
     sourcePath: "ui/components/button-ghost.tsx",
   },
   {
-    title: "Button Group Demo",
+    id: "group-demo",
+    title: "Group Demo",
     component: ButtonGroupDemo,
     sourcePath: "ui/components/button-group-demo.tsx",
   },
   {
-    title: "Button Group Dropdown",
+    id: "group-dropdown",
+    title: "Group Dropdown",
     component: ButtonGroupDropdown,
     sourcePath: "ui/components/button-group-dropdown.tsx",
   },
   {
-    title: "Button Group Input Group",
+    id: "group-input-group",
+    title: "Group Input Group",
     component: ButtonGroupInputGroup,
     sourcePath: "ui/components/button-group-input-group.tsx",
   },
   {
-    title: "Button Group Input",
+    id: "group-input",
+    title: "Group Input",
     component: ButtonGroupInput,
     sourcePath: "ui/components/button-group-input.tsx",
   },
   {
-    title: "Button Group Nested",
+    id: "group-nested",
+    title: "Group Nested",
     component: ButtonGroupNested,
     sourcePath: "ui/components/button-group-nested.tsx",
   },
   {
-    title: "Button Group Orientation",
+    id: "group-orientation",
+    title: "Group Orientation",
     component: ButtonGroupOrientation,
     sourcePath: "ui/components/button-group-orientation.tsx",
   },
   {
-    title: "Button Group Popover",
+    id: "group-popover",
+    title: "Group Popover",
     component: ButtonGroupPopover,
     sourcePath: "ui/components/button-group-popover.tsx",
   },
   {
-    title: "Button Group Select",
+    id: "group-select",
+    title: "Group Select",
     component: ButtonGroupSelect,
     sourcePath: "ui/components/button-group-select.tsx",
   },
   {
-    title: "Button Group Separator",
+    id: "group-separator",
+    title: "Group Separator",
     component: ButtonGroupSeparatorDemo,
     sourcePath: "ui/components/button-group-separator.tsx",
   },
   {
-    title: "Button Group Size",
+    id: "group-size",
+    title: "Group Size",
     component: ButtonGroupSize,
     sourcePath: "ui/components/button-group-size.tsx",
   },
   {
-    title: "Button Icon",
+    id: "icon",
+    title: "Icon",
     component: ButtonIcon,
     sourcePath: "ui/components/button-icon.tsx",
   },
   {
-    title: "Button Link",
+    id: "link",
+    title: "Link",
     component: ButtonLink,
     sourcePath: "ui/components/button-link.tsx",
   },
   {
-    title: "Button Outline",
+    id: "outline",
+    title: "Outline",
     component: ButtonOutline,
     sourcePath: "ui/components/button-outline.tsx",
   },
   {
-    title: "Button Rounded",
+    id: "rounded",
+    title: "Rounded",
     component: ButtonRounded,
     sourcePath: "ui/components/button-rounded.tsx",
   },
   {
-    title: "Button Secondary",
+    id: "secondary",
+    title: "Secondary",
     component: ButtonSecondary,
     sourcePath: "ui/components/button-secondary.tsx",
   },
   {
-    title: "Button Size",
+    id: "size",
+    title: "Size",
     component: ButtonSize,
     sourcePath: "ui/components/button-size.tsx",
   },
   {
-    title: "Button Spinner",
+    id: "spinner",
+    title: "Spinner",
     component: ButtonSpinner,
     sourcePath: "ui/components/button-spinner.tsx",
   },
 ] as const
 
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+    { id: "aschild", title: "Aschild" },
+    { id: "default", title: "Default" },
+    { id: "demo", title: "Demo" },
+    { id: "destructive", title: "Destructive" },
+    { id: "ghost", title: "Ghost" },
+    { id: "group-demo", title: "Group Demo" },
+    { id: "group-dropdown", title: "Group Dropdown" },
+    { id: "group-input-group", title: "Group Input Group" },
+    { id: "group-input", title: "Group Input" },
+    { id: "group-nested", title: "Group Nested" },
+    { id: "group-orientation", title: "Group Orientation" },
+    { id: "group-popover", title: "Group Popover" },
+    { id: "group-select", title: "Group Select" },
+    { id: "group-separator", title: "Group Separator" },
+    { id: "group-size", title: "Group Size" },
+    { id: "icon", title: "Icon" },
+    { id: "link", title: "Link" },
+    { id: "outline", title: "Outline" },
+    { id: "rounded", title: "Rounded" },
+    { id: "secondary", title: "Secondary" },
+    { id: "size", title: "Size" },
+    { id: "spinner", title: "Spinner" },
+]
+
 export default function ButtonPage() {
   return (
-    <div className="flex gap-12">
-      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          On This Page
-        </h3>
-      </div>
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Button"
+        description="Button component"
+      />
 
-      <div className="max-w-2xl flex-1 space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Button</h1>
-        <p className="text-lg text-muted-foreground">
-          Button component — {examples.length} examples rendered live with source code
-        </p>
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the button primitive to your project."
+      >
+        <CodeBlock code="pnpm dlx shadcn@latest add button" />
+      </DocsSection>
 
-        <div className="flex flex-col gap-10">
-          {examples.map((example) => {
-            const Component = example.component
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import and use the Button component."
+      >
+        <CodeBlock
+          code={`import { Button } from "@/primitives/button"`}
+        />
+      </DocsSection>
 
-            return (
+      <div className="space-y-10">
+        {examples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
               <ComponentExample
-                key={example.sourcePath}
-                title={example.title}
                 source={readSource(example.sourcePath)}
               >
                 <Component />
               </ComponentExample>
-            )
-          })}
-        </div>
+            </DocsSection>
+          )
+        })}
       </div>
-    </div>
+    </DocsPage>
   )
 }
