@@ -60,13 +60,14 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "basic", title: "Basic" },
-    { id: "demo", title: "Demo" },
-    { id: "description", title: "Description" },
-    { id: "disabled", title: "Disabled" },
-    { id: "group", title: "Group" },
-    { id: "invalid", title: "Invalid" },
-    { id: "table", title: "Table" },
+  { id: "examples", title: "Examples" },
+  { id: "basic", title: "Basic", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "description", title: "Description", depth: 3 },
+  { id: "disabled", title: "Disabled", depth: 3 },
+  { id: "group", title: "Group", depth: 3 },
+  { id: "invalid", title: "Invalid", depth: 3 },
+  { id: "table", title: "Table", depth: 3 },
 ]
 
 export default function CheckboxPage() {
@@ -74,13 +75,13 @@ export default function CheckboxPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Checkbox"
-        description="Checkbox component"
+        description="A control that allows the user to toggle between checked and not checked."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the checkbox primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add checkbox" />
       </DocsSection>
@@ -88,32 +89,34 @@ export default function CheckboxPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Checkbox component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Checkbox } from "@/primitives/checkbox"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

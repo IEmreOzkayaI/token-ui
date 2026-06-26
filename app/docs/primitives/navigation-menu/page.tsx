@@ -18,7 +18,8 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "demo", title: "Demo" },
+  { id: "examples", title: "Examples" },
+  { id: "demo", title: "Demo", depth: 3 },
 ]
 
 export default function NavigationMenuPage() {
@@ -26,13 +27,13 @@ export default function NavigationMenuPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="NavigationMenu"
-        description="NavigationMenu component"
+        description="A collection of links for navigating between pages."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the navigation-menu primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add navigation-menu" />
       </DocsSection>
@@ -40,32 +41,34 @@ export default function NavigationMenuPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the NavigationMenu component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { NavigationMenu } from "@/primitives/navigation-menu"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

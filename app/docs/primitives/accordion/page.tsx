@@ -11,56 +11,40 @@ import AccordionDemo from "@/ui/components/accordion-demo"
 import AccordionDisabled from "@/ui/components/accordion-disabled"
 import AccordionMultiple from "@/ui/components/accordion-multiple"
 
-const accordionExamples = [
+const examples = [
   {
     id: "basic",
     title: "Basic",
-    description:
-      "A simple accordion that only shows one item at a time. The first item is open by default.",
     component: AccordionBasic,
     sourcePath: "ui/components/accordion-basic.tsx",
   },
   {
-    id: "demo",
-    title: "Demo",
-    description:
-      "A single collapsible accordion with shipping, returns, and support FAQ items.",
-    component: AccordionDemo,
-    sourcePath: "ui/components/accordion-demo.tsx",
-  },
-  {
-    id: "card",
-    title: "Card",
-    description:
-      "An accordion nested inside a card for subscription and billing questions.",
-    component: AccordionCard,
-    sourcePath: "ui/components/accordion-card.tsx",
-  },
-  {
     id: "borders",
     title: "Borders",
-    description:
-      "An accordion wrapped in a rounded border with padded items.",
     component: AccordionBorders,
     sourcePath: "ui/components/accordion-borders.tsx",
   },
   {
+    id: "card",
+    title: "Card",
+    component: AccordionCard,
+    sourcePath: "ui/components/accordion-card.tsx",
+  },
+  {
+    id: "demo",
+    title: "Demo",
+    component: AccordionDemo,
+    sourcePath: "ui/components/accordion-demo.tsx",
+  },
+  {
     id: "disabled",
     title: "Disabled",
-    description: (
-      <>
-        Use the <code>disabled</code> prop on <code>AccordionItem</code> to
-        disable individual items.
-      </>
-    ),
     component: AccordionDisabled,
     sourcePath: "ui/components/accordion-disabled.tsx",
   },
   {
     id: "multiple",
     title: "Multiple",
-    description:
-      "Set type to multiple to allow more than one item to be open at the same time.",
     component: AccordionMultiple,
     sourcePath: "ui/components/accordion-multiple.tsx",
   },
@@ -69,10 +53,13 @@ const accordionExamples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-  ...accordionExamples.map((example) => ({
-    id: example.id,
-    title: example.title,
-  })),
+  { id: "examples", title: "Examples" },
+  { id: "basic", title: "Basic", depth: 3 },
+  { id: "borders", title: "Borders", depth: 3 },
+  { id: "card", title: "Card", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "disabled", title: "Disabled", depth: 3 },
+  { id: "multiple", title: "Multiple", depth: 3 },
 ]
 
 export default function AccordionPage() {
@@ -86,7 +73,7 @@ export default function AccordionPage() {
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the accordion primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add accordion" />
       </DocsSection>
@@ -94,38 +81,34 @@ export default function AccordionPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import the accordion parts and compose them together."
+        description="Import and compose the component."
       >
         <CodeBlock
-          code={`import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/primitives/accordion"`}
+          code={`import { Accordion } from "@/primitives/accordion"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {accordionExamples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                description={example.description}
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

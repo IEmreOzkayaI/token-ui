@@ -39,10 +39,11 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "demo", title: "Demo" },
-    { id: "disabled", title: "Disabled" },
-    { id: "groups", title: "Groups" },
-    { id: "invalid", title: "Invalid" },
+  { id: "examples", title: "Examples" },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "disabled", title: "Disabled", depth: 3 },
+  { id: "groups", title: "Groups", depth: 3 },
+  { id: "invalid", title: "Invalid", depth: 3 },
 ]
 
 export default function NativeSelectPage() {
@@ -50,13 +51,13 @@ export default function NativeSelectPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="NativeSelect"
-        description="NativeSelect component"
+        description="A styled wrapper around the native HTML select element."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the native-select primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add native-select" />
       </DocsSection>
@@ -64,32 +65,34 @@ export default function NativeSelectPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the NativeSelect component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { NativeSelect } from "@/primitives/native-select"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

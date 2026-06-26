@@ -25,8 +25,9 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "demo", title: "Demo" },
-    { id: "sides", title: "Sides" },
+  { id: "examples", title: "Examples" },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "sides", title: "Sides", depth: 3 },
 ]
 
 export default function HoverCardPage() {
@@ -34,13 +35,13 @@ export default function HoverCardPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="HoverCard"
-        description="HoverCard component"
+        description="A card that appears when hovering over a trigger element."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the hover-card primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add hover-card" />
       </DocsSection>
@@ -48,32 +49,34 @@ export default function HoverCardPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the HoverCard component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { HoverCard } from "@/primitives/hover-card"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

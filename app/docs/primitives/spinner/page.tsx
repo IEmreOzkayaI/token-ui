@@ -60,13 +60,14 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "badge", title: "Badge" },
-    { id: "button", title: "Button" },
-    { id: "custom", title: "Custom" },
-    { id: "demo", title: "Demo" },
-    { id: "empty", title: "Empty" },
-    { id: "input-group", title: "Input Group" },
-    { id: "size", title: "Size" },
+  { id: "examples", title: "Examples" },
+  { id: "badge", title: "Badge", depth: 3 },
+  { id: "button", title: "Button", depth: 3 },
+  { id: "custom", title: "Custom", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "empty", title: "Empty", depth: 3 },
+  { id: "input-group", title: "Input Group", depth: 3 },
+  { id: "size", title: "Size", depth: 3 },
 ]
 
 export default function SpinnerPage() {
@@ -74,13 +75,13 @@ export default function SpinnerPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Spinner"
-        description="Spinner component"
+        description="Animated loading indicator to show pending state."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the spinner primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add spinner" />
       </DocsSection>
@@ -88,32 +89,34 @@ export default function SpinnerPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Spinner component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Spinner } from "@/primitives/spinner"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

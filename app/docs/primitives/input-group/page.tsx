@@ -144,25 +144,26 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "basic", title: "Basic" },
-    { id: "block-end", title: "Block End" },
-    { id: "block-start", title: "Block Start" },
-    { id: "button-group", title: "Button Group" },
-    { id: "demo", title: "Demo" },
-    { id: "dropdown", title: "Dropdown" },
-    { id: "in-card", title: "In Card" },
-    { id: "inline-end", title: "Inline End" },
-    { id: "inline-start", title: "Inline Start" },
-    { id: "kbd", title: "Kbd" },
-    { id: "label", title: "Label" },
-    { id: "spinner", title: "Spinner" },
-    { id: "text", title: "Text" },
-    { id: "textarea-examples", title: "Textarea Examples" },
-    { id: "tooltip", title: "Tooltip" },
-    { id: "with-addons", title: "With Addons" },
-    { id: "with-buttons", title: "With Buttons" },
-    { id: "with-kbd", title: "With Kbd" },
-    { id: "with-tooltip", title: "With Tooltip" },
+  { id: "examples", title: "Examples" },
+  { id: "basic", title: "Basic", depth: 3 },
+  { id: "block-end", title: "Block End", depth: 3 },
+  { id: "block-start", title: "Block Start", depth: 3 },
+  { id: "button-group", title: "Button Group", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "dropdown", title: "Dropdown", depth: 3 },
+  { id: "in-card", title: "In Card", depth: 3 },
+  { id: "inline-end", title: "Inline End", depth: 3 },
+  { id: "inline-start", title: "Inline Start", depth: 3 },
+  { id: "kbd", title: "Kbd", depth: 3 },
+  { id: "label", title: "Label", depth: 3 },
+  { id: "spinner", title: "Spinner", depth: 3 },
+  { id: "text", title: "Text", depth: 3 },
+  { id: "textarea-examples", title: "Textarea Examples", depth: 3 },
+  { id: "tooltip", title: "Tooltip", depth: 3 },
+  { id: "with-addons", title: "With Addons", depth: 3 },
+  { id: "with-buttons", title: "With Buttons", depth: 3 },
+  { id: "with-kbd", title: "With Kbd", depth: 3 },
+  { id: "with-tooltip", title: "With Tooltip", depth: 3 },
 ]
 
 export default function InputGroupPage() {
@@ -170,13 +171,13 @@ export default function InputGroupPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="InputGroup"
-        description="InputGroup component"
+        description="Groups inputs with addons, buttons, or icons for compound fields."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the input-group primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add input-group" />
       </DocsSection>
@@ -184,32 +185,34 @@ export default function InputGroupPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the InputGroup component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { InputGroup } from "@/primitives/input-group"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

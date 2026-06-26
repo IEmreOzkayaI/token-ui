@@ -67,14 +67,15 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "badge-icon", title: "Badge Icon" },
-    { id: "badge", title: "Badge" },
-    { id: "basic", title: "Basic" },
-    { id: "dropdown", title: "Dropdown" },
-    { id: "group-count-icon", title: "Group Count Icon" },
-    { id: "group-count", title: "Group Count" },
-    { id: "group", title: "Group" },
-    { id: "size", title: "Size" },
+  { id: "examples", title: "Examples" },
+  { id: "badge-icon", title: "Badge Icon", depth: 3 },
+  { id: "badge", title: "Badge", depth: 3 },
+  { id: "basic", title: "Basic", depth: 3 },
+  { id: "dropdown", title: "Dropdown", depth: 3 },
+  { id: "group-count-icon", title: "Group Count Icon", depth: 3 },
+  { id: "group-count", title: "Group Count", depth: 3 },
+  { id: "group", title: "Group", depth: 3 },
+  { id: "size", title: "Size", depth: 3 },
 ]
 
 export default function AvatarPage() {
@@ -82,13 +83,13 @@ export default function AvatarPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Avatar"
-        description="Avatar component"
+        description="An image element with a fallback for representing the user."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the avatar primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add avatar" />
       </DocsSection>
@@ -96,32 +97,34 @@ export default function AvatarPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Avatar component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Avatar } from "@/primitives/avatar"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

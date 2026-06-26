@@ -81,16 +81,17 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "avatar", title: "Avatar" },
-    { id: "demo", title: "Demo" },
-    { id: "dropdown", title: "Dropdown" },
-    { id: "group", title: "Group" },
-    { id: "header", title: "Header" },
-    { id: "icon", title: "Icon" },
-    { id: "image", title: "Image" },
-    { id: "link", title: "Link" },
-    { id: "size", title: "Size" },
-    { id: "variant", title: "Variant" },
+  { id: "examples", title: "Examples" },
+  { id: "avatar", title: "Avatar", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "dropdown", title: "Dropdown", depth: 3 },
+  { id: "group", title: "Group", depth: 3 },
+  { id: "header", title: "Header", depth: 3 },
+  { id: "icon", title: "Icon", depth: 3 },
+  { id: "image", title: "Image", depth: 3 },
+  { id: "link", title: "Link", depth: 3 },
+  { id: "size", title: "Size", depth: 3 },
+  { id: "variant", title: "Variant", depth: 3 },
 ]
 
 export default function ItemPage() {
@@ -98,13 +99,13 @@ export default function ItemPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Item"
-        description="Item component"
+        description="A composable list-item component for building menus and selections."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the item primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add item" />
       </DocsSection>
@@ -112,32 +113,34 @@ export default function ItemPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Item component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Item } from "@/primitives/item"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

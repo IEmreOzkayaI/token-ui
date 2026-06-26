@@ -53,12 +53,13 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "basic", title: "Basic" },
-    { id: "caption", title: "Caption" },
-    { id: "demo", title: "Demo" },
-    { id: "multiple", title: "Multiple" },
-    { id: "time", title: "Time" },
-    { id: "week-numbers", title: "Week Numbers" },
+  { id: "examples", title: "Examples" },
+  { id: "basic", title: "Basic", depth: 3 },
+  { id: "caption", title: "Caption", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "multiple", title: "Multiple", depth: 3 },
+  { id: "time", title: "Time", depth: 3 },
+  { id: "week-numbers", title: "Week Numbers", depth: 3 },
 ]
 
 export default function CalendarPage() {
@@ -66,13 +67,13 @@ export default function CalendarPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Calendar"
-        description="Calendar component"
+        description="A date field component that allows users to enter and edit date values."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the calendar primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add calendar" />
       </DocsSection>
@@ -80,32 +81,34 @@ export default function CalendarPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Calendar component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Calendar } from "@/primitives/calendar"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

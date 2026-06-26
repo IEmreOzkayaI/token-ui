@@ -53,12 +53,13 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "controlled", title: "Controlled" },
-    { id: "demo", title: "Demo" },
-    { id: "disabled", title: "Disabled" },
-    { id: "multiple", title: "Multiple" },
-    { id: "range", title: "Range" },
-    { id: "vertical", title: "Vertical" },
+  { id: "examples", title: "Examples" },
+  { id: "controlled", title: "Controlled", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "disabled", title: "Disabled", depth: 3 },
+  { id: "multiple", title: "Multiple", depth: 3 },
+  { id: "range", title: "Range", depth: 3 },
+  { id: "vertical", title: "Vertical", depth: 3 },
 ]
 
 export default function SliderPage() {
@@ -66,13 +67,13 @@ export default function SliderPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Slider"
-        description="Slider component"
+        description="An input where the user selects a value from within a given range."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the slider primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add slider" />
       </DocsSection>
@@ -80,32 +81,34 @@ export default function SliderPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Slider component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Slider } from "@/primitives/slider"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

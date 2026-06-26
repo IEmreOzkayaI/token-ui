@@ -32,9 +32,10 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "demo", title: "Demo" },
-    { id: "icons-only", title: "Icons Only" },
-    { id: "simple", title: "Simple" },
+  { id: "examples", title: "Examples" },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "icons-only", title: "Icons Only", depth: 3 },
+  { id: "simple", title: "Simple", depth: 3 },
 ]
 
 export default function PaginationPage() {
@@ -42,13 +43,13 @@ export default function PaginationPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Pagination"
-        description="Pagination component"
+        description="Navigation component for moving between pages of content."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the pagination primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add pagination" />
       </DocsSection>
@@ -56,32 +57,34 @@ export default function PaginationPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Pagination component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Pagination } from "@/primitives/pagination"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

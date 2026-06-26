@@ -32,9 +32,10 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "demo", title: "Demo" },
-    { id: "file-tree", title: "File Tree" },
-    { id: "settings", title: "Settings" },
+  { id: "examples", title: "Examples" },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "file-tree", title: "File Tree", depth: 3 },
+  { id: "settings", title: "Settings", depth: 3 },
 ]
 
 export default function CollapsiblePage() {
@@ -42,13 +43,13 @@ export default function CollapsiblePage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Collapsible"
-        description="Collapsible component"
+        description="An interactive component which expands/collapses a panel."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the collapsible primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add collapsible" />
       </DocsSection>
@@ -56,32 +57,34 @@ export default function CollapsiblePage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Collapsible component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Collapsible } from "@/primitives/collapsible"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

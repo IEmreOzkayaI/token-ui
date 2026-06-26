@@ -95,18 +95,19 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "checkbox", title: "Checkbox" },
-    { id: "choice-card", title: "Choice Card" },
-    { id: "demo", title: "Demo" },
-    { id: "fieldset", title: "Fieldset" },
-    { id: "group", title: "Group" },
-    { id: "input", title: "Input" },
-    { id: "radio", title: "Radio" },
-    { id: "responsive", title: "Responsive" },
-    { id: "select", title: "Select" },
-    { id: "slider", title: "Slider" },
-    { id: "switch", title: "Switch" },
-    { id: "textarea", title: "Textarea" },
+  { id: "examples", title: "Examples" },
+  { id: "checkbox", title: "Checkbox", depth: 3 },
+  { id: "choice-card", title: "Choice Card", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "fieldset", title: "Fieldset", depth: 3 },
+  { id: "group", title: "Group", depth: 3 },
+  { id: "input", title: "Input", depth: 3 },
+  { id: "radio", title: "Radio", depth: 3 },
+  { id: "responsive", title: "Responsive", depth: 3 },
+  { id: "select", title: "Select", depth: 3 },
+  { id: "slider", title: "Slider", depth: 3 },
+  { id: "switch", title: "Switch", depth: 3 },
+  { id: "textarea", title: "Textarea", depth: 3 },
 ]
 
 export default function FieldPage() {
@@ -114,13 +115,13 @@ export default function FieldPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Field"
-        description="Field component"
+        description="Composable form field with label, description, and validation messages."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the field primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add field" />
       </DocsSection>
@@ -128,32 +129,34 @@ export default function FieldPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Field component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Field } from "@/primitives/field"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

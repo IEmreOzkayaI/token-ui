@@ -9,12 +9,6 @@ import AlertBasic from "@/ui/components/alert-basic"
 import AlertColors from "@/ui/components/alert-colors"
 import AlertDemo from "@/ui/components/alert-demo"
 import AlertDestructive from "@/ui/components/alert-destructive"
-import AlertDialogBasic from "@/ui/components/alert-dialog-basic"
-import AlertDialogDemo from "@/ui/components/alert-dialog-demo"
-import AlertDialogDestructive from "@/ui/components/alert-dialog-destructive"
-import AlertDialogWithMedia from "@/ui/components/alert-dialog-media"
-import AlertDialogSmallWithMedia from "@/ui/components/alert-dialog-small-media"
-import AlertDialogSmall from "@/ui/components/alert-dialog-small"
 
 const examples = [
   {
@@ -47,58 +41,17 @@ const examples = [
     component: AlertDestructive,
     sourcePath: "ui/components/alert-destructive.tsx",
   },
-  {
-    id: "dialog-basic",
-    title: "Dialog Basic",
-    component: AlertDialogBasic,
-    sourcePath: "ui/components/alert-dialog-basic.tsx",
-  },
-  {
-    id: "dialog-demo",
-    title: "Dialog Demo",
-    component: AlertDialogDemo,
-    sourcePath: "ui/components/alert-dialog-demo.tsx",
-  },
-  {
-    id: "dialog-destructive",
-    title: "Dialog Destructive",
-    component: AlertDialogDestructive,
-    sourcePath: "ui/components/alert-dialog-destructive.tsx",
-  },
-  {
-    id: "dialog-media",
-    title: "Dialog Media",
-    component: AlertDialogWithMedia,
-    sourcePath: "ui/components/alert-dialog-media.tsx",
-  },
-  {
-    id: "dialog-small-media",
-    title: "Dialog Small Media",
-    component: AlertDialogSmallWithMedia,
-    sourcePath: "ui/components/alert-dialog-small-media.tsx",
-  },
-  {
-    id: "dialog-small",
-    title: "Dialog Small",
-    component: AlertDialogSmall,
-    sourcePath: "ui/components/alert-dialog-small.tsx",
-  },
 ] as const
 
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "action", title: "Action" },
-    { id: "basic", title: "Basic" },
-    { id: "colors", title: "Colors" },
-    { id: "demo", title: "Demo" },
-    { id: "destructive", title: "Destructive" },
-    { id: "dialog-basic", title: "Dialog Basic" },
-    { id: "dialog-demo", title: "Dialog Demo" },
-    { id: "dialog-destructive", title: "Dialog Destructive" },
-    { id: "dialog-media", title: "Dialog Media" },
-    { id: "dialog-small-media", title: "Dialog Small Media" },
-    { id: "dialog-small", title: "Dialog Small" },
+  { id: "examples", title: "Examples" },
+  { id: "action", title: "Action", depth: 3 },
+  { id: "basic", title: "Basic", depth: 3 },
+  { id: "colors", title: "Colors", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "destructive", title: "Destructive", depth: 3 },
 ]
 
 export default function AlertPage() {
@@ -106,13 +59,13 @@ export default function AlertPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Alert"
-        description="Alert component"
+        description="Displays a callout for important messages, warnings, or contextual information."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the alert primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add alert" />
       </DocsSection>
@@ -120,32 +73,34 @@ export default function AlertPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Alert component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Alert } from "@/primitives/alert"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

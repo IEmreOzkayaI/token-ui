@@ -53,7 +53,7 @@ export default function DocsHome() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Introduction"
-        description="UI Tokens is an internal design system for building consistent, accessible product interfaces. It gives developers copy-paste components and gives stakeholders a shared language for color, type, and layout."
+        description="Token UI is an internal design system for building consistent, accessible product interfaces. It gives developers copy-paste components and gives stakeholders a shared language for color, type, and layout."
       >
         <div className="flex flex-wrap gap-2 pt-2">
           <Badge variant="secondary">55+ Primitives</Badge>
@@ -65,7 +65,7 @@ export default function DocsHome() {
 
       <DocsSection id="overview" title="Overview">
         <p className="text-muted-foreground">
-          UI Tokens combines three layers into one codebase:{" "}
+          Token UI combines three layers into one codebase:{" "}
           <strong className="font-medium text-foreground">design foundations</strong>{" "}
           (colors, typography, spacing),{" "}
           <strong className="font-medium text-foreground">primitives</strong>{" "}
@@ -135,7 +135,7 @@ export default function DocsHome() {
       <DocsSection id="architecture" title="Architecture">
         <div className="overflow-hidden rounded-xl border font-mono text-sm">
           <pre className="overflow-x-auto bg-muted/40 p-4 leading-relaxed">
-{`token-ui-demo/
+{`token-ui/
 ├── app/globals.css          # Design tokens (CSS variables)
 ├── lib/utils.ts             # cn() class merge helper
 ├── ui/

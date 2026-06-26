@@ -81,16 +81,17 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "basic", title: "Basic" },
-    { id: "checkboxes", title: "Checkboxes" },
-    { id: "demo", title: "Demo" },
-    { id: "destructive", title: "Destructive" },
-    { id: "groups", title: "Groups" },
-    { id: "icons", title: "Icons" },
-    { id: "radio", title: "Radio" },
-    { id: "shortcuts", title: "Shortcuts" },
-    { id: "sides", title: "Sides" },
-    { id: "submenu", title: "Submenu" },
+  { id: "examples", title: "Examples" },
+  { id: "basic", title: "Basic", depth: 3 },
+  { id: "checkboxes", title: "Checkboxes", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "destructive", title: "Destructive", depth: 3 },
+  { id: "groups", title: "Groups", depth: 3 },
+  { id: "icons", title: "Icons", depth: 3 },
+  { id: "radio", title: "Radio", depth: 3 },
+  { id: "shortcuts", title: "Shortcuts", depth: 3 },
+  { id: "sides", title: "Sides", depth: 3 },
+  { id: "submenu", title: "Submenu", depth: 3 },
 ]
 
 export default function ContextMenuPage() {
@@ -98,13 +99,13 @@ export default function ContextMenuPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="ContextMenu"
-        description="ContextMenu component"
+        description="Displays a menu triggered by a right-click or long-press action."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the context-menu primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add context-menu" />
       </DocsSection>
@@ -112,32 +113,34 @@ export default function ContextMenuPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the ContextMenu component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { ContextMenu } from "@/primitives/context-menu"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

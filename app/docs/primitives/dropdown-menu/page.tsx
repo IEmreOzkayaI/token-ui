@@ -95,18 +95,19 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "avatar", title: "Avatar" },
-    { id: "basic", title: "Basic" },
-    { id: "checkboxes-icons", title: "Checkboxes Icons" },
-    { id: "checkboxes", title: "Checkboxes" },
-    { id: "complex", title: "Complex" },
-    { id: "demo", title: "Demo" },
-    { id: "destructive", title: "Destructive" },
-    { id: "icons", title: "Icons" },
-    { id: "radio-group", title: "Radio Group" },
-    { id: "radio-icons", title: "Radio Icons" },
-    { id: "shortcuts", title: "Shortcuts" },
-    { id: "submenu", title: "Submenu" },
+  { id: "examples", title: "Examples" },
+  { id: "avatar", title: "Avatar", depth: 3 },
+  { id: "basic", title: "Basic", depth: 3 },
+  { id: "checkboxes-icons", title: "Checkboxes Icons", depth: 3 },
+  { id: "checkboxes", title: "Checkboxes", depth: 3 },
+  { id: "complex", title: "Complex", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "destructive", title: "Destructive", depth: 3 },
+  { id: "icons", title: "Icons", depth: 3 },
+  { id: "radio-group", title: "Radio Group", depth: 3 },
+  { id: "radio-icons", title: "Radio Icons", depth: 3 },
+  { id: "shortcuts", title: "Shortcuts", depth: 3 },
+  { id: "submenu", title: "Submenu", depth: 3 },
 ]
 
 export default function DropdownMenuPage() {
@@ -114,13 +115,13 @@ export default function DropdownMenuPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="DropdownMenu"
-        description="DropdownMenu component"
+        description="Displays a menu to the user triggered by a button — typically a list of actions."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the dropdown-menu primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add dropdown-menu" />
       </DocsSection>
@@ -128,32 +129,34 @@ export default function DropdownMenuPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the DropdownMenu component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { DropdownMenu } from "@/primitives/dropdown-menu"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

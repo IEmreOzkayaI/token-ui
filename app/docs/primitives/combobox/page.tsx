@@ -81,16 +81,17 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "auto-highlight", title: "Auto Highlight" },
-    { id: "basic", title: "Basic" },
-    { id: "clear", title: "Clear" },
-    { id: "custom", title: "Custom" },
-    { id: "disabled", title: "Disabled" },
-    { id: "groups", title: "Groups" },
-    { id: "input-group", title: "Input Group" },
-    { id: "invalid", title: "Invalid" },
-    { id: "multiple", title: "Multiple" },
-    { id: "popup", title: "Popup" },
+  { id: "examples", title: "Examples" },
+  { id: "auto-highlight", title: "Auto Highlight", depth: 3 },
+  { id: "basic", title: "Basic", depth: 3 },
+  { id: "clear", title: "Clear", depth: 3 },
+  { id: "custom", title: "Custom", depth: 3 },
+  { id: "disabled", title: "Disabled", depth: 3 },
+  { id: "groups", title: "Groups", depth: 3 },
+  { id: "input-group", title: "Input Group", depth: 3 },
+  { id: "invalid", title: "Invalid", depth: 3 },
+  { id: "multiple", title: "Multiple", depth: 3 },
+  { id: "popup", title: "Popup", depth: 3 },
 ]
 
 export default function ComboboxPage() {
@@ -98,13 +99,13 @@ export default function ComboboxPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Combobox"
-        description="Combobox component"
+        description="Autocomplete input with a filterable dropdown list of options."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the combobox primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add combobox" />
       </DocsSection>
@@ -112,32 +113,34 @@ export default function ComboboxPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Combobox component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Combobox } from "@/primitives/combobox"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

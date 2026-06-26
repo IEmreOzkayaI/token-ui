@@ -53,12 +53,13 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "basic", title: "Basic" },
-    { id: "demo", title: "Demo" },
-    { id: "destructive", title: "Destructive" },
-    { id: "media", title: "Media" },
-    { id: "small-media", title: "Small Media" },
-    { id: "small", title: "Small" },
+  { id: "examples", title: "Examples" },
+  { id: "basic", title: "Basic", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "destructive", title: "Destructive", depth: 3 },
+  { id: "media", title: "Media", depth: 3 },
+  { id: "small-media", title: "Small Media", depth: 3 },
+  { id: "small", title: "Small", depth: 3 },
 ]
 
 export default function AlertDialogPage() {
@@ -66,13 +67,13 @@ export default function AlertDialogPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="AlertDialog"
-        description="AlertDialog component"
+        description="A modal dialog that interrupts the user with important content and expects a response."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the alert-dialog primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add alert-dialog" />
       </DocsSection>
@@ -80,32 +81,34 @@ export default function AlertDialogPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the AlertDialog component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { AlertDialog } from "@/primitives/alert-dialog"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

@@ -32,9 +32,10 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "demo", title: "Demo" },
-    { id: "portrait", title: "Portrait" },
-    { id: "square", title: "Square" },
+  { id: "examples", title: "Examples" },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "portrait", title: "Portrait", depth: 3 },
+  { id: "square", title: "Square", depth: 3 },
 ]
 
 export default function AspectRatioPage() {
@@ -42,13 +43,13 @@ export default function AspectRatioPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="AspectRatio"
-        description="AspectRatio component"
+        description="Displays content within a desired ratio, maintaining proportions across viewports."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the aspect-ratio primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add aspect-ratio" />
       </DocsSection>
@@ -56,32 +57,34 @@ export default function AspectRatioPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the AspectRatio component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { AspectRatio } from "@/primitives/aspect-ratio"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

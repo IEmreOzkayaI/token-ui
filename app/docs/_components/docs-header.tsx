@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, Plus, Search, X } from "lucide-react"
 
+import { DocsLogo } from "@/app/docs/_components/docs-logo"
 import { ThemeToggle } from "@/app/docs/_components/theme-toggle"
 import { docsTopNav } from "@/app/docs/_lib/top-nav"
 import { Button } from "@/primitives/button"
@@ -53,29 +54,7 @@ export function DocsHeader({ mobileOpen, onToggleMobile }: DocsHeaderProps) {
           {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
         </Button>
 
-        <Link
-          href="/docs"
-          className="flex items-center gap-2 font-medium"
-          aria-label="UI Tokens home"
-        >
-          <div className="flex size-7 items-center justify-center rounded-md border bg-background shadow-sm">
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 15 15"
-              fill="none"
-              aria-hidden
-            >
-              <path
-                d="M4.5 2.5L10.5 12.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
-          <span className="hidden font-semibold sm:inline">UI Tokens</span>
-        </Link>
+        <DocsLogo />
 
         <nav className="hidden items-center gap-1 md:flex">
           {docsTopNav.map((item) => {

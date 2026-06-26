@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react"
+
 import { cn } from "@/lib/utils"
 
 type ColorSwatchProps = {
@@ -8,6 +10,20 @@ type ColorSwatchProps = {
   dark: string
 }
 
+function getSwatchStyle(
+  token: string,
+  isBorderToken: boolean,
+  isRingToken: boolean
+): CSSProperties | undefined {
+  if (isBorderToken) {
+    return { borderBottomColor: `var(--${token})` }
+  }
+  if (isRingToken) {
+    return { boxShadow: `0 0 0 3px var(--${token})` }
+  }
+  return undefined
+}
+
 export function ColorSwatch({
   token,
   tailwindClass,
@@ -16,7 +32,9 @@ export function ColorSwatch({
   dark,
 }: ColorSwatchProps) {
   const isTextToken = tailwindClass.startsWith("text-")
-  const isBorderToken = tailwindClass.startsWith("border-") && !tailwindClass.includes("border-border")
+  const isBorderColorToken = tailwindClass === "border-border"
+  const isBorderToken =
+    tailwindClass.startsWith("border-") && !isBorderColorToken
   const isRingToken = tailwindClass.startsWith("ring-")
 
   return (
@@ -25,22 +43,16 @@ export function ColorSwatch({
         className={cn(
           "flex h-20 items-end p-4",
           isTextToken && "bg-background",
+          isBorderColorToken && "border-4 border-border bg-background",
           isBorderToken && "border-b-4 bg-muted/30",
           isRingToken && "bg-background",
           !isTextToken &&
             !isBorderToken &&
+            !isBorderColorToken &&
             !isRingToken &&
             tailwindClass
         )}
-        style={
-          isBorderToken
-            ? { borderBottomColor: `var(--${token})` }
-            : isRingToken
-              ? ({
-                  boxShadow: `0 0 0 3px var(--${token})`,
-                } as React.CSSProperties)
-              : undefined
-        }
+        style={getSwatchStyle(token, isBorderToken, isRingToken)}
       >
         {isTextToken && (
           <span className={cn("text-lg font-medium", tailwindClass)}>Aa</span>

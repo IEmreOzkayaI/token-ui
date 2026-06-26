@@ -81,16 +81,17 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "demo", title: "Demo" },
-    { id: "dropdown", title: "Dropdown" },
-    { id: "input-group", title: "Input Group" },
-    { id: "input", title: "Input" },
-    { id: "nested", title: "Nested" },
-    { id: "orientation", title: "Orientation" },
-    { id: "popover", title: "Popover" },
-    { id: "select", title: "Select" },
-    { id: "separator", title: "Separator" },
-    { id: "size", title: "Size" },
+  { id: "examples", title: "Examples" },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "dropdown", title: "Dropdown", depth: 3 },
+  { id: "input-group", title: "Input Group", depth: 3 },
+  { id: "input", title: "Input", depth: 3 },
+  { id: "nested", title: "Nested", depth: 3 },
+  { id: "orientation", title: "Orientation", depth: 3 },
+  { id: "popover", title: "Popover", depth: 3 },
+  { id: "select", title: "Select", depth: 3 },
+  { id: "separator", title: "Separator", depth: 3 },
+  { id: "size", title: "Size", depth: 3 },
 ]
 
 export default function ButtonGroupPage() {
@@ -98,13 +99,13 @@ export default function ButtonGroupPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="ButtonGroup"
-        description="ButtonGroup component"
+        description="Groups related buttons together with consistent spacing and optional separators."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the button-group primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add button-group" />
       </DocsSection>
@@ -112,32 +113,34 @@ export default function ButtonGroupPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the ButtonGroup component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { ButtonGroup } from "@/primitives/button-group"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

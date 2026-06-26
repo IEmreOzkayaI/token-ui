@@ -18,7 +18,8 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "tooltip", title: "Tooltip" },
+  { id: "examples", title: "Examples" },
+  { id: "tooltip", title: "Tooltip", depth: 3 },
 ]
 
 export default function ChartPage() {
@@ -26,13 +27,13 @@ export default function ChartPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Chart"
-        description="Chart component"
+        description="Beautiful charts built using Recharts. Copy and paste into your apps."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the chart primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add chart" />
       </DocsSection>
@@ -40,32 +41,34 @@ export default function ChartPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Chart component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Chart } from "@/primitives/chart"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

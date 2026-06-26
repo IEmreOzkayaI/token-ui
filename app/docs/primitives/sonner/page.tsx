@@ -39,10 +39,11 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "demo", title: "Demo" },
-    { id: "description", title: "Description" },
-    { id: "position", title: "Position" },
-    { id: "types", title: "Types" },
+  { id: "examples", title: "Examples" },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "description", title: "Description", depth: 3 },
+  { id: "position", title: "Position", depth: 3 },
+  { id: "types", title: "Types", depth: 3 },
 ]
 
 export default function SonnerPage() {
@@ -50,13 +51,13 @@ export default function SonnerPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Sonner"
-        description="Sonner component"
+        description="An opinionated toast notification component for React."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the sonner primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add sonner" />
       </DocsSection>
@@ -64,32 +65,34 @@ export default function SonnerPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Sonner component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Sonner } from "@/primitives/sonner"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

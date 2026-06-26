@@ -53,12 +53,13 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "choice-card", title: "Choice Card" },
-    { id: "demo", title: "Demo" },
-    { id: "description", title: "Description" },
-    { id: "disabled", title: "Disabled" },
-    { id: "fieldset", title: "Fieldset" },
-    { id: "invalid", title: "Invalid" },
+  { id: "examples", title: "Examples" },
+  { id: "choice-card", title: "Choice Card", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "description", title: "Description", depth: 3 },
+  { id: "disabled", title: "Disabled", depth: 3 },
+  { id: "fieldset", title: "Fieldset", depth: 3 },
+  { id: "invalid", title: "Invalid", depth: 3 },
 ]
 
 export default function RadioGroupPage() {
@@ -66,13 +67,13 @@ export default function RadioGroupPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="RadioGroup"
-        description="RadioGroup component"
+        description="A set of checkable buttons where only one can be checked at a time."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the radio-group primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add radio-group" />
       </DocsSection>
@@ -80,32 +81,34 @@ export default function RadioGroupPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the RadioGroup component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { RadioGroup } from "@/primitives/radio-group"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

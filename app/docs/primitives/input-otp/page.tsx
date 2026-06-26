@@ -74,15 +74,16 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "alphanumeric", title: "Alphanumeric" },
-    { id: "controlled", title: "Controlled" },
-    { id: "demo", title: "Demo" },
-    { id: "disabled", title: "Disabled" },
-    { id: "form", title: "Form" },
-    { id: "four-digits", title: "Four Digits" },
-    { id: "invalid", title: "Invalid" },
-    { id: "pattern", title: "Pattern" },
-    { id: "separator", title: "Separator" },
+  { id: "examples", title: "Examples" },
+  { id: "alphanumeric", title: "Alphanumeric", depth: 3 },
+  { id: "controlled", title: "Controlled", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "disabled", title: "Disabled", depth: 3 },
+  { id: "form", title: "Form", depth: 3 },
+  { id: "four-digits", title: "Four Digits", depth: 3 },
+  { id: "invalid", title: "Invalid", depth: 3 },
+  { id: "pattern", title: "Pattern", depth: 3 },
+  { id: "separator", title: "Separator", depth: 3 },
 ]
 
 export default function InputOtpPage() {
@@ -90,13 +91,13 @@ export default function InputOtpPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="InputOtp"
-        description="InputOtp component"
+        description="Accessible one-time password component with copy paste functionality."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the input-otp primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add input-otp" />
       </DocsSection>
@@ -104,32 +105,34 @@ export default function InputOtpPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the InputOtp component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { InputOtp } from "@/primitives/input-otp"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

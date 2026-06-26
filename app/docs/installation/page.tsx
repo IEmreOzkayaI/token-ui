@@ -34,12 +34,12 @@ export default function InstallationPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Installation"
-        description="Set up UI Tokens in a new or existing Next.js project. This guide covers dependencies, design tokens, path aliases, and your first component."
+        description="Set up Token UI in a new or existing Next.js project. This guide covers dependencies, design tokens, path aliases, and your first component."
       />
 
       <DocsSection id="overview" title="Overview">
         <p className="text-muted-foreground">
-          UI Tokens is distributed as source files, not a published npm component
+          Token UI is distributed as source files, not a published npm component
           library. You copy primitives into your codebase and wire them to your
           Tailwind theme. The setup takes roughly 15 minutes for a greenfield
           Next.js app.

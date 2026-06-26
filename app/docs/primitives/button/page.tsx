@@ -9,16 +9,6 @@ import ButtonDefault from "@/ui/components/button-default"
 import ButtonDemo from "@/ui/components/button-demo"
 import ButtonDestructive from "@/ui/components/button-destructive"
 import ButtonGhost from "@/ui/components/button-ghost"
-import ButtonGroupDemo from "@/ui/components/button-group-demo"
-import ButtonGroupDropdown from "@/ui/components/button-group-dropdown"
-import ButtonGroupInputGroup from "@/ui/components/button-group-input-group"
-import ButtonGroupInput from "@/ui/components/button-group-input"
-import ButtonGroupNested from "@/ui/components/button-group-nested"
-import ButtonGroupOrientation from "@/ui/components/button-group-orientation"
-import ButtonGroupPopover from "@/ui/components/button-group-popover"
-import ButtonGroupSelect from "@/ui/components/button-group-select"
-import ButtonGroupSeparatorDemo from "@/ui/components/button-group-separator"
-import ButtonGroupSize from "@/ui/components/button-group-size"
 import ButtonIcon from "@/ui/components/button-icon"
 import ButtonLink from "@/ui/components/button-link"
 import ButtonOutline from "@/ui/components/button-outline"
@@ -57,66 +47,6 @@ const examples = [
     title: "Ghost",
     component: ButtonGhost,
     sourcePath: "ui/components/button-ghost.tsx",
-  },
-  {
-    id: "group-demo",
-    title: "Group Demo",
-    component: ButtonGroupDemo,
-    sourcePath: "ui/components/button-group-demo.tsx",
-  },
-  {
-    id: "group-dropdown",
-    title: "Group Dropdown",
-    component: ButtonGroupDropdown,
-    sourcePath: "ui/components/button-group-dropdown.tsx",
-  },
-  {
-    id: "group-input-group",
-    title: "Group Input Group",
-    component: ButtonGroupInputGroup,
-    sourcePath: "ui/components/button-group-input-group.tsx",
-  },
-  {
-    id: "group-input",
-    title: "Group Input",
-    component: ButtonGroupInput,
-    sourcePath: "ui/components/button-group-input.tsx",
-  },
-  {
-    id: "group-nested",
-    title: "Group Nested",
-    component: ButtonGroupNested,
-    sourcePath: "ui/components/button-group-nested.tsx",
-  },
-  {
-    id: "group-orientation",
-    title: "Group Orientation",
-    component: ButtonGroupOrientation,
-    sourcePath: "ui/components/button-group-orientation.tsx",
-  },
-  {
-    id: "group-popover",
-    title: "Group Popover",
-    component: ButtonGroupPopover,
-    sourcePath: "ui/components/button-group-popover.tsx",
-  },
-  {
-    id: "group-select",
-    title: "Group Select",
-    component: ButtonGroupSelect,
-    sourcePath: "ui/components/button-group-select.tsx",
-  },
-  {
-    id: "group-separator",
-    title: "Group Separator",
-    component: ButtonGroupSeparatorDemo,
-    sourcePath: "ui/components/button-group-separator.tsx",
-  },
-  {
-    id: "group-size",
-    title: "Group Size",
-    component: ButtonGroupSize,
-    sourcePath: "ui/components/button-group-size.tsx",
   },
   {
     id: "icon",
@@ -165,28 +95,19 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "aschild", title: "Aschild" },
-    { id: "default", title: "Default" },
-    { id: "demo", title: "Demo" },
-    { id: "destructive", title: "Destructive" },
-    { id: "ghost", title: "Ghost" },
-    { id: "group-demo", title: "Group Demo" },
-    { id: "group-dropdown", title: "Group Dropdown" },
-    { id: "group-input-group", title: "Group Input Group" },
-    { id: "group-input", title: "Group Input" },
-    { id: "group-nested", title: "Group Nested" },
-    { id: "group-orientation", title: "Group Orientation" },
-    { id: "group-popover", title: "Group Popover" },
-    { id: "group-select", title: "Group Select" },
-    { id: "group-separator", title: "Group Separator" },
-    { id: "group-size", title: "Group Size" },
-    { id: "icon", title: "Icon" },
-    { id: "link", title: "Link" },
-    { id: "outline", title: "Outline" },
-    { id: "rounded", title: "Rounded" },
-    { id: "secondary", title: "Secondary" },
-    { id: "size", title: "Size" },
-    { id: "spinner", title: "Spinner" },
+  { id: "examples", title: "Examples" },
+  { id: "aschild", title: "Aschild", depth: 3 },
+  { id: "default", title: "Default", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "destructive", title: "Destructive", depth: 3 },
+  { id: "ghost", title: "Ghost", depth: 3 },
+  { id: "icon", title: "Icon", depth: 3 },
+  { id: "link", title: "Link", depth: 3 },
+  { id: "outline", title: "Outline", depth: 3 },
+  { id: "rounded", title: "Rounded", depth: 3 },
+  { id: "secondary", title: "Secondary", depth: 3 },
+  { id: "size", title: "Size", depth: 3 },
+  { id: "spinner", title: "Spinner", depth: 3 },
 ]
 
 export default function ButtonPage() {
@@ -194,13 +115,13 @@ export default function ButtonPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Button"
-        description="Button component"
+        description="Displays a button or a component that looks like a button."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the button primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add button" />
       </DocsSection>
@@ -208,32 +129,34 @@ export default function ButtonPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Button component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Button } from "@/primitives/button"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

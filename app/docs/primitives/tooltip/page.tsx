@@ -39,10 +39,11 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "demo", title: "Demo" },
-    { id: "disabled", title: "Disabled" },
-    { id: "keyboard", title: "Keyboard" },
-    { id: "sides", title: "Sides" },
+  { id: "examples", title: "Examples" },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "disabled", title: "Disabled", depth: 3 },
+  { id: "keyboard", title: "Keyboard", depth: 3 },
+  { id: "sides", title: "Sides", depth: 3 },
 ]
 
 export default function TooltipPage() {
@@ -50,13 +51,13 @@ export default function TooltipPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Tooltip"
-        description="Tooltip component"
+        description="A popup that displays information related to an element on hover or focus."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the tooltip primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add tooltip" />
       </DocsSection>
@@ -64,32 +65,34 @@ export default function TooltipPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Tooltip component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Tooltip } from "@/primitives/tooltip"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }

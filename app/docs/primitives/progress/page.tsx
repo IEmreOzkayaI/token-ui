@@ -32,9 +32,10 @@ const examples = [
 const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
-    { id: "controlled", title: "Controlled" },
-    { id: "demo", title: "Demo" },
-    { id: "label", title: "Label" },
+  { id: "examples", title: "Examples" },
+  { id: "controlled", title: "Controlled", depth: 3 },
+  { id: "demo", title: "Demo", depth: 3 },
+  { id: "label", title: "Label", depth: 3 },
 ]
 
 export default function ProgressPage() {
@@ -42,13 +43,13 @@ export default function ProgressPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Progress"
-        description="Progress component"
+        description="Displays an indicator showing the completion progress of a task."
       />
 
       <DocsSection
         id="installation"
         title="Installation"
-        description="Add the progress primitive to your project."
+        description="Add the component to your project."
       >
         <CodeBlock code="pnpm dlx shadcn@latest add progress" />
       </DocsSection>
@@ -56,32 +57,34 @@ export default function ProgressPage() {
       <DocsSection
         id="usage"
         title="Usage"
-        description="Import and use the Progress component."
+        description="Import and compose the component."
       >
         <CodeBlock
           code={`import { Progress } from "@/primitives/progress"`}
         />
       </DocsSection>
 
-      <div className="space-y-10">
-        {examples.map((example) => {
-          const Component = example.component
+      <DocsSection id="examples" title="Examples">
+        <div className="space-y-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-          return (
-            <DocsSection
-              key={example.id}
-              id={example.id}
-              title={example.title}
-            >
-              <ComponentExample
-                source={readSource(example.sourcePath)}
+            return (
+              <DocsSection
+                key={example.id}
+                id={example.id}
+                title={example.title}
               >
-                <Component />
-              </ComponentExample>
-            </DocsSection>
-          )
-        })}
-      </div>
+                <ComponentExample
+                  source={readSource(example.sourcePath)}
+                >
+                  <Component />
+                </ComponentExample>
+              </DocsSection>
+            )
+          })}
+        </div>
+      </DocsSection>
     </DocsPage>
   )
 }
