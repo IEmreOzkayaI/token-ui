@@ -12,6 +12,7 @@ import { CodeBlock } from "@/app/docs/_components/code-block"
 
 const toc = [
   { id: "overview", title: "Overview" },
+  { id: "preset", title: "Design Preset" },
   { id: "prerequisites", title: "Prerequisites" },
   { id: "structure", title: "Project Structure" },
   { id: "setup", title: "Setup" },
@@ -45,10 +46,47 @@ export default function InstallationPage() {
           Next.js app.
         </p>
         <DocsCallout title="Already using shadcn/ui?" variant="tip">
-          This system follows the same mental model: Radix primitives, Tailwind
-          styling, <code>cn()</code> helper, and CSS variable tokens. Migration
-          is mostly a path and naming alignment exercise.
+          Token UI uses the <code>radix-nova</code> preset from shadcn/ui. The
+          same mental model applies: Radix primitives, Tailwind styling,{" "}
+          <code>cn()</code> helper, and CSS variable tokens.
         </DocsCallout>
+      </DocsSection>
+
+      <DocsSection
+        id="preset"
+        title="Design Preset"
+        description="This repository is configured with a shared shadcn preset for colors, fonts, and component styling."
+      >
+        <DocsTable headers={["Setting", "Value"]}>
+          <DocsTableRow>
+            <DocsTableCell className="font-medium">Style</DocsTableCell>
+            <DocsTableCell mono>radix-nova</DocsTableCell>
+          </DocsTableRow>
+          <DocsTableRow>
+            <DocsTableCell className="font-medium">Preset ID</DocsTableCell>
+            <DocsTableCell mono>b1Ymqvgiu</DocsTableCell>
+          </DocsTableRow>
+          <DocsTableRow>
+            <DocsTableCell className="font-medium">Base color</DocsTableCell>
+            <DocsTableCell mono>neutral</DocsTableCell>
+          </DocsTableRow>
+          <DocsTableRow>
+            <DocsTableCell className="font-medium">Icon library</DocsTableCell>
+            <DocsTableCell mono>lucide</DocsTableCell>
+          </DocsTableRow>
+          <DocsTableRow>
+            <DocsTableCell className="font-medium">Primitives path</DocsTableCell>
+            <DocsTableCell mono>ui/primitives/</DocsTableCell>
+          </DocsTableRow>
+        </DocsTable>
+        <p className="text-sm text-muted-foreground">
+          To sync an existing clone with the latest preset tokens and component
+          styles, run:
+        </p>
+        <CodeBlock
+          code={`pnpm dlx shadcn@latest apply --preset b1Ymqvgiu -y
+pnpm dlx shadcn@latest add --all -y -o -p ui/primitives`}
+        />
       </DocsSection>
 
       <DocsSection id="prerequisites" title="Prerequisites">

@@ -2,9 +2,10 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, Plus, Search, X } from "lucide-react"
+import { Menu, X } from "lucide-react"
 
 import { DocsLogo } from "@/app/docs/_components/docs-logo"
+import { DocsSearch } from "@/app/docs/_components/docs-search"
 import { ThemeToggle } from "@/app/docs/_components/theme-toggle"
 import { docsTopNav } from "@/app/docs/_lib/top-nav"
 import { Button } from "@/primitives/button"
@@ -24,7 +25,7 @@ function GitHubLink() {
       asChild
     >
       <a
-        href="https://github.com"
+        href="https://github.com/IEmreOzkayaI/token-ui"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub"
@@ -78,36 +79,10 @@ export function DocsHeader({ mobileOpen, onToggleMobile }: DocsHeaderProps) {
         </nav>
 
         <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="hidden h-8 w-44 justify-start gap-2 px-2.5 text-muted-foreground lg:flex xl:w-52"
-          >
-            <Search className="size-3.5 shrink-0 opacity-50" />
-            <span className="truncate text-sm">Search documentation...</span>
-            <kbd className="pointer-events-none ml-auto hidden h-5 select-none items-center gap-0.5 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium xl:flex">
-              <span>⌘</span>K
-            </kbd>
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            className="lg:hidden"
-            aria-label="Search"
-          >
-            <Search className="size-4" />
-          </Button>
+          <DocsSearch />
 
           <GitHubLink />
           <ThemeToggle />
-
-          <Button size="sm" className="hidden h-8 gap-1.5 px-3 sm:flex" asChild>
-            <Link href="/docs/installation">
-              <Plus className="size-3.5" />
-              New
-            </Link>
-          </Button>
         </div>
       </div>
     </header>

@@ -109,9 +109,9 @@ export default function RadiusPage() {
         <DocsTable headers={["Component", "Typical radius", "Rationale"]}>
           <DocsTableRow>
             <DocsTableCell>Button, Input, Badge</DocsTableCell>
-            <DocsTableCell mono>rounded-2xl</DocsTableCell>
+            <DocsTableCell mono>rounded-lg</DocsTableCell>
             <DocsTableCell className="text-muted-foreground">
-              Pill-like controls, friendly and tappable
+              Nova-style controls with consistent corner radius
             </DocsTableCell>
           </DocsTableRow>
           <DocsTableRow>

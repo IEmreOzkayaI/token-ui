@@ -168,7 +168,7 @@ export default function DocsHome() {
             { icon: Code2, title: "Copy-Paste Workflow", description: "No runtime dependency on a component library package." },
             { icon: Layers, title: "Composable Examples", description: "Real patterns for cards, forms, navigation, and more." },
             { icon: Shield, title: "Radix Accessibility", description: "Focus traps, escape handling, and screen reader support." },
-            { icon: Sparkles, title: "Tailwind CSS v4", description: "Utility-first styling wired to semantic design tokens." },
+            { icon: Sparkles, title: "radix-nova Preset", description: "shadcn/ui Nova style — refined radius, spacing, and component defaults." },
           ].map((feature) => (
             <div key={feature.title} className="rounded-xl border bg-card p-5 shadow-sm">
               <feature.icon className="mb-3 size-5" />

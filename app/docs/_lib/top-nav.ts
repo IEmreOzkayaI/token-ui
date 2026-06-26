@@ -13,8 +13,8 @@ export const docsTopNav: TopNavLink[] = [
   },
   {
     label: "Components",
-    href: "/docs/primitives/accordion",
-    isActive: (pathname) => pathname.startsWith("/docs/primitives"),
+    href: "/docs/ui/components/accordion",
+    isActive: (pathname) => pathname.startsWith("/docs/ui/components"),
   },
   {
     label: "Foundations",
