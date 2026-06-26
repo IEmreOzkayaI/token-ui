@@ -4,42 +4,42 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import CardDemo from "@/ui/components/card-demo"
-import CardEdgeToEdge from "@/ui/components/card-edge-to-edge"
-import CardImage from "@/ui/components/card-image"
-import CardSmall from "@/ui/components/card-small"
-import CardSpacing from "@/ui/components/card-spacing"
+import CardDemo from "@/ui/components/card/demo"
+import CardEdgeToEdge from "@/ui/components/card/edge-to-edge"
+import CardImage from "@/ui/components/card/image"
+import CardSmall from "@/ui/components/card/small"
+import CardSpacing from "@/ui/components/card/spacing"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: CardDemo,
-    sourcePath: "ui/components/card-demo.tsx",
+    sourcePath: "ui/components/card/demo.tsx",
   },
   {
     id: "edge-to-edge",
     title: "Edge To Edge",
     component: CardEdgeToEdge,
-    sourcePath: "ui/components/card-edge-to-edge.tsx",
+    sourcePath: "ui/components/card/edge-to-edge.tsx",
   },
   {
     id: "image",
     title: "Image",
     component: CardImage,
-    sourcePath: "ui/components/card-image.tsx",
+    sourcePath: "ui/components/card/image.tsx",
   },
   {
     id: "small",
     title: "Small",
     component: CardSmall,
-    sourcePath: "ui/components/card-small.tsx",
+    sourcePath: "ui/components/card/small.tsx",
   },
   {
     id: "spacing",
     title: "Spacing",
     component: CardSpacing,
-    sourcePath: "ui/components/card-spacing.tsx",
+    sourcePath: "ui/components/card/spacing.tsx",
   },
 ] as const
 

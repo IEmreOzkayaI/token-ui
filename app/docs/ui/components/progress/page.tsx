@@ -4,28 +4,28 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import ProgressControlled from "@/ui/components/progress-controlled"
-import ProgressDemo from "@/ui/components/progress-demo"
-import ProgressWithLabel from "@/ui/components/progress-label"
+import ProgressControlled from "@/ui/components/progress/controlled"
+import ProgressDemo from "@/ui/components/progress/demo"
+import ProgressWithLabel from "@/ui/components/progress/label"
 
 const examples = [
   {
     id: "controlled",
     title: "Controlled",
     component: ProgressControlled,
-    sourcePath: "ui/components/progress-controlled.tsx",
+    sourcePath: "ui/components/progress/controlled.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: ProgressDemo,
-    sourcePath: "ui/components/progress-demo.tsx",
+    sourcePath: "ui/components/progress/demo.tsx",
   },
   {
     id: "label",
     title: "Label",
     component: ProgressWithLabel,
-    sourcePath: "ui/components/progress-label.tsx",
+    sourcePath: "ui/components/progress/label.tsx",
   },
 ] as const
 

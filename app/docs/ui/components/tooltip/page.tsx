@@ -4,35 +4,35 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import TooltipDemo from "@/ui/components/tooltip-demo"
-import TooltipDisabled from "@/ui/components/tooltip-disabled"
-import TooltipKeyboard from "@/ui/components/tooltip-keyboard"
-import TooltipSides from "@/ui/components/tooltip-sides"
+import TooltipDemo from "@/ui/components/tooltip/demo"
+import TooltipDisabled from "@/ui/components/tooltip/disabled"
+import TooltipKeyboard from "@/ui/components/tooltip/keyboard"
+import TooltipSides from "@/ui/components/tooltip/sides"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: TooltipDemo,
-    sourcePath: "ui/components/tooltip-demo.tsx",
+    sourcePath: "ui/components/tooltip/demo.tsx",
   },
   {
     id: "disabled",
     title: "Disabled",
     component: TooltipDisabled,
-    sourcePath: "ui/components/tooltip-disabled.tsx",
+    sourcePath: "ui/components/tooltip/disabled.tsx",
   },
   {
     id: "keyboard",
     title: "Keyboard",
     component: TooltipKeyboard,
-    sourcePath: "ui/components/tooltip-keyboard.tsx",
+    sourcePath: "ui/components/tooltip/keyboard.tsx",
   },
   {
     id: "sides",
     title: "Sides",
     component: TooltipSides,
-    sourcePath: "ui/components/tooltip-sides.tsx",
+    sourcePath: "ui/components/tooltip/sides.tsx",
   },
 ] as const
 

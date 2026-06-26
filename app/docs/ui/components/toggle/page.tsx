@@ -4,42 +4,42 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import ToggleDemo from "@/ui/components/toggle-demo"
-import ToggleDisabled from "@/ui/components/toggle-disabled"
-import ToggleOutline from "@/ui/components/toggle-outline"
-import ToggleSizes from "@/ui/components/toggle-sizes"
-import ToggleText from "@/ui/components/toggle-text"
+import ToggleDemo from "@/ui/components/toggle/demo"
+import ToggleDisabled from "@/ui/components/toggle/disabled"
+import ToggleOutline from "@/ui/components/toggle/outline"
+import ToggleSizes from "@/ui/components/toggle/sizes"
+import ToggleText from "@/ui/components/toggle/text"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: ToggleDemo,
-    sourcePath: "ui/components/toggle-demo.tsx",
+    sourcePath: "ui/components/toggle/demo.tsx",
   },
   {
     id: "disabled",
     title: "Disabled",
     component: ToggleDisabled,
-    sourcePath: "ui/components/toggle-disabled.tsx",
+    sourcePath: "ui/components/toggle/disabled.tsx",
   },
   {
     id: "outline",
     title: "Outline",
     component: ToggleOutline,
-    sourcePath: "ui/components/toggle-outline.tsx",
+    sourcePath: "ui/components/toggle/outline.tsx",
   },
   {
     id: "sizes",
     title: "Sizes",
     component: ToggleSizes,
-    sourcePath: "ui/components/toggle-sizes.tsx",
+    sourcePath: "ui/components/toggle/sizes.tsx",
   },
   {
     id: "text",
     title: "Text",
     component: ToggleText,
-    sourcePath: "ui/components/toggle-text.tsx",
+    sourcePath: "ui/components/toggle/text.tsx",
   },
 ] as const
 

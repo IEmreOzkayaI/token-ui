@@ -4,21 +4,21 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import ScrollAreaDemo from "@/ui/components/scroll-area-demo"
-import ScrollAreaHorizontalDemo from "@/ui/components/scroll-area-horizontal-demo"
+import ScrollAreaDemo from "@/ui/components/scroll-area/demo"
+import ScrollAreaHorizontalDemo from "@/ui/components/scroll-area/horizontal-demo"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: ScrollAreaDemo,
-    sourcePath: "ui/components/scroll-area-demo.tsx",
+    sourcePath: "ui/components/scroll-area/demo.tsx",
   },
   {
     id: "horizontal-demo",
     title: "Horizontal Demo",
     component: ScrollAreaHorizontalDemo,
-    sourcePath: "ui/components/scroll-area-horizontal-demo.tsx",
+    sourcePath: "ui/components/scroll-area/horizontal-demo.tsx",
   },
 ] as const
 

@@ -4,49 +4,49 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import CalendarBasic from "@/ui/components/calendar-basic"
-import CalendarCaption from "@/ui/components/calendar-caption"
-import CalendarDemo from "@/ui/components/calendar-demo"
-import CalendarMultiple from "@/ui/components/calendar-multiple"
-import CalendarWithTime from "@/ui/components/calendar-time"
-import CalendarWeekNumbers from "@/ui/components/calendar-week-numbers"
+import CalendarBasic from "@/ui/components/calendar/basic"
+import CalendarCaption from "@/ui/components/calendar/caption"
+import CalendarDemo from "@/ui/components/calendar/demo"
+import CalendarMultiple from "@/ui/components/calendar/multiple"
+import CalendarWithTime from "@/ui/components/calendar/time"
+import CalendarWeekNumbers from "@/ui/components/calendar/week-numbers"
 
 const examples = [
   {
     id: "basic",
     title: "Basic",
     component: CalendarBasic,
-    sourcePath: "ui/components/calendar-basic.tsx",
+    sourcePath: "ui/components/calendar/basic.tsx",
   },
   {
     id: "caption",
     title: "Caption",
     component: CalendarCaption,
-    sourcePath: "ui/components/calendar-caption.tsx",
+    sourcePath: "ui/components/calendar/caption.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: CalendarDemo,
-    sourcePath: "ui/components/calendar-demo.tsx",
+    sourcePath: "ui/components/calendar/demo.tsx",
   },
   {
     id: "multiple",
     title: "Multiple",
     component: CalendarMultiple,
-    sourcePath: "ui/components/calendar-multiple.tsx",
+    sourcePath: "ui/components/calendar/multiple.tsx",
   },
   {
     id: "time",
     title: "Time",
     component: CalendarWithTime,
-    sourcePath: "ui/components/calendar-time.tsx",
+    sourcePath: "ui/components/calendar/time.tsx",
   },
   {
     id: "week-numbers",
     title: "Week Numbers",
     component: CalendarWeekNumbers,
-    sourcePath: "ui/components/calendar-week-numbers.tsx",
+    sourcePath: "ui/components/calendar/week-numbers.tsx",
   },
 ] as const
 

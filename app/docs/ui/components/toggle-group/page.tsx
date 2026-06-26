@@ -4,56 +4,56 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import ToggleGroupDemo from "@/ui/components/toggle-group-demo"
-import ToggleGroupDisabled from "@/ui/components/toggle-group-disabled"
-import ToggleGroupFontWeightSelector from "@/ui/components/toggle-group-font-weight-selector"
-import ToggleGroupOutline from "@/ui/components/toggle-group-outline"
-import ToggleGroupSizes from "@/ui/components/toggle-group-sizes"
-import ToggleGroupSpacing from "@/ui/components/toggle-group-spacing"
-import ToggleGroupVertical from "@/ui/components/toggle-group-vertical"
+import ToggleGroupDemo from "@/ui/components/toggle-group/demo"
+import ToggleGroupDisabled from "@/ui/components/toggle-group/disabled"
+import ToggleGroupFontWeightSelector from "@/ui/components/toggle-group/font-weight-selector"
+import ToggleGroupOutline from "@/ui/components/toggle-group/outline"
+import ToggleGroupSizes from "@/ui/components/toggle-group/sizes"
+import ToggleGroupSpacing from "@/ui/components/toggle-group/spacing"
+import ToggleGroupVertical from "@/ui/components/toggle-group/vertical"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: ToggleGroupDemo,
-    sourcePath: "ui/components/toggle-group-demo.tsx",
+    sourcePath: "ui/components/toggle-group/demo.tsx",
   },
   {
     id: "disabled",
     title: "Disabled",
     component: ToggleGroupDisabled,
-    sourcePath: "ui/components/toggle-group-disabled.tsx",
+    sourcePath: "ui/components/toggle-group/disabled.tsx",
   },
   {
     id: "font-weight-selector",
     title: "Font Weight Selector",
     component: ToggleGroupFontWeightSelector,
-    sourcePath: "ui/components/toggle-group-font-weight-selector.tsx",
+    sourcePath: "ui/components/toggle-group/font-weight-selector.tsx",
   },
   {
     id: "outline",
     title: "Outline",
     component: ToggleGroupOutline,
-    sourcePath: "ui/components/toggle-group-outline.tsx",
+    sourcePath: "ui/components/toggle-group/outline.tsx",
   },
   {
     id: "sizes",
     title: "Sizes",
     component: ToggleGroupSizes,
-    sourcePath: "ui/components/toggle-group-sizes.tsx",
+    sourcePath: "ui/components/toggle-group/sizes.tsx",
   },
   {
     id: "spacing",
     title: "Spacing",
     component: ToggleGroupSpacing,
-    sourcePath: "ui/components/toggle-group-spacing.tsx",
+    sourcePath: "ui/components/toggle-group/spacing.tsx",
   },
   {
     id: "vertical",
     title: "Vertical",
     component: ToggleGroupVertical,
-    sourcePath: "ui/components/toggle-group-vertical.tsx",
+    sourcePath: "ui/components/toggle-group/vertical.tsx",
   },
 ] as const
 

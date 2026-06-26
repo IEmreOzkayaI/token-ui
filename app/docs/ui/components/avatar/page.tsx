@@ -4,63 +4,63 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import AvatarBadgeIconExample from "@/ui/components/avatar-badge-icon"
-import AvatarWithBadge from "@/ui/components/avatar-badge"
-import AvatarDemo from "@/ui/components/avatar-basic"
-import AvatarDropdown from "@/ui/components/avatar-dropdown"
-import AvatarGroupCountIconExample from "@/ui/components/avatar-group-count-icon"
-import AvatarGroupCountExample from "@/ui/components/avatar-group-count"
-import AvatarGroupExample from "@/ui/components/avatar-group"
-import AvatarSizeExample from "@/ui/components/avatar-size"
+import AvatarBadgeIconExample from "@/ui/components/avatar/badge-icon"
+import AvatarWithBadge from "@/ui/components/avatar/badge"
+import AvatarDemo from "@/ui/components/avatar/basic"
+import AvatarDropdown from "@/ui/components/avatar/dropdown"
+import AvatarGroupCountIconExample from "@/ui/components/avatar/group-count-icon"
+import AvatarGroupCountExample from "@/ui/components/avatar/group-count"
+import AvatarGroupExample from "@/ui/components/avatar/group"
+import AvatarSizeExample from "@/ui/components/avatar/size"
 
 const examples = [
   {
     id: "badge-icon",
     title: "Badge Icon",
     component: AvatarBadgeIconExample,
-    sourcePath: "ui/components/avatar-badge-icon.tsx",
+    sourcePath: "ui/components/avatar/badge-icon.tsx",
   },
   {
     id: "badge",
     title: "Badge",
     component: AvatarWithBadge,
-    sourcePath: "ui/components/avatar-badge.tsx",
+    sourcePath: "ui/components/avatar/badge.tsx",
   },
   {
     id: "basic",
     title: "Basic",
     component: AvatarDemo,
-    sourcePath: "ui/components/avatar-basic.tsx",
+    sourcePath: "ui/components/avatar/basic.tsx",
   },
   {
     id: "dropdown",
     title: "Dropdown",
     component: AvatarDropdown,
-    sourcePath: "ui/components/avatar-dropdown.tsx",
+    sourcePath: "ui/components/avatar/dropdown.tsx",
   },
   {
     id: "group-count-icon",
     title: "Group Count Icon",
     component: AvatarGroupCountIconExample,
-    sourcePath: "ui/components/avatar-group-count-icon.tsx",
+    sourcePath: "ui/components/avatar/group-count-icon.tsx",
   },
   {
     id: "group-count",
     title: "Group Count",
     component: AvatarGroupCountExample,
-    sourcePath: "ui/components/avatar-group-count.tsx",
+    sourcePath: "ui/components/avatar/group-count.tsx",
   },
   {
     id: "group",
     title: "Group",
     component: AvatarGroupExample,
-    sourcePath: "ui/components/avatar-group.tsx",
+    sourcePath: "ui/components/avatar/group.tsx",
   },
   {
     id: "size",
     title: "Size",
     component: AvatarSizeExample,
-    sourcePath: "ui/components/avatar-size.tsx",
+    sourcePath: "ui/components/avatar/size.tsx",
   },
 ] as const
 

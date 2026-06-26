@@ -4,42 +4,42 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import MenubarCheckbox from "@/ui/components/menubar-checkbox"
-import MenubarDemo from "@/ui/components/menubar-demo"
-import MenubarIcons from "@/ui/components/menubar-icons"
-import MenubarRadio from "@/ui/components/menubar-radio"
-import MenubarSubmenu from "@/ui/components/menubar-submenu"
+import MenubarCheckbox from "@/ui/components/menubar/checkbox"
+import MenubarDemo from "@/ui/components/menubar/demo"
+import MenubarIcons from "@/ui/components/menubar/icons"
+import MenubarRadio from "@/ui/components/menubar/radio"
+import MenubarSubmenu from "@/ui/components/menubar/submenu"
 
 const examples = [
   {
     id: "checkbox",
     title: "Checkbox",
     component: MenubarCheckbox,
-    sourcePath: "ui/components/menubar-checkbox.tsx",
+    sourcePath: "ui/components/menubar/checkbox.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: MenubarDemo,
-    sourcePath: "ui/components/menubar-demo.tsx",
+    sourcePath: "ui/components/menubar/demo.tsx",
   },
   {
     id: "icons",
     title: "Icons",
     component: MenubarIcons,
-    sourcePath: "ui/components/menubar-icons.tsx",
+    sourcePath: "ui/components/menubar/icons.tsx",
   },
   {
     id: "radio",
     title: "Radio",
     component: MenubarRadio,
-    sourcePath: "ui/components/menubar-radio.tsx",
+    sourcePath: "ui/components/menubar/radio.tsx",
   },
   {
     id: "submenu",
     title: "Submenu",
     component: MenubarSubmenu,
-    sourcePath: "ui/components/menubar-submenu.tsx",
+    sourcePath: "ui/components/menubar/submenu.tsx",
   },
 ] as const
 

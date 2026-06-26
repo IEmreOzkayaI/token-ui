@@ -4,35 +4,35 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import PopoverAlignments from "@/ui/components/popover-alignments"
-import PopoverBasic from "@/ui/components/popover-basic"
-import PopoverDemo from "@/ui/components/popover-demo"
-import PopoverForm from "@/ui/components/popover-form"
+import PopoverAlignments from "@/ui/components/popover/alignments"
+import PopoverBasic from "@/ui/components/popover/basic"
+import PopoverDemo from "@/ui/components/popover/demo"
+import PopoverForm from "@/ui/components/popover/form"
 
 const examples = [
   {
     id: "alignments",
     title: "Alignments",
     component: PopoverAlignments,
-    sourcePath: "ui/components/popover-alignments.tsx",
+    sourcePath: "ui/components/popover/alignments.tsx",
   },
   {
     id: "basic",
     title: "Basic",
     component: PopoverBasic,
-    sourcePath: "ui/components/popover-basic.tsx",
+    sourcePath: "ui/components/popover/basic.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: PopoverDemo,
-    sourcePath: "ui/components/popover-demo.tsx",
+    sourcePath: "ui/components/popover/demo.tsx",
   },
   {
     id: "form",
     title: "Form",
     component: PopoverForm,
-    sourcePath: "ui/components/popover-form.tsx",
+    sourcePath: "ui/components/popover/form.tsx",
   },
 ] as const
 

@@ -4,21 +4,21 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import HoverCardDemo from "@/ui/components/hover-card-demo"
-import HoverCardSides from "@/ui/components/hover-card-sides"
+import HoverCardDemo from "@/ui/components/hover-card/demo"
+import HoverCardSides from "@/ui/components/hover-card/sides"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: HoverCardDemo,
-    sourcePath: "ui/components/hover-card-demo.tsx",
+    sourcePath: "ui/components/hover-card/demo.tsx",
   },
   {
     id: "sides",
     title: "Sides",
     component: HoverCardSides,
-    sourcePath: "ui/components/hover-card-sides.tsx",
+    sourcePath: "ui/components/hover-card/sides.tsx",
   },
 ] as const
 

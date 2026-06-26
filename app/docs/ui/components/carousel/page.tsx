@@ -4,49 +4,49 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import CarouselDApiDemo from "@/ui/components/carousel-api"
-import CarouselDemo from "@/ui/components/carousel-demo"
-import CarouselMultiple from "@/ui/components/carousel-multiple"
-import CarouselOrientation from "@/ui/components/carousel-orientation"
-import CarouselSize from "@/ui/components/carousel-size"
-import CarouselSpacing from "@/ui/components/carousel-spacing"
+import CarouselDApiDemo from "@/ui/components/carousel/api"
+import CarouselDemo from "@/ui/components/carousel/demo"
+import CarouselMultiple from "@/ui/components/carousel/multiple"
+import CarouselOrientation from "@/ui/components/carousel/orientation"
+import CarouselSize from "@/ui/components/carousel/size"
+import CarouselSpacing from "@/ui/components/carousel/spacing"
 
 const examples = [
   {
     id: "api",
     title: "Api",
     component: CarouselDApiDemo,
-    sourcePath: "ui/components/carousel-api.tsx",
+    sourcePath: "ui/components/carousel/api.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: CarouselDemo,
-    sourcePath: "ui/components/carousel-demo.tsx",
+    sourcePath: "ui/components/carousel/demo.tsx",
   },
   {
     id: "multiple",
     title: "Multiple",
     component: CarouselMultiple,
-    sourcePath: "ui/components/carousel-multiple.tsx",
+    sourcePath: "ui/components/carousel/multiple.tsx",
   },
   {
     id: "orientation",
     title: "Orientation",
     component: CarouselOrientation,
-    sourcePath: "ui/components/carousel-orientation.tsx",
+    sourcePath: "ui/components/carousel/orientation.tsx",
   },
   {
     id: "size",
     title: "Size",
     component: CarouselSize,
-    sourcePath: "ui/components/carousel-size.tsx",
+    sourcePath: "ui/components/carousel/size.tsx",
   },
   {
     id: "spacing",
     title: "Spacing",
     component: CarouselSpacing,
-    sourcePath: "ui/components/carousel-spacing.tsx",
+    sourcePath: "ui/components/carousel/spacing.tsx",
   },
 ] as const
 

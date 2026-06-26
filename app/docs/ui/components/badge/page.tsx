@@ -4,49 +4,49 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import BadgeCustomColors from "@/ui/components/badge-colors"
-import BadgeDemo from "@/ui/components/badge-demo"
-import BadgeWithIconLeft from "@/ui/components/badge-icon"
-import BadgeAsLink from "@/ui/components/badge-link"
-import BadgeWithSpinner from "@/ui/components/badge-spinner"
-import BadgeVariants from "@/ui/components/badge-variants"
+import BadgeCustomColors from "@/ui/components/badge/colors"
+import BadgeDemo from "@/ui/components/badge/demo"
+import BadgeWithIconLeft from "@/ui/components/badge/icon"
+import BadgeAsLink from "@/ui/components/badge/link"
+import BadgeWithSpinner from "@/ui/components/badge/spinner"
+import BadgeVariants from "@/ui/components/badge/variants"
 
 const examples = [
   {
     id: "colors",
     title: "Colors",
     component: BadgeCustomColors,
-    sourcePath: "ui/components/badge-colors.tsx",
+    sourcePath: "ui/components/badge/colors.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: BadgeDemo,
-    sourcePath: "ui/components/badge-demo.tsx",
+    sourcePath: "ui/components/badge/demo.tsx",
   },
   {
     id: "icon",
     title: "Icon",
     component: BadgeWithIconLeft,
-    sourcePath: "ui/components/badge-icon.tsx",
+    sourcePath: "ui/components/badge/icon.tsx",
   },
   {
     id: "link",
     title: "Link",
     component: BadgeAsLink,
-    sourcePath: "ui/components/badge-link.tsx",
+    sourcePath: "ui/components/badge/link.tsx",
   },
   {
     id: "spinner",
     title: "Spinner",
     component: BadgeWithSpinner,
-    sourcePath: "ui/components/badge-spinner.tsx",
+    sourcePath: "ui/components/badge/spinner.tsx",
   },
   {
     id: "variants",
     title: "Variants",
     component: BadgeVariants,
-    sourcePath: "ui/components/badge-variants.tsx",
+    sourcePath: "ui/components/badge/variants.tsx",
   },
 ] as const
 

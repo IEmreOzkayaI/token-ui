@@ -4,49 +4,49 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import SwitchChoiceCard from "@/ui/components/switch-choice-card"
-import SwitchDemo from "@/ui/components/switch-demo"
-import SwitchDescription from "@/ui/components/switch-description"
-import SwitchDisabled from "@/ui/components/switch-disabled"
-import SwitchInvalid from "@/ui/components/switch-invalid"
-import SwitchSizes from "@/ui/components/switch-sizes"
+import SwitchChoiceCard from "@/ui/components/switch/choice-card"
+import SwitchDemo from "@/ui/components/switch/demo"
+import SwitchDescription from "@/ui/components/switch/description"
+import SwitchDisabled from "@/ui/components/switch/disabled"
+import SwitchInvalid from "@/ui/components/switch/invalid"
+import SwitchSizes from "@/ui/components/switch/sizes"
 
 const examples = [
   {
     id: "choice-card",
     title: "Choice Card",
     component: SwitchChoiceCard,
-    sourcePath: "ui/components/switch-choice-card.tsx",
+    sourcePath: "ui/components/switch/choice-card.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: SwitchDemo,
-    sourcePath: "ui/components/switch-demo.tsx",
+    sourcePath: "ui/components/switch/demo.tsx",
   },
   {
     id: "description",
     title: "Description",
     component: SwitchDescription,
-    sourcePath: "ui/components/switch-description.tsx",
+    sourcePath: "ui/components/switch/description.tsx",
   },
   {
     id: "disabled",
     title: "Disabled",
     component: SwitchDisabled,
-    sourcePath: "ui/components/switch-disabled.tsx",
+    sourcePath: "ui/components/switch/disabled.tsx",
   },
   {
     id: "invalid",
     title: "Invalid",
     component: SwitchInvalid,
-    sourcePath: "ui/components/switch-invalid.tsx",
+    sourcePath: "ui/components/switch/invalid.tsx",
   },
   {
     id: "sizes",
     title: "Sizes",
     component: SwitchSizes,
-    sourcePath: "ui/components/switch-sizes.tsx",
+    sourcePath: "ui/components/switch/sizes.tsx",
   },
 ] as const
 

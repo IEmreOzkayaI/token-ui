@@ -4,35 +4,35 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import EmptyAvatarGroup from "@/ui/components/empty-avatar-group"
-import EmptyAvatar from "@/ui/components/empty-avatar"
-import EmptyInCard from "@/ui/components/empty-card"
-import EmptyInputGroup from "@/ui/components/empty-input-group"
+import EmptyAvatarGroup from "@/ui/components/empty/avatar-group"
+import EmptyAvatar from "@/ui/components/empty/avatar"
+import EmptyInCard from "@/ui/components/empty/card"
+import EmptyInputGroup from "@/ui/components/empty/input-group"
 
 const examples = [
   {
     id: "avatar-group",
     title: "Avatar Group",
     component: EmptyAvatarGroup,
-    sourcePath: "ui/components/empty-avatar-group.tsx",
+    sourcePath: "ui/components/empty/avatar-group.tsx",
   },
   {
     id: "avatar",
     title: "Avatar",
     component: EmptyAvatar,
-    sourcePath: "ui/components/empty-avatar.tsx",
+    sourcePath: "ui/components/empty/avatar.tsx",
   },
   {
     id: "card",
     title: "Card",
     component: EmptyInCard,
-    sourcePath: "ui/components/empty-card.tsx",
+    sourcePath: "ui/components/empty/card.tsx",
   },
   {
     id: "input-group",
     title: "Input Group",
     component: EmptyInputGroup,
-    sourcePath: "ui/components/empty-input-group.tsx",
+    sourcePath: "ui/components/empty/input-group.tsx",
   },
 ] as const
 

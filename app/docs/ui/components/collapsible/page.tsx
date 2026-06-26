@@ -4,28 +4,28 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import CollapsibleDemo from "@/ui/components/collapsible-demo"
-import CollapsibleFileTree from "@/ui/components/collapsible-file-tree"
-import CollapsibleSettings from "@/ui/components/collapsible-settings"
+import CollapsibleDemo from "@/ui/components/collapsible/demo"
+import CollapsibleFileTree from "@/ui/components/collapsible/file-tree"
+import CollapsibleSettings from "@/ui/components/collapsible/settings"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: CollapsibleDemo,
-    sourcePath: "ui/components/collapsible-demo.tsx",
+    sourcePath: "ui/components/collapsible/demo.tsx",
   },
   {
     id: "file-tree",
     title: "File Tree",
     component: CollapsibleFileTree,
-    sourcePath: "ui/components/collapsible-file-tree.tsx",
+    sourcePath: "ui/components/collapsible/file-tree.tsx",
   },
   {
     id: "settings",
     title: "Settings",
     component: CollapsibleSettings,
-    sourcePath: "ui/components/collapsible-settings.tsx",
+    sourcePath: "ui/components/collapsible/settings.tsx",
   },
 ] as const
 

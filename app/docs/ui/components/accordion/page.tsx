@@ -4,49 +4,49 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import AccordionBasic from "@/ui/components/accordion-basic"
-import AccordionBorders from "@/ui/components/accordion-borders"
-import AccordionCard from "@/ui/components/accordion-card"
-import AccordionDemo from "@/ui/components/accordion-demo"
-import AccordionDisabled from "@/ui/components/accordion-disabled"
-import AccordionMultiple from "@/ui/components/accordion-multiple"
+import AccordionBasic from "@/ui/components/accordion/basic"
+import AccordionBorders from "@/ui/components/accordion/borders"
+import AccordionCard from "@/ui/components/accordion/card"
+import AccordionDemo from "@/ui/components/accordion/demo"
+import AccordionDisabled from "@/ui/components/accordion/disabled"
+import AccordionMultiple from "@/ui/components/accordion/multiple"
 
 const examples = [
   {
     id: "basic",
     title: "Basic",
     component: AccordionBasic,
-    sourcePath: "ui/components/accordion-basic.tsx",
+    sourcePath: "ui/components/accordion/basic.tsx",
   },
   {
     id: "borders",
     title: "Borders",
     component: AccordionBorders,
-    sourcePath: "ui/components/accordion-borders.tsx",
+    sourcePath: "ui/components/accordion/borders.tsx",
   },
   {
     id: "card",
     title: "Card",
     component: AccordionCard,
-    sourcePath: "ui/components/accordion-card.tsx",
+    sourcePath: "ui/components/accordion/card.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: AccordionDemo,
-    sourcePath: "ui/components/accordion-demo.tsx",
+    sourcePath: "ui/components/accordion/demo.tsx",
   },
   {
     id: "disabled",
     title: "Disabled",
     component: AccordionDisabled,
-    sourcePath: "ui/components/accordion-disabled.tsx",
+    sourcePath: "ui/components/accordion/disabled.tsx",
   },
   {
     id: "multiple",
     title: "Multiple",
     component: AccordionMultiple,
-    sourcePath: "ui/components/accordion-multiple.tsx",
+    sourcePath: "ui/components/accordion/multiple.tsx",
   },
 ] as const
 

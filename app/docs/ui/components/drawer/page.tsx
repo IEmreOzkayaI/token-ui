@@ -4,21 +4,21 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import DrawerScrollableContent from "@/ui/components/drawer-scrollable-content"
-import DrawerWithSides from "@/ui/components/drawer-sides"
+import DrawerScrollableContent from "@/ui/components/drawer/scrollable-content"
+import DrawerWithSides from "@/ui/components/drawer/sides"
 
 const examples = [
   {
     id: "scrollable-content",
     title: "Scrollable Content",
     component: DrawerScrollableContent,
-    sourcePath: "ui/components/drawer-scrollable-content.tsx",
+    sourcePath: "ui/components/drawer/scrollable-content.tsx",
   },
   {
     id: "sides",
     title: "Sides",
     component: DrawerWithSides,
-    sourcePath: "ui/components/drawer-sides.tsx",
+    sourcePath: "ui/components/drawer/sides.tsx",
   },
 ] as const
 

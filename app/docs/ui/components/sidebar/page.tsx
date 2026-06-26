@@ -4,14 +4,14 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import AppSidebar from "@/ui/components/sidebar-controlled"
+import AppSidebar from "@/ui/components/sidebar/controlled"
 
 const examples = [
   {
     id: "controlled",
     title: "Controlled",
     component: AppSidebar,
-    sourcePath: "ui/components/sidebar-controlled.tsx",
+    sourcePath: "ui/components/sidebar/controlled.tsx",
   },
 ] as const
 

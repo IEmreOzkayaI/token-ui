@@ -4,28 +4,28 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import PaginationDemo from "@/ui/components/pagination-demo"
-import PaginationIconsOnly from "@/ui/components/pagination-icons-only"
-import PaginationSimple from "@/ui/components/pagination-simple"
+import PaginationDemo from "@/ui/components/pagination/demo"
+import PaginationIconsOnly from "@/ui/components/pagination/icons-only"
+import PaginationSimple from "@/ui/components/pagination/simple"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: PaginationDemo,
-    sourcePath: "ui/components/pagination-demo.tsx",
+    sourcePath: "ui/components/pagination/demo.tsx",
   },
   {
     id: "icons-only",
     title: "Icons Only",
     component: PaginationIconsOnly,
-    sourcePath: "ui/components/pagination-icons-only.tsx",
+    sourcePath: "ui/components/pagination/icons-only.tsx",
   },
   {
     id: "simple",
     title: "Simple",
     component: PaginationSimple,
-    sourcePath: "ui/components/pagination-simple.tsx",
+    sourcePath: "ui/components/pagination/simple.tsx",
   },
 ] as const
 

@@ -4,42 +4,42 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import TextareaButton from "@/ui/components/textarea-button"
-import TextareaDemo from "@/ui/components/textarea-demo"
-import TextareaDisabled from "@/ui/components/textarea-disabled"
-import TextareaField from "@/ui/components/textarea-field"
-import TextareaInvalid from "@/ui/components/textarea-invalid"
+import TextareaButton from "@/ui/components/textarea/button"
+import TextareaDemo from "@/ui/components/textarea/demo"
+import TextareaDisabled from "@/ui/components/textarea/disabled"
+import TextareaField from "@/ui/components/textarea/field"
+import TextareaInvalid from "@/ui/components/textarea/invalid"
 
 const examples = [
   {
     id: "button",
     title: "Button",
     component: TextareaButton,
-    sourcePath: "ui/components/textarea-button.tsx",
+    sourcePath: "ui/components/textarea/button.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: TextareaDemo,
-    sourcePath: "ui/components/textarea-demo.tsx",
+    sourcePath: "ui/components/textarea/demo.tsx",
   },
   {
     id: "disabled",
     title: "Disabled",
     component: TextareaDisabled,
-    sourcePath: "ui/components/textarea-disabled.tsx",
+    sourcePath: "ui/components/textarea/disabled.tsx",
   },
   {
     id: "field",
     title: "Field",
     component: TextareaField,
-    sourcePath: "ui/components/textarea-field.tsx",
+    sourcePath: "ui/components/textarea/field.tsx",
   },
   {
     id: "invalid",
     title: "Invalid",
     component: TextareaInvalid,
-    sourcePath: "ui/components/textarea-invalid.tsx",
+    sourcePath: "ui/components/textarea/invalid.tsx",
   },
 ] as const
 

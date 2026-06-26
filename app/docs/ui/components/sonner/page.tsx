@@ -4,35 +4,35 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import SonnerDemo from "@/ui/components/sonner-demo"
-import SonnerDescription from "@/ui/components/sonner-description"
-import SonnerPosition from "@/ui/components/sonner-position"
-import SonnerTypes from "@/ui/components/sonner-types"
+import SonnerDemo from "@/ui/components/sonner/demo"
+import SonnerDescription from "@/ui/components/sonner/description"
+import SonnerPosition from "@/ui/components/sonner/position"
+import SonnerTypes from "@/ui/components/sonner/types"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: SonnerDemo,
-    sourcePath: "ui/components/sonner-demo.tsx",
+    sourcePath: "ui/components/sonner/demo.tsx",
   },
   {
     id: "description",
     title: "Description",
     component: SonnerDescription,
-    sourcePath: "ui/components/sonner-description.tsx",
+    sourcePath: "ui/components/sonner/description.tsx",
   },
   {
     id: "position",
     title: "Position",
     component: SonnerPosition,
-    sourcePath: "ui/components/sonner-position.tsx",
+    sourcePath: "ui/components/sonner/position.tsx",
   },
   {
     id: "types",
     title: "Types",
     component: SonnerTypes,
-    sourcePath: "ui/components/sonner-types.tsx",
+    sourcePath: "ui/components/sonner/types.tsx",
   },
 ] as const
 

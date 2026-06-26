@@ -4,56 +4,56 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import SpinnerBadge from "@/ui/components/spinner-badge"
-import SpinnerButton from "@/ui/components/spinner-button"
-import SpinnerCustom from "@/ui/components/spinner-custom"
-import SpinnerDemo from "@/ui/components/spinner-demo"
-import SpinnerEmpty from "@/ui/components/spinner-empty"
-import SpinnerInputGroup from "@/ui/components/spinner-input-group"
-import SpinnerSize from "@/ui/components/spinner-size"
+import SpinnerBadge from "@/ui/components/spinner/badge"
+import SpinnerButton from "@/ui/components/spinner/button"
+import SpinnerCustom from "@/ui/components/spinner/custom"
+import SpinnerDemo from "@/ui/components/spinner/demo"
+import SpinnerEmpty from "@/ui/components/spinner/empty"
+import SpinnerInputGroup from "@/ui/components/spinner/input-group"
+import SpinnerSize from "@/ui/components/spinner/size"
 
 const examples = [
   {
     id: "badge",
     title: "Badge",
     component: SpinnerBadge,
-    sourcePath: "ui/components/spinner-badge.tsx",
+    sourcePath: "ui/components/spinner/badge.tsx",
   },
   {
     id: "button",
     title: "Button",
     component: SpinnerButton,
-    sourcePath: "ui/components/spinner-button.tsx",
+    sourcePath: "ui/components/spinner/button.tsx",
   },
   {
     id: "custom",
     title: "Custom",
     component: SpinnerCustom,
-    sourcePath: "ui/components/spinner-custom.tsx",
+    sourcePath: "ui/components/spinner/custom.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: SpinnerDemo,
-    sourcePath: "ui/components/spinner-demo.tsx",
+    sourcePath: "ui/components/spinner/demo.tsx",
   },
   {
     id: "empty",
     title: "Empty",
     component: SpinnerEmpty,
-    sourcePath: "ui/components/spinner-empty.tsx",
+    sourcePath: "ui/components/spinner/empty.tsx",
   },
   {
     id: "input-group",
     title: "Input Group",
     component: SpinnerInputGroup,
-    sourcePath: "ui/components/spinner-input-group.tsx",
+    sourcePath: "ui/components/spinner/input-group.tsx",
   },
   {
     id: "size",
     title: "Size",
     component: SpinnerSize,
-    sourcePath: "ui/components/spinner-size.tsx",
+    sourcePath: "ui/components/spinner/size.tsx",
   },
 ] as const
 

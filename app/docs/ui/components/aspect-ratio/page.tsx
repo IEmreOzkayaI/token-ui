@@ -4,28 +4,28 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import AspectRatioDemo from "@/ui/components/aspect-ratio-demo"
-import AspectRatioPortrait from "@/ui/components/aspect-ratio-portrait"
-import AspectRatioSquare from "@/ui/components/aspect-ratio-square"
+import AspectRatioDemo from "@/ui/components/aspect-ratio/demo"
+import AspectRatioPortrait from "@/ui/components/aspect-ratio/portrait"
+import AspectRatioSquare from "@/ui/components/aspect-ratio/square"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: AspectRatioDemo,
-    sourcePath: "ui/components/aspect-ratio-demo.tsx",
+    sourcePath: "ui/components/aspect-ratio/demo.tsx",
   },
   {
     id: "portrait",
     title: "Portrait",
     component: AspectRatioPortrait,
-    sourcePath: "ui/components/aspect-ratio-portrait.tsx",
+    sourcePath: "ui/components/aspect-ratio/portrait.tsx",
   },
   {
     id: "square",
     title: "Square",
     component: AspectRatioSquare,
-    sourcePath: "ui/components/aspect-ratio-square.tsx",
+    sourcePath: "ui/components/aspect-ratio/square.tsx",
   },
 ] as const
 

@@ -4,28 +4,28 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import TableActions from "@/ui/components/table-actions"
-import TableDemo from "@/ui/components/table-demo"
-import TableFooterExample from "@/ui/components/table-footer"
+import TableActions from "@/ui/components/table/actions"
+import TableDemo from "@/ui/components/table/demo"
+import TableFooterExample from "@/ui/components/table/footer"
 
 const examples = [
   {
     id: "actions",
     title: "Actions",
     component: TableActions,
-    sourcePath: "ui/components/table-actions.tsx",
+    sourcePath: "ui/components/table/actions.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: TableDemo,
-    sourcePath: "ui/components/table-demo.tsx",
+    sourcePath: "ui/components/table/demo.tsx",
   },
   {
     id: "footer",
     title: "Footer",
     component: TableFooterExample,
-    sourcePath: "ui/components/table-footer.tsx",
+    sourcePath: "ui/components/table/footer.tsx",
   },
 ] as const
 

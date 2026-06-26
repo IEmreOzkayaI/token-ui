@@ -4,14 +4,14 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import NavigationMenuDemo from "@/ui/components/navigation-menu-demo"
+import NavigationMenuDemo from "@/ui/components/navigation-menu/demo"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: NavigationMenuDemo,
-    sourcePath: "ui/components/navigation-menu-demo.tsx",
+    sourcePath: "ui/components/navigation-menu/demo.tsx",
   },
 ] as const
 

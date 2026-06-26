@@ -4,49 +4,49 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import SliderControlled from "@/ui/components/slider-controlled"
-import SliderDemo from "@/ui/components/slider-demo"
-import SliderDisabled from "@/ui/components/slider-disabled"
-import SliderMultiple from "@/ui/components/slider-multiple"
-import SliderRange from "@/ui/components/slider-range"
-import SliderVertical from "@/ui/components/slider-vertical"
+import SliderControlled from "@/ui/components/slider/controlled"
+import SliderDemo from "@/ui/components/slider/demo"
+import SliderDisabled from "@/ui/components/slider/disabled"
+import SliderMultiple from "@/ui/components/slider/multiple"
+import SliderRange from "@/ui/components/slider/range"
+import SliderVertical from "@/ui/components/slider/vertical"
 
 const examples = [
   {
     id: "controlled",
     title: "Controlled",
     component: SliderControlled,
-    sourcePath: "ui/components/slider-controlled.tsx",
+    sourcePath: "ui/components/slider/controlled.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: SliderDemo,
-    sourcePath: "ui/components/slider-demo.tsx",
+    sourcePath: "ui/components/slider/demo.tsx",
   },
   {
     id: "disabled",
     title: "Disabled",
     component: SliderDisabled,
-    sourcePath: "ui/components/slider-disabled.tsx",
+    sourcePath: "ui/components/slider/disabled.tsx",
   },
   {
     id: "multiple",
     title: "Multiple",
     component: SliderMultiple,
-    sourcePath: "ui/components/slider-multiple.tsx",
+    sourcePath: "ui/components/slider/multiple.tsx",
   },
   {
     id: "range",
     title: "Range",
     component: SliderRange,
-    sourcePath: "ui/components/slider-range.tsx",
+    sourcePath: "ui/components/slider/range.tsx",
   },
   {
     id: "vertical",
     title: "Vertical",
     component: SliderVertical,
-    sourcePath: "ui/components/slider-vertical.tsx",
+    sourcePath: "ui/components/slider/vertical.tsx",
   },
 ] as const
 

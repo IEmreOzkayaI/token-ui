@@ -4,91 +4,91 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import ButtonAsChild from "@/ui/components/button-aschild"
-import ButtonDefault from "@/ui/components/button-default"
-import ButtonDemo from "@/ui/components/button-demo"
-import ButtonDestructive from "@/ui/components/button-destructive"
-import ButtonGhost from "@/ui/components/button-ghost"
-import ButtonIcon from "@/ui/components/button-icon"
-import ButtonLink from "@/ui/components/button-link"
-import ButtonOutline from "@/ui/components/button-outline"
-import ButtonRounded from "@/ui/components/button-rounded"
-import ButtonSecondary from "@/ui/components/button-secondary"
-import ButtonSize from "@/ui/components/button-size"
-import ButtonSpinner from "@/ui/components/button-spinner"
+import ButtonAsChild from "@/ui/components/button/aschild"
+import ButtonDefault from "@/ui/components/button/default"
+import ButtonDemo from "@/ui/components/button/demo"
+import ButtonDestructive from "@/ui/components/button/destructive"
+import ButtonGhost from "@/ui/components/button/ghost"
+import ButtonIcon from "@/ui/components/button/icon"
+import ButtonLink from "@/ui/components/button/link"
+import ButtonOutline from "@/ui/components/button/outline"
+import ButtonRounded from "@/ui/components/button/rounded"
+import ButtonSecondary from "@/ui/components/button/secondary"
+import ButtonSize from "@/ui/components/button/size"
+import ButtonSpinner from "@/ui/components/button/spinner"
 
 const examples = [
   {
     id: "aschild",
     title: "Aschild",
     component: ButtonAsChild,
-    sourcePath: "ui/components/button-aschild.tsx",
+    sourcePath: "ui/components/button/aschild.tsx",
   },
   {
     id: "default",
     title: "Default",
     component: ButtonDefault,
-    sourcePath: "ui/components/button-default.tsx",
+    sourcePath: "ui/components/button/default.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: ButtonDemo,
-    sourcePath: "ui/components/button-demo.tsx",
+    sourcePath: "ui/components/button/demo.tsx",
   },
   {
     id: "destructive",
     title: "Destructive",
     component: ButtonDestructive,
-    sourcePath: "ui/components/button-destructive.tsx",
+    sourcePath: "ui/components/button/destructive.tsx",
   },
   {
     id: "ghost",
     title: "Ghost",
     component: ButtonGhost,
-    sourcePath: "ui/components/button-ghost.tsx",
+    sourcePath: "ui/components/button/ghost.tsx",
   },
   {
     id: "icon",
     title: "Icon",
     component: ButtonIcon,
-    sourcePath: "ui/components/button-icon.tsx",
+    sourcePath: "ui/components/button/icon.tsx",
   },
   {
     id: "link",
     title: "Link",
     component: ButtonLink,
-    sourcePath: "ui/components/button-link.tsx",
+    sourcePath: "ui/components/button/link.tsx",
   },
   {
     id: "outline",
     title: "Outline",
     component: ButtonOutline,
-    sourcePath: "ui/components/button-outline.tsx",
+    sourcePath: "ui/components/button/outline.tsx",
   },
   {
     id: "rounded",
     title: "Rounded",
     component: ButtonRounded,
-    sourcePath: "ui/components/button-rounded.tsx",
+    sourcePath: "ui/components/button/rounded.tsx",
   },
   {
     id: "secondary",
     title: "Secondary",
     component: ButtonSecondary,
-    sourcePath: "ui/components/button-secondary.tsx",
+    sourcePath: "ui/components/button/secondary.tsx",
   },
   {
     id: "size",
     title: "Size",
     component: ButtonSize,
-    sourcePath: "ui/components/button-size.tsx",
+    sourcePath: "ui/components/button/size.tsx",
   },
   {
     id: "spinner",
     title: "Spinner",
     component: ButtonSpinner,
-    sourcePath: "ui/components/button-spinner.tsx",
+    sourcePath: "ui/components/button/spinner.tsx",
   },
 ] as const
 

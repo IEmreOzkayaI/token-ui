@@ -4,42 +4,42 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import TabsDemo from "@/ui/components/tabs-demo"
-import TabsDisabled from "@/ui/components/tabs-disabled"
-import TabsIcons from "@/ui/components/tabs-icons"
-import TabsLine from "@/ui/components/tabs-line"
-import TabsVertical from "@/ui/components/tabs-vertical"
+import TabsDemo from "@/ui/components/tabs/demo"
+import TabsDisabled from "@/ui/components/tabs/disabled"
+import TabsIcons from "@/ui/components/tabs/icons"
+import TabsLine from "@/ui/components/tabs/line"
+import TabsVertical from "@/ui/components/tabs/vertical"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: TabsDemo,
-    sourcePath: "ui/components/tabs-demo.tsx",
+    sourcePath: "ui/components/tabs/demo.tsx",
   },
   {
     id: "disabled",
     title: "Disabled",
     component: TabsDisabled,
-    sourcePath: "ui/components/tabs-disabled.tsx",
+    sourcePath: "ui/components/tabs/disabled.tsx",
   },
   {
     id: "icons",
     title: "Icons",
     component: TabsIcons,
-    sourcePath: "ui/components/tabs-icons.tsx",
+    sourcePath: "ui/components/tabs/icons.tsx",
   },
   {
     id: "line",
     title: "Line",
     component: TabsLine,
-    sourcePath: "ui/components/tabs-line.tsx",
+    sourcePath: "ui/components/tabs/line.tsx",
   },
   {
     id: "vertical",
     title: "Vertical",
     component: TabsVertical,
-    sourcePath: "ui/components/tabs-vertical.tsx",
+    sourcePath: "ui/components/tabs/vertical.tsx",
   },
 ] as const
 

@@ -4,56 +4,56 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import CheckboxBasic from "@/ui/components/checkbox-basic"
-import CheckboxDemo from "@/ui/components/checkbox-demo"
-import CheckboxDescription from "@/ui/components/checkbox-description"
-import CheckboxDisabled from "@/ui/components/checkbox-disabled"
-import CheckboxGroup from "@/ui/components/checkbox-group"
-import CheckboxInvalid from "@/ui/components/checkbox-invalid"
-import CheckboxInTable from "@/ui/components/checkbox-table"
+import CheckboxBasic from "@/ui/components/checkbox/basic"
+import CheckboxDemo from "@/ui/components/checkbox/demo"
+import CheckboxDescription from "@/ui/components/checkbox/description"
+import CheckboxDisabled from "@/ui/components/checkbox/disabled"
+import CheckboxGroup from "@/ui/components/checkbox/group"
+import CheckboxInvalid from "@/ui/components/checkbox/invalid"
+import CheckboxInTable from "@/ui/components/checkbox/table"
 
 const examples = [
   {
     id: "basic",
     title: "Basic",
     component: CheckboxBasic,
-    sourcePath: "ui/components/checkbox-basic.tsx",
+    sourcePath: "ui/components/checkbox/basic.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: CheckboxDemo,
-    sourcePath: "ui/components/checkbox-demo.tsx",
+    sourcePath: "ui/components/checkbox/demo.tsx",
   },
   {
     id: "description",
     title: "Description",
     component: CheckboxDescription,
-    sourcePath: "ui/components/checkbox-description.tsx",
+    sourcePath: "ui/components/checkbox/description.tsx",
   },
   {
     id: "disabled",
     title: "Disabled",
     component: CheckboxDisabled,
-    sourcePath: "ui/components/checkbox-disabled.tsx",
+    sourcePath: "ui/components/checkbox/disabled.tsx",
   },
   {
     id: "group",
     title: "Group",
     component: CheckboxGroup,
-    sourcePath: "ui/components/checkbox-group.tsx",
+    sourcePath: "ui/components/checkbox/group.tsx",
   },
   {
     id: "invalid",
     title: "Invalid",
     component: CheckboxInvalid,
-    sourcePath: "ui/components/checkbox-invalid.tsx",
+    sourcePath: "ui/components/checkbox/invalid.tsx",
   },
   {
     id: "table",
     title: "Table",
     component: CheckboxInTable,
-    sourcePath: "ui/components/checkbox-table.tsx",
+    sourcePath: "ui/components/checkbox/table.tsx",
   },
 ] as const
 

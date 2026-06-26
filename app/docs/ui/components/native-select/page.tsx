@@ -4,35 +4,35 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import NativeSelectDemo from "@/ui/components/native-select-demo"
-import NativeSelectDisabled from "@/ui/components/native-select-disabled"
-import NativeSelectGroups from "@/ui/components/native-select-groups"
-import NativeSelectInvalid from "@/ui/components/native-select-invalid"
+import NativeSelectDemo from "@/ui/components/native-select/demo"
+import NativeSelectDisabled from "@/ui/components/native-select/disabled"
+import NativeSelectGroups from "@/ui/components/native-select/groups"
+import NativeSelectInvalid from "@/ui/components/native-select/invalid"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: NativeSelectDemo,
-    sourcePath: "ui/components/native-select-demo.tsx",
+    sourcePath: "ui/components/native-select/demo.tsx",
   },
   {
     id: "disabled",
     title: "Disabled",
     component: NativeSelectDisabled,
-    sourcePath: "ui/components/native-select-disabled.tsx",
+    sourcePath: "ui/components/native-select/disabled.tsx",
   },
   {
     id: "groups",
     title: "Groups",
     component: NativeSelectGroups,
-    sourcePath: "ui/components/native-select-groups.tsx",
+    sourcePath: "ui/components/native-select/groups.tsx",
   },
   {
     id: "invalid",
     title: "Invalid",
     component: NativeSelectInvalid,
-    sourcePath: "ui/components/native-select-invalid.tsx",
+    sourcePath: "ui/components/native-select/invalid.tsx",
   },
 ] as const
 

@@ -4,42 +4,42 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import AlertActionExample from "@/ui/components/alert-action"
-import AlertBasic from "@/ui/components/alert-basic"
-import AlertColors from "@/ui/components/alert-colors"
-import AlertDemo from "@/ui/components/alert-demo"
-import AlertDestructive from "@/ui/components/alert-destructive"
+import AlertActionExample from "@/ui/components/alert/action"
+import AlertBasic from "@/ui/components/alert/basic"
+import AlertColors from "@/ui/components/alert/colors"
+import AlertDemo from "@/ui/components/alert/demo"
+import AlertDestructive from "@/ui/components/alert/destructive"
 
 const examples = [
   {
     id: "action",
     title: "Action",
     component: AlertActionExample,
-    sourcePath: "ui/components/alert-action.tsx",
+    sourcePath: "ui/components/alert/action.tsx",
   },
   {
     id: "basic",
     title: "Basic",
     component: AlertBasic,
-    sourcePath: "ui/components/alert-basic.tsx",
+    sourcePath: "ui/components/alert/basic.tsx",
   },
   {
     id: "colors",
     title: "Colors",
     component: AlertColors,
-    sourcePath: "ui/components/alert-colors.tsx",
+    sourcePath: "ui/components/alert/colors.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: AlertDemo,
-    sourcePath: "ui/components/alert-demo.tsx",
+    sourcePath: "ui/components/alert/demo.tsx",
   },
   {
     id: "destructive",
     title: "Destructive",
     component: AlertDestructive,
-    sourcePath: "ui/components/alert-destructive.tsx",
+    sourcePath: "ui/components/alert/destructive.tsx",
   },
 ] as const
 

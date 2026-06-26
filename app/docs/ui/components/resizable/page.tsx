@@ -4,28 +4,28 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import ResizableDemo from "@/ui/components/resizable-demo"
-import ResizableHandleDemo from "@/ui/components/resizable-handle"
-import ResizableVertical from "@/ui/components/resizable-vertical"
+import ResizableDemo from "@/ui/components/resizable/demo"
+import ResizableHandleDemo from "@/ui/components/resizable/handle"
+import ResizableVertical from "@/ui/components/resizable/vertical"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: ResizableDemo,
-    sourcePath: "ui/components/resizable-demo.tsx",
+    sourcePath: "ui/components/resizable/demo.tsx",
   },
   {
     id: "handle",
     title: "Handle",
     component: ResizableHandleDemo,
-    sourcePath: "ui/components/resizable-handle.tsx",
+    sourcePath: "ui/components/resizable/handle.tsx",
   },
   {
     id: "vertical",
     title: "Vertical",
     component: ResizableVertical,
-    sourcePath: "ui/components/resizable-vertical.tsx",
+    sourcePath: "ui/components/resizable/vertical.tsx",
   },
 ] as const
 

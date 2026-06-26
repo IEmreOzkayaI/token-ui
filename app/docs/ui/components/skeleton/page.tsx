@@ -4,49 +4,49 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import SkeletonAvatar from "@/ui/components/skeleton-avatar"
-import SkeletonCard from "@/ui/components/skeleton-card"
-import SkeletonDemo from "@/ui/components/skeleton-demo"
-import SkeletonForm from "@/ui/components/skeleton-form"
-import SkeletonTable from "@/ui/components/skeleton-table"
-import SkeletonText from "@/ui/components/skeleton-text"
+import SkeletonAvatar from "@/ui/components/skeleton/avatar"
+import SkeletonCard from "@/ui/components/skeleton/card"
+import SkeletonDemo from "@/ui/components/skeleton/demo"
+import SkeletonForm from "@/ui/components/skeleton/form"
+import SkeletonTable from "@/ui/components/skeleton/table"
+import SkeletonText from "@/ui/components/skeleton/text"
 
 const examples = [
   {
     id: "avatar",
     title: "Avatar",
     component: SkeletonAvatar,
-    sourcePath: "ui/components/skeleton-avatar.tsx",
+    sourcePath: "ui/components/skeleton/avatar.tsx",
   },
   {
     id: "card",
     title: "Card",
     component: SkeletonCard,
-    sourcePath: "ui/components/skeleton-card.tsx",
+    sourcePath: "ui/components/skeleton/card.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: SkeletonDemo,
-    sourcePath: "ui/components/skeleton-demo.tsx",
+    sourcePath: "ui/components/skeleton/demo.tsx",
   },
   {
     id: "form",
     title: "Form",
     component: SkeletonForm,
-    sourcePath: "ui/components/skeleton-form.tsx",
+    sourcePath: "ui/components/skeleton/form.tsx",
   },
   {
     id: "table",
     title: "Table",
     component: SkeletonTable,
-    sourcePath: "ui/components/skeleton-table.tsx",
+    sourcePath: "ui/components/skeleton/table.tsx",
   },
   {
     id: "text",
     title: "Text",
     component: SkeletonText,
-    sourcePath: "ui/components/skeleton-text.tsx",
+    sourcePath: "ui/components/skeleton/text.tsx",
   },
 ] as const
 

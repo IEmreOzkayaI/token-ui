@@ -4,91 +4,91 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import DropdownMenuAvatar from "@/ui/components/dropdown-menu-avatar"
-import DropdownMenuBasic from "@/ui/components/dropdown-menu-basic"
-import DropdownMenuCheckboxesIcons from "@/ui/components/dropdown-menu-checkboxes-icons"
-import DropdownMenuCheckboxes from "@/ui/components/dropdown-menu-checkboxes"
-import DropdownMenuComplex from "@/ui/components/dropdown-menu-complex"
-import DropdownMenuDemo from "@/ui/components/dropdown-menu-demo"
-import DropdownMenuDestructive from "@/ui/components/dropdown-menu-destructive"
-import DropdownMenuIcons from "@/ui/components/dropdown-menu-icons"
-import DropdownMenuRadioGroupDemo from "@/ui/components/dropdown-menu-radio-group"
-import DropdownMenuRadioIcons from "@/ui/components/dropdown-menu-radio-icons"
-import DropdownMenuShortcuts from "@/ui/components/dropdown-menu-shortcuts"
-import DropdownMenuSubmenu from "@/ui/components/dropdown-menu-submenu"
+import DropdownMenuAvatar from "@/ui/components/dropdown-menu/avatar"
+import DropdownMenuBasic from "@/ui/components/dropdown-menu/basic"
+import DropdownMenuCheckboxesIcons from "@/ui/components/dropdown-menu/checkboxes-icons"
+import DropdownMenuCheckboxes from "@/ui/components/dropdown-menu/checkboxes"
+import DropdownMenuComplex from "@/ui/components/dropdown-menu/complex"
+import DropdownMenuDemo from "@/ui/components/dropdown-menu/demo"
+import DropdownMenuDestructive from "@/ui/components/dropdown-menu/destructive"
+import DropdownMenuIcons from "@/ui/components/dropdown-menu/icons"
+import DropdownMenuRadioGroupDemo from "@/ui/components/dropdown-menu/radio-group"
+import DropdownMenuRadioIcons from "@/ui/components/dropdown-menu/radio-icons"
+import DropdownMenuShortcuts from "@/ui/components/dropdown-menu/shortcuts"
+import DropdownMenuSubmenu from "@/ui/components/dropdown-menu/submenu"
 
 const examples = [
   {
     id: "avatar",
     title: "Avatar",
     component: DropdownMenuAvatar,
-    sourcePath: "ui/components/dropdown-menu-avatar.tsx",
+    sourcePath: "ui/components/dropdown-menu/avatar.tsx",
   },
   {
     id: "basic",
     title: "Basic",
     component: DropdownMenuBasic,
-    sourcePath: "ui/components/dropdown-menu-basic.tsx",
+    sourcePath: "ui/components/dropdown-menu/basic.tsx",
   },
   {
     id: "checkboxes-icons",
     title: "Checkboxes Icons",
     component: DropdownMenuCheckboxesIcons,
-    sourcePath: "ui/components/dropdown-menu-checkboxes-icons.tsx",
+    sourcePath: "ui/components/dropdown-menu/checkboxes-icons.tsx",
   },
   {
     id: "checkboxes",
     title: "Checkboxes",
     component: DropdownMenuCheckboxes,
-    sourcePath: "ui/components/dropdown-menu-checkboxes.tsx",
+    sourcePath: "ui/components/dropdown-menu/checkboxes.tsx",
   },
   {
     id: "complex",
     title: "Complex",
     component: DropdownMenuComplex,
-    sourcePath: "ui/components/dropdown-menu-complex.tsx",
+    sourcePath: "ui/components/dropdown-menu/complex.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: DropdownMenuDemo,
-    sourcePath: "ui/components/dropdown-menu-demo.tsx",
+    sourcePath: "ui/components/dropdown-menu/demo.tsx",
   },
   {
     id: "destructive",
     title: "Destructive",
     component: DropdownMenuDestructive,
-    sourcePath: "ui/components/dropdown-menu-destructive.tsx",
+    sourcePath: "ui/components/dropdown-menu/destructive.tsx",
   },
   {
     id: "icons",
     title: "Icons",
     component: DropdownMenuIcons,
-    sourcePath: "ui/components/dropdown-menu-icons.tsx",
+    sourcePath: "ui/components/dropdown-menu/icons.tsx",
   },
   {
     id: "radio-group",
     title: "Radio Group",
     component: DropdownMenuRadioGroupDemo,
-    sourcePath: "ui/components/dropdown-menu-radio-group.tsx",
+    sourcePath: "ui/components/dropdown-menu/radio-group.tsx",
   },
   {
     id: "radio-icons",
     title: "Radio Icons",
     component: DropdownMenuRadioIcons,
-    sourcePath: "ui/components/dropdown-menu-radio-icons.tsx",
+    sourcePath: "ui/components/dropdown-menu/radio-icons.tsx",
   },
   {
     id: "shortcuts",
     title: "Shortcuts",
     component: DropdownMenuShortcuts,
-    sourcePath: "ui/components/dropdown-menu-shortcuts.tsx",
+    sourcePath: "ui/components/dropdown-menu/shortcuts.tsx",
   },
   {
     id: "submenu",
     title: "Submenu",
     component: DropdownMenuSubmenu,
-    sourcePath: "ui/components/dropdown-menu-submenu.tsx",
+    sourcePath: "ui/components/dropdown-menu/submenu.tsx",
   },
 ] as const
 

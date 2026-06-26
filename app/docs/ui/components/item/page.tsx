@@ -4,77 +4,77 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import ItemAvatar from "@/ui/components/item-avatar"
-import ItemDemo from "@/ui/components/item-demo"
-import ItemDropdown from "@/ui/components/item-dropdown"
-import ItemGroupExample from "@/ui/components/item-group"
-import ItemHeaderDemo from "@/ui/components/item-header"
-import ItemIcon from "@/ui/components/item-icon"
-import ItemImage from "@/ui/components/item-image"
-import ItemLink from "@/ui/components/item-link"
-import ItemSizeDemo from "@/ui/components/item-size"
-import ItemVariant from "@/ui/components/item-variant"
+import ItemAvatar from "@/ui/components/item/avatar"
+import ItemDemo from "@/ui/components/item/demo"
+import ItemDropdown from "@/ui/components/item/dropdown"
+import ItemGroupExample from "@/ui/components/item/group"
+import ItemHeaderDemo from "@/ui/components/item/header"
+import ItemIcon from "@/ui/components/item/icon"
+import ItemImage from "@/ui/components/item/image"
+import ItemLink from "@/ui/components/item/link"
+import ItemSizeDemo from "@/ui/components/item/size"
+import ItemVariant from "@/ui/components/item/variant"
 
 const examples = [
   {
     id: "avatar",
     title: "Avatar",
     component: ItemAvatar,
-    sourcePath: "ui/components/item-avatar.tsx",
+    sourcePath: "ui/components/item/avatar.tsx",
   },
   {
     id: "demo",
     title: "Demo",
     component: ItemDemo,
-    sourcePath: "ui/components/item-demo.tsx",
+    sourcePath: "ui/components/item/demo.tsx",
   },
   {
     id: "dropdown",
     title: "Dropdown",
     component: ItemDropdown,
-    sourcePath: "ui/components/item-dropdown.tsx",
+    sourcePath: "ui/components/item/dropdown.tsx",
   },
   {
     id: "group",
     title: "Group",
     component: ItemGroupExample,
-    sourcePath: "ui/components/item-group.tsx",
+    sourcePath: "ui/components/item/group.tsx",
   },
   {
     id: "header",
     title: "Header",
     component: ItemHeaderDemo,
-    sourcePath: "ui/components/item-header.tsx",
+    sourcePath: "ui/components/item/header.tsx",
   },
   {
     id: "icon",
     title: "Icon",
     component: ItemIcon,
-    sourcePath: "ui/components/item-icon.tsx",
+    sourcePath: "ui/components/item/icon.tsx",
   },
   {
     id: "image",
     title: "Image",
     component: ItemImage,
-    sourcePath: "ui/components/item-image.tsx",
+    sourcePath: "ui/components/item/image.tsx",
   },
   {
     id: "link",
     title: "Link",
     component: ItemLink,
-    sourcePath: "ui/components/item-link.tsx",
+    sourcePath: "ui/components/item/link.tsx",
   },
   {
     id: "size",
     title: "Size",
     component: ItemSizeDemo,
-    sourcePath: "ui/components/item-size.tsx",
+    sourcePath: "ui/components/item/size.tsx",
   },
   {
     id: "variant",
     title: "Variant",
     component: ItemVariant,
-    sourcePath: "ui/components/item-variant.tsx",
+    sourcePath: "ui/components/item/variant.tsx",
   },
 ] as const
 

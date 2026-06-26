@@ -4,14 +4,14 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import LabelDemo from "@/ui/components/label-demo"
+import LabelDemo from "@/ui/components/label/demo"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: LabelDemo,
-    sourcePath: "ui/components/label-demo.tsx",
+    sourcePath: "ui/components/label/demo.tsx",
   },
 ] as const
 

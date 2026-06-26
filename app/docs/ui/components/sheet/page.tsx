@@ -4,28 +4,28 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import SheetDemo from "@/ui/components/sheet-demo"
-import SheetNoCloseButton from "@/ui/components/sheet-no-close-button"
-import SheetSide from "@/ui/components/sheet-side"
+import SheetDemo from "@/ui/components/sheet/demo"
+import SheetNoCloseButton from "@/ui/components/sheet/no-close-button"
+import SheetSide from "@/ui/components/sheet/side"
 
 const examples = [
   {
     id: "demo",
     title: "Demo",
     component: SheetDemo,
-    sourcePath: "ui/components/sheet-demo.tsx",
+    sourcePath: "ui/components/sheet/demo.tsx",
   },
   {
     id: "no-close-button",
     title: "No Close Button",
     component: SheetNoCloseButton,
-    sourcePath: "ui/components/sheet-no-close-button.tsx",
+    sourcePath: "ui/components/sheet/no-close-button.tsx",
   },
   {
     id: "side",
     title: "Side",
     component: SheetSide,
-    sourcePath: "ui/components/sheet-side.tsx",
+    sourcePath: "ui/components/sheet/side.tsx",
   },
 ] as const
 

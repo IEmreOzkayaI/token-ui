@@ -4,14 +4,14 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import ChartTooltipDemo from "@/ui/components/chart-tooltip"
+import ChartTooltipDemo from "@/ui/components/chart/tooltip"
 
 const examples = [
   {
     id: "tooltip",
     title: "Tooltip",
     component: ChartTooltipDemo,
-    sourcePath: "ui/components/chart-tooltip.tsx",
+    sourcePath: "ui/components/chart/tooltip.tsx",
   },
 ] as const
 
