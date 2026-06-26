@@ -1,243 +1,99 @@
 "use client"
 
-import { Copy, Check, AlertCircle, XCircle, InfoIcon } from "lucide-react"
-import { useState } from "react"
+import { Ualert } from "@/primitives/alert"
 import { Card } from "@/primitives/card"
-import { Alert, AlertTitle, AlertDescription, AlertAction } from "@/primitives/alert"
-import { Button } from "@/primitives/button"
+import { Copy, Check } from "lucide-react"
+import { useState } from "react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
+  const lines = children.split("\n")
+
   return (
-    <div className="relative">
+    <div className="relative group">
       <button
         onClick={() => {
           navigator.clipboard.writeText(children)
           setCopied(true)
           setTimeout(() => setCopied(false), 2000)
         }}
-        className="absolute top-2 right-2 p-2 rounded-lg hover:bg-muted transition-colors"
+        className="absolute top-3 right-3 p-2 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors z-10"
       >
-        {copied ? <Check className="size-4 text-green-600" /> : <Copy className="size-4" />}
+        {copied ? (
+          <Check className="size-4 text-green-500" />
+        ) : (
+          <Copy className="size-4" />
+        )}
       </button>
-      <Card className="p-4">
-        <pre className="text-sm overflow-x-auto font-mono pr-12">{children}</pre>
+      <Card className="p-4 bg-slate-950 text-slate-50 border-slate-800 overflow-hidden">
+        <pre className="text-sm overflow-x-auto font-mono">
+          <code>
+            {lines.map((line, i) => (
+              <div key={i} className="flex">
+                <span className="inline-block w-8 text-right pr-4 text-slate-600 select-none">{i + 1}</span>
+                <span>{line}</span>
+              </div>
+            ))}
+          </code>
+        </pre>
       </Card>
     </div>
   )
 }
 
-function Preview({ children }: { children: React.ReactNode }) {
+export default function UalertPage() {
   return (
-    <Card className="p-6 border-dashed space-y-4">
-      {children}
-    </Card>
-  )
-}
-
-export default function AlertPage() {
-  return (
-    <div className="space-y-8">
-      <section className="space-y-4">
-        <h1 className="text-4xl font-bold">Alert</h1>
-        <p className="text-lg text-muted-foreground">
-          Displays callout for user attention.
-        </p>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import {
-  Alert,
-  AlertTitle,
-  AlertDescription,
-  AlertAction,
-} from "@/primitives/alert"`}</CodeBlock>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Usage</h2>
-        <Preview>
-          <Alert>
-            <AlertCircle className="size-4" />
-            <AlertTitle>Heads up!</AlertTitle>
-            <AlertDescription>
-              You can add components to your project using the CLI.
-            </AlertDescription>
-          </Alert>
-        </Preview>
-        <CodeBlock>{`<Alert>
-  <AlertCircle className="size-4" />
-  <AlertTitle>Heads up!</AlertTitle>
-  <AlertDescription>
-    You can add components to your project using the CLI.
-  </AlertDescription>
-</Alert>`}</CodeBlock>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Examples</h2>
-
-        <div className="space-y-6">
-          <div>
-            <h3 className="font-semibold mb-3">Default</h3>
-            <Preview>
-              <Alert>
-                <InfoIcon className="size-4" />
-                <AlertTitle>Information</AlertTitle>
-                <AlertDescription>
-                  This is an informational alert message.
-                </AlertDescription>
-              </Alert>
-            </Preview>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-3">Destructive</h3>
-            <Preview>
-              <Alert variant="destructive">
-                <XCircle className="size-4" />
-                <AlertTitle>Error</AlertTitle>
-                <AlertDescription>
-                  An error occurred while processing your request.
-                </AlertDescription>
-              </Alert>
-            </Preview>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-3">With Action</h3>
-            <Preview>
-              <Alert>
-                <AlertCircle className="size-4" />
-                <AlertTitle>Update Available</AlertTitle>
-                <AlertDescription>
-                  New version available. Update now to get latest features.
-                </AlertDescription>
-                <AlertAction>
-                  <Button size="sm" variant="outline">Update</Button>
-                </AlertAction>
-              </Alert>
-            </Preview>
-            <CodeBlock>{`<Alert>
-  <AlertCircle className="size-4" />
-  <AlertTitle>Update Available</AlertTitle>
-  <AlertDescription>
-    New version available.
-  </AlertDescription>
-  <AlertAction>
-    <Button size="sm" variant="outline">Update</Button>
-  </AlertAction>
-</Alert>`}</CodeBlock>
-          </div>
+    <div className="flex gap-12">
+      <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
+        <div className="space-y-2">
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li><a href="#usage" className="hover:text-foreground">Usage</a></li>
+            <li><a href="#installation" className="hover:text-foreground">Installation</a></li>
+          </ul>
         </div>
-      </section>
+      </div>
 
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Composition</h2>
-        <Card className="p-4">
-          <pre className="text-sm font-mono">{`Alert
-├── Icon (optional)
-├── AlertTitle
-├── AlertDescription
-└── AlertAction (optional)`}</pre>
-        </Card>
-      </section>
+      <div className="flex-1 max-w-2xl space-y-8">
+        <section className="space-y-4">
+          <h1 className="text-5xl font-bold tracking-tight">Ualert</h1>
+          <p className="text-lg text-muted-foreground">
+            Component documentation and examples.
+          </p>
+        </section>
 
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">API Reference</h2>
+        <section id="usage" className="space-y-4">
+          <h2 className="text-2xl font-bold">Usage</h2>
+          <Tabs defaultValue="code">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="preview">Preview</TabsTrigger>
+              <TabsTrigger value="code">Code</TabsTrigger>
+            </TabsList>
+            <TabsContent value="preview">
+              <Card className="p-8 min-h-40 text-center text-muted-foreground">
+                Preview coming soon
+              </Card>
+            </TabsContent>
+            <TabsContent value="code">
+              <CodeBlock>{`import { Ualert } from "@/primitives/alert"
 
-        <div className="space-y-6">
-          <div>
-            <h3 className="font-semibold mb-3">Alert</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left py-2 px-3 font-medium">Prop</th>
-                    <th className="text-left py-2 px-3 font-medium">Type</th>
-                    <th className="text-left py-2 px-3 font-medium">Default</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-border">
-                    <td className="py-2 px-3 font-mono text-xs">variant</td>
-                    <td className="py-2 px-3 text-xs">default | destructive</td>
-                    <td className="py-2 px-3 text-xs">default</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 px-3 font-mono text-xs">className</td>
-                    <td className="py-2 px-3 text-xs">string</td>
-                    <td className="py-2 px-3 text-xs">-</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+export function UalertDemo() {
+  return <Ualert />
+}`}</CodeBlock>
+            </TabsContent>
+          </Tabs>
+        </section>
 
-          <div>
-            <h3 className="font-semibold mb-3">AlertTitle</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left py-2 px-3 font-medium">Prop</th>
-                    <th className="text-left py-2 px-3 font-medium">Type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="py-2 px-3 font-mono text-xs">className</td>
-                    <td className="py-2 px-3 text-xs">string</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <section id="installation" className="space-y-4">
+          <h2 className="text-2xl font-bold">Installation</h2>
+          <CodeBlock>{`pnpm dlx shadcn@latest add alert`}</CodeBlock>
+        </section>
 
-          <div>
-            <h3 className="font-semibold mb-3">AlertDescription</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left py-2 px-3 font-medium">Prop</th>
-                    <th className="text-left py-2 px-3 font-medium">Type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="py-2 px-3 font-mono text-xs">className</td>
-                    <td className="py-2 px-3 text-xs">string</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-3">AlertAction</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left py-2 px-3 font-medium">Prop</th>
-                    <th className="text-left py-2 px-3 font-medium">Type</th>
-                    <th className="text-left py-2 px-3 font-medium">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="py-2 px-3 font-mono text-xs">className</td>
-                    <td className="py-2 px-3 text-xs">string</td>
-                    <td className="py-2 px-3 text-xs">Positioned top-right by default</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
+        <section className="flex items-center justify-between pt-8 border-t">
+          <div className="text-sm text-muted-foreground">Last updated: June 26, 2025</div>
+        </section>
+      </div>
     </div>
   )
 }

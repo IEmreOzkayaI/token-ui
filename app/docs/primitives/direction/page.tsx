@@ -1,56 +1,99 @@
 "use client"
 
+import { Udirection } from "@/primitives/direction"
+import { Card } from "@/primitives/card"
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/primitives/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
+  const lines = children.split("\n")
+
   return (
-    <div className="relative">
+    <div className="relative group">
       <button
         onClick={() => {
           navigator.clipboard.writeText(children)
           setCopied(true)
           setTimeout(() => setCopied(false), 2000)
         }}
-        className="absolute top-2 right-2 p-2 rounded-lg hover:bg-muted transition-colors"
+        className="absolute top-3 right-3 p-2 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors z-10"
       >
-        {copied ? <Check className="size-4 text-green-600" /> : <Copy className="size-4" />}
+        {copied ? (
+          <Check className="size-4 text-green-500" />
+        ) : (
+          <Copy className="size-4" />
+        )}
       </button>
-      <Card className="p-4">
-        <pre className="text-sm overflow-x-auto font-mono pr-12">{children}</pre>
+      <Card className="p-4 bg-slate-950 text-slate-50 border-slate-800 overflow-hidden">
+        <pre className="text-sm overflow-x-auto font-mono">
+          <code>
+            {lines.map((line, i) => (
+              <div key={i} className="flex">
+                <span className="inline-block w-8 text-right pr-4 text-slate-600 select-none">{i + 1}</span>
+                <span>{line}</span>
+              </div>
+            ))}
+          </code>
+        </pre>
       </Card>
     </div>
   )
 }
 
-export default function DirectionPage() {
+export default function UdirectionPage() {
   return (
-    <div className="space-y-8">
-      <section className="space-y-4">
-        <h1 className="text-4xl font-bold">Direction</h1>
-        <p className="text-lg text-muted-foreground">
-          Component for building user interfaces.
-        </p>
-      </section>
+    <div className="flex gap-12">
+      <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
+        <div className="space-y-2">
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li><a href="#usage" className="hover:text-foreground">Usage</a></li>
+            <li><a href="#installation" className="hover:text-foreground">Installation</a></li>
+          </ul>
+        </div>
+      </div>
 
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import { Direction } from "@/primitives/direction"`}</CodeBlock>
-      </section>
+      <div className="flex-1 max-w-2xl space-y-8">
+        <section className="space-y-4">
+          <h1 className="text-5xl font-bold tracking-tight">Udirection</h1>
+          <p className="text-lg text-muted-foreground">
+            Component documentation and examples.
+          </p>
+        </section>
 
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Usage</h2>
-        <CodeBlock>{`<Direction />`}</CodeBlock>
-      </section>
+        <section id="usage" className="space-y-4">
+          <h2 className="text-2xl font-bold">Usage</h2>
+          <Tabs defaultValue="code">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="preview">Preview</TabsTrigger>
+              <TabsTrigger value="code">Code</TabsTrigger>
+            </TabsList>
+            <TabsContent value="preview">
+              <Card className="p-8 min-h-40 text-center text-muted-foreground">
+                Preview coming soon
+              </Card>
+            </TabsContent>
+            <TabsContent value="code">
+              <CodeBlock>{`import { Udirection } from "@/primitives/direction"
 
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Documentation</h2>
-        <p className="text-muted-foreground">
-          See component API and examples. Customize via Tailwind or edit source directly.
-        </p>
-      </section>
+export function UdirectionDemo() {
+  return <Udirection />
+}`}</CodeBlock>
+            </TabsContent>
+          </Tabs>
+        </section>
+
+        <section id="installation" className="space-y-4">
+          <h2 className="text-2xl font-bold">Installation</h2>
+          <CodeBlock>{`pnpm dlx shadcn@latest add direction`}</CodeBlock>
+        </section>
+
+        <section className="flex items-center justify-between pt-8 border-t">
+          <div className="text-sm text-muted-foreground">Last updated: June 26, 2025</div>
+        </section>
+      </div>
     </div>
   )
 }

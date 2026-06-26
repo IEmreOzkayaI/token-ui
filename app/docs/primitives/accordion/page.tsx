@@ -1,266 +1,99 @@
 "use client"
 
+import { Uaccordion } from "@/primitives/accordion"
+import { Card } from "@/primitives/card"
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/primitives/card"
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/primitives/accordion"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
+  const lines = children.split("\n")
+
   return (
-    <div className="relative">
+    <div className="relative group">
       <button
         onClick={() => {
           navigator.clipboard.writeText(children)
           setCopied(true)
           setTimeout(() => setCopied(false), 2000)
         }}
-        className="absolute top-2 right-2 p-2 rounded-lg hover:bg-muted transition-colors"
+        className="absolute top-3 right-3 p-2 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors z-10"
       >
-        {copied ? <Check className="size-4 text-green-600" /> : <Copy className="size-4" />}
+        {copied ? (
+          <Check className="size-4 text-green-500" />
+        ) : (
+          <Copy className="size-4" />
+        )}
       </button>
-      <Card className="p-4">
-        <pre className="text-sm overflow-x-auto font-mono pr-12">{children}</pre>
+      <Card className="p-4 bg-slate-950 text-slate-50 border-slate-800 overflow-hidden">
+        <pre className="text-sm overflow-x-auto font-mono">
+          <code>
+            {lines.map((line, i) => (
+              <div key={i} className="flex">
+                <span className="inline-block w-8 text-right pr-4 text-slate-600 select-none">{i + 1}</span>
+                <span>{line}</span>
+              </div>
+            ))}
+          </code>
+        </pre>
       </Card>
     </div>
   )
 }
 
-function Preview({ children }: { children: React.ReactNode }) {
+export default function UaccordionPage() {
   return (
-    <Card className="p-6 border-dashed max-w-xl">
-      {children}
-    </Card>
-  )
-}
-
-export default function AccordionPage() {
-  return (
-    <div className="space-y-8">
-      <section className="space-y-4">
-        <h1 className="text-4xl font-bold">Accordion</h1>
-        <p className="text-lg text-muted-foreground">
-          Vertically stacked set of interactive headings revealing sections of content.
-        </p>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/primitives/accordion"`}</CodeBlock>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Usage</h2>
-        <Preview>
-          <Accordion type="single" collapsible defaultValue="item-1">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>Is it accessible?</AccordionTrigger>
-              <AccordionContent>
-                Yes. It adheres to WAI-ARIA design patterns.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </Preview>
-        <CodeBlock>{`<Accordion type="single" collapsible defaultValue="item-1">
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Is it accessible?</AccordionTrigger>
-    <AccordionContent>
-      Yes. It adheres to WAI-ARIA design patterns.
-    </AccordionContent>
-  </AccordionItem>
-</Accordion>`}</CodeBlock>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Composition</h2>
-        <Card className="p-4">
-          <pre className="text-sm font-mono">{`Accordion
-├── AccordionItem
-│   ├── AccordionTrigger
-│   └── AccordionContent
-└── AccordionItem
-    ├── AccordionTrigger
-    └── AccordionContent`}</pre>
-        </Card>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Examples</h2>
-
-        <div className="space-y-6">
-          <div>
-            <h3 className="font-semibold mb-3">Basic</h3>
-            <p className="text-sm text-muted-foreground mb-3">Single item open at a time (first open by default)</p>
-            <Preview>
-              <Accordion type="single" collapsible defaultValue="item-1">
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                  <AccordionContent>Yes. WAI-ARIA design pattern.</AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-2">
-                  <AccordionTrigger>Is it styled?</AccordionTrigger>
-                  <AccordionContent>Yes. With Tailwind CSS.</AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-3">
-                  <AccordionTrigger>Is it animated?</AccordionTrigger>
-                  <AccordionContent>Yes. Smooth expand/collapse.</AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </Preview>
-            <CodeBlock>{`<Accordion type="single" collapsible defaultValue="item-1">
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Is it accessible?</AccordionTrigger>
-    <AccordionContent>Yes. WAI-ARIA design pattern.</AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="item-2">
-    <AccordionTrigger>Is it styled?</AccordionTrigger>
-    <AccordionContent>Yes. With Tailwind CSS.</AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="item-3">
-    <AccordionTrigger>Is it animated?</AccordionTrigger>
-    <AccordionContent>Yes. Smooth expand/collapse.</AccordionContent>
-  </AccordionItem>
-</Accordion>`}</CodeBlock>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-3">Multiple</h3>
-            <p className="text-sm text-muted-foreground mb-3">Multiple items open simultaneously</p>
-            <Preview>
-              <Accordion type="multiple">
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>Feature A</AccordionTrigger>
-                  <AccordionContent>Multiple items can be open.</AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-2">
-                  <AccordionTrigger>Feature B</AccordionTrigger>
-                  <AccordionContent>Expand any combination.</AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-3">
-                  <AccordionTrigger>Feature C</AccordionTrigger>
-                  <AccordionContent>No auto-collapse needed.</AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </Preview>
-            <CodeBlock>{`<Accordion type="multiple">
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Feature A</AccordionTrigger>
-    <AccordionContent>Content A</AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="item-2">
-    <AccordionTrigger>Feature B</AccordionTrigger>
-    <AccordionContent>Content B</AccordionContent>
-  </AccordionItem>
-</Accordion>`}</CodeBlock>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-3">Disabled Item</h3>
-            <p className="text-sm text-muted-foreground mb-3">Individual items can be disabled</p>
-            <Preview>
-              <Accordion type="single" collapsible>
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>Enabled</AccordionTrigger>
-                  <AccordionContent>This item works normally.</AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-2" disabled>
-                  <AccordionTrigger>Disabled</AccordionTrigger>
-                  <AccordionContent>This item is disabled.</AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </Preview>
-            <CodeBlock>{`<Accordion type="single">
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Enabled</AccordionTrigger>
-    <AccordionContent>Works normally</AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="item-2" disabled>
-    <AccordionTrigger>Disabled</AccordionTrigger>
-    <AccordionContent>Cannot open</AccordionContent>
-  </AccordionItem>
-</Accordion>`}</CodeBlock>
-          </div>
+    <div className="flex gap-12">
+      <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
+        <div className="space-y-2">
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li><a href="#usage" className="hover:text-foreground">Usage</a></li>
+            <li><a href="#installation" className="hover:text-foreground">Installation</a></li>
+          </ul>
         </div>
-      </section>
+      </div>
 
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">API Reference</h2>
+      <div className="flex-1 max-w-2xl space-y-8">
+        <section className="space-y-4">
+          <h1 className="text-5xl font-bold tracking-tight">Uaccordion</h1>
+          <p className="text-lg text-muted-foreground">
+            Component documentation and examples.
+          </p>
+        </section>
 
-        <div className="space-y-6">
-          <div>
-            <h3 className="font-semibold mb-3">Accordion</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left py-2 px-3 font-medium">Prop</th>
-                    <th className="text-left py-2 px-3 font-medium">Type</th>
-                    <th className="text-left py-2 px-3 font-medium">Default</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-border">
-                    <td className="py-2 px-3 font-mono text-xs">type</td>
-                    <td className="py-2 px-3 text-xs">single | multiple</td>
-                    <td className="py-2 px-3 text-xs">-</td>
-                  </tr>
-                  <tr className="border-b border-border">
-                    <td className="py-2 px-3 font-mono text-xs">collapsible</td>
-                    <td className="py-2 px-3 text-xs">boolean</td>
-                    <td className="py-2 px-3 text-xs">false</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 px-3 font-mono text-xs">defaultValue</td>
-                    <td className="py-2 px-3 text-xs">string | string[]</td>
-                    <td className="py-2 px-3 text-xs">-</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <section id="usage" className="space-y-4">
+          <h2 className="text-2xl font-bold">Usage</h2>
+          <Tabs defaultValue="code">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="preview">Preview</TabsTrigger>
+              <TabsTrigger value="code">Code</TabsTrigger>
+            </TabsList>
+            <TabsContent value="preview">
+              <Card className="p-8 min-h-40 text-center text-muted-foreground">
+                Preview coming soon
+              </Card>
+            </TabsContent>
+            <TabsContent value="code">
+              <CodeBlock>{`import { Uaccordion } from "@/primitives/accordion"
 
-          <div>
-            <h3 className="font-semibold mb-3">AccordionItem</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left py-2 px-3 font-medium">Prop</th>
-                    <th className="text-left py-2 px-3 font-medium">Type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-border">
-                    <td className="py-2 px-3 font-mono text-xs">value</td>
-                    <td className="py-2 px-3 text-xs">string (required)</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 px-3 font-mono text-xs">disabled</td>
-                    <td className="py-2 px-3 text-xs">boolean</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+export function UaccordionDemo() {
+  return <Uaccordion />
+}`}</CodeBlock>
+            </TabsContent>
+          </Tabs>
+        </section>
 
-          <div>
-            <h3 className="font-semibold mb-3">AccordionTrigger & AccordionContent</h3>
-            <p className="text-sm text-muted-foreground">
-              Accept standard HTML element props (className, etc.)
-            </p>
-          </div>
-        </div>
-      </section>
+        <section id="installation" className="space-y-4">
+          <h2 className="text-2xl font-bold">Installation</h2>
+          <CodeBlock>{`pnpm dlx shadcn@latest add accordion`}</CodeBlock>
+        </section>
+
+        <section className="flex items-center justify-between pt-8 border-t">
+          <div className="text-sm text-muted-foreground">Last updated: June 26, 2025</div>
+        </section>
+      </div>
     </div>
   )
 }

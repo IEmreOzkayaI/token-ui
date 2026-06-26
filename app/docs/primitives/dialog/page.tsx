@@ -1,312 +1,99 @@
 "use client"
 
+import { Udialog } from "@/primitives/dialog"
+import { Card } from "@/primitives/card"
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/primitives/card"
-import { Button } from "@/primitives/button"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-  DialogClose,
-} from "@/primitives/dialog"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
+  const lines = children.split("\n")
+
   return (
-    <div className="relative">
+    <div className="relative group">
       <button
         onClick={() => {
           navigator.clipboard.writeText(children)
           setCopied(true)
           setTimeout(() => setCopied(false), 2000)
         }}
-        className="absolute top-2 right-2 p-2 rounded-lg hover:bg-muted transition-colors"
+        className="absolute top-3 right-3 p-2 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors z-10"
       >
-        {copied ? <Check className="size-4 text-green-600" /> : <Copy className="size-4" />}
+        {copied ? (
+          <Check className="size-4 text-green-500" />
+        ) : (
+          <Copy className="size-4" />
+        )}
       </button>
-      <Card className="p-4">
-        <pre className="text-sm overflow-x-auto font-mono pr-12">{children}</pre>
+      <Card className="p-4 bg-slate-950 text-slate-50 border-slate-800 overflow-hidden">
+        <pre className="text-sm overflow-x-auto font-mono">
+          <code>
+            {lines.map((line, i) => (
+              <div key={i} className="flex">
+                <span className="inline-block w-8 text-right pr-4 text-slate-600 select-none">{i + 1}</span>
+                <span>{line}</span>
+              </div>
+            ))}
+          </code>
+        </pre>
       </Card>
     </div>
   )
 }
 
-function Preview({ children }: { children: React.ReactNode }) {
+export default function UdialogPage() {
   return (
-    <Card className="p-6 border-dashed flex items-center justify-center min-h-24">
-      {children}
-    </Card>
-  )
-}
-
-export default function DialogPage() {
-  const [open, setOpen] = useState(false)
-  const [open2, setOpen2] = useState(false)
-
-  return (
-    <div className="space-y-8">
-      <section className="space-y-4">
-        <h1 className="text-4xl font-bold">Dialog</h1>
-        <p className="text-lg text-muted-foreground">
-          Modal dialog component for user interactions.
-        </p>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogClose,
-} from "@/primitives/dialog"`}</CodeBlock>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Usage</h2>
-        <Preview>
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-              <Button>Open Dialog</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Dialog Title</DialogTitle>
-                <DialogDescription>
-                  Dialog description goes here.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="py-4">
-                <p>Dialog content</p>
-              </div>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant="outline">Close</Button>
-                </DialogClose>
-                <Button>Save</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </Preview>
-        <CodeBlock>{`<Dialog>
-  <DialogTrigger asChild>
-    <Button>Open Dialog</Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Dialog Title</DialogTitle>
-      <DialogDescription>
-        Dialog description
-      </DialogDescription>
-    </DialogHeader>
-    <div className="py-4">Content</div>
-    <DialogFooter>
-      <Button>Save</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`}</CodeBlock>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Composition</h2>
-        <Card className="p-4">
-          <pre className="text-sm font-mono">{`Dialog
-├── DialogTrigger
-└── DialogContent
-    ├── DialogHeader
-    │   ├── DialogTitle
-    │   └── DialogDescription
-    ├── (content)
-    └── DialogFooter`}</pre>
-        </Card>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">Examples</h2>
-
-        <div className="space-y-6">
-          <div>
-            <h3 className="font-semibold mb-3">Basic</h3>
-            <Preview>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button>Open Dialog</Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Confirm Action</DialogTitle>
-                    <DialogDescription>
-                      Are you sure?
-                    </DialogDescription>
-                  </DialogHeader>
-                  <DialogFooter>
-                    <DialogClose asChild>
-                      <Button variant="outline">Cancel</Button>
-                    </DialogClose>
-                    <Button>Confirm</Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-            </Preview>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-3">With Form</h3>
-            <Preview>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button>Edit Profile</Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-sm">
-                  <DialogHeader>
-                    <DialogTitle>Edit Profile</DialogTitle>
-                    <DialogDescription>
-                      Update your profile information
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="space-y-4">
-                    <input type="text" placeholder="Name" className="w-full px-3 py-2 border border-border rounded-lg text-sm" />
-                    <input type="email" placeholder="Email" className="w-full px-3 py-2 border border-border rounded-lg text-sm" />
-                  </div>
-                  <DialogFooter>
-                    <DialogClose asChild>
-                      <Button variant="outline">Cancel</Button>
-                    </DialogClose>
-                    <Button>Save Changes</Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-            </Preview>
-            <CodeBlock>{`<Dialog>
-  <DialogTrigger asChild>
-    <Button>Edit Profile</Button>
-  </DialogTrigger>
-  <DialogContent className="max-w-sm">
-    <DialogHeader>
-      <DialogTitle>Edit Profile</DialogTitle>
-      <DialogDescription>Update info</DialogDescription>
-    </DialogHeader>
-    <div className="space-y-4">
-      <input type="text" placeholder="Name" />
-      <input type="email" placeholder="Email" />
-    </div>
-    <DialogFooter>
-      <Button>Save</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`}</CodeBlock>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-3">Controlled</h3>
-            <p className="text-sm text-muted-foreground mb-3">Using state to control open/close</p>
-            <Preview>
-              <Dialog open={open2} onOpenChange={setOpen2}>
-                <DialogTrigger asChild>
-                  <Button>Controlled Dialog</Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Controlled State</DialogTitle>
-                  </DialogHeader>
-                  <p className="text-sm">State managed via useState hook</p>
-                  <DialogFooter>
-                    <Button onClick={() => setOpen2(false)}>
-                      Close
-                    </Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-            </Preview>
-            <CodeBlock>{`const [open, setOpen] = useState(false)
-
-<Dialog open={open} onOpenChange={setOpen}>
-  <DialogTrigger asChild>
-    <Button>Open</Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Controlled Dialog</DialogTitle>
-    </DialogHeader>
-    <DialogFooter>
-      <Button onClick={() => setOpen(false)}>
-        Close
-      </Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`}</CodeBlock>
-          </div>
+    <div className="flex gap-12">
+      <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
+        <div className="space-y-2">
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li><a href="#usage" className="hover:text-foreground">Usage</a></li>
+            <li><a href="#installation" className="hover:text-foreground">Installation</a></li>
+          </ul>
         </div>
-      </section>
+      </div>
 
-      <section className="space-y-4">
-        <h2 className="text-2xl font-bold">API Reference</h2>
+      <div className="flex-1 max-w-2xl space-y-8">
+        <section className="space-y-4">
+          <h1 className="text-5xl font-bold tracking-tight">Udialog</h1>
+          <p className="text-lg text-muted-foreground">
+            Component documentation and examples.
+          </p>
+        </section>
 
-        <div className="space-y-6">
-          <div>
-            <h3 className="font-semibold mb-3">Dialog</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left py-2 px-3 font-medium">Prop</th>
-                    <th className="text-left py-2 px-3 font-medium">Type</th>
-                    <th className="text-left py-2 px-3 font-medium">Default</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-border">
-                    <td className="py-2 px-3 font-mono text-xs">open</td>
-                    <td className="py-2 px-3 text-xs">boolean</td>
-                    <td className="py-2 px-3 text-xs">-</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 px-3 font-mono text-xs">onOpenChange</td>
-                    <td className="py-2 px-3 text-xs">(open: boolean) =&gt; void</td>
-                    <td className="py-2 px-3 text-xs">-</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <section id="usage" className="space-y-4">
+          <h2 className="text-2xl font-bold">Usage</h2>
+          <Tabs defaultValue="code">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="preview">Preview</TabsTrigger>
+              <TabsTrigger value="code">Code</TabsTrigger>
+            </TabsList>
+            <TabsContent value="preview">
+              <Card className="p-8 min-h-40 text-center text-muted-foreground">
+                Preview coming soon
+              </Card>
+            </TabsContent>
+            <TabsContent value="code">
+              <CodeBlock>{`import { Udialog } from "@/primitives/dialog"
 
-          <div>
-            <h3 className="font-semibold mb-3">DialogContent</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left py-2 px-3 font-medium">Prop</th>
-                    <th className="text-left py-2 px-3 font-medium">Type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="py-2 px-3 font-mono text-xs">className</td>
-                    <td className="py-2 px-3 text-xs">string</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+export function UdialogDemo() {
+  return <Udialog />
+}`}</CodeBlock>
+            </TabsContent>
+          </Tabs>
+        </section>
 
-          <div>
-            <h3 className="font-semibold mb-3">Other Components</h3>
-            <p className="text-sm text-muted-foreground">
-              DialogTrigger, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose accept standard HTML props.
-            </p>
-          </div>
-        </div>
-      </section>
+        <section id="installation" className="space-y-4">
+          <h2 className="text-2xl font-bold">Installation</h2>
+          <CodeBlock>{`pnpm dlx shadcn@latest add dialog`}</CodeBlock>
+        </section>
+
+        <section className="flex items-center justify-between pt-8 border-t">
+          <div className="text-sm text-muted-foreground">Last updated: June 26, 2025</div>
+        </section>
+      </div>
     </div>
   )
 }
