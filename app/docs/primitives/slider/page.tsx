@@ -1,82 +1,75 @@
-"use client"
+import { ComponentExample } from "@/app/docs/_components/component-example"
+import { readSource } from "@/app/docs/_lib/read-source"
+import { SliderControlled } from "@/ui/components/slider-controlled"
+import { SliderDemo } from "@/ui/components/slider-demo"
+import { SliderDisabled } from "@/ui/components/slider-disabled"
+import { SliderMultiple } from "@/ui/components/slider-multiple"
+import { SliderRange } from "@/ui/components/slider-range"
+import { SliderVertical } from "@/ui/components/slider-vertical"
 
-import { Card } from "@/primitives/card"
-import { Copy, Check } from "lucide-react"
-import { useState } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
+const examples = [
+  {
+    title: "Slider Controlled",
+    component: SliderControlled,
+    sourcePath: "ui/components/slider-controlled.tsx",
+  },
+  {
+    title: "Slider Demo",
+    component: SliderDemo,
+    sourcePath: "ui/components/slider-demo.tsx",
+  },
+  {
+    title: "Slider Disabled",
+    component: SliderDisabled,
+    sourcePath: "ui/components/slider-disabled.tsx",
+  },
+  {
+    title: "Slider Multiple",
+    component: SliderMultiple,
+    sourcePath: "ui/components/slider-multiple.tsx",
+  },
+  {
+    title: "Slider Range",
+    component: SliderRange,
+    sourcePath: "ui/components/slider-range.tsx",
+  },
+  {
+    title: "Slider Vertical",
+    component: SliderVertical,
+    sourcePath: "ui/components/slider-vertical.tsx",
+  },
+] as const
 
-function CodeBlock({ children }: { children: string }) {
-  const [copied, setCopied] = useState(false)
-  const lines = children.split("\n")
-
-  return (
-    <div className="relative group">
-      <button
-        onClick={() => {
-          navigator.clipboard.writeText(children)
-          setCopied(true)
-          setTimeout(() => setCopied(false), 2000)
-        }}
-        className="absolute top-3 right-3 p-2 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors z-10"
-      >
-        {copied ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
-      </button>
-      <Card className="p-4 bg-slate-950 text-slate-50 border-slate-800 overflow-hidden">
-        <pre className="text-sm overflow-x-auto font-mono">
-          <code>
-            {lines.map((line, i) => (
-              <div key={i} className="flex">
-                <span className="inline-block w-8 text-right pr-4 text-slate-600 select-none">{i + 1}</span>
-                <span>{line}</span>
-              </div>
-            ))}
-          </code>
-        </pre>
-      </Card>
-    </div>
-  )
-}
-
-function Preview({ children }: { children: React.ReactNode }) {
-  return (
-    <Card className="p-8 border bg-white flex items-center justify-center min-h-48 rounded-lg">
-      {children}
-    </Card>
-  )
-}
-
-export default function UsliderPage() {
+export default function SliderPage() {
   return (
     <div className="flex gap-12">
-      <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
-        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
+      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
+        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+          On This Page
+        </h3>
       </div>
 
-      <div className="flex-1 max-w-2xl space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Uslider</h1>
-        <p className="text-lg text-muted-foreground">Uslider component with live examples from ui/components/slider-*.tsx</p>
+      <div className="max-w-2xl flex-1 space-y-8">
+        <h1 className="text-5xl font-bold tracking-tight">Slider</h1>
+        <p className="text-lg text-muted-foreground">
+          Slider component — {examples.length} examples rendered live with source code
+        </p>
 
-        <Tabs defaultValue="preview">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="preview">Preview</TabsTrigger>
-            <TabsTrigger value="code">Code</TabsTrigger>
-          </TabsList>
-          <TabsContent value="preview">
-            <Preview>
-              <div className="text-center text-muted-foreground py-8">
-                Live component preview — see code tab for import details
-              </div>
-            </Preview>
-          </TabsContent>
-          <TabsContent value="code">
-            <CodeBlock>{`// Example: ui/components/slider-basic.tsx
-import { Component } from "@/primitives/slider"
+        <div className="flex flex-col gap-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-export function UsliderExample() {
-  return <Component />
-}`}</CodeBlock>
-          </TabsContent>
-        </Tabs>
+            return (
+              <ComponentExample
+                key={example.sourcePath}
+                title={example.title}
+                source={readSource(example.sourcePath)}
+              >
+                <Component />
+              </ComponentExample>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

@@ -1,83 +1,131 @@
-"use client"
+import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
+import { readSource } from "@/app/docs/_lib/read-source"
+import AccordionBasic from "@/ui/components/accordion-basic"
+import AccordionBorders from "@/ui/components/accordion-borders"
+import AccordionCard from "@/ui/components/accordion-card"
+import AccordionDemo from "@/ui/components/accordion-demo"
+import AccordionDisabled from "@/ui/components/accordion-disabled"
+import AccordionMultiple from "@/ui/components/accordion-multiple"
 
-import { Card } from "@/primitives/card"
-import { Copy, Check } from "lucide-react"
-import { useState } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
+const accordionExamples = [
+  {
+    id: "basic",
+    title: "Basic",
+    description:
+      "A simple accordion that only shows one item at a time. The first item is open by default.",
+    component: AccordionBasic,
+    sourcePath: "ui/components/accordion-basic.tsx",
+  },
+  {
+    id: "demo",
+    title: "Demo",
+    description:
+      "A single collapsible accordion with shipping, returns, and support FAQ items.",
+    component: AccordionDemo,
+    sourcePath: "ui/components/accordion-demo.tsx",
+  },
+  {
+    id: "card",
+    title: "Card",
+    description:
+      "An accordion nested inside a card for subscription and billing questions.",
+    component: AccordionCard,
+    sourcePath: "ui/components/accordion-card.tsx",
+  },
+  {
+    id: "borders",
+    title: "Borders",
+    description:
+      "An accordion wrapped in a rounded border with padded items.",
+    component: AccordionBorders,
+    sourcePath: "ui/components/accordion-borders.tsx",
+  },
+  {
+    id: "disabled",
+    title: "Disabled",
+    description: (
+      <>
+        Use the <code>disabled</code> prop on <code>AccordionItem</code> to
+        disable individual items.
+      </>
+    ),
+    component: AccordionDisabled,
+    sourcePath: "ui/components/accordion-disabled.tsx",
+  },
+  {
+    id: "multiple",
+    title: "Multiple",
+    description:
+      "Set type to multiple to allow more than one item to be open at the same time.",
+    component: AccordionMultiple,
+    sourcePath: "ui/components/accordion-multiple.tsx",
+  },
+] as const
 
-function CodeBlock({ children }: { children: string }) {
-  const [copied, setCopied] = useState(false)
-  const lines = children.split("\n")
+const toc = [
+  { id: "installation", title: "Installation" },
+  { id: "usage", title: "Usage" },
+  ...accordionExamples.map((example) => ({
+    id: example.id,
+    title: example.title,
+  })),
+]
 
+export default function AccordionPage() {
   return (
-    <div className="relative group">
-      <button
-        onClick={() => {
-          navigator.clipboard.writeText(children)
-          setCopied(true)
-          setTimeout(() => setCopied(false), 2000)
-        }}
-        className="absolute top-3 right-3 p-2 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors z-10"
+    <DocsPage toc={toc}>
+      <DocsPageHeader
+        title="Accordion"
+        description="A vertically stacked set of interactive headings that each reveal a section of content."
+      />
+
+      <DocsSection
+        id="installation"
+        title="Installation"
+        description="Add the accordion primitive to your project."
       >
-        {copied ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
-      </button>
-      <Card className="p-4 bg-slate-950 text-slate-50 border-slate-800 overflow-hidden">
-        <pre className="text-sm overflow-x-auto font-mono">
-          <code>
-            {lines.map((line, i) => (
-              <div key={i} className="flex">
-                <span className="inline-block w-8 text-right pr-4 text-slate-600 select-none">{i + 1}</span>
-                <span>{line}</span>
-              </div>
-            ))}
-          </code>
-        </pre>
-      </Card>
-    </div>
-  )
-}
+        <CodeBlock code="pnpm dlx shadcn@latest add accordion" />
+      </DocsSection>
 
-function Preview({ children }: { children: React.ReactNode }) {
-  return (
-    <Card className="p-8 border bg-white flex items-center justify-center min-h-48 rounded-lg">
-      {children}
-    </Card>
-  )
-}
+      <DocsSection
+        id="usage"
+        title="Usage"
+        description="Import the accordion parts and compose them together."
+      >
+        <CodeBlock
+          code={`import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/primitives/accordion"`}
+        />
+      </DocsSection>
 
-export default function UaccordionPage() {
-  return (
-    <div className="flex gap-12">
-      <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
-        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
+      <div className="space-y-10">
+        {accordionExamples.map((example) => {
+          const Component = example.component
+
+          return (
+            <DocsSection
+              key={example.id}
+              id={example.id}
+              title={example.title}
+            >
+              <ComponentExample
+                description={example.description}
+                source={readSource(example.sourcePath)}
+              >
+                <Component />
+              </ComponentExample>
+            </DocsSection>
+          )
+        })}
       </div>
-
-      <div className="flex-1 max-w-2xl space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Uaccordion</h1>
-        <p className="text-lg text-muted-foreground">Uaccordion component with live examples from ui/components/accordion-*.tsx</p>
-
-        <Tabs defaultValue="preview">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="preview">Preview</TabsTrigger>
-            <TabsTrigger value="code">Code</TabsTrigger>
-          </TabsList>
-          <TabsContent value="preview">
-            <Preview>
-              <div className="text-center text-muted-foreground py-8">
-                Live component preview — see code tab for import details
-              </div>
-            </Preview>
-          </TabsContent>
-          <TabsContent value="code">
-            <CodeBlock>{`// Example: ui/components/accordion-basic.tsx
-import { Component } from "@/primitives/accordion"
-
-export function UaccordionExample() {
-  return <Component />
-}`}</CodeBlock>
-          </TabsContent>
-        </Tabs>
-      </div>
-    </div>
+    </DocsPage>
   )
 }

@@ -1,82 +1,57 @@
-"use client"
+import { ComponentExample } from "@/app/docs/_components/component-example"
+import { readSource } from "@/app/docs/_lib/read-source"
+import CollapsibleDemo from "@/ui/components/collapsible-demo"
+import { CollapsibleFileTree } from "@/ui/components/collapsible-file-tree"
+import { CollapsibleSettings } from "@/ui/components/collapsible-settings"
 
-import { Card } from "@/primitives/card"
-import { Copy, Check } from "lucide-react"
-import { useState } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
+const examples = [
+  {
+    title: "Collapsible Demo",
+    component: CollapsibleDemo,
+    sourcePath: "ui/components/collapsible-demo.tsx",
+  },
+  {
+    title: "Collapsible File Tree",
+    component: CollapsibleFileTree,
+    sourcePath: "ui/components/collapsible-file-tree.tsx",
+  },
+  {
+    title: "Collapsible Settings",
+    component: CollapsibleSettings,
+    sourcePath: "ui/components/collapsible-settings.tsx",
+  },
+] as const
 
-function CodeBlock({ children }: { children: string }) {
-  const [copied, setCopied] = useState(false)
-  const lines = children.split("\n")
-
-  return (
-    <div className="relative group">
-      <button
-        onClick={() => {
-          navigator.clipboard.writeText(children)
-          setCopied(true)
-          setTimeout(() => setCopied(false), 2000)
-        }}
-        className="absolute top-3 right-3 p-2 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors z-10"
-      >
-        {copied ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
-      </button>
-      <Card className="p-4 bg-slate-950 text-slate-50 border-slate-800 overflow-hidden">
-        <pre className="text-sm overflow-x-auto font-mono">
-          <code>
-            {lines.map((line, i) => (
-              <div key={i} className="flex">
-                <span className="inline-block w-8 text-right pr-4 text-slate-600 select-none">{i + 1}</span>
-                <span>{line}</span>
-              </div>
-            ))}
-          </code>
-        </pre>
-      </Card>
-    </div>
-  )
-}
-
-function Preview({ children }: { children: React.ReactNode }) {
-  return (
-    <Card className="p-8 border bg-white flex items-center justify-center min-h-48 rounded-lg">
-      {children}
-    </Card>
-  )
-}
-
-export default function UcollapsiblePage() {
+export default function CollapsiblePage() {
   return (
     <div className="flex gap-12">
-      <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
-        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
+      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
+        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+          On This Page
+        </h3>
       </div>
 
-      <div className="flex-1 max-w-2xl space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Ucollapsible</h1>
-        <p className="text-lg text-muted-foreground">Ucollapsible component with live examples from ui/components/collapsible-*.tsx</p>
+      <div className="max-w-2xl flex-1 space-y-8">
+        <h1 className="text-5xl font-bold tracking-tight">Collapsible</h1>
+        <p className="text-lg text-muted-foreground">
+          Collapsible component — {examples.length} examples rendered live with source code
+        </p>
 
-        <Tabs defaultValue="preview">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="preview">Preview</TabsTrigger>
-            <TabsTrigger value="code">Code</TabsTrigger>
-          </TabsList>
-          <TabsContent value="preview">
-            <Preview>
-              <div className="text-center text-muted-foreground py-8">
-                Live component preview — see code tab for import details
-              </div>
-            </Preview>
-          </TabsContent>
-          <TabsContent value="code">
-            <CodeBlock>{`// Example: ui/components/collapsible-basic.tsx
-import { Component } from "@/primitives/collapsible"
+        <div className="flex flex-col gap-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-export function UcollapsibleExample() {
-  return <Component />
-}`}</CodeBlock>
-          </TabsContent>
-        </Tabs>
+            return (
+              <ComponentExample
+                key={example.sourcePath}
+                title={example.title}
+                source={readSource(example.sourcePath)}
+              >
+                <Component />
+              </ComponentExample>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

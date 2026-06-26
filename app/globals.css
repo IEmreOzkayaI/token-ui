@@ -128,3 +128,41 @@
     @apply font-sans;
   }
 }
+
+@layer components {
+  .docs-prose {
+    @apply text-foreground;
+  }
+
+  .docs-prose p {
+    @apply leading-7;
+  }
+
+  .docs-prose p + p {
+    @apply mt-4;
+  }
+
+  .docs-prose h2 {
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+  }
+
+  .docs-prose h3 {
+    @apply scroll-m-20 text-lg font-medium tracking-tight;
+  }
+
+  .docs-prose code:not(pre code) {
+    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm;
+  }
+
+  .docs-prose ul {
+    @apply my-4 ml-6 list-disc space-y-2;
+  }
+
+  .docs-prose li {
+    @apply leading-7;
+  }
+
+  .container-wrapper {
+    @apply mx-auto w-full max-w-screen-2xl;
+  }
+}

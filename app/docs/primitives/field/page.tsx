@@ -1,82 +1,111 @@
-"use client"
+import { ComponentExample } from "@/app/docs/_components/component-example"
+import { readSource } from "@/app/docs/_lib/read-source"
+import { FieldCheckbox } from "@/ui/components/field-checkbox"
+import FieldChoiceCard from "@/ui/components/field-choice-card"
+import FieldDemo from "@/ui/components/field-demo"
+import { FieldFieldset } from "@/ui/components/field-fieldset"
+import FieldGroupExample from "@/ui/components/field-group"
+import FieldInput from "@/ui/components/field-input"
+import { FieldRadio } from "@/ui/components/field-radio"
+import { FieldResponsive } from "@/ui/components/field-responsive"
+import FieldSelect from "@/ui/components/field-select"
+import FieldSlider from "@/ui/components/field-slider"
+import FieldSwitch from "@/ui/components/field-switch"
+import FieldTextarea from "@/ui/components/field-textarea"
 
-import { Card } from "@/primitives/card"
-import { Copy, Check } from "lucide-react"
-import { useState } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
+const examples = [
+  {
+    title: "Field Checkbox",
+    component: FieldCheckbox,
+    sourcePath: "ui/components/field-checkbox.tsx",
+  },
+  {
+    title: "Field Choice Card",
+    component: FieldChoiceCard,
+    sourcePath: "ui/components/field-choice-card.tsx",
+  },
+  {
+    title: "Field Demo",
+    component: FieldDemo,
+    sourcePath: "ui/components/field-demo.tsx",
+  },
+  {
+    title: "Field Fieldset",
+    component: FieldFieldset,
+    sourcePath: "ui/components/field-fieldset.tsx",
+  },
+  {
+    title: "Field Group",
+    component: FieldGroupExample,
+    sourcePath: "ui/components/field-group.tsx",
+  },
+  {
+    title: "Field Input",
+    component: FieldInput,
+    sourcePath: "ui/components/field-input.tsx",
+  },
+  {
+    title: "Field Radio",
+    component: FieldRadio,
+    sourcePath: "ui/components/field-radio.tsx",
+  },
+  {
+    title: "Field Responsive",
+    component: FieldResponsive,
+    sourcePath: "ui/components/field-responsive.tsx",
+  },
+  {
+    title: "Field Select",
+    component: FieldSelect,
+    sourcePath: "ui/components/field-select.tsx",
+  },
+  {
+    title: "Field Slider",
+    component: FieldSlider,
+    sourcePath: "ui/components/field-slider.tsx",
+  },
+  {
+    title: "Field Switch",
+    component: FieldSwitch,
+    sourcePath: "ui/components/field-switch.tsx",
+  },
+  {
+    title: "Field Textarea",
+    component: FieldTextarea,
+    sourcePath: "ui/components/field-textarea.tsx",
+  },
+] as const
 
-function CodeBlock({ children }: { children: string }) {
-  const [copied, setCopied] = useState(false)
-  const lines = children.split("\n")
-
-  return (
-    <div className="relative group">
-      <button
-        onClick={() => {
-          navigator.clipboard.writeText(children)
-          setCopied(true)
-          setTimeout(() => setCopied(false), 2000)
-        }}
-        className="absolute top-3 right-3 p-2 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors z-10"
-      >
-        {copied ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
-      </button>
-      <Card className="p-4 bg-slate-950 text-slate-50 border-slate-800 overflow-hidden">
-        <pre className="text-sm overflow-x-auto font-mono">
-          <code>
-            {lines.map((line, i) => (
-              <div key={i} className="flex">
-                <span className="inline-block w-8 text-right pr-4 text-slate-600 select-none">{i + 1}</span>
-                <span>{line}</span>
-              </div>
-            ))}
-          </code>
-        </pre>
-      </Card>
-    </div>
-  )
-}
-
-function Preview({ children }: { children: React.ReactNode }) {
-  return (
-    <Card className="p-8 border bg-white flex items-center justify-center min-h-48 rounded-lg">
-      {children}
-    </Card>
-  )
-}
-
-export default function UfieldPage() {
+export default function FieldPage() {
   return (
     <div className="flex gap-12">
-      <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
-        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
+      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
+        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+          On This Page
+        </h3>
       </div>
 
-      <div className="flex-1 max-w-2xl space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Ufield</h1>
-        <p className="text-lg text-muted-foreground">Ufield component with live examples from ui/components/field-*.tsx</p>
+      <div className="max-w-2xl flex-1 space-y-8">
+        <h1 className="text-5xl font-bold tracking-tight">Field</h1>
+        <p className="text-lg text-muted-foreground">
+          Field component — {examples.length} examples rendered live with source code
+        </p>
 
-        <Tabs defaultValue="preview">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="preview">Preview</TabsTrigger>
-            <TabsTrigger value="code">Code</TabsTrigger>
-          </TabsList>
-          <TabsContent value="preview">
-            <Preview>
-              <div className="text-center text-muted-foreground py-8">
-                Live component preview — see code tab for import details
-              </div>
-            </Preview>
-          </TabsContent>
-          <TabsContent value="code">
-            <CodeBlock>{`// Example: ui/components/field-basic.tsx
-import { Component } from "@/primitives/field"
+        <div className="flex flex-col gap-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-export function UfieldExample() {
-  return <Component />
-}`}</CodeBlock>
-          </TabsContent>
-        </Tabs>
+            return (
+              <ComponentExample
+                key={example.sourcePath}
+                title={example.title}
+                source={readSource(example.sourcePath)}
+              >
+                <Component />
+              </ComponentExample>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

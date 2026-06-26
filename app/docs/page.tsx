@@ -1,122 +1,152 @@
-import { Card } from "@/primitives/card"
-import { Button } from "@/primitives/button"
 import Link from "next/link"
-import { ArrowRight, Code2, Palette, Package } from "lucide-react"
+import { ArrowRight, Blocks, Code2, Palette, Sparkles } from "lucide-react"
+
+import { DocsPage } from "@/app/docs/_components/docs-page"
+import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
+import { DocsSection } from "@/app/docs/_components/docs-section"
+import { CodeBlock } from "@/app/docs/_components/code-block"
+import { Button } from "@/primitives/button"
+import { Badge } from "@/primitives/badge"
 
 export default function DocsHome() {
   return (
-    <div className="space-y-8">
-      {/* Hero */}
-      <section className="space-y-4">
-        <h1 className="text-5xl font-bold tracking-tight">
-          Build Beautiful UIs<br />
-          <span className="text-primary">Faster</span>
-        </h1>
-        <p className="text-lg text-muted-foreground max-w-2xl">
-          A comprehensive design system with 50+ production-ready components. Copy, paste, customize.
+    <DocsPage
+      toc={[
+        { id: "introduction", title: "Introduction" },
+        { id: "features", title: "Features" },
+        { id: "quick-start", title: "Quick Start" },
+        { id: "foundations", title: "Foundations" },
+      ]}
+    >
+      <DocsPageHeader
+        title="Introduction"
+        description="Beautifully designed components built with Radix UI and Tailwind CSS. Copy, paste, and customize."
+      >
+        <div className="flex flex-wrap gap-2 pt-2">
+          <Badge variant="secondary">55+ Components</Badge>
+          <Badge variant="secondary">Open Source</Badge>
+          <Badge variant="secondary">Copy & Paste</Badge>
+        </div>
+      </DocsPageHeader>
+
+      <DocsSection id="introduction" title="What is UI Tokens?">
+        <p className="leading-7 text-muted-foreground [&:not(:first-child)]:mt-6">
+          UI Tokens is a collection of reusable components built on top of
+          Radix UI primitives and styled with Tailwind CSS. The same
+          copy-paste approach as shadcn/ui — you own the code, no package
+          lock-in.
         </p>
-        <div className="flex gap-3 pt-4">
-          <Button size="lg" asChild>
+      </DocsSection>
+
+      <DocsSection id="features" title="Features">
+        <div className="grid gap-4 sm:grid-cols-2">
+          {[
+            {
+              icon: Blocks,
+              title: "55+ Components",
+              description:
+                "Production-ready primitives from Accordion to Tooltip.",
+            },
+            {
+              icon: Code2,
+              title: "Copy-Paste Ready",
+              description:
+                "Drop components into your project and customize freely.",
+            },
+            {
+              icon: Palette,
+              title: "Design Tokens",
+              description:
+                "OKLCH colors, spacing scale, typography, and radius.",
+            },
+            {
+              icon: Sparkles,
+              title: "Accessible",
+              description:
+                "Built on Radix UI with keyboard and screen reader support.",
+            },
+          ].map((feature) => (
+            <div
+              key={feature.title}
+              className="rounded-xl border bg-card p-6 shadow-sm"
+            >
+              <feature.icon className="mb-3 size-5 text-foreground" />
+              <h3 className="font-semibold">{feature.title}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </DocsSection>
+
+      <DocsSection id="quick-start" title="Quick Start">
+        <p className="text-muted-foreground">
+          Get started by installing dependencies and copying a component into
+          your project.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Button asChild>
             <Link href="/docs/installation" className="gap-2">
-              Get Started
+              Installation
               <ArrowRight className="size-4" />
             </Link>
           </Button>
-          <Button size="lg" variant="outline" asChild>
-            <Link href="/docs/components/button">Browse Components</Link>
+          <Button variant="outline" asChild>
+            <Link href="/docs/primitives/accordion">Browse Components</Link>
           </Button>
         </div>
-      </section>
-
-      {/* Features */}
-      <section className="grid md:grid-cols-3 gap-6 pt-8">
-        <Card className="p-6 space-y-3">
-          <Palette className="size-6 text-primary" />
-          <h3 className="font-semibold">50+ Components</h3>
-          <p className="text-sm text-muted-foreground">
-            Carefully crafted components built on shadcn/ui and Radix UI. Copy and customize freely.
-          </p>
-        </Card>
-
-        <Card className="p-6 space-y-3">
-          <Code2 className="size-6 text-primary" />
-          <h3 className="font-semibold">Copy-Paste Ready</h3>
-          <p className="text-sm text-muted-foreground">
-            Components are designed to be copied into your project. Own your code, no dependencies.
-          </p>
-        </Card>
-
-        <Card className="p-6 space-y-3">
-          <Package className="size-6 text-primary" />
-          <h3 className="font-semibold">Fully Styled</h3>
-          <p className="text-sm text-muted-foreground">
-            Built with Tailwind CSS. Comes with dark mode support and semantic color tokens.
-          </p>
-        </Card>
-      </section>
-
-      {/* Code Example */}
-      <section className="space-y-4 pt-8">
-        <h2 className="text-2xl font-bold">Quick Start</h2>
-        <Card className="p-4">
-          <pre className="text-sm overflow-x-auto">
-{`import { Button } from "@/primitives/button"
+        <CodeBlock
+          code={`import { Button } from "@/primitives/button"
 
 export function MyComponent() {
   return <Button>Click me</Button>
 }`}
-          </pre>
-        </Card>
-      </section>
+        />
+      </DocsSection>
 
-      {/* Foundations */}
-      <section className="space-y-4 pt-8">
-        <h2 className="text-2xl font-bold">Design Foundations</h2>
+      <DocsSection id="foundations" title="Foundations">
         <p className="text-muted-foreground">
-          Everything is built on solid foundations: semantic color tokens, proportional spacing, accessible typography.
+          Design tokens that power every component in the system.
         </p>
-        <div className="grid md:grid-cols-2 gap-4">
-          <Link href="/docs/foundations/colors" className="group">
-            <Card className="p-4 hover:border-primary/50 transition-colors">
-              <h3 className="font-semibold group-hover:text-primary transition-colors">Colors</h3>
-              <p className="text-sm text-muted-foreground mt-1">OKLCH color space. Light & dark modes.</p>
-            </Card>
-          </Link>
-          <Link href="/docs/foundations/typography" className="group">
-            <Card className="p-4 hover:border-primary/50 transition-colors">
-              <h3 className="font-semibold group-hover:text-primary transition-colors">Typography</h3>
-              <p className="text-sm text-muted-foreground mt-1">System fonts, scales & weights.</p>
-            </Card>
-          </Link>
-          <Link href="/docs/foundations/spacing" className="group">
-            <Card className="p-4 hover:border-primary/50 transition-colors">
-              <h3 className="font-semibold group-hover:text-primary transition-colors">Spacing</h3>
-              <p className="text-sm text-muted-foreground mt-1">4px base unit. Proportional scale.</p>
-            </Card>
-          </Link>
-          <Link href="/docs/foundations/radius" className="group">
-            <Card className="p-4 hover:border-primary/50 transition-colors">
-              <h3 className="font-semibold group-hover:text-primary transition-colors">Radius</h3>
-              <p className="text-sm text-muted-foreground mt-1">7 levels. Consistent rounding.</p>
-            </Card>
-          </Link>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {[
+            {
+              href: "/docs/foundations/colors",
+              title: "Colors",
+              description: "OKLCH color space with light and dark modes.",
+            },
+            {
+              href: "/docs/foundations/typography",
+              title: "Typography",
+              description: "Type scale, weights, and font families.",
+            },
+            {
+              href: "/docs/foundations/spacing",
+              title: "Spacing",
+              description: "4px base unit with proportional scale.",
+            },
+            {
+              href: "/docs/foundations/radius",
+              title: "Radius",
+              description: "Consistent border radius levels.",
+            },
+          ].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="group rounded-xl border p-4 transition-colors hover:bg-muted/50"
+            >
+              <h3 className="font-medium group-hover:underline">
+                {item.title}
+              </h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {item.description}
+              </p>
+            </Link>
+          ))}
         </div>
-      </section>
-
-      {/* Stats */}
-      <section className="grid md:grid-cols-4 gap-4 pt-8">
-        {[
-          { value: "50+", label: "Components" },
-          { value: "100%", label: "Copy-Paste" },
-          { value: "WCAG AA", label: "Accessible" },
-          { value: "Dark Mode", label: "Included" },
-        ].map((item) => (
-          <Card key={item.label} className="p-4 text-center">
-            <div className="text-2xl font-bold text-primary">{item.value}</div>
-            <div className="text-xs text-muted-foreground mt-1">{item.label}</div>
-          </Card>
-        ))}
-      </section>
-    </div>
+      </DocsSection>
+    </DocsPage>
   )
 }

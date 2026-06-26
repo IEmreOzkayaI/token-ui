@@ -1,82 +1,171 @@
-"use client"
+import { ComponentExample } from "@/app/docs/_components/component-example"
+import { readSource } from "@/app/docs/_lib/read-source"
+import ButtonAsChild from "@/ui/components/button-aschild"
+import ButtonDefault from "@/ui/components/button-default"
+import ButtonDemo from "@/ui/components/button-demo"
+import ButtonDestructive from "@/ui/components/button-destructive"
+import ButtonGhost from "@/ui/components/button-ghost"
+import ButtonGroupDemo from "@/ui/components/button-group-demo"
+import ButtonGroupDropdown from "@/ui/components/button-group-dropdown"
+import ButtonGroupInputGroup from "@/ui/components/button-group-input-group"
+import ButtonGroupInput from "@/ui/components/button-group-input"
+import { ButtonGroupNested } from "@/ui/components/button-group-nested"
+import ButtonGroupOrientation from "@/ui/components/button-group-orientation"
+import ButtonGroupPopover from "@/ui/components/button-group-popover"
+import ButtonGroupSelect from "@/ui/components/button-group-select"
+import ButtonGroupSeparatorDemo from "@/ui/components/button-group-separator"
+import ButtonGroupSize from "@/ui/components/button-group-size"
+import ButtonIcon from "@/ui/components/button-icon"
+import ButtonLink from "@/ui/components/button-link"
+import ButtonOutline from "@/ui/components/button-outline"
+import ButtonRounded from "@/ui/components/button-rounded"
+import ButtonSecondary from "@/ui/components/button-secondary"
+import ButtonSize from "@/ui/components/button-size"
+import ButtonSpinner from "@/ui/components/button-spinner"
 
-import { Card } from "@/primitives/card"
-import { Copy, Check } from "lucide-react"
-import { useState } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
+const examples = [
+  {
+    title: "Button Aschild",
+    component: ButtonAsChild,
+    sourcePath: "ui/components/button-aschild.tsx",
+  },
+  {
+    title: "Button Default",
+    component: ButtonDefault,
+    sourcePath: "ui/components/button-default.tsx",
+  },
+  {
+    title: "Button Demo",
+    component: ButtonDemo,
+    sourcePath: "ui/components/button-demo.tsx",
+  },
+  {
+    title: "Button Destructive",
+    component: ButtonDestructive,
+    sourcePath: "ui/components/button-destructive.tsx",
+  },
+  {
+    title: "Button Ghost",
+    component: ButtonGhost,
+    sourcePath: "ui/components/button-ghost.tsx",
+  },
+  {
+    title: "Button Group Demo",
+    component: ButtonGroupDemo,
+    sourcePath: "ui/components/button-group-demo.tsx",
+  },
+  {
+    title: "Button Group Dropdown",
+    component: ButtonGroupDropdown,
+    sourcePath: "ui/components/button-group-dropdown.tsx",
+  },
+  {
+    title: "Button Group Input Group",
+    component: ButtonGroupInputGroup,
+    sourcePath: "ui/components/button-group-input-group.tsx",
+  },
+  {
+    title: "Button Group Input",
+    component: ButtonGroupInput,
+    sourcePath: "ui/components/button-group-input.tsx",
+  },
+  {
+    title: "Button Group Nested",
+    component: ButtonGroupNested,
+    sourcePath: "ui/components/button-group-nested.tsx",
+  },
+  {
+    title: "Button Group Orientation",
+    component: ButtonGroupOrientation,
+    sourcePath: "ui/components/button-group-orientation.tsx",
+  },
+  {
+    title: "Button Group Popover",
+    component: ButtonGroupPopover,
+    sourcePath: "ui/components/button-group-popover.tsx",
+  },
+  {
+    title: "Button Group Select",
+    component: ButtonGroupSelect,
+    sourcePath: "ui/components/button-group-select.tsx",
+  },
+  {
+    title: "Button Group Separator",
+    component: ButtonGroupSeparatorDemo,
+    sourcePath: "ui/components/button-group-separator.tsx",
+  },
+  {
+    title: "Button Group Size",
+    component: ButtonGroupSize,
+    sourcePath: "ui/components/button-group-size.tsx",
+  },
+  {
+    title: "Button Icon",
+    component: ButtonIcon,
+    sourcePath: "ui/components/button-icon.tsx",
+  },
+  {
+    title: "Button Link",
+    component: ButtonLink,
+    sourcePath: "ui/components/button-link.tsx",
+  },
+  {
+    title: "Button Outline",
+    component: ButtonOutline,
+    sourcePath: "ui/components/button-outline.tsx",
+  },
+  {
+    title: "Button Rounded",
+    component: ButtonRounded,
+    sourcePath: "ui/components/button-rounded.tsx",
+  },
+  {
+    title: "Button Secondary",
+    component: ButtonSecondary,
+    sourcePath: "ui/components/button-secondary.tsx",
+  },
+  {
+    title: "Button Size",
+    component: ButtonSize,
+    sourcePath: "ui/components/button-size.tsx",
+  },
+  {
+    title: "Button Spinner",
+    component: ButtonSpinner,
+    sourcePath: "ui/components/button-spinner.tsx",
+  },
+] as const
 
-function CodeBlock({ children }: { children: string }) {
-  const [copied, setCopied] = useState(false)
-  const lines = children.split("\n")
-
-  return (
-    <div className="relative group">
-      <button
-        onClick={() => {
-          navigator.clipboard.writeText(children)
-          setCopied(true)
-          setTimeout(() => setCopied(false), 2000)
-        }}
-        className="absolute top-3 right-3 p-2 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition-colors z-10"
-      >
-        {copied ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
-      </button>
-      <Card className="p-4 bg-slate-950 text-slate-50 border-slate-800 overflow-hidden">
-        <pre className="text-sm overflow-x-auto font-mono">
-          <code>
-            {lines.map((line, i) => (
-              <div key={i} className="flex">
-                <span className="inline-block w-8 text-right pr-4 text-slate-600 select-none">{i + 1}</span>
-                <span>{line}</span>
-              </div>
-            ))}
-          </code>
-        </pre>
-      </Card>
-    </div>
-  )
-}
-
-function Preview({ children }: { children: React.ReactNode }) {
-  return (
-    <Card className="p-8 border bg-white flex items-center justify-center min-h-48 rounded-lg">
-      {children}
-    </Card>
-  )
-}
-
-export default function UbuttonPage() {
+export default function ButtonPage() {
   return (
     <div className="flex gap-12">
-      <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
-        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
+      <div className="fixed top-20 right-0 hidden h-screen w-64 overflow-y-auto border-l bg-background/50 p-6 lg:block">
+        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+          On This Page
+        </h3>
       </div>
 
-      <div className="flex-1 max-w-2xl space-y-8">
-        <h1 className="text-5xl font-bold tracking-tight">Ubutton</h1>
-        <p className="text-lg text-muted-foreground">Ubutton component with live examples from ui/components/button-*.tsx</p>
+      <div className="max-w-2xl flex-1 space-y-8">
+        <h1 className="text-5xl font-bold tracking-tight">Button</h1>
+        <p className="text-lg text-muted-foreground">
+          Button component — {examples.length} examples rendered live with source code
+        </p>
 
-        <Tabs defaultValue="preview">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="preview">Preview</TabsTrigger>
-            <TabsTrigger value="code">Code</TabsTrigger>
-          </TabsList>
-          <TabsContent value="preview">
-            <Preview>
-              <div className="text-center text-muted-foreground py-8">
-                Live component preview — see code tab for import details
-              </div>
-            </Preview>
-          </TabsContent>
-          <TabsContent value="code">
-            <CodeBlock>{`// Example: ui/components/button-basic.tsx
-import { Component } from "@/primitives/button"
+        <div className="flex flex-col gap-10">
+          {examples.map((example) => {
+            const Component = example.component
 
-export function UbuttonExample() {
-  return <Component />
-}`}</CodeBlock>
-          </TabsContent>
-        </Tabs>
+            return (
+              <ComponentExample
+                key={example.sourcePath}
+                title={example.title}
+                source={readSource(example.sourcePath)}
+              >
+                <Component />
+              </ComponentExample>
+            )
+          })}
+        </div>
       </div>
     </div>
   )
