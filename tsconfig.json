@@ -22,6 +22,8 @@
       "@/*": ["./*"],
       "@/primitives": ["./ui/primitives"],
       "@/primitives/*": ["./ui/primitives/*"],
+      "@/components": ["./ui/components"],
+      "@/components/*": ["./ui/components/*"],
       "@/examples": ["./ui/components"],
       "@/examples/*": ["./ui/components/*"],
       "@/ui": ["./ui"],
