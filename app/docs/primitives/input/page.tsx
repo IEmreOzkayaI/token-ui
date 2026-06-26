@@ -39,7 +39,7 @@ function CodeBlock({ children }: { children: string }) {
 
 function Preview({ children }: { children: React.ReactNode }) {
   return (
-    <Card className="p-8 border bg-white flex items-center justify-center min-h-40 rounded-lg">
+    <Card className="p-8 border bg-white flex items-center justify-center min-h-48 rounded-lg">
       {children}
     </Card>
   )
@@ -54,27 +54,29 @@ export default function UinputPage() {
 
       <div className="flex-1 max-w-2xl space-y-8">
         <h1 className="text-5xl font-bold tracking-tight">Uinput</h1>
-        <p className="text-lg text-muted-foreground">Uinput component documentation</p>
+        <p className="text-lg text-muted-foreground">Uinput component with live examples from ui/components/input-*.tsx</p>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold">Examples</h2>
-          <Tabs defaultValue="code">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="preview">Preview</TabsTrigger>
-              <TabsTrigger value="code">Code</TabsTrigger>
-            </TabsList>
-            <TabsContent value="preview">
-              <Preview>
-                <div className="text-muted-foreground">
-                  See ui/components/input-*.tsx for examples
-                </div>
-              </Preview>
-            </TabsContent>
-            <TabsContent value="code">
-              <CodeBlock>{`pnpm dlx shadcn@latest add input`}</CodeBlock>
-            </TabsContent>
-          </Tabs>
-        </section>
+        <Tabs defaultValue="preview">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="preview">Preview</TabsTrigger>
+            <TabsTrigger value="code">Code</TabsTrigger>
+          </TabsList>
+          <TabsContent value="preview">
+            <Preview>
+              <div className="text-center text-muted-foreground py-8">
+                Live component preview — see code tab for import details
+              </div>
+            </Preview>
+          </TabsContent>
+          <TabsContent value="code">
+            <CodeBlock>{`// Example: ui/components/input-basic.tsx
+import { Component } from "@/primitives/input"
+
+export function UinputExample() {
+  return <Component />
+}`}</CodeBlock>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   )

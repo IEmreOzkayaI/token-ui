@@ -39,7 +39,7 @@ function CodeBlock({ children }: { children: string }) {
 
 function Preview({ children }: { children: React.ReactNode }) {
   return (
-    <Card className="p-8 border bg-white flex items-center justify-center min-h-40 rounded-lg">
+    <Card className="p-8 border bg-white flex items-center justify-center min-h-48 rounded-lg">
       {children}
     </Card>
   )
@@ -49,53 +49,34 @@ export default function UskeletonPage() {
   return (
     <div className="flex gap-12">
       <div className="fixed right-0 top-20 w-64 h-screen overflow-y-auto border-l bg-background/50 p-6 hidden lg:block">
-        <div className="space-y-2">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><a href="#examples" className="hover:text-foreground">Examples</a></li>
-            <li><a href="#installation" className="hover:text-foreground">Installation</a></li>
-          </ul>
-        </div>
+        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
       </div>
 
       <div className="flex-1 max-w-2xl space-y-8">
-        <section className="space-y-4">
-          <h1 className="text-5xl font-bold tracking-tight">Uskeleton</h1>
-          <p className="text-lg text-muted-foreground">Uskeleton component with live examples</p>
-        </section>
+        <h1 className="text-5xl font-bold tracking-tight">Uskeleton</h1>
+        <p className="text-lg text-muted-foreground">Uskeleton component with live examples from ui/components/skeleton-*.tsx</p>
 
-        <section id="examples" className="space-y-4">
-          <h2 className="text-2xl font-bold">Examples</h2>
-          <Tabs defaultValue="code" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="preview">Preview</TabsTrigger>
-              <TabsTrigger value="code">Code</TabsTrigger>
-            </TabsList>
-            <TabsContent value="preview">
-              <Preview>
-                <div className="text-center text-muted-foreground">
-                  Component examples from ui/components/skeleton-*.tsx
-                </div>
-              </Preview>
-            </TabsContent>
-            <TabsContent value="code">
-              <CodeBlock>{`import { Component } from "@/primitives/skeleton"
+        <Tabs defaultValue="preview">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="preview">Preview</TabsTrigger>
+            <TabsTrigger value="code">Code</TabsTrigger>
+          </TabsList>
+          <TabsContent value="preview">
+            <Preview>
+              <div className="text-center text-muted-foreground py-8">
+                Live component preview — see code tab for import details
+              </div>
+            </Preview>
+          </TabsContent>
+          <TabsContent value="code">
+            <CodeBlock>{`// Example: ui/components/skeleton-basic.tsx
+import { Component } from "@/primitives/skeleton"
 
-export function Example() {
+export function UskeletonExample() {
   return <Component />
 }`}</CodeBlock>
-            </TabsContent>
-          </Tabs>
-        </section>
-
-        <section id="installation" className="space-y-4">
-          <h2 className="text-2xl font-bold">Installation</h2>
-          <CodeBlock>{`pnpm dlx shadcn@latest add skeleton`}</CodeBlock>
-        </section>
-
-        <section className="flex items-center justify-between pt-8 border-t">
-          <div className="text-sm text-muted-foreground">Last updated: June 26, 2025</div>
-        </section>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   )
