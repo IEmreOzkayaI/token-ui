@@ -2,8 +2,8 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
-import { Slider } from "@/components/primitives/slider"
+import { Card } from "@/primitives/card"
+import { Slider } from "@/primitives/slider"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -46,7 +46,7 @@ export default function SliderPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import { Slider } from "@/components/primitives/slider"`}</CodeBlock>
+        <CodeBlock>{`import { Slider } from "@/primitives/slider"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

@@ -2,8 +2,9 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
-import { Switch, Label } from "@/components/primitives/switch"
+import { Card } from "@/primitives/card"
+import { Switch } from "@/primitives/switch"
+import { Label } from "@/primitives/label"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -46,8 +47,8 @@ export default function SwitchPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import { Switch } from "@/components/primitives/switch"
-import { Label } from "@/components/primitives/label"`}</CodeBlock>
+        <CodeBlock>{`import { Switch } from "@/primitives/switch"
+import { Label } from "@/primitives/label"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

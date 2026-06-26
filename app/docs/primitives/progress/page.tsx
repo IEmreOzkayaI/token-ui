@@ -2,7 +2,7 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
+import { Card } from "@/primitives/card"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -37,7 +37,7 @@ export default function ProgressPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import { Progress } from "@/components/primitives/progress"`}</CodeBlock>
+        <CodeBlock>{`import { Progress } from "@/primitives/progress"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

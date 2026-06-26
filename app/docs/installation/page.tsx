@@ -1,4 +1,4 @@
-import { Card } from "@/components/primitives/card"
+import { Card } from "@/primitives/card"
 import { AlertCircle, CheckCircle2 } from "lucide-react"
 
 export default function InstallationPage() {
@@ -102,7 +102,7 @@ export function cn(...inputs: ClassValue[]) {
         <Card className="p-4 space-y-2 text-sm">
           <p>Example: To use Button component:</p>
           <pre className="bg-background p-3 rounded overflow-x-auto font-mono">
-{`import { Button } from "@/components/primitives/button"
+{`import { Button } from "@/primitives/button"
 
 export function MyComponent() {
   return <Button>Click me</Button>
@@ -123,7 +123,7 @@ export function MyComponent() {
         <Card className="p-4">
           <pre className="text-sm overflow-x-auto font-mono">
 {`// app/layout.tsx
-import { TooltipProvider } from "@/components/primitives/tooltip"
+import { TooltipProvider } from "@/primitives/tooltip"
 
 export default function RootLayout({
   children,

@@ -1,8 +1,8 @@
 import { ReactNode } from "react"
 import Link from "next/link"
 import { Search, Menu } from "lucide-react"
-import { Input } from "@/components/primitives/input"
-import { Button } from "@/components/primitives/button"
+import { Input } from "@/primitives/input"
+import { Button } from "@/primitives/button"
 
 const docs = [
   {

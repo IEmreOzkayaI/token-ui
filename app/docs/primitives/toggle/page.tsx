@@ -2,8 +2,8 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
-import { Toggle } from "@/components/primitives/toggle"
+import { Card } from "@/primitives/card"
+import { Toggle } from "@/primitives/toggle"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -46,7 +46,7 @@ export default function TogglePage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import { Toggle } from "@/components/primitives/toggle"`}</CodeBlock>
+        <CodeBlock>{`import { Toggle } from "@/primitives/toggle"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

@@ -19,7 +19,11 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/primitives": ["./components/ui/primitives"],
+      "@/primitives/*": ["./components/ui/primitives/*"],
+      "@/examples": ["./components/ui/components"],
+      "@/examples/*": ["./components/ui/components/*"]
     }
   },
   "include": [

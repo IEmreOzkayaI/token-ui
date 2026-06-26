@@ -2,8 +2,8 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
-import { Textarea } from "@/components/primitives/textarea"
+import { Card } from "@/primitives/card"
+import { Textarea } from "@/primitives/textarea"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -46,7 +46,7 @@ export default function TextareaPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import { Textarea } from "@/components/primitives/textarea"`}</CodeBlock>
+        <CodeBlock>{`import { Textarea } from "@/primitives/textarea"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

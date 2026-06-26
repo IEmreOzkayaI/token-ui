@@ -2,8 +2,8 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
-import { Badge } from "@/components/primitives/badge"
+import { Card } from "@/primitives/card"
+import { Badge } from "@/primitives/badge"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -46,7 +46,7 @@ export default function BadgePage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import { Badge } from "@/components/primitives/badge"`}</CodeBlock>
+        <CodeBlock>{`import { Badge } from "@/primitives/badge"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

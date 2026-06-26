@@ -2,9 +2,9 @@
 
 import { Copy, Check, AlertCircle, XCircle, InfoIcon } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
-import { Alert, AlertTitle, AlertDescription, AlertAction } from "@/components/primitives/alert"
-import { Button } from "@/components/primitives/button"
+import { Card } from "@/primitives/card"
+import { Alert, AlertTitle, AlertDescription, AlertAction } from "@/primitives/alert"
+import { Button } from "@/primitives/button"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -52,7 +52,7 @@ export default function AlertPage() {
   AlertTitle,
   AlertDescription,
   AlertAction,
-} from "@/components/primitives/alert"`}</CodeBlock>
+} from "@/primitives/alert"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

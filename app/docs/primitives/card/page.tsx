@@ -2,8 +2,8 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/primitives/card"
-import { Button } from "@/components/primitives/button"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/primitives/card"
+import { Button } from "@/primitives/button"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -70,7 +70,7 @@ export default function CardPage() {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@/components/primitives/card"`}</CodeBlock>
+} from "@/primitives/card"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

@@ -1,5 +1,5 @@
-import { Card } from "@/components/primitives/card"
-import { Button } from "@/components/primitives/button"
+import { Card } from "@/primitives/card"
+import { Button } from "@/primitives/button"
 import Link from "next/link"
 import { ArrowRight, Code2, Palette, Package } from "lucide-react"
 
@@ -60,7 +60,7 @@ export default function DocsHome() {
         <h2 className="text-2xl font-bold">Quick Start</h2>
         <Card className="p-4">
           <pre className="text-sm overflow-x-auto">
-{`import { Button } from "@/components/primitives/button"
+{`import { Button } from "@/primitives/button"
 
 export function MyComponent() {
   return <Button>Click me</Button>

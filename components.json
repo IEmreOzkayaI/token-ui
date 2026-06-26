@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "default",
+  "style": "radix-rhea",
   "rsc": true,
   "tsx": true,
   "tailwind": {
@@ -16,6 +16,8 @@
     "components": "@/components",
     "utils": "@/lib/utils",
     "ui": "@/components/ui",
+    "primitives": "@/components/ui/primitives",
+    "examples": "@/components/ui/components",
     "lib": "@/lib",
     "hooks": "@/hooks"
   },

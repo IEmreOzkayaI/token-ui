@@ -2,8 +2,8 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
-import {  } from "@/components/primitives/collapsible"
+import { Card } from "@/primitives/card"
+import {  } from "@/primitives/collapsible"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -50,7 +50,7 @@ export default function CollapsiblePage() {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/primitives/collapsible"`}</CodeBlock>
+} from "@/primitives/collapsible"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

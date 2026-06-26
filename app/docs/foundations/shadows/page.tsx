@@ -1,4 +1,4 @@
-import { Card } from "@/components/primitives/card"
+import { Card } from "@/primitives/card"
 
 export default function ShadowsPage() {
   return (

@@ -1,7 +1,7 @@
 "use client"
 
-import { Button } from "@/components/primitives/button"
-import { Card } from "@/components/primitives/card"
+import { Button } from "@/primitives/button"
+import { Card } from "@/primitives/card"
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
 
@@ -56,7 +56,7 @@ export default function ButtonPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import { Button } from "@/components/primitives/button"`}</CodeBlock>
+        <CodeBlock>{`import { Button } from "@/primitives/button"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

@@ -2,8 +2,9 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
-import { RadioGroup, RadioGroupItem, Label } from "@/components/primitives/radio-group"
+import { Card } from "@/primitives/card"
+import { RadioGroup, RadioGroupItem } from "@/primitives/radio-group"
+import { Label } from "@/primitives/label"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -46,8 +47,8 @@ export default function RadioGroupPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import { RadioGroup, RadioGroupItem } from "@/components/primitives/radio-group"
-import { Label } from "@/components/primitives/label"`}</CodeBlock>
+        <CodeBlock>{`import { RadioGroup, RadioGroupItem } from "@/primitives/radio-group"
+import { Label } from "@/primitives/label"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

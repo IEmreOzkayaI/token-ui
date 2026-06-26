@@ -2,13 +2,13 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
+import { Card } from "@/primitives/card"
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/primitives/accordion"
+} from "@/primitives/accordion"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -56,7 +56,7 @@ export default function AccordionPage() {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/primitives/accordion"`}</CodeBlock>
+} from "@/primitives/accordion"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

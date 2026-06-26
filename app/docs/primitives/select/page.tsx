@@ -2,8 +2,8 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
-import {  } from "@/components/primitives/select"
+import { Card } from "@/primitives/card"
+import {  } from "@/primitives/select"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -52,7 +52,7 @@ export default function SelectPage() {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/primitives/select"`}</CodeBlock>
+} from "@/primitives/select"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

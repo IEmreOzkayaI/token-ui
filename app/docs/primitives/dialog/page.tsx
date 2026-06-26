@@ -2,8 +2,8 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
-import { Button } from "@/components/primitives/button"
+import { Card } from "@/primitives/card"
+import { Button } from "@/primitives/button"
 import {
   Dialog,
   DialogContent,
@@ -13,7 +13,7 @@ import {
   DialogTrigger,
   DialogFooter,
   DialogClose,
-} from "@/components/primitives/dialog"
+} from "@/primitives/dialog"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -68,7 +68,7 @@ export default function DialogPage() {
   DialogDescription,
   DialogFooter,
   DialogClose,
-} from "@/components/primitives/dialog"`}</CodeBlock>
+} from "@/primitives/dialog"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">

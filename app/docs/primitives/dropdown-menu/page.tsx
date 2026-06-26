@@ -2,7 +2,7 @@
 
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { Card } from "@/components/primitives/card"
+import { Card } from "@/primitives/card"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -37,7 +37,7 @@ export default function DropdownMenuPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-bold">Import</h2>
-        <CodeBlock>{`import { DropdownMenu } from "@/components/primitives/dropdown-menu"`}</CodeBlock>
+        <CodeBlock>{`import { DropdownMenu } from "@/primitives/dropdown-menu"`}</CodeBlock>
       </section>
 
       <section className="space-y-4">
