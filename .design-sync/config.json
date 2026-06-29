@@ -1,0 +1,8 @@
+{
+  "projectId": "b059ca30-4261-4b0b-a457-e5215c47f117",
+  "shape": "package",
+  "pkg": "token-ui-demo",
+  "globalName": "TokenUI",
+  "srcDir": "ui",
+  "cssEntry": "app/globals.css"
+}
