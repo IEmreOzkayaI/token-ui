@@ -5,6 +5,7 @@ import { Button } from "@/primitives/button"
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/primitives/tabs"
+import CardProfile from "@/components/card/profile"
 
 function CodeBlock({ children }: { children: string }) {
   const [copied, setCopied] = useState(false)
@@ -66,6 +67,15 @@ export default function CardComponentPage() {
 
         <section id="examples" className="space-y-4">
           <h2 className="text-2xl font-bold">Examples</h2>
+
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold">Profile Card with Shopping Data</h3>
+            <p className="text-sm text-muted-foreground">Mobile app profile card with shopping analytics. Three responsive layout variations: compact, detailed, and minimal.</p>
+            <Card className="p-8 border bg-white flex items-center justify-center min-h-96 rounded-lg">
+              <CardProfile />
+            </Card>
+          </div>
+
           <Tabs defaultValue="preview" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="preview">Preview</TabsTrigger>
