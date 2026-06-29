@@ -55,6 +55,7 @@ export default function CardComponentPage() {
           <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li><a href="#examples" className="hover:text-foreground">Examples</a></li>
+            <li className="ml-4"><a href="#profile-card" className="hover:text-foreground">Profile Card</a></li>
           </ul>
         </div>
       </div>
@@ -68,7 +69,7 @@ export default function CardComponentPage() {
         <section id="examples" className="space-y-4">
           <h2 className="text-2xl font-bold">Examples</h2>
 
-          <div className="space-y-2">
+          <div id="profile-card" className="space-y-2">
             <h3 className="text-lg font-semibold">Profile Card with Shopping Data</h3>
             <p className="text-sm text-muted-foreground">Mobile app profile card with shopping analytics. Three responsive layout variations: compact, detailed, and minimal.</p>
             <Card className="p-8 border bg-white flex items-center justify-center min-h-96 rounded-lg">
