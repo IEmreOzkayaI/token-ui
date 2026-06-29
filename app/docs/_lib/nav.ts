@@ -62,6 +62,7 @@ export const docsNav: NavSection[] = [
       { label: "Kbd", href: "/docs/ui/components/kbd" },
       { label: "Label", href: "/docs/ui/components/label" },
       { label: "Menubar", href: "/docs/ui/components/menubar" },
+      { label: "Message", href: "/docs/ui/components/message" },
       { label: "Native Select", href: "/docs/ui/components/native-select" },
       { label: "Navigation Menu", href: "/docs/ui/components/navigation-menu" },
       { label: "Pagination", href: "/docs/ui/components/pagination" },
