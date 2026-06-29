@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, Eye, EyeOff, Trash2 } from "lucide-react"
+import { ChevronDown, Eye, EyeOff, Trash2, Chip, Lock } from "lucide-react"
 import { Button } from "@/primitives/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/primitives/card"
 import { cn } from "@/lib/utils"
@@ -27,6 +27,7 @@ export default function CreditCardList({
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set())
   const [revealedCards, setRevealedCards] = useState<Set<string>>(new Set())
   const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set())
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null)
 
   const toggleExpanded = (id: string) => {
     const newExpanded = new Set(expandedCards)
@@ -65,6 +66,19 @@ export default function CreditCardList({
     onDelete?.(id)
   }
 
+  const getNetworkGradient = (network: string) => {
+    switch (network) {
+      case "visa":
+        return "from-blue-600 to-blue-700"
+      case "mastercard":
+        return "from-red-600 to-orange-600"
+      case "amex":
+        return "from-green-700 to-teal-700"
+      default:
+        return "from-slate-600 to-slate-700"
+    }
+  }
+
   const getNetworkIcon = (network: string) => {
     switch (network) {
       case "visa":
@@ -78,19 +92,6 @@ export default function CreditCardList({
     }
   }
 
-  const getNetworkColor = (network: string) => {
-    switch (network) {
-      case "visa":
-        return "text-blue-600 dark:text-blue-400"
-      case "mastercard":
-        return "text-red-600 dark:text-red-400"
-      case "amex":
-        return "text-green-600 dark:text-green-400"
-      default:
-        return "text-muted-foreground"
-    }
-  }
-
   const maskCardNumber = (cardNumber: string) => {
     const last4 = cardNumber.slice(-4)
     return `•••• •••• •••• ${last4}`
@@ -101,197 +102,241 @@ export default function CreditCardList({
   }
 
   return (
-    <div className="w-full space-y-3">
-      {cards.map((card) => {
+    <div className="w-full space-y-4">
+      {cards.map((card, idx) => {
         const isExpanded = expandedCards.has(card.id)
         const isRevealed = revealedCards.has(card.id)
         const isFlipped = flippedCards.has(card.id)
+        const isHovered = hoveredCard === card.id
 
         return (
-          <Card
+          <div
             key={card.id}
-            className="cursor-pointer transition-all hover:border-primary/50"
-            onClick={() => toggleExpanded(card.id)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault()
-                toggleExpanded(card.id)
-              }
-            }}
-            aria-expanded={isExpanded}
-            aria-label={`Credit card ending in ${card.cardNumber.slice(-4)}`}
+            className="animate-in fade-in slide-in-from-bottom-2 duration-500"
+            style={{ animationDelay: `${idx * 50}ms` }}
           >
-            {/* Summary */}
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4 flex-1">
-                  {/* Network Icon */}
-                  <div
-                    className={cn(
-                      "w-10 h-10 rounded bg-muted flex items-center justify-center font-semibold text-sm",
-                      getNetworkColor(card.network)
-                    )}
-                  >
-                    {getNetworkIcon(card.network)}
-                  </div>
-
-                  {/* Card Info */}
-                  <div className="flex-1 min-w-0">
-                    <CardTitle className="text-base">{card.cardholderName}</CardTitle>
-                    <CardDescription className="font-mono text-sm">
-                      {isRevealed ? formatCardNumber(card.cardNumber) : maskCardNumber(card.cardNumber)}
-                    </CardDescription>
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={(e) => toggleRevealed(card.id, e)}
-                    aria-label={isRevealed ? "Hide card number" : "Show card number"}
-                    className="hover:text-primary"
-                  >
-                    {isRevealed ? (
-                      <EyeOff className="size-4" />
-                    ) : (
-                      <Eye className="size-4" />
-                    )}
-                  </Button>
-
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={(e) => toggleExpanded(card.id, e)}
-                    className={cn(
-                      "transition-transform",
-                      isExpanded && "rotate-180"
-                    )}
-                    aria-label={isExpanded ? "Collapse card details" : "Expand card details"}
-                  >
-                    <ChevronDown className="size-4" />
-                  </Button>
-                </div>
-              </div>
-            </CardHeader>
-
-            {/* Expanded Content */}
-            {isExpanded && (
-              <CardContent className="space-y-4 pt-0 border-t">
-                {/* Card Illustration */}
+            <Card
+              className={cn(
+                "cursor-pointer transition-all overflow-hidden",
+                "hover:shadow-lg hover:border-primary/30",
+                isExpanded && "ring-2 ring-primary/20"
+              )}
+              onClick={() => toggleExpanded(card.id)}
+              onMouseEnter={() => setHoveredCard(card.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault()
+                  toggleExpanded(card.id)
+                }
+              }}
+              aria-expanded={isExpanded}
+              aria-label={`Credit card ending in ${card.cardNumber.slice(-4)}`}
+            >
+              {/* Summary - Premium Style */}
+              <CardHeader className="pb-4 relative overflow-hidden">
                 <div
-                  className="h-48 perspective cursor-pointer"
-                  onClick={(e) => toggleFlipped(card.id, e)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault()
-                      toggleFlipped(card.id, e)
-                    }
-                  }}
-                  aria-label="Toggle card front/back view"
-                >
+                  className={cn(
+                    "absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-300",
+                    getNetworkGradient(card.network),
+                    isHovered && "opacity-5"
+                  )}
+                />
+                <div className="relative flex items-center justify-between">
+                  <div className="flex items-center gap-4 flex-1">
+                    {/* Premium Network Badge */}
+                    <div
+                      className={cn(
+                        "w-14 h-14 rounded-lg bg-gradient-to-br shadow-md",
+                        "flex items-center justify-center font-bold text-white text-sm",
+                        "transition-transform duration-300",
+                        isHovered && "scale-110"
+                      )}
+                      style={{
+                        backgroundImage: `linear-gradient(135deg, var(--primary), var(--secondary))`,
+                      }}
+                    >
+                      {getNetworkIcon(card.network)}
+                    </div>
+
+                    {/* Card Info */}
+                    <div className="flex-1 min-w-0 space-y-1">
+                      <CardTitle className="text-base font-semibold">
+                        {card.cardholderName}
+                      </CardTitle>
+                      <div className="flex items-center gap-2">
+                        <code className="font-mono text-sm tracking-widest text-muted-foreground transition-all duration-300">
+                          {isRevealed ? formatCardNumber(card.cardNumber) : maskCardNumber(card.cardNumber)}
+                        </code>
+                        <Lock className="size-3.5 text-muted-foreground/70" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Premium Actions */}
+                  <div className="flex items-center gap-1">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => toggleRevealed(card.id, e)}
+                      aria-label={isRevealed ? "Hide card number" : "Show card number"}
+                      className={cn(
+                        "transition-colors duration-300",
+                        "hover:text-primary hover:bg-primary/10"
+                      )}
+                    >
+                      {isRevealed ? (
+                        <EyeOff className="size-4" />
+                      ) : (
+                        <Eye className="size-4" />
+                      )}
+                    </Button>
+
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => toggleExpanded(card.id, e)}
+                      className={cn(
+                        "transition-transform duration-500",
+                        isExpanded && "rotate-180"
+                      )}
+                      aria-label={isExpanded ? "Collapse card details" : "Expand card details"}
+                    >
+                      <ChevronDown className="size-4" />
+                    </Button>
+                  </div>
+                </div>
+              </CardHeader>
+
+              {/* Expanded Content - Premium Design */}
+              {isExpanded && (
+                <CardContent className="space-y-6 pt-0 border-t animate-in fade-in duration-300">
+                  {/* 3D Card Illustration */}
                   <div
-                    className={cn(
-                      "relative w-full h-full transition-transform duration-300 [transform-style:preserve-3d]",
-                      isFlipped && "[transform:rotateY(180deg)]"
-                    )}
+                    className="h-56 perspective cursor-pointer transition-all duration-300 hover:scale-105"
+                    onClick={(e) => toggleFlipped(card.id, e)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault()
+                        toggleFlipped(card.id, e)
+                      }
+                    }}
+                    aria-label="Toggle card front/back view"
                   >
-                    {/* Front */}
                     <div
                       className={cn(
-                        "absolute inset-0 w-full h-full rounded-lg p-6 bg-gradient-to-br from-primary to-primary/80 text-white flex flex-col justify-between [backface-visibility:hidden]",
-                        "shadow-lg border border-primary/20"
+                        "relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d]",
+                        isFlipped && "[transform:rotateY(180deg)]"
                       )}
                     >
-                      <div className="flex justify-between items-start">
-                        <div className="text-2xl font-bold tracking-widest">
-                          {getNetworkIcon(card.network)}
+                      {/* Front */}
+                      <div
+                        className={cn(
+                          "absolute inset-0 w-full h-full rounded-2xl p-6 text-white flex flex-col justify-between [backface-visibility:hidden]",
+                          "shadow-2xl border border-white/10 backdrop-blur-sm",
+                          "bg-gradient-to-br",
+                          getNetworkGradient(card.network)
+                        )}
+                      >
+                        <div className="flex justify-between items-start">
+                          <Chip className="size-8 text-white/80" />
+                          <div className="text-xs font-semibold uppercase tracking-widest opacity-80">
+                            {card.network}
+                          </div>
                         </div>
-                        <div className="text-xs font-semibold uppercase opacity-75">
-                          {card.network}
-                        </div>
-                      </div>
 
-                      <div className="space-y-4">
-                        <div>
-                          <p className="text-xs opacity-75 mb-2">Card Number</p>
-                          <p className="font-mono text-xl tracking-widest">
-                            {isRevealed ? formatCardNumber(card.cardNumber) : maskCardNumber(card.cardNumber)}
-                          </p>
-                        </div>
-
-                        <div className="flex justify-between items-end">
+                        <div className="space-y-5">
                           <div>
-                            <p className="text-xs opacity-75">Cardholder</p>
-                            <p className="font-semibold">{card.cardholderName}</p>
+                            <p className="text-xs opacity-70 mb-2 font-medium tracking-wide">
+                              Card Number
+                            </p>
+                            <p className="font-mono text-xl tracking-[0.3em] font-semibold">
+                              {isRevealed ? formatCardNumber(card.cardNumber) : maskCardNumber(card.cardNumber)}
+                            </p>
                           </div>
-                          <div className="text-right">
-                            <p className="text-xs opacity-75">Expires</p>
-                            <p className="font-mono">{card.expiryDate}</p>
+
+                          <div className="flex justify-between items-end pt-4 border-t border-white/10">
+                            <div>
+                              <p className="text-xs opacity-70 mb-1 font-medium">Cardholder</p>
+                              <p className="font-semibold text-sm">{card.cardholderName}</p>
+                            </div>
+                            <div className="text-right">
+                              <p className="text-xs opacity-70 mb-1 font-medium">Expires</p>
+                              <p className="font-mono text-sm font-semibold">{card.expiryDate}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Back */}
+                      <div
+                        className={cn(
+                          "absolute inset-0 w-full h-full rounded-2xl p-6 flex flex-col justify-center [backface-visibility:hidden] [transform:rotateY(180deg)]",
+                          "shadow-2xl border border-border bg-gradient-to-br from-muted to-muted/80"
+                        )}
+                      >
+                        <div className="space-y-6">
+                          <div className="bg-muted-foreground/20 h-12 rounded w-full" />
+                          <div className="flex justify-end">
+                            <div className="bg-background h-10 w-20 rounded flex items-center justify-center border border-border">
+                              <span className="text-xs font-bold text-muted-foreground">
+                                {card.cvv}
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
 
-                    {/* Back */}
-                    <div
-                      className={cn(
-                        "absolute inset-0 w-full h-full rounded-lg p-6 bg-gradient-to-br from-muted to-muted/80 flex flex-col justify-center [backface-visibility:hidden] [transform:rotateY(180deg)]",
-                        "shadow-lg border border-border"
-                      )}
-                    >
-                      <div className="space-y-4">
-                        <div className="bg-card h-12 rounded" />
-                        <div className="flex justify-end">
-                          <div className="bg-muted-foreground/20 h-8 w-16 rounded flex items-center justify-center">
-                            <span className="text-xs font-semibold">{card.cvv}</span>
-                          </div>
-                        </div>
-                      </div>
+                  {/* Details Grid - Premium Layout */}
+                  <div className="grid grid-cols-2 gap-6 py-4 border-y">
+                    <div className="space-y-1">
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                        Card Number
+                      </p>
+                      <p className="font-mono text-sm font-semibold text-foreground">
+                        {isRevealed ? formatCardNumber(card.cardNumber) : maskCardNumber(card.cardNumber)}
+                      </p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                        Expires
+                      </p>
+                      <p className="font-semibold text-sm">{card.expiryDate}</p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                        Cardholder
+                      </p>
+                      <p className="font-semibold text-sm">{card.cardholderName}</p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                        Network
+                      </p>
+                      <p className="font-semibold text-sm capitalize">{card.network}</p>
                     </div>
                   </div>
-                </div>
 
-                {/* Card Details */}
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="text-muted-foreground text-xs">Card Number</p>
-                    <p className="font-mono font-semibold">
-                      {isRevealed ? formatCardNumber(card.cardNumber) : maskCardNumber(card.cardNumber)}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground text-xs">Expires</p>
-                    <p className="font-semibold">{card.expiryDate}</p>
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground text-xs">Cardholder</p>
-                    <p className="font-semibold">{card.cardholderName}</p>
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground text-xs">Network</p>
-                    <p className="font-semibold capitalize">{card.network}</p>
-                  </div>
-                </div>
-
-                {/* Delete Button */}
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={(e) => handleDelete(card.id, e)}
-                  className="w-full"
-                >
-                  <Trash2 className="size-4 mr-2" />
-                  Delete Card
-                </Button>
-              </CardContent>
-            )}
-          </Card>
+                  {/* Delete Button - Premium Style */}
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={(e) => handleDelete(card.id, e)}
+                    className="w-full transition-all duration-300 hover:scale-105 active:scale-95"
+                  >
+                    <Trash2 className="size-4 mr-2" />
+                    Delete Card
+                  </Button>
+                </CardContent>
+              )}
+            </Card>
+          </div>
         )
       })}
     </div>
