@@ -1,4 +1,4 @@
-import { ComponentExample } from "@/app/docs/_components/component-example"
+import { BlockPreview } from "@/app/docs/_components/block-preview"
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
@@ -41,11 +41,9 @@ export default function AdminDashboardPage() {
       </DocsSection>
 
       <DocsSection id="example" title="Example">
-        <div className="bg-muted/30 rounded-lg overflow-hidden border">
-          <ComponentExample source={readSource("ui/blocks/AdminDashboard/default.tsx")}>
-            <AdminDashboard />
-          </ComponentExample>
-        </div>
+        <BlockPreview source={readSource("ui/blocks/AdminDashboard/default.tsx")} title="Admin Dashboard">
+          <AdminDashboard />
+        </BlockPreview>
       </DocsSection>
 
       <DocsSection id="architecture" title="Architecture">
