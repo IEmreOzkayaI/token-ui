@@ -47,6 +47,7 @@ export const docsNav: NavSection[] = [
       { label: "Combobox", href: "/docs/ui/components/combobox" },
       { label: "Command", href: "/docs/ui/components/command" },
       { label: "Context Menu", href: "/docs/ui/components/context-menu" },
+      { label: "DataTable", href: "/docs/ui/components/datatable" },
       { label: "Dialog", href: "/docs/ui/components/dialog" },
       { label: "Direction", href: "/docs/ui/components/direction" },
       { label: "Drawer", href: "/docs/ui/components/drawer" },

@@ -146,6 +146,12 @@ function ListField({
               type="text"
               value={item}
               onChange={(e) => update(i, e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault()
+                  setItems([...items, ""])
+                }
+              }}
               placeholder={placeholder}
               className="flex h-9 w-full rounded-sm border bg-transparent px-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-foreground/20 focus:ring-1 focus:ring-ring"
             />
@@ -216,6 +222,7 @@ export default function DeriveVariantPage() {
   const c = component || "{bileşen}"
   const v = variant || "{varyant_adı}"
   const variantOptions = component ? COMMON_VARIANTS : []
+  const baseVariant = variant || "demo"
 
   const prompt = `Token UI design system projesinde çalışıyorum.
 GitHub: https://github.com/IEmreOzkayaI/token-ui
@@ -224,7 +231,7 @@ GitHub: https://github.com/IEmreOzkayaI/token-ui
 **Bileşen:** ${c}
 **Varyant:** ${v}
 
-\`ui/components/${c}/demo.tsx\` dosyasını baz al.
+\`ui/components/${c}/${baseVariant}.tsx\` dosyasını baz al.
 Üzerine şu özellikleri ekle:
 
 ${list}

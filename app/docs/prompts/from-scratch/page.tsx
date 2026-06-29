@@ -146,6 +146,12 @@ function ListField({
               type="text"
               value={item}
               onChange={(e) => update(i, e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault()
+                  setItems([...items, ""])
+                }
+              }}
               placeholder={placeholder}
               className="flex h-9 w-full rounded-sm border bg-transparent px-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-foreground/20 focus:ring-1 focus:ring-ring"
             />

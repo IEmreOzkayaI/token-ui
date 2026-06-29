@@ -11,6 +11,7 @@ import CardEdgeToEdge from "@/ui/components/card/edge-to-edge"
 import CardImage from "@/ui/components/card/image"
 import CardMonthlyOverview from "@/ui/components/card/monthly-overview"
 import CardPaymentMethod from "@/ui/components/card/payment-method"
+import CardProduct from "@/ui/components/card/product"
 import CardSmall from "@/ui/components/card/small"
 import CardSpacing from "@/ui/components/card/spacing"
 import CardWalletSummary from "@/ui/components/card/wallet-summary"
@@ -78,6 +79,12 @@ const examples = [
     sourcePath: "ui/components/card/payment-method.tsx",
   },
   {
+    id: "product",
+    title: "Product",
+    component: CardProduct,
+    sourcePath: "ui/components/card/product.tsx",
+  },
+  {
     id: "monthly-overview",
     title: "Monthly Overview",
     component: CardMonthlyOverview,
@@ -89,17 +96,7 @@ const toc = [
   { id: "installation", title: "Installation" },
   { id: "usage", title: "Usage" },
   { id: "examples", title: "Examples" },
-  { id: "demo", title: "Demo", depth: 3 },
-  { id: "edge-to-edge", title: "Edge To Edge", depth: 3 },
-  { id: "image", title: "Image", depth: 3 },
-  { id: "small", title: "Small", depth: 3 },
-  { id: "spacing", title: "Spacing", depth: 3 },
-  { id: "wallet-summary", title: "Wallet Summary", depth: 3 },
-  { id: "weather", title: "Weather", depth: 3 },
-  { id: "cargo-tracker", title: "Cargo Tracker", depth: 3 },
-  { id: "device-status", title: "Device Status", depth: 3 },
-  { id: "payment-method", title: "Payment Method", depth: 3 },
-  { id: "monthly-overview", title: "Monthly Overview", depth: 3 },
+  ...examples.map((ex) => ({ id: ex.id, title: ex.title, depth: 3 })),
 ]
 
 export default function CardPage() {
