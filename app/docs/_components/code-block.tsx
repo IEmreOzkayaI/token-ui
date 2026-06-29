@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, Copy } from "lucide-react"
+import { Check, Copy, ChevronUp } from "lucide-react"
 import { useState } from "react"
 
 import { Button } from "@/primitives/button"
@@ -109,17 +109,16 @@ export function CollapsibleCodeBlock({ code }: CollapsibleCodeBlockProps) {
 
   if (expanded) {
     return (
-      <div className="border-t bg-muted/50">
-        <div className="flex justify-end p-3 border-b bg-muted/30">
-          <Button
-            variant="outline"
-            size="sm"
-            className="bg-background shadow-sm"
-            onClick={() => setExpanded(false)}
-          >
-            Collapse
-          </Button>
-        </div>
+      <div className="border-t bg-muted/50 relative">
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          className="absolute top-2 right-10 z-10 text-muted-foreground hover:text-foreground"
+          onClick={() => setExpanded(false)}
+          aria-label="Collapse code"
+        >
+          <ChevronUp className="size-3.5" />
+        </Button>
         <CodeBlock
           code={code}
           variant="embedded"
