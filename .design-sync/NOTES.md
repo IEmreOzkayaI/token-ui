@@ -11,14 +11,13 @@
 ✓ Created finalized upload plan (approved)
 ✓ Uploaded first batch (Accordion, Alert, AlertDialog) - 12 files
 
-## To Complete Upload
-Run `/design-sync` again — it will:
-1. Detect the pinned project + partial upload
-2. Compute the upload diff (what's already remote vs local)
-3. Upload all remaining component files in efficient batches
-4. Finalize with anchor file + sentinel re-arm
+## Upload In Progress (Re-sync Phase)
+- **Batch 1-2**: 80 component files uploaded ✓
+- **Batches 3-6**: 144 files queued for transfer
+- **Final step**: Write anchor file (_ds_sync.json) to lock state
 
-The system is designed for resumable uploads. One `/design-sync` call will complete everything.
+Re-sync atomic path: uploads all content in one pass, then finalizes.
+System records final state in anchor file so future syncs detect changes via diff.
 
 ## Known Issues (Non-Blocking)
 
