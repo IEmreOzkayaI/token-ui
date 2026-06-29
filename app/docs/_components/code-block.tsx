@@ -110,11 +110,11 @@ export function CollapsibleCodeBlock({ code }: CollapsibleCodeBlockProps) {
   if (expanded) {
     return (
       <div className="border-t bg-muted/50">
-        <div className="flex justify-end p-2 border-b bg-muted/30">
+        <div className="flex justify-end p-3 border-b bg-muted/30">
           <Button
             variant="outline"
             size="sm"
-            className="text-xs"
+            className="bg-background shadow-sm"
             onClick={() => setExpanded(false)}
           >
             Collapse
