@@ -61,5 +61,6 @@
     "ToggleGroup": "ui/primitives/toggle-group.tsx",
     "Toggle": "ui/primitives/toggle.tsx",
     "Tooltip": "ui/primitives/tooltip.tsx"
-  }
+  },
+  "readmeHeader": ".design-sync/conventions.md"
 }
