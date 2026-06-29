@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { ChevronDown, Eye, EyeOff, Trash2, CreditCard, Lock } from "lucide-react"
 import { Button } from "@/primitives/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/primitives/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/primitives/card"
 import { cn } from "@/lib/utils"
 
 interface CreditCardData {
@@ -27,37 +27,24 @@ export default function CreditCardList({
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set())
   const [revealedCards, setRevealedCards] = useState<Set<string>>(new Set())
   const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set())
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null)
 
   const toggleExpanded = (id: string) => {
     const newExpanded = new Set(expandedCards)
-    if (newExpanded.has(id)) {
-      newExpanded.delete(id)
-    } else {
-      newExpanded.add(id)
-    }
+    newExpanded.has(id) ? newExpanded.delete(id) : newExpanded.add(id)
     setExpandedCards(newExpanded)
   }
 
   const toggleRevealed = (id: string, e: React.MouseEvent) => {
     e.stopPropagation()
     const newRevealed = new Set(revealedCards)
-    if (newRevealed.has(id)) {
-      newRevealed.delete(id)
-    } else {
-      newRevealed.add(id)
-    }
+    newRevealed.has(id) ? newRevealed.delete(id) : newRevealed.add(id)
     setRevealedCards(newRevealed)
   }
 
   const toggleFlipped = (id: string, e: React.MouseEvent) => {
     e.stopPropagation()
     const newFlipped = new Set(flippedCards)
-    if (newFlipped.has(id)) {
-      newFlipped.delete(id)
-    } else {
-      newFlipped.add(id)
-    }
+    newFlipped.has(id) ? newFlipped.delete(id) : newFlipped.add(id)
     setFlippedCards(newFlipped)
   }
 
@@ -66,16 +53,29 @@ export default function CreditCardList({
     onDelete?.(id)
   }
 
-  const getNetworkGradient = (network: string) => {
+  const getNetworkBgColor = (network: string) => {
     switch (network) {
       case "visa":
-        return "from-blue-600 to-blue-700"
+        return "from-blue-500 via-blue-600 to-blue-700"
       case "mastercard":
-        return "from-red-600 to-orange-600"
+        return "from-red-500 via-orange-500 to-orange-600"
       case "amex":
-        return "from-green-700 to-teal-700"
+        return "from-emerald-600 via-teal-600 to-teal-700"
       default:
-        return "from-slate-600 to-slate-700"
+        return "from-slate-500 to-slate-700"
+    }
+  }
+
+  const getBadgeBg = (network: string) => {
+    switch (network) {
+      case "visa":
+        return "bg-blue-600"
+      case "mastercard":
+        return "bg-red-600"
+      case "amex":
+        return "bg-emerald-700"
+      default:
+        return "bg-slate-600"
     }
   }
 
@@ -102,12 +102,11 @@ export default function CreditCardList({
   }
 
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-3">
       {cards.map((card, idx) => {
         const isExpanded = expandedCards.has(card.id)
         const isRevealed = revealedCards.has(card.id)
         const isFlipped = flippedCards.has(card.id)
-        const isHovered = hoveredCard === card.id
 
         return (
           <div
@@ -118,12 +117,10 @@ export default function CreditCardList({
             <Card
               className={cn(
                 "cursor-pointer transition-all overflow-hidden",
-                "hover:shadow-lg hover:border-primary/30",
-                isExpanded && "ring-2 ring-primary/20"
+                "hover:shadow-xl hover:border-primary/40",
+                isExpanded && "ring-2 ring-primary/30 shadow-lg"
               )}
               onClick={() => toggleExpanded(card.id)}
-              onMouseEnter={() => setHoveredCard(card.id)}
-              onMouseLeave={() => setHoveredCard(null)}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -135,57 +132,41 @@ export default function CreditCardList({
               aria-expanded={isExpanded}
               aria-label={`Credit card ending in ${card.cardNumber.slice(-4)}`}
             >
-              {/* Summary - Premium Style */}
-              <CardHeader className="pb-4 relative overflow-hidden">
-                <div
-                  className={cn(
-                    "absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-300",
-                    getNetworkGradient(card.network),
-                    isHovered && "opacity-5"
-                  )}
-                />
-                <div className="relative flex items-center justify-between">
-                  <div className="flex items-center gap-4 flex-1">
-                    {/* Premium Network Badge */}
+              {/* Summary */}
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between gap-4">
+                  {/* Badge + Info */}
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
                     <div
                       className={cn(
-                        "w-14 h-14 rounded-lg bg-gradient-to-br shadow-md",
-                        "flex items-center justify-center font-bold text-white text-sm",
-                        "transition-transform duration-300",
-                        isHovered && "scale-110"
+                        "w-12 h-12 rounded-lg flex items-center justify-center",
+                        "font-bold text-white text-xs shadow-md flex-shrink-0",
+                        "transition-transform duration-300 hover:scale-110",
+                        getBadgeBg(card.network)
                       )}
-                      style={{
-                        backgroundImage: `linear-gradient(135deg, var(--primary), var(--secondary))`,
-                      }}
                     >
                       {getNetworkIcon(card.network)}
                     </div>
-
-                    {/* Card Info */}
-                    <div className="flex-1 min-w-0 space-y-1">
-                      <CardTitle className="text-base font-semibold">
+                    <div className="flex-1 min-w-0">
+                      <CardTitle className="text-sm font-semibold truncate">
                         {card.cardholderName}
                       </CardTitle>
-                      <div className="flex items-center gap-2">
-                        <code className="font-mono text-sm tracking-widest text-muted-foreground transition-all duration-300">
+                      <div className="flex items-center gap-1.5 mt-1">
+                        <code className="font-mono text-xs text-muted-foreground">
                           {isRevealed ? formatCardNumber(card.cardNumber) : maskCardNumber(card.cardNumber)}
                         </code>
-                        <Lock className="size-3.5 text-muted-foreground/70" />
+                        <Lock className="size-3 text-muted-foreground/70 flex-shrink-0" />
                       </div>
                     </div>
                   </div>
 
-                  {/* Premium Actions */}
-                  <div className="flex items-center gap-1">
+                  {/* Actions */}
+                  <div className="flex items-center gap-0.5 flex-shrink-0">
                     <Button
                       variant="ghost"
                       size="icon"
                       onClick={(e) => toggleRevealed(card.id, e)}
-                      aria-label={isRevealed ? "Hide card number" : "Show card number"}
-                      className={cn(
-                        "transition-colors duration-300",
-                        "hover:text-primary hover:bg-primary/10"
-                      )}
+                      className="h-8 w-8 hover:bg-primary/10 hover:text-primary"
                     >
                       {isRevealed ? (
                         <EyeOff className="size-4" />
@@ -193,16 +174,14 @@ export default function CreditCardList({
                         <Eye className="size-4" />
                       )}
                     </Button>
-
                     <Button
                       variant="ghost"
                       size="icon"
                       onClick={(e) => toggleExpanded(card.id, e)}
                       className={cn(
-                        "transition-transform duration-500",
+                        "h-8 w-8 transition-transform duration-300",
                         isExpanded && "rotate-180"
                       )}
-                      aria-label={isExpanded ? "Collapse card details" : "Expand card details"}
                     >
                       <ChevronDown className="size-4" />
                     </Button>
@@ -210,22 +189,16 @@ export default function CreditCardList({
                 </div>
               </CardHeader>
 
-              {/* Expanded Content - Premium Design */}
+              {/* Expanded */}
               {isExpanded && (
-                <CardContent className="space-y-6 pt-0 border-t animate-in fade-in duration-300">
-                  {/* 3D Card Illustration */}
+                <CardContent className="space-y-5 pt-0 border-t animate-in fade-in duration-300">
+                  {/* Card 3D */}
                   <div
-                    className="h-56 perspective cursor-pointer transition-all duration-300 hover:scale-105"
+                    className={cn(
+                      "h-52 perspective cursor-pointer transition-transform duration-300",
+                      "rounded-xl overflow-hidden hover:shadow-lg"
+                    )}
                     onClick={(e) => toggleFlipped(card.id, e)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault()
-                        toggleFlipped(card.id, e)
-                      }
-                    }}
-                    aria-label="Toggle card front/back view"
                   >
                     <div
                       className={cn(
@@ -236,37 +209,33 @@ export default function CreditCardList({
                       {/* Front */}
                       <div
                         className={cn(
-                          "absolute inset-0 w-full h-full rounded-2xl p-6 text-white flex flex-col justify-between [backface-visibility:hidden]",
-                          "shadow-2xl border border-white/10 backdrop-blur-sm",
+                          "absolute inset-0 rounded-xl p-5 text-white flex flex-col justify-between",
+                          "[backface-visibility:hidden] shadow-xl border border-white/20",
                           "bg-gradient-to-br",
-                          getNetworkGradient(card.network)
+                          getNetworkBgColor(card.network)
                         )}
                       >
                         <div className="flex justify-between items-start">
-                          <CreditCard className="size-8 text-white/80" />
-                          <div className="text-xs font-semibold uppercase tracking-widest opacity-80">
+                          <CreditCard className="size-7" />
+                          <div className="text-xs font-bold uppercase opacity-80">
                             {card.network}
                           </div>
                         </div>
-
-                        <div className="space-y-5">
+                        <div className="space-y-4">
                           <div>
-                            <p className="text-xs opacity-70 mb-2 font-medium tracking-wide">
-                              Card Number
-                            </p>
-                            <p className="font-mono text-xl tracking-[0.3em] font-semibold">
+                            <p className="text-xs opacity-75 mb-1 font-medium">Card Number</p>
+                            <p className="font-mono text-lg tracking-[0.2em] font-semibold">
                               {isRevealed ? formatCardNumber(card.cardNumber) : maskCardNumber(card.cardNumber)}
                             </p>
                           </div>
-
-                          <div className="flex justify-between items-end pt-4 border-t border-white/10">
+                          <div className="flex justify-between items-end pt-2 border-t border-white/20">
                             <div>
-                              <p className="text-xs opacity-70 mb-1 font-medium">Cardholder</p>
-                              <p className="font-semibold text-sm">{card.cardholderName}</p>
+                              <p className="text-xs opacity-75 mb-0.5 font-medium">Cardholder</p>
+                              <p className="text-sm font-semibold">{card.cardholderName}</p>
                             </div>
                             <div className="text-right">
-                              <p className="text-xs opacity-70 mb-1 font-medium">Expires</p>
-                              <p className="font-mono text-sm font-semibold">{card.expiryDate}</p>
+                              <p className="text-xs opacity-75 mb-0.5 font-medium">Expires</p>
+                              <p className="text-sm font-semibold">{card.expiryDate}</p>
                             </div>
                           </div>
                         </div>
@@ -275,17 +244,16 @@ export default function CreditCardList({
                       {/* Back */}
                       <div
                         className={cn(
-                          "absolute inset-0 w-full h-full rounded-2xl p-6 flex flex-col justify-center [backface-visibility:hidden] [transform:rotateY(180deg)]",
-                          "shadow-2xl border border-border bg-gradient-to-br from-muted to-muted/80"
+                          "absolute inset-0 rounded-xl p-5 flex flex-col justify-center",
+                          "[backface-visibility:hidden] [transform:rotateY(180deg)]",
+                          "shadow-xl border border-border bg-muted"
                         )}
                       >
-                        <div className="space-y-6">
-                          <div className="bg-muted-foreground/20 h-12 rounded w-full" />
+                        <div className="space-y-4">
+                          <div className="bg-muted-foreground/30 h-10 rounded" />
                           <div className="flex justify-end">
-                            <div className="bg-background h-10 w-20 rounded flex items-center justify-center border border-border">
-                              <span className="text-xs font-bold text-muted-foreground">
-                                {card.cvv}
-                              </span>
+                            <div className="bg-background h-8 w-16 rounded flex items-center justify-center text-xs font-bold">
+                              {card.cvv}
                             </div>
                           </div>
                         </div>
@@ -293,42 +261,42 @@ export default function CreditCardList({
                     </div>
                   </div>
 
-                  {/* Details Grid - Premium Layout */}
-                  <div className="grid grid-cols-2 gap-6 py-4 border-y">
-                    <div className="space-y-1">
-                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                        Card Number
+                  {/* Details Grid */}
+                  <div className="grid grid-cols-2 gap-5 py-3 border-y text-sm">
+                    <div>
+                      <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">
+                        Number
                       </p>
-                      <p className="font-mono text-sm font-semibold text-foreground">
+                      <p className="font-mono font-semibold text-foreground">
                         {isRevealed ? formatCardNumber(card.cardNumber) : maskCardNumber(card.cardNumber)}
                       </p>
                     </div>
-                    <div className="space-y-1">
-                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                    <div>
+                      <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">
                         Expires
                       </p>
-                      <p className="font-semibold text-sm">{card.expiryDate}</p>
+                      <p className="font-semibold">{card.expiryDate}</p>
                     </div>
-                    <div className="space-y-1">
-                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                    <div>
+                      <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">
                         Cardholder
                       </p>
-                      <p className="font-semibold text-sm">{card.cardholderName}</p>
+                      <p className="font-semibold">{card.cardholderName}</p>
                     </div>
-                    <div className="space-y-1">
-                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                    <div>
+                      <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">
                         Network
                       </p>
-                      <p className="font-semibold text-sm capitalize">{card.network}</p>
+                      <p className="font-semibold capitalize">{card.network}</p>
                     </div>
                   </div>
 
-                  {/* Delete Button - Premium Style */}
+                  {/* Delete */}
                   <Button
                     variant="destructive"
                     size="sm"
                     onClick={(e) => handleDelete(card.id, e)}
-                    className="w-full transition-all duration-300 hover:scale-105 active:scale-95"
+                    className="w-full h-8 transition-all duration-200 hover:scale-105 active:scale-95"
                   >
                     <Trash2 className="size-4 mr-2" />
                     Delete Card
