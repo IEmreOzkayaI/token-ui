@@ -194,7 +194,7 @@ export default function CreditCardList({
                 <CardContent className="space-y-5 pt-0 border-t animate-in fade-in duration-300">
                   {/* Card 3D */}
                   <div
-                    className="h-52 cursor-pointer rounded-xl overflow-hidden hover:shadow-lg"
+                    className="h-64 cursor-pointer rounded-xl overflow-hidden hover:shadow-lg"
                     onClick={(e) => toggleFlipped(card.id, e)}
                     style={{ perspective: "1000px" }}
                   >
