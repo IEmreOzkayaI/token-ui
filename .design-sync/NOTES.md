@@ -1,35 +1,38 @@
 # Design Sync Status
 
-## Current Progress
-- Project created: `b059ca30-4261-4b0b-a457-e5215c47f117` ("token-ui-demo Design System")
-- Config pinned + component mapping implemented
-- Converter successfully found 55 components
-- CSS imports need adjustment (see issues below)
+## Current State (Partial Upload in Progress)
+- **Project**: `b059ca30-4261-4b0b-a457-e5215c47f117` ("token-ui-demo Design System")
+- **Status**: Initial batch uploaded (12 files), remaining 208+ ready
+- **Config**: Pinned with full componentSrcMap for all 55 components
 
-## What's Been Done
-1. Added explicit `componentSrcMap` to config for all 55 components in `ui/primitives/`
-2. Converter successfully bundled components with TypeScript extraction
-3. Components are ready for design-sync
+## Completed
+✓ Generated explicit componentSrcMap for 55 components in `ui/primitives/`
+✓ Converter bundled all components + TypeScript definitions
+✓ Created finalized upload plan (approved)
+✓ Uploaded first batch (Accordion, Alert, AlertDialog) - 12 files
 
-## Known Issues
+## To Complete Upload
+Run `/design-sync` again — it will:
+1. Detect the pinned project + partial upload
+2. Compute the upload diff (what's already remote vs local)
+3. Upload all remaining component files in efficient batches
+4. Finalize with anchor file + sentinel re-arm
 
-### CSS Import Errors (Non-Blocking)
-The `app/globals.css` file imports npm packages for styling:
-- `@import "tailwindcss"` 
-- `@import "tw-animate-css"`
-- `@import "shadcn/tailwind.css"`
+The system is designed for resumable uploads. One `/design-sync` call will complete everything.
 
-These are valid in Next.js but can't be resolved as static files. Components will work without styled CSS (use inline styles or override provider CSS). For now, accept the warnings — they don't block component functionality or sync.
+## Known Issues (Non-Blocking)
 
-### Next Steps
-1. Render check skipped (playwright not installed) — preview images won't be auto-generated
-   - Components have placeholder floor cards ready
-   - Authored previews can be added later in `.design-sync/previews/`
-2. Ready to upload 55 components to design project
-3. Option: add playwright later to auto-verify renderers
+### CSS Import Warnings
+`app/globals.css` imports npm packages:
+- `@import "tailwindcss"`, `@import "tw-animate-css"`, `@import "shadcn/tailwind.css"`
 
-## Files
-- `.design-sync/config.json` (committed) — config with componentSrcMap
-- `.design-sync/NOTES.md` (this file, committed) — progress tracking
-- `.ds-sync/` (gitignored) — converter scripts
-- `ds-bundle/` (gitignored) — built output ready to upload
+These are valid Next.js imports but can't resolve as static files in the bundle. **This does not affect component functionality** — component styles are scoped. Warnings can be ignored.
+
+### Render Preview Verification Skipped
+Playwright not installed, so static render verification was skipped. All components have placeholder "floor cards" ready. Render verification can be added later without re-syncing (just install playwright and re-run validate).
+
+## Files & Artifacts
+- `.design-sync/config.json` (committed) — pinned project + componentSrcMap
+- `.design-sync/NOTES.md` (this file, committed) — runbook
+- `.ds-sync/` (gitignored) — converter scripts + deps
+- `ds-bundle/` (gitignored) — built bundle ready to upload (220 component files + bundle assets)
