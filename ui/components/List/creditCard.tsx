@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, Eye, EyeOff, Trash2, Chip, Lock } from "lucide-react"
+import { ChevronDown, Eye, EyeOff, Trash2, CreditCard, Lock } from "lucide-react"
 import { Button } from "@/primitives/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/primitives/card"
 import { cn } from "@/lib/utils"
@@ -243,7 +243,7 @@ export default function CreditCardList({
                         )}
                       >
                         <div className="flex justify-between items-start">
-                          <Chip className="size-8 text-white/80" />
+                          <CreditCard className="size-8 text-white/80" />
                           <div className="text-xs font-semibold uppercase tracking-widest opacity-80">
                             {card.network}
                           </div>
