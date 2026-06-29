@@ -90,6 +90,12 @@ export const docsNav: NavSection[] = [
     ],
   },
   {
+    title: "Blocks",
+    items: [
+      { label: "Admin Dashboard", href: "/docs/ui/blocks/admin-dashboard" },
+    ],
+  },
+  {
     title: "Prompts",
     items: [
       { label: "Derive variant", href: "/docs/prompts/derive-variant" },
