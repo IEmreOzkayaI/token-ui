@@ -4,7 +4,7 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { readSource } from "@/app/docs/_lib/read-source"
-import MessageDefault from "@/ui/components/message/default"
+import MessageDefault from "@/ui/components/Message/default"
 
 const examples = [
   {
