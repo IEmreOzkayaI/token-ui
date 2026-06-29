@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
       { hostname: "github.com" },
     ],
   },
+  experimental: {
+    turbopack: {
+      root: __dirname,
+    },
+  },
 };
 
 export default nextConfig;
