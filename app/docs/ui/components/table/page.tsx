@@ -8,6 +8,7 @@ import TableActions from "@/ui/components/table/actions"
 import TableDemo from "@/ui/components/table/demo"
 import TableFooterExample from "@/ui/components/table/footer"
 import TableCustom from "@/ui/components/table/custom"
+import TableCollapsible from "@/ui/components/table/collapsible"
 
 const examples = [
   {
@@ -34,6 +35,12 @@ const examples = [
     component: TableCustom,
     sourcePath: "ui/components/table/custom.tsx",
   },
+  {
+    id: "collapsible",
+    title: "Collapsible",
+    component: TableCollapsible,
+    sourcePath: "ui/components/table/collapsible.tsx",
+  },
 ] as const
 
 const toc = [
@@ -44,6 +51,7 @@ const toc = [
   { id: "demo", title: "Demo", depth: 3 },
   { id: "footer", title: "Footer", depth: 3 },
   { id: "custom", title: "Custom", depth: 3 },
+  { id: "collapsible", title: "Collapsible", depth: 3 },
 ]
 
 export default function TablePage() {
