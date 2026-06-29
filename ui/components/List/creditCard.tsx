@@ -56,26 +56,26 @@ export default function CreditCardList({
   const getNetworkBgColor = (network: string) => {
     switch (network) {
       case "visa":
-        return "from-blue-500 via-blue-600 to-blue-700"
+        return "bg-gradient-to-br from-primary via-primary to-primary/80"
       case "mastercard":
-        return "from-red-500 via-orange-500 to-orange-600"
+        return "bg-gradient-to-br from-destructive via-destructive to-destructive/80"
       case "amex":
-        return "from-emerald-600 via-teal-600 to-teal-700"
+        return "bg-gradient-to-br from-success via-success to-success/80"
       default:
-        return "from-slate-500 to-slate-700"
+        return "bg-gradient-to-br from-muted-foreground to-muted-foreground/80"
     }
   }
 
   const getBadgeBg = (network: string) => {
     switch (network) {
       case "visa":
-        return "bg-blue-600"
+        return "bg-primary"
       case "mastercard":
-        return "bg-red-600"
+        return "bg-destructive"
       case "amex":
-        return "bg-emerald-700"
+        return "bg-success"
       default:
-        return "bg-slate-600"
+        return "bg-muted-foreground"
     }
   }
 
