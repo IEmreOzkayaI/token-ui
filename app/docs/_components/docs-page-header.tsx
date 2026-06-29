@@ -4,6 +4,7 @@ import { Check, Copy } from "lucide-react"
 import { ReactNode, useState } from "react"
 
 import { Button } from "@/primitives/button"
+import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { cn } from "@/lib/utils"
 
 type DocsPageHeaderProps = {
@@ -22,7 +23,8 @@ export function DocsPageHeader({
   const [copied, setCopied] = useState(false)
 
   async function copyPage() {
-    await navigator.clipboard.writeText(window.location.href)
+    const ok = await copyToClipboard(window.location.href)
+    if (!ok) return
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }

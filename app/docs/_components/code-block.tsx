@@ -4,6 +4,7 @@ import { Check, Copy, ChevronUp } from "lucide-react"
 import { useState } from "react"
 
 import { Button } from "@/primitives/button"
+import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { cn } from "@/lib/utils"
 
 type CodeBlockProps = {
@@ -51,11 +52,19 @@ export function CodeBlock({
   variant = "standalone",
 }: CodeBlockProps) {
   const [copied, setCopied] = useState(false)
+  const [failed, setFailed] = useState(false)
 
   async function copyCode() {
-    await navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    const ok = await copyToClipboard(code)
+    if (ok) {
+      setCopied(true)
+      setFailed(false)
+      setTimeout(() => setCopied(false), 2000)
+      return
+    }
+
+    setFailed(true)
+    setTimeout(() => setFailed(false), 3000)
   }
 
   const isEmbedded = variant === "embedded"
@@ -73,7 +82,7 @@ export function CodeBlock({
               : "opacity-0 transition-opacity group-hover:opacity-100"
           )}
           onClick={copyCode}
-          aria-label="Copy code"
+          aria-label={failed ? "Copy failed" : "Copy code"}
         >
           {copied ? (
             <Check className="size-3.5 text-green-600" />

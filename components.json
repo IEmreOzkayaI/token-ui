@@ -1,12 +1,12 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "radix-vega",
+  "style": "radix-lyra",
   "rsc": true,
   "tsx": true,
   "tailwind": {
     "config": "tailwind.config.ts",
     "css": "app/globals.css",
-    "baseColor": "neutral",
+    "baseColor": "zinc",
     "cssVariables": true
   },
   "aliases": {
@@ -17,7 +17,7 @@
   },
   "iconLibrary": "lucide",
   "rtl": false,
-  "menuColor": "default",
-  "menuAccent": "subtle",
+  "menuColor": "inverted",
+  "menuAccent": "bold",
   "registries": {}
 }
