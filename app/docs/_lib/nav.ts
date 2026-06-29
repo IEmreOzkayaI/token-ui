@@ -90,6 +90,7 @@ export const docsNav: NavSection[] = [
       { label: "─ Blocks", href: "/docs/ui/blocks" },
       { label: "─ Admin Dashboard", href: "/docs/ui/blocks/admin-dashboard" },
       { label: "─ Admin Dashboard V2", href: "/docs/ui/blocks/admin-dashboard-v2" },
+      { label: "─ Admin Dashboard V3", href: "/docs/ui/blocks/admin-dashboard-v3" },
     ],
   },
   {
