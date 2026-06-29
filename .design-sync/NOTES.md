@@ -1,43 +1,35 @@
 # Design Sync Status
 
-## Current State
+## Current Progress
 - Project created: `b059ca30-4261-4b0b-a457-e5215c47f117` ("token-ui-demo Design System")
-- Config pinned to `.design-sync/config.json`
-- **Sync paused** — waiting on library structure
+- Config pinned + component mapping implemented
+- Converter successfully found 55 components
+- CSS imports need adjustment (see issues below)
 
-## What Happened
-Converter attempted to extract components from source but found 0 exports. Root cause: this is a Next.js showcase app (`app/` + internal docs site), not a published library. The converter's TypeScript parser couldn't resolve the re-export chain in `ui/index.ts → ui/primitives → individual files`.
+## What's Been Done
+1. Added explicit `componentSrcMap` to config for all 55 components in `ui/primitives/`
+2. Converter successfully bundled components with TypeScript extraction
+3. Components are ready for design-sync
 
-## Path Forward
+## Known Issues
 
-### Option 1: Create a Library Build (Recommended)
-Add a build step to output components as a standalone library:
+### CSS Import Errors (Non-Blocking)
+The `app/globals.css` file imports npm packages for styling:
+- `@import "tailwindcss"` 
+- `@import "tw-animate-css"`
+- `@import "shadcn/tailwind.css"`
 
-```json
-// package.json addition
-{
-  "scripts": {
-    "build:lib": "tsup --entry.index=ui/index.ts --format esm,cjs --dts --outDir dist"
-  }
-}
-```
+These are valid in Next.js but can't be resolved as static files. Components will work without styled CSS (use inline styles or override provider CSS). For now, accept the warnings — they don't block component functionality or sync.
 
-Then sync from `dist/` on re-run. This becomes your source of truth for external consumption.
+### Next Steps
+1. Render check skipped (playwright not installed) — preview images won't be auto-generated
+   - Components have placeholder floor cards ready
+   - Authored previews can be added later in `.design-sync/previews/`
+2. Ready to upload 55 components to design project
+3. Option: add playwright later to auto-verify renderers
 
-### Option 2: Manual Component Mapping (Workaround)
-I configure `componentSrcMap` in `.design-sync/config.json` explicitly pointing to each component file (e.g., `"Button": "ui/primitives/button.tsx"`). Converter will then find them individually. Slower but avoids build step.
-
-### Option 3: Storybook / Docs
-If you add Storybook or structured docs with live previews, switch shape to `'storybook'` and sync from there.
-
-## When Ready
-1. Choose an option above
-2. Message `/design-sync` again
-3. Sync will pick up the pinned project (no new project created) and upload to the existing one
-
-## Files Created
-- `.design-sync/config.json` (committed) — project ID pinned
-- `.ds-sync/` (gitignored) — converter scripts + deps
-- `ds-bundle/` (gitignored) — build attempt output
-
-To re-run: just change the structure (add a build, add storybook, or implement component mapping) and call `/design-sync` again.
+## Files
+- `.design-sync/config.json` (committed) — config with componentSrcMap
+- `.design-sync/NOTES.md` (this file, committed) — progress tracking
+- `.ds-sync/` (gitignored) — converter scripts
+- `ds-bundle/` (gitignored) — built output ready to upload
