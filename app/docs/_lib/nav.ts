@@ -87,12 +87,8 @@ export const docsNav: NavSection[] = [
       { label: "Toggle", href: "/docs/ui/components/toggle" },
       { label: "Toggle Group", href: "/docs/ui/components/toggle-group" },
       { label: "Tooltip", href: "/docs/ui/components/tooltip" },
-    ],
-  },
-  {
-    title: "Blocks",
-    items: [
-      { label: "Admin Dashboard", href: "/docs/ui/blocks/admin-dashboard" },
+      { label: "─ Blocks", href: "/docs/ui/blocks" },
+      { label: "─ Admin Dashboard", href: "/docs/ui/blocks/admin-dashboard" },
     ],
   },
   {
