@@ -194,26 +194,26 @@ export default function CreditCardList({
                 <CardContent className="space-y-5 pt-0 border-t animate-in fade-in duration-300">
                   {/* Card 3D */}
                   <div
-                    className={cn(
-                      "h-52 perspective cursor-pointer transition-transform duration-300",
-                      "rounded-xl overflow-hidden hover:shadow-lg"
-                    )}
+                    className="h-52 cursor-pointer rounded-xl overflow-hidden hover:shadow-lg"
                     onClick={(e) => toggleFlipped(card.id, e)}
+                    style={{ perspective: "1000px" }}
                   >
                     <div
-                      className={cn(
-                        "relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d]",
-                        isFlipped && "[transform:rotateY(180deg)]"
-                      )}
+                      className="relative w-full h-full transition-transform duration-500"
+                      style={{
+                        transformStyle: "preserve-3d",
+                        transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+                      }}
                     >
                       {/* Front */}
                       <div
                         className={cn(
                           "absolute inset-0 rounded-xl p-5 text-white flex flex-col justify-between",
-                          "[backface-visibility:hidden] shadow-xl border border-white/20",
+                          "shadow-xl border border-white/20",
                           "bg-gradient-to-br",
                           getNetworkBgColor(card.network)
                         )}
+                        style={{ backfaceVisibility: "hidden" }}
                       >
                         <div className="flex justify-between items-start">
                           <CreditCard className="size-7" />
@@ -243,11 +243,11 @@ export default function CreditCardList({
 
                       {/* Back */}
                       <div
-                        className={cn(
-                          "absolute inset-0 rounded-xl p-5 flex flex-col justify-center",
-                          "[backface-visibility:hidden] [transform:rotateY(180deg)]",
-                          "shadow-xl border border-border bg-muted"
-                        )}
+                        className="absolute inset-0 rounded-xl p-5 flex flex-col justify-center shadow-xl border border-border bg-muted"
+                        style={{
+                          backfaceVisibility: "hidden",
+                          transform: "rotateY(180deg)",
+                        }}
                       >
                         <div className="space-y-4">
                           <div className="bg-muted-foreground/30 h-10 rounded" />
