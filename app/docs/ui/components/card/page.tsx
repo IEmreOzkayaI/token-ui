@@ -12,6 +12,7 @@ import CardImage from "@/ui/components/card/image"
 import CardMonthlyOverview from "@/ui/components/card/monthly-overview"
 import CardPaymentMethod from "@/ui/components/card/payment-method"
 import CardProduct from "@/ui/components/card/product"
+import CardProfile from "@/ui/components/card/profile"
 import CardSmall from "@/ui/components/card/small"
 import CardSpacing from "@/ui/components/card/spacing"
 import CardWalletSummary from "@/ui/components/card/wallet-summary"
@@ -89,6 +90,12 @@ const examples = [
     title: "Monthly Overview",
     component: CardMonthlyOverview,
     sourcePath: "ui/components/card/monthly-overview.tsx",
+  },
+  {
+    id: "profile",
+    title: "Profile",
+    component: CardProfile,
+    sourcePath: "ui/components/card/profile.tsx",
   },
 ] as const
 
