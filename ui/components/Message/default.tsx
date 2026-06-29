@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 
 export interface MessageDefaultProps {
   variant?: "balloon" | "fullscreen"
+  isDemo?: boolean
 }
 
 interface ChatMessage {
@@ -26,7 +27,7 @@ interface ChatState {
   error: string | null
 }
 
-export default function MessageDefault({ variant = "balloon" }: MessageDefaultProps) {
+export default function MessageDefault({ variant = "balloon", isDemo = false }: MessageDefaultProps) {
   const [state, setState] = useState<ChatState>({
     open: false,
     messages: [
@@ -246,13 +247,13 @@ export default function MessageDefault({ variant = "balloon" }: MessageDefaultPr
   )
 
   return (
-    <div className="relative">
+    <div className={cn("relative", { "w-full h-96": isDemo })}>
       {/* FAB Button */}
       <Button
         size="icon"
         className={cn(
           "rounded-full shadow-lg animate-in fade-in zoom-in duration-300",
-          "fixed bottom-6 right-6 z-40"
+          isDemo ? "absolute bottom-6 right-6 z-40" : "fixed bottom-6 right-6 z-40"
         )}
         onClick={() => setState((prev) => ({ ...prev, open: !prev.open }))}
         aria-label="Sohbeti aç"
