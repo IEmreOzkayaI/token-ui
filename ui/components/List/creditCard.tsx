@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { ChevronDown, Eye, EyeOff, Trash2, CreditCard, Lock } from "lucide-react"
 import { Button } from "@/primitives/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/primitives/card"
+import { Card, CardContent, CardHeader } from "@/primitives/card"
 import { cn } from "@/lib/utils"
 
 interface CreditCardData {
@@ -53,42 +53,17 @@ export default function CreditCardList({
     onDelete?.(id)
   }
 
-  const getNetworkBgColor = (network: string) => {
-    switch (network) {
-      case "visa":
-        return "bg-gradient-to-br from-primary via-primary to-primary/80"
-      case "mastercard":
-        return "bg-gradient-to-br from-destructive via-destructive to-destructive/80"
-      case "amex":
-        return "bg-gradient-to-br from-success via-success to-success/80"
-      default:
-        return "bg-gradient-to-br from-muted-foreground to-muted-foreground/80"
-    }
-  }
-
-  const getBadgeBg = (network: string) => {
-    switch (network) {
-      case "visa":
-        return "bg-primary"
-      case "mastercard":
-        return "bg-destructive"
-      case "amex":
-        return "bg-success"
-      default:
-        return "bg-muted-foreground"
-    }
-  }
-
   const getNetworkIcon = (network: string) => {
+    const iconProps = "size-5 text-white"
     switch (network) {
       case "visa":
-        return "VI"
+        return <CreditCard className={iconProps} />
       case "mastercard":
-        return "MC"
+        return <CreditCard className={iconProps} />
       case "amex":
-        return "AX"
+        return <CreditCard className={iconProps} />
       default:
-        return "CC"
+        return <CreditCard className={iconProps} />
     }
   }
 
@@ -117,9 +92,9 @@ export default function CreditCardList({
             <Card
               className={cn(
                 "cursor-pointer transition-all overflow-hidden",
-                "hover:shadow-xl hover:border-primary/40",
-                isExpanded && "ring-2 ring-primary/30 shadow-lg"
+                "hover:border-[color:var(--primary)] hover:shadow-lg"
               )}
+              style={{ boxShadow: isExpanded ? "var(--shadow-lg)" : undefined }}
               onClick={() => toggleExpanded(card.id)}
               role="button"
               tabIndex={0}
@@ -135,27 +110,28 @@ export default function CreditCardList({
               {/* Summary */}
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between gap-4">
-                  {/* Badge + Info */}
                   <div className="flex items-center gap-3 flex-1 min-w-0">
+                    {/* Badge with network icon */}
                     <div
-                      className={cn(
-                        "w-12 h-12 rounded-lg flex items-center justify-center",
-                        "font-bold text-white text-xs shadow-md flex-shrink-0",
-                        "transition-transform duration-300 hover:scale-110",
-                        getBadgeBg(card.network)
-                      )}
+                      className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:scale-110"
+                      style={{
+                        backgroundColor: "var(--primary)",
+                        boxShadow: "var(--shadow-md)",
+                      }}
                     >
                       {getNetworkIcon(card.network)}
                     </div>
+
+                    {/* Card info */}
                     <div className="flex-1 min-w-0">
-                      <CardTitle className="text-sm font-semibold truncate">
+                      <p className="text-sm font-semibold truncate" style={{ color: "var(--foreground)" }}>
                         {card.cardholderName}
-                      </CardTitle>
+                      </p>
                       <div className="flex items-center gap-1.5 mt-1">
-                        <code className="font-mono text-xs text-muted-foreground">
+                        <code className="font-mono text-xs" style={{ color: "var(--muted-foreground)" }}>
                           {isRevealed ? formatCardNumber(card.cardNumber) : maskCardNumber(card.cardNumber)}
                         </code>
-                        <Lock className="size-3 text-muted-foreground/70 flex-shrink-0" />
+                        <Lock className="size-3 flex-shrink-0" style={{ color: "var(--muted-foreground)" }} />
                       </div>
                     </div>
                   </div>
@@ -166,22 +142,15 @@ export default function CreditCardList({
                       variant="ghost"
                       size="icon"
                       onClick={(e) => toggleRevealed(card.id, e)}
-                      className="h-8 w-8 hover:bg-primary/10 hover:text-primary"
+                      className="h-8 w-8"
                     >
-                      {isRevealed ? (
-                        <EyeOff className="size-4" />
-                      ) : (
-                        <Eye className="size-4" />
-                      )}
+                      {isRevealed ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                     </Button>
                     <Button
                       variant="ghost"
                       size="icon"
+                      className={cn("h-8 w-8 transition-transform duration-300", isExpanded && "rotate-180")}
                       onClick={(e) => toggleExpanded(card.id, e)}
-                      className={cn(
-                        "h-8 w-8 transition-transform duration-300",
-                        isExpanded && "rotate-180"
-                      )}
                     >
                       <ChevronDown className="size-4" />
                     </Button>
@@ -192,9 +161,9 @@ export default function CreditCardList({
               {/* Expanded */}
               {isExpanded && (
                 <CardContent className="space-y-5 pt-0 border-t animate-in fade-in duration-300">
-                  {/* Card 3D */}
+                  {/* 3D Card */}
                   <div
-                    className="h-64 cursor-pointer rounded-xl overflow-hidden hover:shadow-lg"
+                    className="h-64 cursor-pointer rounded-xl overflow-hidden"
                     onClick={(e) => toggleFlipped(card.id, e)}
                     style={{ perspective: "1000px" }}
                   >
@@ -207,19 +176,18 @@ export default function CreditCardList({
                     >
                       {/* Front */}
                       <div
-                        className={cn(
-                          "absolute inset-0 rounded-xl p-5 text-white flex flex-col justify-between",
-                          "shadow-xl border border-white/20",
-                          "bg-gradient-to-br",
-                          getNetworkBgColor(card.network)
-                        )}
-                        style={{ backfaceVisibility: "hidden" }}
+                        className="absolute inset-0 rounded-xl p-5 text-white flex flex-col justify-between"
+                        style={{
+                          backgroundImage: `linear-gradient(135deg, var(--primary), color-mix(in oklch, var(--primary) 80%, transparent))`,
+                          backfaceVisibility: "hidden",
+                          boxShadow: "var(--shadow-xl)",
+                          borderColor: "rgba(255,255,255,0.2)",
+                          borderWidth: "1px",
+                        }}
                       >
                         <div className="flex justify-between items-start">
-                          <CreditCard className="size-7" />
-                          <div className="text-xs font-bold uppercase opacity-80">
-                            {card.network}
-                          </div>
+                          {getNetworkIcon(card.network)}
+                          <div className="text-xs font-bold uppercase opacity-80">{card.network}</div>
                         </div>
                         <div className="space-y-4">
                           <div>
@@ -243,16 +211,23 @@ export default function CreditCardList({
 
                       {/* Back */}
                       <div
-                        className="absolute inset-0 rounded-xl p-5 flex flex-col justify-center shadow-xl border border-border bg-muted"
+                        className="absolute inset-0 rounded-xl p-5 flex flex-col justify-center"
                         style={{
+                          backgroundColor: "var(--muted)",
                           backfaceVisibility: "hidden",
                           transform: "rotateY(180deg)",
+                          boxShadow: "var(--shadow-xl)",
+                          borderColor: "var(--border)",
+                          borderWidth: "1px",
                         }}
                       >
                         <div className="space-y-4">
-                          <div className="bg-muted-foreground/30 h-10 rounded" />
+                          <div className="h-10 rounded" style={{ backgroundColor: "var(--muted-foreground)", opacity: "0.3" }} />
                           <div className="flex justify-end">
-                            <div className="bg-background h-8 w-16 rounded flex items-center justify-center text-xs font-bold">
+                            <div
+                              className="h-8 w-16 rounded flex items-center justify-center text-xs font-bold"
+                              style={{ backgroundColor: "var(--background)", color: "var(--muted-foreground)" }}
+                            >
                               {card.cvv}
                             </div>
                           </div>
@@ -263,32 +238,21 @@ export default function CreditCardList({
 
                   {/* Details Grid */}
                   <div className="grid grid-cols-2 gap-5 py-3 border-y text-sm">
-                    <div>
-                      <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">
-                        Number
-                      </p>
-                      <p className="font-mono font-semibold text-foreground">
-                        {isRevealed ? formatCardNumber(card.cardNumber) : maskCardNumber(card.cardNumber)}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">
-                        Expires
-                      </p>
-                      <p className="font-semibold">{card.expiryDate}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">
-                        Cardholder
-                      </p>
-                      <p className="font-semibold">{card.cardholderName}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">
-                        Network
-                      </p>
-                      <p className="font-semibold capitalize">{card.network}</p>
-                    </div>
+                    {[
+                      { label: "Number", value: isRevealed ? formatCardNumber(card.cardNumber) : maskCardNumber(card.cardNumber) },
+                      { label: "Expires", value: card.expiryDate },
+                      { label: "Cardholder", value: card.cardholderName },
+                      { label: "Network", value: card.network },
+                    ].map((item) => (
+                      <div key={item.label}>
+                        <p className="text-xs font-semibold uppercase mb-1" style={{ color: "var(--muted-foreground)" }}>
+                          {item.label}
+                        </p>
+                        <p className="font-semibold" style={{ color: "var(--foreground)" }}>
+                          {item.value}
+                        </p>
+                      </div>
+                    ))}
                   </div>
 
                   {/* Delete */}
