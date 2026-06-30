@@ -18,12 +18,11 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
   const pathname = usePathname()
   const [query, setQuery] = useState("")
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
-    "Getting Started": pathname.startsWith("/docs/installation") ||
-      pathname === "/docs",
-    Foundations: pathname.startsWith("/docs/foundations"),
+    "Getting Started": false,
+    Foundations: false,
     Prompts: false,
     Changelog: false,
-    Components: false,
+    Components: true,
   })
 
   const hasQuery = query.trim().length > 0
@@ -48,23 +47,52 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
     <ScrollArea className={cn("h-full", className)}>
       <div className="space-y-1 py-6 px-4">
         {/* Sections */}
-        {otherSections.map((section) => (
-          <div key={section.title}>
-            <button
-              type="button"
-              onClick={() => toggleSection(section.title)}
-              className={cn(
-                "flex w-full items-center justify-between px-0 py-2 text-sm font-medium transition-colors hover:text-foreground",
-                expanded[section.title]
-                  ? "text-foreground"
-                  : "text-muted-foreground"
-              )}
-            >
+        {otherSections.map((section) => {
+          const sectionButton = (
+            <div className="flex w-full items-center justify-between">
               <span>{section.title}</span>
               <span className="text-lg leading-none">
                 {expanded[section.title] ? "−" : "+"}
               </span>
-            </button>
+            </div>
+          )
+
+          return (
+            <div key={section.title}>
+              {section.href ? (
+                <Link
+                  href={section.href}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    toggleSection(section.title)
+                    onNavigate?.()
+                  }}
+                  className={cn(
+                    "flex w-full items-center justify-between px-0 py-2 text-sm font-medium transition-colors hover:text-foreground",
+                    expanded[section.title]
+                      ? "text-foreground"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {sectionButton}
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => toggleSection(section.title)}
+                  className={cn(
+                    "flex w-full items-center justify-between px-0 py-2 text-sm font-medium transition-colors hover:text-foreground",
+                    expanded[section.title]
+                      ? "text-foreground"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {sectionButton}
+                </button>
+              )}
+            </div>
+          )
+        })
 
             {expanded[section.title] && (
               <ul className="space-y-1 pl-4 mt-1 mb-4">
@@ -89,15 +117,20 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                 })}
               </ul>
             )}
-          </div>
-        ))}
+            </div>
+          )
+        })}
 
         {/* Components */}
         {componentSection && (
           <div className="border-t mt-4 pt-4">
-            <button
-              type="button"
-              onClick={() => toggleSection("Components")}
+            <Link
+              href={componentSection.href || "/docs/ui/components/accordion"}
+              onClick={(e) => {
+                e.preventDefault()
+                toggleSection("Components")
+                onNavigate?.()
+              }}
               className={cn(
                 "flex w-full items-center justify-between px-0 py-2 text-sm font-medium transition-colors hover:text-foreground",
                 expanded["Components"]
@@ -109,7 +142,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
               <span className="text-lg leading-none">
                 {expanded["Components"] ? "−" : "+"}
               </span>
-            </button>
+            </Link>
 
             {expanded["Components"] && (
               <div className="mt-3 space-y-3">

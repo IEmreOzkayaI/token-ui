@@ -5,12 +5,14 @@ export type NavItem = {
 
 export type NavSection = {
   title: string
+  href?: string
   items: NavItem[]
 }
 
 export const docsNav: NavSection[] = [
   {
     title: "Getting Started",
+    href: "/docs",
     items: [
       { label: "Introduction", href: "/docs" },
       { label: "Installation", href: "/docs/installation" },
@@ -18,6 +20,7 @@ export const docsNav: NavSection[] = [
   },
   {
     title: "Foundations",
+    href: "/docs/foundations",
     items: [
       { label: "Overview", href: "/docs/foundations" },
       { label: "Colors", href: "/docs/foundations/colors" },
@@ -30,6 +33,7 @@ export const docsNav: NavSection[] = [
   },
   {
     title: "Components",
+    href: "/docs/ui/components/accordion",
     items: [
       { label: "Accordion", href: "/docs/ui/components/accordion" },
       { label: "Alert", href: "/docs/ui/components/alert" },
@@ -97,14 +101,16 @@ export const docsNav: NavSection[] = [
   },
   {
     title: "Prompts",
+    href: "/docs/prompts/derive-variant",
     items: [
       { label: "Derive variant", href: "/docs/prompts/derive-variant" },
       { label: "Modify existing", href: "/docs/prompts/modify-existing" },
       { label: "From scratch", href: "/docs/prompts/from-scratch" },
     ],
   },
-{
+  {
     title: "Changelog",
+    href: "/docs/changelog",
     items: [
       { label: "Overview", href: "/docs/changelog" },
       { label: "v1.1.0", href: "/docs/changelog/v1.1.0" },
