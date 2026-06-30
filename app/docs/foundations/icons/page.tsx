@@ -6,6 +6,7 @@ import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import * as LucideIcons from "lucide-react"
+import { Code, Lightbulb, Ruler, Palette, Zap } from "lucide-react"
 
 const toc = [
   { id: "overview", title: "Overview" },
@@ -38,19 +39,27 @@ export default function IconsPage() {
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📍 Library</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Code className="size-4" /> Library
+            </p>
             <code className="text-xs">lucide-react (v0.263+)</code>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">🎨 Icons</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Lightbulb className="size-4" /> Icons
+            </p>
             <p className="text-xs">500+ stroke-based icons</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📏 Base Size</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Ruler className="size-4" /> Base Size
+            </p>
             <p className="text-xs">24x24px viewBox</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">🎯 Format</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Palette className="size-4" /> Format
+            </p>
             <p className="text-xs">SVG, stroke-based</p>
           </div>
         </div>

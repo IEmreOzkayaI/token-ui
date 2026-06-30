@@ -5,6 +5,7 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { CodeBlock } from "@/app/docs/_components/code-block"
+import { Code, BarChart3, Moon, Lightbulb } from "lucide-react"
 
 const toc = [
   { id: "overview", title: "Overview" },
@@ -27,19 +28,27 @@ export default function ShadowsPage() {
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📍 Source</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Code className="size-4" /> Source
+            </p>
             <code className="text-xs">app/globals.css :root and .dark</code>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📊 Levels</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <BarChart3 className="size-4" /> Levels
+            </p>
             <p className="text-xs">7 elevations (none, xs to 2xl)</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">🎨 Dark Mode</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Moon className="size-4" /> Dark Mode
+            </p>
             <p className="text-xs">Adjusted opacity per mode</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">🔍 Semantics</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Lightbulb className="size-4" /> Semantics
+            </p>
             <p className="text-xs">Elevation increases with component importance</p>
           </div>
         </div>

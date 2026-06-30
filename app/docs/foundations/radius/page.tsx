@@ -5,6 +5,7 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { CodeBlock } from "@/app/docs/_components/code-block"
+import { Code, Layers, Grid3x3, Lightbulb } from "lucide-react"
 
 const toc = [
   { id: "overview", title: "Overview" },
@@ -27,19 +28,27 @@ export default function RadiusPage() {
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📍 Source</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Code className="size-4" /> Source
+            </p>
             <code className="text-xs">app/globals.css :root</code>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📏 Levels</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Layers className="size-4" /> Levels
+            </p>
             <p className="text-xs">7 semantic steps (sm to full)</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">🎯 Range</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Grid3x3 className="size-4" /> Range
+            </p>
             <p className="text-xs">4px to 9999px</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">🔤 Semantic</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Lightbulb className="size-4" /> Semantic
+            </p>
             <p className="text-xs">Sharp to pill/circle</p>
           </div>
         </div>

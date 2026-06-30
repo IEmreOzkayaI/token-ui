@@ -5,6 +5,7 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { CodeBlock } from "@/app/docs/_components/code-block"
+import { Code, Ruler, Weight, ArrowUpDown } from "lucide-react"
 
 const toc = [
   { id: "overview", title: "Overview" },
@@ -29,19 +30,27 @@ export default function TypographyPage() {
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📍 Source</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Code className="size-4" /> Source
+            </p>
             <code className="text-xs">app/globals.css :root</code>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📏 Scale</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Ruler className="size-4" /> Scale
+            </p>
             <p className="text-xs">11 steps (0.75rem to 4.5rem)</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">⚖️ Weights</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Weight className="size-4" /> Weights
+            </p>
             <p className="text-xs">5 weights (300 to 700)</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📐 Line Heights</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <ArrowUpDown className="size-4" /> Line Heights
+            </p>
             <p className="text-xs">4 scales (1.2 to 2)</p>
           </div>
         </div>

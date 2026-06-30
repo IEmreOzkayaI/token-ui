@@ -5,6 +5,7 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { CodeBlock } from "@/app/docs/_components/code-block"
+import { Code, Palette, Moon, Link, Lightbulb } from "lucide-react"
 
 const toc = [
   { id: "overview", title: "Overview" },
@@ -30,19 +31,27 @@ export default function ColorsPage() {
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📍 Source</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Code className="size-4" /> Source
+            </p>
             <code className="text-xs">app/globals.css (:root and .dark)</code>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">🎨 Format</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Palette className="size-4" /> Format
+            </p>
             <code className="text-xs">oklch(Lightness Chroma Hue)</code>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">🌓 Mode Support</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Moon className="size-4" /> Mode Support
+            </p>
             <p className="text-xs">Automatic light/dark variants</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">🔗 Integration</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Link className="size-4" /> Integration
+            </p>
             <p className="text-xs">CSS vars, Tailwind, JavaScript</p>
           </div>
         </div>

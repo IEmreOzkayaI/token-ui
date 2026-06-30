@@ -6,6 +6,7 @@ import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { useState } from "react"
+import { Code, BarChart3, Zap, TrendingUp } from "lucide-react"
 
 const toc = [
   { id: "overview", title: "Overview" },
@@ -30,19 +31,27 @@ export default function TransitionsPage() {
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📍 Source</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Code className="size-4" /> Source
+            </p>
             <code className="text-xs">app/globals.css :root</code>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">⏱️ Speeds</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <BarChart3 className="size-4" /> Speeds
+            </p>
             <p className="text-xs">3 durations (fast, base, slow)</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📈 Easing</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <TrendingUp className="size-4" /> Easing
+            </p>
             <p className="text-xs">Material Motion easing curve</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">🎯 Use</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Zap className="size-4" /> Use
+            </p>
             <p className="text-xs">UI state changes, interactions</p>
           </div>
         </div>

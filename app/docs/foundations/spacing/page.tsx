@@ -5,6 +5,7 @@ import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { CodeBlock } from "@/app/docs/_components/code-block"
+import { Code, Ruler, Grid3x3, Target } from "lucide-react"
 
 const toc = [
   { id: "overview", title: "Overview" },
@@ -27,19 +28,27 @@ export default function SpacingPage() {
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📍 Source</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Code className="size-4" /> Source
+            </p>
             <code className="text-xs">app/globals.css :root</code>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📏 Base Unit</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Ruler className="size-4" /> Base Unit
+            </p>
             <p className="text-xs">8px (1rem base size = 16px)</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">📊 Scale</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Grid3x3 className="size-4" /> Scale
+            </p>
             <p className="text-xs">0 to 32rem (0px to 512px)</p>
           </div>
           <div className="border border-border/50 rounded-lg p-4 bg-foreground/5">
-            <p className="text-sm font-medium mb-2">🎯 Values</p>
+            <p className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Target className="size-4" /> Values
+            </p>
             <p className="text-xs">12 predefined tokens</p>
           </div>
         </div>
