@@ -45,16 +45,27 @@ File location: ui/primitives/{primitive_name}.tsx
 
 Return complete, production-ready code.`
 
+const EXAMPLE_VALUES = {
+  primitive_name: "toggle-group",
+  base_element: "div",
+  features: "- Multiple toggle buttons\n- Selection state management\n- Single or multiple selection modes\n- Keyboard navigation (arrow keys)",
+  variants: "- default, outline, ghost\n- Size: sm, default, lg",
+  a11y_requirements: "- ARIA roles for button group\n- Keyboard navigation with arrow keys\n- Proper focus management\n- Screen reader support",
+}
+
+const EMPTY_VALUES = {
+  primitive_name: "",
+  base_element: "",
+  features: "",
+  variants: "",
+  a11y_requirements: "",
+}
+
 export default function NewPrimitivePage() {
   const [open, setOpen] = useState(false)
   const [copied, setCopied] = useState(false)
-  const [values, setValues] = useState({
-    primitive_name: "toggle-group",
-    base_element: "div",
-    features: "- Multiple toggle buttons\n- Selection state management\n- Single or multiple selection modes\n- Keyboard navigation (arrow keys)",
-    variants: "- default, outline, ghost\n- Size: sm, default, lg",
-    a11y_requirements: "- ARIA roles for button group\n- Keyboard navigation with arrow keys\n- Proper focus management\n- Screen reader support",
-  })
+  const [showExample, setShowExample] = useState(true)
+  const [values, setValues] = useState(EXAMPLE_VALUES)
 
   const generatePrompt = () => {
     let result = PROMPT
@@ -135,8 +146,19 @@ export default function NewPrimitivePage() {
 
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent className="w-full sm:max-w-2xl flex flex-col">
-          <SheetHeader>
+          <SheetHeader className="flex items-center justify-between">
             <SheetTitle>Generate Primitive Prompt</SheetTitle>
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-2"
+              onClick={() => {
+                setShowExample(!showExample)
+                setValues(showExample ? EMPTY_VALUES : EXAMPLE_VALUES)
+              }}
+            >
+              {showExample ? "Clear" : "See Example"}
+            </Button>
           </SheetHeader>
 
           <div className="flex-1 overflow-y-auto px-4">
