@@ -71,7 +71,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                   <ChevronDown className={cn("size-3 shrink-0 transition-transform", !isItemExpanded && "-rotate-90")} />
                   {isItemExpanded
                     ? <FolderOpen className="size-3.5 shrink-0 text-primary" />
-                    : <Folder className="size-3.5 shrink-0 text-primary/60" />
+                    : <Folder className="size-3.5 shrink-0 text-primary" />
                   }
                   <span className="font-medium">{item.label}</span>
                 </button>
@@ -113,7 +113,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
               <ChevronDown className={cn("size-3 shrink-0 transition-transform", !expanded[section.title] && "-rotate-90")} />
               {expanded[section.title]
                 ? <FolderOpen className="size-3.5 shrink-0 text-primary" />
-                : <Folder className="size-3.5 shrink-0 text-primary/60" />
+                : <Folder className="size-3.5 shrink-0 text-primary" />
               }
               <span className="text-sm font-semibold">{section.title}</span>
             </div>
@@ -178,7 +178,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
               <ChevronDown className={cn("size-3 shrink-0 transition-transform", !expanded["Components"] && "-rotate-90")} />
               {expanded["Components"]
                 ? <FolderOpen className="size-3.5 shrink-0 text-primary" />
-                : <Folder className="size-3.5 shrink-0 text-primary/60" />
+                : <Folder className="size-3.5 shrink-0 text-primary" />
               }
               <span className="font-semibold">Components</span>
             </Link>
