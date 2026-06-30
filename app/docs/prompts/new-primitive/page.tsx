@@ -283,13 +283,11 @@ export default function NewPrimitivePage() {
             </div>
           </div>
           <SheetHeader className="px-6 pt-5 pb-4 border-b">
-            <div className="flex items-start justify-between gap-4">
-              <div className="space-y-0.5">
-                <SheetTitle className="text-base font-semibold">Prompt Generator</SheetTitle>
-                <p className="text-xs text-muted-foreground">Fill in parameters to generate your Token UI prompt</p>
-              </div>
+            <SheetTitle className="text-base font-semibold">Prompt Generator</SheetTitle>
+            <div className="flex items-center gap-2">
+              <p className="text-xs text-muted-foreground">Fill in parameters to generate your Token UI prompt</p>
               <button
-                className="shrink-0 mt-0.5 text-xs text-primary/70 underline underline-offset-2 hover:text-primary transition-colors"
+                className="shrink-0 text-xs text-primary/70 underline underline-offset-2 hover:text-primary transition-colors"
                 onClick={() => {
                   setShowExample(!showExample)
                   setValues(showExample ? EMPTY_VALUES : EXAMPLE_VALUES)
