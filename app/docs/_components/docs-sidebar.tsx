@@ -93,7 +93,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                 )}
               >
                 <div className="size-3 shrink-0" />
-                <FileText className="size-3.5 shrink-0 text-muted-foreground/60" />
+                <FileText className="size-3.5 shrink-0 text-primary/50" />
                 {item.label}
               </Link>
             </li>
@@ -110,11 +110,11 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
         {otherSections.map((section) => {
           const sectionButton = (
             <div className="flex w-full items-center gap-2">
-              {expanded[section.title] ? (
-                <ChevronDown className="size-4 shrink-0 opacity-60" />
-              ) : (
-                <ChevronRight className="size-4 shrink-0 opacity-60" />
-              )}
+              <ChevronDown className={cn("size-3 shrink-0 transition-transform", !expanded[section.title] && "-rotate-90")} />
+              {expanded[section.title]
+                ? <FolderOpen className="size-3.5 shrink-0 text-primary" />
+                : <Folder className="size-3.5 shrink-0 text-primary/60" />
+              }
               <span className="text-sm font-semibold">{section.title}</span>
             </div>
           )
@@ -169,16 +169,18 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                 onNavigate?.()
               }}
               className={cn(
-                "group flex w-full items-center justify-between rounded px-2 py-2 text-xs font-medium font-semibold uppercase tracking-wide transition-all",
+                "group flex w-full items-center gap-2 rounded px-2 py-2 text-xs font-medium transition-all hover:bg-foreground/5",
                 expanded["Components"]
                   ? "text-foreground bg-foreground/5"
-                  : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
+                  : "text-muted-foreground hover:text-foreground"
               )}
             >
-              <span>Components</span>
-              <span className="text-sm leading-none opacity-60 group-hover:opacity-100 transition-opacity">
-                {expanded["Components"] ? "−" : "+"}
-              </span>
+              <ChevronDown className={cn("size-3 shrink-0 transition-transform", !expanded["Components"] && "-rotate-90")} />
+              {expanded["Components"]
+                ? <FolderOpen className="size-3.5 shrink-0 text-primary" />
+                : <Folder className="size-3.5 shrink-0 text-primary/60" />
+              }
+              <span className="font-semibold">Components</span>
             </Link>
 
             {expanded["Components"] && (
