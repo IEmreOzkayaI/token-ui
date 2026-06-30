@@ -164,44 +164,6 @@ Focus state:          show ring without radius change`} />
     </DocsPage>
   )
 }
-        <FoundationViewer type="radius" />
-      </DocsSection>
-
-      <DocsSection id="semantic" title="Semantic Values">
-        <p className="text-muted-foreground mb-6">
-          Semantic radius names for common use cases.
-        </p>
-        <CodeBlock code={`import { semanticRadius } from "@/ui/foundations"
-
-// Sharp: minimal rounding
-semanticRadius.sharp       // 0px
-
-// Subtle: barely noticeable
-semanticRadius.subtle      // 4px
-
-// Standard: common default
-semanticRadius.standard    // 8px
-
-// Soft: comfortable rounding
-semanticRadius.soft        // 12px
-
-// Round: fully rounded
-semanticRadius.round       // 16px
-
-// Pill: maximum horizontal
-semanticRadius.pill        // 9999px (rounded button)
-
-// Circle: fully circular
-semanticRadius.circle      // 9999px (avatar)`} />
-      </DocsSection>
-
-      <DocsSection id="component" title="Component Radius">
-        <p className="text-muted-foreground mb-6">
-          Component-specific border radius defaults.
-        </p>
-        <CodeBlock code={`import { componentRadius } from "@/ui/foundations"
-
-// Common components
 componentRadius.button     // Standard button rounding
 componentRadius.card       // Card container rounding
 componentRadius.input      // Form input rounding
