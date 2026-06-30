@@ -3,14 +3,15 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/primitives/card"
 import { Button } from "@/primitives/button"
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/primitives/sheet"
+import { Input } from "@/primitives/input"
+import { Label } from "@/primitives/label"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/primitives/sheet"
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
-import { cn } from "@/lib/utils"
 import { Copy, Check } from "lucide-react"
 
 const PROMPT = `You are a Token UI design system engineer.
@@ -124,54 +125,71 @@ export default function NewPrimitivePage() {
         <Button onClick={() => setOpen(true)}>Create</Button>
 
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetContent className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 flex flex-col">
+          <SheetContent className="w-full sm:max-w-2xl flex flex-col">
             <SheetHeader>
-              <SheetTitle>Fill Parameters</SheetTitle>
+              <SheetTitle>New Primitive Parameters</SheetTitle>
             </SheetHeader>
 
-            <div className="flex-1 overflow-y-auto space-y-4 py-6">
-              <div className="space-y-3">
-                {[
-                  { key: "primitive_name", label: "Primitive Name", placeholder: "e.g., toggle, badge, toggle-group" },
-                  { key: "base_element", label: "Base Element/Primitive", placeholder: "e.g., button, div, input" },
-                  { key: "features", label: "Required Features", placeholder: "List features line by line", textarea: true },
-                  { key: "variants", label: "Variant Options", placeholder: "e.g., default, outline, ghost", textarea: true },
-                  { key: "a11y_requirements", label: "Accessibility Requirements", placeholder: "Keyboard nav, ARIA labels, etc.", textarea: true },
-                ].map((param) => (
-                  <div key={param.key}>
-                    <label className="text-xs font-medium block mb-1.5">{param.label}</label>
-                    {param.textarea ? (
-                      <textarea
-                        value={values[param.key as keyof typeof values]}
-                        onChange={(e) => setValues((prev) => ({ ...prev, [param.key]: e.target.value }))}
-                        placeholder={param.placeholder}
-                        className={cn(
-                          "w-full min-h-20 rounded-lg border border-border/50 bg-foreground/5 px-3 py-2 text-xs",
-                          "outline-none focus:border-foreground/30 focus:bg-foreground/10 transition-colors",
-                          "placeholder:text-muted-foreground/40 resize-none"
-                        )}
-                      />
-                    ) : (
-                      <input
-                        type="text"
-                        value={values[param.key as keyof typeof values]}
-                        onChange={(e) => setValues((prev) => ({ ...prev, [param.key]: e.target.value }))}
-                        placeholder={param.placeholder}
-                        className={cn(
-                          "w-full rounded-lg border border-border/50 bg-foreground/5 px-3 py-2 text-xs",
-                          "outline-none focus:border-foreground/30 focus:bg-foreground/10 transition-colors",
-                          "placeholder:text-muted-foreground/40"
-                        )}
-                      />
-                    )}
-                  </div>
-                ))}
+            <div className="flex-1 overflow-y-auto px-4">
+              <div className="grid gap-6 py-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="primitive-name">Primitive Name</Label>
+                  <Input
+                    id="primitive-name"
+                    value={values.primitive_name}
+                    onChange={(e) => setValues((prev) => ({ ...prev, primitive_name: e.target.value }))}
+                    placeholder="e.g., toggle, badge, toggle-group"
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="base-element">Base Element/Primitive</Label>
+                  <Input
+                    id="base-element"
+                    value={values.base_element}
+                    onChange={(e) => setValues((prev) => ({ ...prev, base_element: e.target.value }))}
+                    placeholder="e.g., button, div, input"
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="features">Required Features</Label>
+                  <textarea
+                    id="features"
+                    value={values.features}
+                    onChange={(e) => setValues((prev) => ({ ...prev, features: e.target.value }))}
+                    placeholder="List features line by line"
+                    className="h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="variants">Variant Options</Label>
+                  <textarea
+                    id="variants"
+                    value={values.variants}
+                    onChange={(e) => setValues((prev) => ({ ...prev, variants: e.target.value }))}
+                    placeholder="e.g., default, outline, ghost"
+                    className="h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="a11y">Accessibility Requirements</Label>
+                  <textarea
+                    id="a11y"
+                    value={values.a11y_requirements}
+                    onChange={(e) => setValues((prev) => ({ ...prev, a11y_requirements: e.target.value }))}
+                    placeholder="Keyboard nav, ARIA labels, etc."
+                    className="h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="border-t pt-4">
+            <div className="border-t px-4 py-4">
               <div className="flex items-center justify-between mb-3">
-                <h4 className="text-xs font-semibold">Prompt</h4>
+                <h4 className="text-sm font-semibold">Generated Prompt</h4>
                 <Button
                   variant="ghost"
                   size="icon-sm"
@@ -184,15 +202,31 @@ export default function NewPrimitivePage() {
                   )}
                 </Button>
               </div>
-              <CodeBlock code={finalPrompt} showLineNumbers={false} className="max-h-48" />
+              <CodeBlock code={finalPrompt} showLineNumbers={false} className="max-h-40" />
               <div className="text-xs text-muted-foreground mt-2">
                 {Object.values(values).some((v) => !v) ? (
-                  <span className="text-yellow-600">⚠️ Fill all parameters</span>
+                  <span className="text-yellow-600">⚠️ Fill all parameters above</span>
                 ) : (
                   <span className="text-primary">✓ Ready to copy</span>
                 )}
               </div>
             </div>
+
+            <SheetFooter className="px-4">
+              <Button onClick={handleCopy} className="w-full">
+                {copied ? (
+                  <>
+                    <Check className="size-4 mr-2" />
+                    Copied!
+                  </>
+                ) : (
+                  <>
+                    <Copy className="size-4 mr-2" />
+                    Copy Prompt
+                  </>
+                )}
+              </Button>
+            </SheetFooter>
           </SheetContent>
         </Sheet>
       </DocsSection>
