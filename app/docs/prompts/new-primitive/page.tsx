@@ -151,7 +151,7 @@ export default function NewPrimitivePage() {
             <Button
               variant="outline"
               size="sm"
-              className="w-fit gap-2 text-xs h-8 px-2"
+              className="w-full gap-2 text-xs h-8 text-primary hover:text-primary"
               onClick={() => {
                 setShowExample(!showExample)
                 setValues(showExample ? EMPTY_VALUES : EXAMPLE_VALUES)
@@ -237,7 +237,7 @@ export default function NewPrimitivePage() {
           </div>
 
           <SheetFooter className="px-4 py-3 border-t">
-            <Button onClick={handleCopy} variant="outline" className="w-full gap-2 h-9">
+            <Button onClick={handleCopy} variant="outline" className="w-full gap-2 h-9 text-primary hover:text-primary">
               {copied ? (
                 <>
                   <Check className="size-4 text-primary" />
