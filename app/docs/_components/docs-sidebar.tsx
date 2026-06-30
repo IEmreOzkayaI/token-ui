@@ -94,10 +94,11 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
               )}
 
               {expanded[section.title] && (
-                <ul className="space-y-1 mt-2 mb-2">
-                  {section.items.map((item) => {
+                <ul className="mt-2 mb-2 ml-2 border-l border-border/30 pl-3">
+                  {section.items.map((item, idx) => {
                     const isActive = pathname === item.href
                     const isGroupHeader = item.label === item.label.toUpperCase() && item.label.length > 0
+                    const isLast = idx === section.items.length - 1
 
                     if (isGroupHeader) {
                       return (
@@ -110,12 +111,16 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                     }
 
                     return (
-                      <li key={item.href}>
+                      <li key={item.href} className={cn(
+                        "relative",
+                        !isLast && "pb-1"
+                      )}>
+                        <div className="absolute left-0 top-3 -ml-4 w-3 h-px bg-border/30" />
                         <Link
                           href={item.href}
                           onClick={onNavigate}
                           className={cn(
-                            "block rounded px-3 py-1.5 text-xs transition-all ml-2",
+                            "block rounded px-2 py-1.5 text-xs transition-all",
                             isActive
                               ? "font-medium text-foreground bg-foreground/10"
                               : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
