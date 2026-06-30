@@ -1,6 +1,7 @@
 export type NavItem = {
   label: string
   href: string
+  items?: NavItem[]
 }
 
 export type NavSection = {
