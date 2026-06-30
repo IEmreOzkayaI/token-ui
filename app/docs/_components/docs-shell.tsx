@@ -8,13 +8,15 @@ import { cn } from "@/lib/utils"
 
 export function DocsShell({ children }: { children: ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [isDark, setIsDark] = useState(true)
 
   useEffect(() => {
-    document.documentElement.classList.add("dark")
+    const isDarkMode = document.documentElement.classList.contains("dark")
+    setIsDark(isDarkMode)
   }, [])
 
   return (
-    <div className="min-h-screen bg-background dark">
+    <div className={cn("min-h-screen bg-background", isDark && "dark")}>
       <DocsHeader
         mobileOpen={mobileOpen}
         onToggleMobile={() => setMobileOpen((open) => !open)}
