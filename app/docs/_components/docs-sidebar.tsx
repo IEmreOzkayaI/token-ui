@@ -39,8 +39,14 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
     )
   }, [componentSection, query, hasQuery])
 
+  const [treeExpanded, setTreeExpanded] = useState<Record<string, boolean>>({})
+
   const toggleSection = (title: string) => {
     setExpanded((prev) => ({ ...prev, [title]: !prev[title] }))
+  }
+
+  const toggleTreeItem = (key: string) => {
+    setTreeExpanded((prev) => ({ ...prev, [key]: !prev[key] }))
   }
 
   const renderItems = (items: typeof docsNav[0]["items"], level = 0): React.ReactNode => {
@@ -55,7 +61,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
           const isLast = idx === items.length - 1
           const hasChildren = item.items && item.items.length > 0
           const itemKey = `${level}-${item.href}-${idx}`
-          const [isItemExpanded, setIsItemExpanded] = useState(false)
+          const isItemExpanded = treeExpanded[itemKey] || false
 
           if (isGroupHeader) {
             return (
@@ -73,7 +79,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
               <div className="flex items-center gap-1">
                 {hasChildren && (
                   <button
-                    onClick={() => setIsItemExpanded(!isItemExpanded)}
+                    onClick={() => toggleTreeItem(itemKey)}
                     className="p-0 hover:opacity-70 transition-opacity"
                   >
                     {isItemExpanded ? (
