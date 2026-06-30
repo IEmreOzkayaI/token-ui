@@ -2,7 +2,7 @@
 
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts"
 import { Card, CardContent, CardHeader } from "@/primitives/card"
-import { Bell, Search, Settings, TrendingUp, DollarSign, CreditCard, Eye, EyeOff, Filter, MoreHorizontal, ArrowUpRight, ArrowDownRight } from "lucide-react"
+import { Bell, Search, Settings, TrendingUp, DollarSign, CreditCard, Eye, EyeOff, Filter, MoreHorizontal, ArrowUpRight, ArrowDownRight, Palette, Cloud, Download, Brain, BarChart3 } from "lucide-react"
 import { Button } from "@/primitives/button"
 import { useState } from "react"
 
@@ -23,11 +23,21 @@ const balanceData = [
   { name: "Suggested Save", value: 5400, color: "var(--secondary)" },
 ]
 
-const transactions = [
-  { id: 1, name: "Adobe Creative Cloud", category: "Subscription", date: "Nov 21, 2025", amount: "-$8,200", type: "expense", icon: "🎨" },
-  { id: 2, name: "Payment from Client ABC", category: "Revenue", date: "Nov 29, 2025", amount: "+$12,450", type: "income", icon: "💰" },
-  { id: 3, name: "AWS Services", category: "Subscription", date: "Nov 25, 2025", amount: "-$4,200", type: "expense", icon: "☁️" },
-  { id: 4, name: "Client Project Milestone", category: "Revenue", date: "Nov 24, 2025", amount: "+$8,900", type: "income", icon: "📊" },
+interface Transaction {
+  id: number
+  name: string
+  category: string
+  date: string
+  amount: string
+  type: "income" | "expense"
+  icon: React.ReactNode
+}
+
+const transactions: Transaction[] = [
+  { id: 1, name: "Adobe Creative Cloud", category: "Subscription", date: "Nov 21, 2025", amount: "-$8,200", type: "expense", icon: <Palette className="size-5" /> },
+  { id: 2, name: "Payment from Client ABC", category: "Revenue", date: "Nov 29, 2025", amount: "+$12,450", type: "income", icon: <TrendingUp className="size-5" /> },
+  { id: 3, name: "AWS Services", category: "Subscription", date: "Nov 25, 2025", amount: "-$4,200", type: "expense", icon: <Cloud className="size-5" /> },
+  { id: 4, name: "Client Project Milestone", category: "Revenue", date: "Nov 24, 2025", amount: "+$8,900", type: "income", icon: <BarChart3 className="size-5" /> },
 ]
 
 const stats = [
@@ -101,8 +111,9 @@ export default function AdminDashboardV3() {
             >
               Last Month ▼
             </button>
-            <Button style={{ backgroundColor: "var(--primary)", color: "white" }}>
-              📤 Export
+            <Button style={{ backgroundColor: "var(--primary)", color: "white" }} className="flex items-center gap-2">
+              <Download className="size-4" />
+              Export
             </Button>
           </div>
         </div>
@@ -288,7 +299,9 @@ export default function AdminDashboardV3() {
                   <div key={tx.id} className="px-6 py-4 hover:bg-muted/30 transition-colors">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4 flex-1">
-                        <div className="text-2xl">{tx.icon}</div>
+                        <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: "var(--muted)" }}>
+                          <div style={{ color: "var(--primary)" }}>{tx.icon}</div>
+                        </div>
                         <div>
                           <p className="font-medium" style={{ color: "var(--foreground)" }}>
                             {tx.name}
@@ -338,7 +351,7 @@ export default function AdminDashboardV3() {
                     className="w-10 h-10 rounded-lg flex items-center justify-center"
                     style={{ backgroundColor: "var(--primary)" }}
                   >
-                    <span className="text-xl">✨</span>
+                    <Brain className="size-5" style={{ color: "white" }} />
                   </div>
                   <div>
                     <h3 className="font-semibold text-sm" style={{ color: "var(--foreground)" }}>
