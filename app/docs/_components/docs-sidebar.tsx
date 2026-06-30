@@ -88,7 +88,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                 className={cn(
                   "flex items-center gap-1.5 rounded px-2 py-1.5 text-xs transition-all",
                   isActive
-                    ? "font-medium text-foreground bg-foreground/10"
+                    ? "font-medium text-primary bg-primary/10"
                     : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
                 )}
               >
