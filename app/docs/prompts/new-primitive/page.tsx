@@ -5,7 +5,6 @@ import { Card, CardContent } from "@/primitives/card"
 import { Button } from "@/primitives/button"
 import { Input } from "@/primitives/input"
 import { Label } from "@/primitives/label"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/primitives/sheet"
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
@@ -46,7 +45,6 @@ File location: ui/primitives/{primitive_name}.tsx
 Return complete, production-ready code.`
 
 export default function NewPrimitivePage() {
-  const [open, setOpen] = useState(false)
   const [copied, setCopied] = useState(false)
   const [values, setValues] = useState({
     primitive_name: "toggle-group",
@@ -78,11 +76,26 @@ export default function NewPrimitivePage() {
   return (
     <DocsPage toc={[
       { id: "overview", title: "Overview" },
-      { id: "create", title: "Create" },
+      { id: "create", title: "Create Prompt" },
     ]}>
       <DocsPageHeader
         title="New Primitive Generation"
         description="Create new base UI component from scratch"
+        action={
+          <Button onClick={handleCopy} size="sm" variant="outline">
+            {copied ? (
+              <>
+                <Check className="size-3.5 mr-1.5" />
+                Copied
+              </>
+            ) : (
+              <>
+                <Copy className="size-3.5 mr-1.5" />
+                Copy Prompt
+              </>
+            )}
+          </Button>
+        }
       />
 
       <DocsSection id="overview" title="Overview">
@@ -122,74 +135,72 @@ export default function NewPrimitivePage() {
       </DocsSection>
 
       <DocsSection id="create" title="Create Prompt">
-        <Button onClick={() => setOpen(true)}>Create</Button>
+        <div className="grid gap-8 lg:grid-cols-2">
+          {/* Parameters */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-sm">Parameters</h3>
+            <div className="space-y-4">
+              <div className="grid gap-2">
+                <Label htmlFor="primitive-name">Primitive Name</Label>
+                <Input
+                  id="primitive-name"
+                  value={values.primitive_name}
+                  onChange={(e) => setValues((prev) => ({ ...prev, primitive_name: e.target.value }))}
+                  placeholder="e.g., toggle, badge, toggle-group"
+                />
+              </div>
 
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetContent className="w-full sm:max-w-2xl flex flex-col">
-            <SheetHeader>
-              <SheetTitle>New Primitive Parameters</SheetTitle>
-            </SheetHeader>
+              <div className="grid gap-2">
+                <Label htmlFor="base-element">Base Element/Primitive</Label>
+                <Input
+                  id="base-element"
+                  value={values.base_element}
+                  onChange={(e) => setValues((prev) => ({ ...prev, base_element: e.target.value }))}
+                  placeholder="e.g., button, div, input"
+                />
+              </div>
 
-            <div className="flex-1 overflow-y-auto px-4">
-              <div className="grid gap-6 py-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="primitive-name">Primitive Name</Label>
-                  <Input
-                    id="primitive-name"
-                    value={values.primitive_name}
-                    onChange={(e) => setValues((prev) => ({ ...prev, primitive_name: e.target.value }))}
-                    placeholder="e.g., toggle, badge, toggle-group"
-                  />
-                </div>
+              <div className="grid gap-2">
+                <Label htmlFor="features">Required Features</Label>
+                <textarea
+                  id="features"
+                  value={values.features}
+                  onChange={(e) => setValues((prev) => ({ ...prev, features: e.target.value }))}
+                  placeholder="List features line by line"
+                  className="h-24 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
+                />
+              </div>
 
-                <div className="grid gap-2">
-                  <Label htmlFor="base-element">Base Element/Primitive</Label>
-                  <Input
-                    id="base-element"
-                    value={values.base_element}
-                    onChange={(e) => setValues((prev) => ({ ...prev, base_element: e.target.value }))}
-                    placeholder="e.g., button, div, input"
-                  />
-                </div>
+              <div className="grid gap-2">
+                <Label htmlFor="variants">Variant Options</Label>
+                <textarea
+                  id="variants"
+                  value={values.variants}
+                  onChange={(e) => setValues((prev) => ({ ...prev, variants: e.target.value }))}
+                  placeholder="e.g., default, outline, ghost"
+                  className="h-24 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
+                />
+              </div>
 
-                <div className="grid gap-2">
-                  <Label htmlFor="features">Required Features</Label>
-                  <textarea
-                    id="features"
-                    value={values.features}
-                    onChange={(e) => setValues((prev) => ({ ...prev, features: e.target.value }))}
-                    placeholder="List features line by line"
-                    className="h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
-                  />
-                </div>
-
-                <div className="grid gap-2">
-                  <Label htmlFor="variants">Variant Options</Label>
-                  <textarea
-                    id="variants"
-                    value={values.variants}
-                    onChange={(e) => setValues((prev) => ({ ...prev, variants: e.target.value }))}
-                    placeholder="e.g., default, outline, ghost"
-                    className="h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
-                  />
-                </div>
-
-                <div className="grid gap-2">
-                  <Label htmlFor="a11y">Accessibility Requirements</Label>
-                  <textarea
-                    id="a11y"
-                    value={values.a11y_requirements}
-                    onChange={(e) => setValues((prev) => ({ ...prev, a11y_requirements: e.target.value }))}
-                    placeholder="Keyboard nav, ARIA labels, etc."
-                    className="h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
-                  />
-                </div>
+              <div className="grid gap-2">
+                <Label htmlFor="a11y">Accessibility Requirements</Label>
+                <textarea
+                  id="a11y"
+                  value={values.a11y_requirements}
+                  onChange={(e) => setValues((prev) => ({ ...prev, a11y_requirements: e.target.value }))}
+                  placeholder="Keyboard nav, ARIA labels, etc."
+                  className="h-24 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
+                />
               </div>
             </div>
+          </div>
 
-            <div className="border-t px-4 py-4">
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="text-sm font-semibold">Generated Prompt</h4>
+          {/* Preview */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-sm">Generated Prompt</h3>
+            <div className="rounded-lg border border-border/50 bg-muted/30 overflow-hidden">
+              <div className="bg-muted/50 border-b border-border/30 px-4 py-2 flex items-center justify-between">
+                <span className="text-xs font-medium text-muted-foreground">prompt.txt</span>
                 <Button
                   variant="ghost"
                   size="icon-sm"
@@ -202,33 +213,21 @@ export default function NewPrimitivePage() {
                   )}
                 </Button>
               </div>
-              <CodeBlock code={finalPrompt} showLineNumbers={false} className="max-h-40" />
-              <div className="text-xs text-muted-foreground mt-2">
-                {Object.values(values).some((v) => !v) ? (
-                  <span className="text-yellow-600">⚠️ Fill all parameters above</span>
-                ) : (
-                  <span className="text-primary">✓ Ready to copy</span>
-                )}
+              <div className="overflow-auto max-h-96">
+                <pre className="p-4 text-xs leading-relaxed text-foreground/80 whitespace-pre-wrap break-words font-mono">
+                  {finalPrompt}
+                </pre>
               </div>
             </div>
-
-            <SheetFooter className="px-4">
-              <Button onClick={handleCopy} className="w-full">
-                {copied ? (
-                  <>
-                    <Check className="size-4 mr-2" />
-                    Copied!
-                  </>
-                ) : (
-                  <>
-                    <Copy className="size-4 mr-2" />
-                    Copy Prompt
-                  </>
-                )}
-              </Button>
-            </SheetFooter>
-          </SheetContent>
-        </Sheet>
+            <div className="text-xs text-muted-foreground">
+              {Object.values(values).some((v) => !v) ? (
+                <span className="text-yellow-600">⚠️ Fill parameters to generate</span>
+              ) : (
+                <span className="text-primary">✓ Ready to copy</span>
+              )}
+            </div>
+          </div>
+        </div>
       </DocsSection>
     </DocsPage>
   )
