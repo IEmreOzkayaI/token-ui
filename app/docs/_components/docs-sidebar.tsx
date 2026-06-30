@@ -105,7 +105,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
 
   return (
     <ScrollArea className={cn("h-full", className)}>
-      <div className="space-y-3 py-8 px-4">
+      <div className="space-y-0.5 py-4 px-4">
         {/* Sections */}
         {otherSections.map((section) => {
           const sectionButton = (
