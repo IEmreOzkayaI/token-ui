@@ -171,14 +171,22 @@ export default function NewPrimitivePage() {
     values.variants.some(Boolean) &&
     values.a11y_requirements.some(Boolean)
 
-  // Highlight filled scalar values in prompt
+  // Highlight all user-entered values in prompt
   const renderPrompt = () => {
     let text = finalPrompt
-    const scalars = [values.primitive_name, values.base_element].filter(Boolean)
-    scalars.forEach(val => {
+    const allValues = [
+      values.primitive_name,
+      values.base_element,
+      ...values.features.filter(Boolean),
+      ...values.variants.filter(Boolean),
+      ...values.a11y_requirements.filter(Boolean),
+    ].filter(Boolean)
+
+    allValues.forEach(val => {
       const escaped = val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
       text = text.replace(new RegExp(escaped, "g"), `___P___${val}___E___`)
     })
+
     const parts = text.split(/(___P___.*?___E___)/)
     return (
       <>
