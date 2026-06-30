@@ -223,11 +223,12 @@ export default function NewPrimitivePage() {
       return parts.length ? parts : text
     }
 
-    const lines = finalPrompt.split("\n")
+    const allLines = finalPrompt.split("\n")
+    const lines = allLines.filter((line, idx) => line.trim() || allLines[idx - 1]?.trim())
     return (
-      <div className="space-y-3">
+      <div className="space-y-2">
         {lines.map((line, i) => {
-          if (!line.trim()) return <div key={i} className="h-2" />
+          if (!line.trim()) return <div key={i} className="h-1" />
           if (line.startsWith("---")) return <div key={i} className="border-t border-border/30 my-1" />
           if (line.match(/^\d+\./)) {
             const [num, ...rest] = line.split(/\s+/)
