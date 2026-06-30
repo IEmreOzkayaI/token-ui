@@ -12,7 +12,7 @@ import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
-import { Copy, Check } from "lucide-react"
+import { Copy, Check, Plus } from "lucide-react"
 
 const PROMPT = `You are a Token UI design system engineer.
 
@@ -95,8 +95,8 @@ export default function NewPrimitivePage() {
         title="New Primitive Generation"
         description="Create new base UI component from scratch"
         action={
-          <Button onClick={() => setOpen(true)} size="sm" variant="outline" className="gap-2">
-            <Copy className="size-3.5" />
+          <Button onClick={() => setOpen(true)} size="sm" className="gap-2">
+            <Plus className="size-3.5" />
             Create
           </Button>
         }
@@ -146,12 +146,12 @@ export default function NewPrimitivePage() {
 
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent className="w-full sm:max-w-2xl flex flex-col">
-          <SheetHeader className="flex items-center justify-between">
+          <SheetHeader className="flex flex-row items-center justify-between pr-0">
             <SheetTitle>Generate Primitive Prompt</SheetTitle>
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
-              className="gap-2"
+              className="gap-2 text-xs"
               onClick={() => {
                 setShowExample(!showExample)
                 setValues(showExample ? EMPTY_VALUES : EXAMPLE_VALUES)
@@ -161,98 +161,105 @@ export default function NewPrimitivePage() {
             </Button>
           </SheetHeader>
 
-          <div className="flex-1 overflow-y-auto px-4">
-            <div className="grid gap-6 py-4">
+          <div className="flex-1 overflow-y-auto">
+            <div className="space-y-5 px-4 py-4">
               <div className="grid gap-2">
-                <Label htmlFor="primitive-name">Primitive Name</Label>
+                <Label htmlFor="primitive-name" className="text-xs font-semibold">Primitive Name</Label>
                 <Input
                   id="primitive-name"
                   value={values.primitive_name}
                   onChange={(e) => setValues((prev) => ({ ...prev, primitive_name: e.target.value }))}
                   placeholder="e.g., toggle, badge, toggle-group"
+                  className="h-9 text-sm"
                 />
               </div>
 
               <div className="grid gap-2">
-                <Label htmlFor="base-element">Base Element/Primitive</Label>
+                <Label htmlFor="base-element" className="text-xs font-semibold">Base Element/Primitive</Label>
                 <Input
                   id="base-element"
                   value={values.base_element}
                   onChange={(e) => setValues((prev) => ({ ...prev, base_element: e.target.value }))}
                   placeholder="e.g., button, div, input"
+                  className="h-9 text-sm"
                 />
               </div>
 
               <div className="grid gap-2">
-                <Label htmlFor="features">Required Features</Label>
+                <Label htmlFor="features" className="text-xs font-semibold">Required Features</Label>
                 <textarea
                   id="features"
                   value={values.features}
                   onChange={(e) => setValues((prev) => ({ ...prev, features: e.target.value }))}
                   placeholder="List features line by line"
-                  className="h-24 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
+                  className="min-h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
                 />
               </div>
 
               <div className="grid gap-2">
-                <Label htmlFor="variants">Variant Options</Label>
+                <Label htmlFor="variants" className="text-xs font-semibold">Variant Options</Label>
                 <textarea
                   id="variants"
                   value={values.variants}
                   onChange={(e) => setValues((prev) => ({ ...prev, variants: e.target.value }))}
                   placeholder="e.g., default, outline, ghost"
-                  className="h-24 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
+                  className="min-h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
                 />
               </div>
 
               <div className="grid gap-2">
-                <Label htmlFor="a11y">Accessibility Requirements</Label>
+                <Label htmlFor="a11y" className="text-xs font-semibold">Accessibility Requirements</Label>
                 <textarea
                   id="a11y"
                   value={values.a11y_requirements}
                   onChange={(e) => setValues((prev) => ({ ...prev, a11y_requirements: e.target.value }))}
                   placeholder="Keyboard nav, ARIA labels, etc."
-                  className="h-24 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
+                  className="min-h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
                 />
               </div>
             </div>
           </div>
 
-          <div className="border-t px-4 py-4">
-            <div className="flex items-center justify-between mb-3">
-              <h4 className="text-sm font-semibold">Generated Prompt</h4>
-              <Button
-                variant="ghost"
-                size="icon-sm"
-                onClick={handleCopy}
-              >
-                {copied ? (
-                  <Check className="size-4 text-primary" />
+          <div className="border-t">
+            <div className="px-4 py-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <h4 className="text-sm font-semibold">Generated Prompt</h4>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  onClick={handleCopy}
+                  className="h-8 w-8"
+                >
+                  {copied ? (
+                    <Check className="size-4 text-primary" />
+                  ) : (
+                    <Copy className="size-4" />
+                  )}
+                </Button>
+              </div>
+              <div className="rounded-lg border border-border/50 bg-muted/30 overflow-hidden">
+                <CodeBlock code={finalPrompt} showLineNumbers={false} className="max-h-40 text-xs" />
+              </div>
+              <div className="text-xs text-muted-foreground">
+                {Object.values(values).some((v) => !v) ? (
+                  <span className="text-yellow-600">⚠️ Fill all parameters</span>
                 ) : (
-                  <Copy className="size-4" />
+                  <span className="text-primary">✓ Ready to copy</span>
                 )}
-              </Button>
-            </div>
-            <CodeBlock code={finalPrompt} showLineNumbers={false} className="max-h-48" />
-            <div className="text-xs text-muted-foreground mt-2">
-              {Object.values(values).some((v) => !v) ? (
-                <span className="text-yellow-600">⚠️ Fill all parameters</span>
-              ) : (
-                <span className="text-primary">✓ Ready to copy</span>
-              )}
+              </div>
             </div>
           </div>
 
-          <SheetFooter className="px-4">
-            <Button onClick={handleCopy} className="w-full">
+          <SheetFooter className="px-4 py-3 border-t">
+            <Button onClick={handleCopy} className="w-full gap-2">
               {copied ? (
                 <>
-                  <Check className="size-4 mr-2" />
+                  <Check className="size-4" />
                   Copied!
                 </>
               ) : (
                 <>
-                  <Copy className="size-4 mr-2" />
+                  <Copy className="size-4" />
                   Copy Prompt
                 </>
               )}
