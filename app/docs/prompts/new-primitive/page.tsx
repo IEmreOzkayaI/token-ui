@@ -10,9 +10,8 @@ import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
-import { CodeBlock } from "@/app/docs/_components/code-block"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
-import { Copy, Check, Plus } from "lucide-react"
+import { Copy, Check, Plus, X, Trash2 } from "lucide-react"
 
 const PROMPT = `You are a Token UI design system engineer.
 
@@ -48,31 +47,91 @@ Return complete, production-ready code.`
 const EXAMPLE_VALUES = {
   primitive_name: "toggle-group",
   base_element: "div",
-  features: "- Multiple toggle buttons\n- Selection state management\n- Single or multiple selection modes\n- Keyboard navigation (arrow keys)",
-  variants: "- default, outline, ghost\n- Size: sm, default, lg",
-  a11y_requirements: "- ARIA roles for button group\n- Keyboard navigation with arrow keys\n- Proper focus management\n- Screen reader support",
+  features: ["Multiple toggle buttons", "Selection state management", "Single or multiple selection modes", "Keyboard navigation (arrow keys)"],
+  variants: ["default", "outline", "ghost", "Size: sm, default, lg"],
+  a11y_requirements: ["ARIA roles for button group", "Keyboard navigation with arrow keys", "Proper focus management", "Screen reader support"],
 }
 
 const EMPTY_VALUES = {
   primitive_name: "",
   base_element: "",
-  features: "",
-  variants: "",
-  a11y_requirements: "",
+  features: [""],
+  variants: [""],
+  a11y_requirements: [""],
+}
+
+type Values = typeof EXAMPLE_VALUES
+
+function MultiInput({
+  label,
+  values,
+  placeholder,
+  onChange,
+}: {
+  label: string
+  values: string[]
+  placeholder: string
+  onChange: (vals: string[]) => void
+}) {
+  const update = (i: number, v: string) => {
+    const next = [...values]
+    next[i] = v
+    onChange(next)
+  }
+  const remove = (i: number) => onChange(values.filter((_, idx) => idx !== i))
+  const add = () => onChange([...values, ""])
+
+  return (
+    <div className="grid gap-2">
+      <Label className="text-xs font-semibold">{label}</Label>
+      <div className="space-y-2">
+        {values.map((val, i) => (
+          <div key={i} className="flex gap-2">
+            <Input
+              value={val}
+              onChange={(e) => update(i, e.target.value)}
+              placeholder={placeholder}
+              className="h-9 text-sm focus-visible:ring-primary flex-1"
+            />
+            {values.length > 1 && (
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                className="h-9 w-9 shrink-0 text-muted-foreground hover:text-destructive"
+                onClick={() => remove(i)}
+              >
+                <X className="size-3.5" />
+              </Button>
+            )}
+          </div>
+        ))}
+      </div>
+      <Button
+        variant="ghost"
+        size="sm"
+        className="w-fit h-7 text-xs gap-1.5 text-muted-foreground hover:text-foreground px-1"
+        onClick={add}
+      >
+        <Plus className="size-3" />
+        Add item
+      </Button>
+    </div>
+  )
 }
 
 export default function NewPrimitivePage() {
   const [open, setOpen] = useState(false)
   const [copied, setCopied] = useState(false)
   const [showExample, setShowExample] = useState(true)
-  const [values, setValues] = useState(EXAMPLE_VALUES)
+  const [values, setValues] = useState<Values>(EXAMPLE_VALUES)
 
   const generatePrompt = () => {
     let result = PROMPT
-    Object.entries(values).forEach(([key, value]) => {
-      const placeholder = `{${key}}`
-      result = result.replace(new RegExp(placeholder, "g"), value || "")
-    })
+    result = result.replace(/\{primitive_name\}/g, values.primitive_name || "")
+    result = result.replace(/\{base_element\}/g, values.base_element || "")
+    result = result.replace(/\{features\}/g, values.features.filter(Boolean).map(f => `- ${f}`).join("\n") || "")
+    result = result.replace(/\{variants\}/g, values.variants.filter(Boolean).map(v => `- ${v}`).join("\n") || "")
+    result = result.replace(/\{a11y_requirements\}/g, values.a11y_requirements.filter(Boolean).map(a => `- ${a}`).join("\n") || "")
     return result
   }
 
@@ -84,6 +143,35 @@ export default function NewPrimitivePage() {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     }
+  }
+
+  const allFilled =
+    values.primitive_name &&
+    values.base_element &&
+    values.features.some(Boolean) &&
+    values.variants.some(Boolean) &&
+    values.a11y_requirements.some(Boolean)
+
+  // Highlight filled scalar values in prompt
+  const renderPrompt = () => {
+    let text = finalPrompt
+    const scalars = [values.primitive_name, values.base_element].filter(Boolean)
+    scalars.forEach(val => {
+      const escaped = val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      text = text.replace(new RegExp(escaped, "g"), `___P___${val}___E___`)
+    })
+    const parts = text.split(/(___P___.*?___E___)/)
+    return (
+      <>
+        {parts.map((part, i) =>
+          part.startsWith("___P___") ? (
+            <span key={i} className="text-primary font-semibold">{part.slice(7, -5)}</span>
+          ) : (
+            part
+          )
+        )}
+      </>
+    )
   }
 
   return (
@@ -145,128 +233,97 @@ export default function NewPrimitivePage() {
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent className="w-full sm:max-w-5xl lg:max-w-6xl flex flex-col">
-          <SheetHeader className="space-y-3">
-            <SheetTitle className="text-left">Generate Primitive Prompt</SheetTitle>
-            <Button
-              size="sm"
-              className="w-full gap-2 text-xs h-8 bg-primary text-white hover:bg-primary/90"
-              onClick={() => {
-                setShowExample(!showExample)
-                setValues(showExample ? EMPTY_VALUES : EXAMPLE_VALUES)
-              }}
-            >
-              {showExample ? "Clear" : "See Example"}
-            </Button>
+        <SheetContent side="right" className="!w-[90vw] !max-w-none flex flex-col">
+          <SheetHeader className="space-y-3 px-6 pt-6 pb-4 border-b">
+            <div className="flex items-center justify-between">
+              <SheetTitle>Generate Primitive Prompt</SheetTitle>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+                  onClick={() => {
+                    setShowExample(!showExample)
+                    setValues(showExample ? EMPTY_VALUES : EXAMPLE_VALUES)
+                  }}
+                >
+                  <Trash2 className="size-3" />
+                  {showExample ? "Clear" : "See Example"}
+                </Button>
+              </div>
+            </div>
           </SheetHeader>
 
-          <div className="flex-1 overflow-y-auto">
-            <div className="space-y-4 px-4 py-4 max-w-2xl">
-              <div className="grid gap-2">
-                <Label htmlFor="primitive-name" className="text-xs font-semibold">Primitive Name</Label>
-                <Input
-                  id="primitive-name"
-                  value={values.primitive_name}
-                  onChange={(e) => setValues((prev) => ({ ...prev, primitive_name: e.target.value }))}
-                  placeholder="e.g., toggle, badge, toggle-group"
-                  className="h-9 text-sm focus-visible:ring-primary"
-                />
-              </div>
+          <div className="flex flex-1 overflow-hidden">
+            {/* Left: Form */}
+            <div className="flex-1 overflow-y-auto border-r">
+              <div className="space-y-6 p-6">
+                <div className="grid gap-2">
+                  <Label htmlFor="primitive-name" className="text-xs font-semibold">Primitive Name</Label>
+                  <Input
+                    id="primitive-name"
+                    value={values.primitive_name}
+                    onChange={(e) => setValues((prev) => ({ ...prev, primitive_name: e.target.value }))}
+                    placeholder="e.g., toggle, badge, toggle-group"
+                    className="h-9 text-sm focus-visible:ring-primary"
+                  />
+                </div>
 
-              <div className="grid gap-2">
-                <Label htmlFor="base-element" className="text-xs font-semibold">Base Element/Primitive</Label>
-                <Input
-                  id="base-element"
-                  value={values.base_element}
-                  onChange={(e) => setValues((prev) => ({ ...prev, base_element: e.target.value }))}
-                  placeholder="e.g., button, div, input"
-                  className="h-9 text-sm focus-visible:ring-primary"
-                />
-              </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="base-element" className="text-xs font-semibold">Base Element/Primitive</Label>
+                  <Input
+                    id="base-element"
+                    value={values.base_element}
+                    onChange={(e) => setValues((prev) => ({ ...prev, base_element: e.target.value }))}
+                    placeholder="e.g., button, div, input"
+                    className="h-9 text-sm focus-visible:ring-primary"
+                  />
+                </div>
 
-              <div className="grid gap-2">
-                <Label htmlFor="features" className="text-xs font-semibold">Required Features</Label>
-                <textarea
-                  id="features"
-                  value={values.features}
-                  onChange={(e) => setValues((prev) => ({ ...prev, features: e.target.value }))}
-                  placeholder="List features line by line"
-                  className="min-h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary resize-none"
+                <MultiInput
+                  label="Required Features"
+                  values={values.features}
+                  placeholder="e.g., Selection state management"
+                  onChange={(v) => setValues((prev) => ({ ...prev, features: v }))}
                 />
-              </div>
 
-              <div className="grid gap-2">
-                <Label htmlFor="variants" className="text-xs font-semibold">Variant Options</Label>
-                <textarea
-                  id="variants"
-                  value={values.variants}
-                  onChange={(e) => setValues((prev) => ({ ...prev, variants: e.target.value }))}
+                <MultiInput
+                  label="Variant Options"
+                  values={values.variants}
                   placeholder="e.g., default, outline, ghost"
-                  className="min-h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary resize-none"
+                  onChange={(v) => setValues((prev) => ({ ...prev, variants: v }))}
                 />
-              </div>
 
-              <div className="grid gap-2">
-                <Label htmlFor="a11y" className="text-xs font-semibold">Accessibility Requirements</Label>
-                <textarea
-                  id="a11y"
-                  value={values.a11y_requirements}
-                  onChange={(e) => setValues((prev) => ({ ...prev, a11y_requirements: e.target.value }))}
-                  placeholder="Keyboard nav, ARIA labels, etc."
-                  className="min-h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary resize-none"
+                <MultiInput
+                  label="Accessibility Requirements"
+                  values={values.a11y_requirements}
+                  placeholder="e.g., ARIA roles for button group"
+                  onChange={(v) => setValues((prev) => ({ ...prev, a11y_requirements: v }))}
                 />
               </div>
             </div>
-          </div>
 
-          <div className="border-t">
-            <div className="px-4 py-4 space-y-3">
-              <h4 className="text-sm font-semibold">Generated Prompt</h4>
-              <div className="rounded-lg border border-border/50 bg-muted/30 overflow-y-auto max-h-96">
-                <pre className="text-base leading-relaxed p-4 whitespace-pre-wrap break-words font-mono text-foreground/80">
-                  {(() => {
-                    let text = finalPrompt
-                    Object.entries(values).forEach(([, value]) => {
-                      if (value) {
-                        // Escape special regex chars and replace each line
-                        const lines = value.split('\n')
-                        lines.forEach(line => {
-                          if (line) {
-                            const escaped = line.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-                            text = text.replace(new RegExp(escaped, 'g'), `___PRIMARY___${line}___END___`)
-                          }
-                        })
-                      }
-                    })
-
-                    const parts = text.split(/(___PRIMARY___.*?___END___)/)
-                    return (
-                      <>
-                        {parts.map((part, i) =>
-                          part.startsWith('___PRIMARY___') ? (
-                            <span key={i} className="text-primary font-semibold">
-                              {part.slice(13, -7)}
-                            </span>
-                          ) : (
-                            part
-                          )
-                        )}
-                      </>
-                    )
-                  })()}
+            {/* Right: Preview */}
+            <div className="flex-1 flex flex-col">
+              <div className="px-6 py-4 border-b flex items-center justify-between">
+                <h4 className="text-sm font-semibold">Generated Prompt</h4>
+                <div className="text-xs text-muted-foreground">
+                  {!allFilled ? (
+                    <span className="text-yellow-600">⚠ Fill all parameters</span>
+                  ) : (
+                    <span className="text-primary">✓ Ready to copy</span>
+                  )}
+                </div>
+              </div>
+              <div className="flex-1 overflow-y-auto">
+                <pre className="text-sm leading-relaxed p-6 whitespace-pre-wrap break-words font-mono text-foreground/80">
+                  {renderPrompt()}
                 </pre>
               </div>
-              <div className="text-xs text-muted-foreground">
-                {Object.values(values).some((v) => !v) ? (
-                  <span className="text-yellow-600">⚠️ Fill all parameters</span>
-                ) : (
-                  <span className="text-primary">✓ Ready to copy</span>
-                )}
-              </div>
             </div>
           </div>
 
-          <SheetFooter className="px-4 py-3 border-t">
+          <SheetFooter className="px-6 py-4 border-t">
             <Button onClick={handleCopy} className="w-full gap-2 h-9 bg-primary text-white hover:bg-primary/90">
               {copied ? (
                 <>
