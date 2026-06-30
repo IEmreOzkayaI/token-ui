@@ -30,28 +30,12 @@ Accessibility requirements:
 
 ---
 
-DESIGN TOKEN STANDARDS (mandatory — no hardcoded values allowed):
+DESIGN TOKEN STANDARDS (mandatory — no hardcoded values):
 
-Colors → use semantic CSS variables from app/globals.css:
-  --primary, --primary-foreground
-  --secondary, --secondary-foreground
-  --muted, --muted-foreground
-  --accent, --accent-foreground
-  --destructive, --destructive-foreground
-  --border, --input, --ring, --background, --foreground
-
-Typography → use token variables:
-  font-size: --font-size-xs | sm | base | lg | xl | 2xl ...
-  font-weight: --font-weight-normal | medium | semibold | bold
-  line-height: --leading-tight | normal | relaxed
-
-Spacing → use --space-* scale (--space-1 through --space-32):
-  padding/margin/gap via Tailwind: p-(--space-4), gap-(--space-2)
-
-Radius → use --radius-sm | md | lg | xl | full
-Border → always use --border or --input color token
-Shadow → use --shadow-sm | md | lg | xl | 2xl
-Transitions → use --transition-fast | base | slow
+Read app/globals.css for all available tokens. Use only CSS variables defined there.
+Token categories: colors, typography (font-size, weight, leading), spacing (--space-*),
+radius (--radius-*), shadows (--shadow-*), borders (--border, --input), transitions (--transition-*).
+Dark mode is automatic via CSS variables — no dark: Tailwind classes needed for colors.
 
 ---
 
@@ -64,9 +48,8 @@ IMPLEMENTATION GUIDELINES:
 5. asChild pattern support if composition needed (Slot from radix-ui)
 6. TypeScript: React.ComponentProps<"{base_element}"> & VariantProps<typeof {primitive_name}Variants>
 7. Accessibility: focus-visible:ring-3 focus-visible:ring-ring/50, aria-invalid states
-8. Dark mode: handled automatically via CSS variables (no dark: classes needed for colors)
-9. data-variant and data-size attributes for external styling hooks
-10. No inline styles — Tailwind + CSS variables only
+8. data-variant and data-size attributes for external styling hooks
+9. No inline styles — Tailwind + CSS variables only
 
 File location: ui/primitives/{primitive_name}.tsx
 
@@ -199,9 +182,8 @@ export default function NewPrimitivePage() {
     values.variants.some(Boolean) &&
     values.a11y_requirements.some(Boolean)
 
-  // Highlight all user-entered values in prompt
+  // Highlight all user-entered values in prompt (single-pass regex, no nested replacement)
   const renderPrompt = () => {
-    let text = finalPrompt
     const allValues = [
       values.primitive_name,
       values.base_element,
@@ -210,23 +192,23 @@ export default function NewPrimitivePage() {
       ...values.a11y_requirements.filter(Boolean),
     ].filter(Boolean).sort((a, b) => b.length - a.length)
 
-    allValues.forEach(val => {
-      const escaped = val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-      text = text.replace(new RegExp(escaped, "g"), `___P___${val}___E___`)
-    })
+    if (!allValues.length) return <>{finalPrompt}</>
 
-    const parts = text.split(/(___P___.*?___E___)/)
-    return (
-      <>
-        {parts.map((part, i) =>
-          part.startsWith("___P___") ? (
-            <span key={i} className="text-primary font-semibold">{part.slice(7, -7)}</span>
-          ) : (
-            part
-          )
-        )}
-      </>
+    const pattern = new RegExp(
+      allValues.map(v => v.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"),
+      "g"
     )
+
+    const parts: (string | JSX.Element)[] = []
+    let last = 0
+    let match: RegExpExecArray | null
+    while ((match = pattern.exec(finalPrompt)) !== null) {
+      if (match.index > last) parts.push(finalPrompt.slice(last, match.index))
+      parts.push(<span key={match.index} className="text-primary font-semibold">{match[0]}</span>)
+      last = pattern.lastIndex
+    }
+    if (last < finalPrompt.length) parts.push(finalPrompt.slice(last))
+    return <>{parts}</>
   }
 
   return (
