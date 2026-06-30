@@ -4,15 +4,15 @@ import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { readSource } from "@/app/docs/_lib/read-source"
-import FuelPumpStatusCardDefault from "@/ui/components/fuel-pump-status-card/default"
-import FuelPumpStatusCardDemo from "@/ui/components/fuel-pump-status-card/demo"
-import FuelPumpStatusCardError from "@/ui/components/fuel-pump-status-card/error"
-import FuelPumpStatusCardFueling from "@/ui/components/fuel-pump-status-card/fueling"
-import FuelPumpStatusCardMaintenance from "@/ui/components/fuel-pump-status-card/maintenance"
-import FuelPumpStatusCardOffline from "@/ui/components/fuel-pump-status-card/offline"
-import FuelPumpStatusCardOnline from "@/ui/components/fuel-pump-status-card/online"
-import FuelPumpStatusCardSize from "@/ui/components/fuel-pump-status-card/size"
-import FuelPumpStatusCardUsage from "@/ui/components/fuel-pump-status-card/usage"
+import FuelPumpStatusCardDefault from "@/ui/domain/fuel-pump-status-card/default"
+import FuelPumpStatusCardDemo from "@/ui/domain/fuel-pump-status-card/demo"
+import FuelPumpStatusCardError from "@/ui/domain/fuel-pump-status-card/error"
+import FuelPumpStatusCardFueling from "@/ui/domain/fuel-pump-status-card/fueling"
+import FuelPumpStatusCardMaintenance from "@/ui/domain/fuel-pump-status-card/maintenance"
+import FuelPumpStatusCardOffline from "@/ui/domain/fuel-pump-status-card/offline"
+import FuelPumpStatusCardOnline from "@/ui/domain/fuel-pump-status-card/online"
+import FuelPumpStatusCardSize from "@/ui/domain/fuel-pump-status-card/size"
+import FuelPumpStatusCardUsage from "@/ui/domain/fuel-pump-status-card/usage"
 
 const examples = [
   {
@@ -20,63 +20,63 @@ const examples = [
     title: "Usage",
     description: "Real-world example with callbacks and alert state management.",
     component: FuelPumpStatusCardUsage,
-    sourcePath: "ui/components/fuel-pump-status-card/usage.tsx",
+    sourcePath: "ui/domain/fuel-pump-status-card/usage.tsx",
   },
   {
     id: "default",
     title: "Default",
     description: "Idle pump with daily totals and fuel breakdown.",
     component: FuelPumpStatusCardDefault,
-    sourcePath: "ui/components/fuel-pump-status-card/default.tsx",
+    sourcePath: "ui/domain/fuel-pump-status-card/default.tsx",
   },
   {
     id: "online",
     title: "Online",
     description: "Pump is online and ready, no active transaction.",
     component: FuelPumpStatusCardOnline,
-    sourcePath: "ui/components/fuel-pump-status-card/online.tsx",
+    sourcePath: "ui/domain/fuel-pump-status-card/online.tsx",
   },
   {
     id: "fueling",
     title: "Fueling",
     description: "Active transaction in progress with live amount and liters.",
     component: FuelPumpStatusCardFueling,
-    sourcePath: "ui/components/fuel-pump-status-card/fueling.tsx",
+    sourcePath: "ui/domain/fuel-pump-status-card/fueling.tsx",
   },
   {
     id: "offline",
     title: "Offline",
     description: "Pump is unreachable. Disconnected connection quality.",
     component: FuelPumpStatusCardOffline,
-    sourcePath: "ui/components/fuel-pump-status-card/offline.tsx",
+    sourcePath: "ui/domain/fuel-pump-status-card/offline.tsx",
   },
   {
     id: "error",
     title: "Error",
     description: "Pump in error state with critical and warning alerts.",
     component: FuelPumpStatusCardError,
-    sourcePath: "ui/components/fuel-pump-status-card/error.tsx",
+    sourcePath: "ui/domain/fuel-pump-status-card/error.tsx",
   },
   {
     id: "maintenance",
     title: "Maintenance",
     description: "Pump taken offline for scheduled maintenance.",
     component: FuelPumpStatusCardMaintenance,
-    sourcePath: "ui/components/fuel-pump-status-card/maintenance.tsx",
+    sourcePath: "ui/domain/fuel-pump-status-card/maintenance.tsx",
   },
   {
     id: "sizes",
     title: "Sizes",
     description: "sm / md / lg size variants for different layout densities.",
     component: FuelPumpStatusCardSize,
-    sourcePath: "ui/components/fuel-pump-status-card/size.tsx",
+    sourcePath: "ui/domain/fuel-pump-status-card/size.tsx",
   },
   {
     id: "demo",
     title: "Grid Demo",
     description: "Responsive grid of all pump states. Alerts are dismissable.",
     component: FuelPumpStatusCardDemo,
-    sourcePath: "ui/components/fuel-pump-status-card/demo.tsx",
+    sourcePath: "ui/domain/fuel-pump-status-card/demo.tsx",
   },
 ] as const
 
@@ -225,7 +225,7 @@ export default function FuelPumpStatusCardPage() {
         </p>
         <div className="overflow-hidden rounded-xl border bg-background">
           <pre className="overflow-x-auto p-4 text-xs leading-6 font-mono text-muted-foreground" style={{ maxHeight: "800px", overflowY: "auto" }}>
-            {readSource("ui/components/fuel-pump-status-card/index.tsx")}
+            {readSource("ui/domain/fuel-pump-status-card/index.tsx")}
           </pre>
         </div>
       </DocsSection>

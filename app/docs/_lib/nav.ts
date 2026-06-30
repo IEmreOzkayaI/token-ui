@@ -101,6 +101,13 @@ export const docsNav: NavSection[] = [
         items: [
           { label: "Store Performance Card", href: "/docs/ui/domain/retail/store-performance-card" },
         ]
+      },
+      {
+        label: "Energy",
+        href: "#energy",
+        items: [
+          { label: "Fuel Pump Status Card", href: "/docs/ui/domain/fuel-pump-status-card" },
+        ]
       }
     ],
   },
@@ -159,7 +166,6 @@ export const docsNav: NavSection[] = [
       { label: "Slider", href: "/docs/ui/components/slider" },
       { label: "Sonner", href: "/docs/ui/components/sonner" },
       { label: "Spinner", href: "/docs/ui/components/spinner" },
-      { label: "Fuel Pump Status Card", href: "/docs/ui/components/fuel-pump-status-card" },
       { label: "Stat Card", href: "/docs/ui/components/stat-card" },
       { label: "Switch", href: "/docs/ui/components/switch" },
       { label: "Table", href: "/docs/ui/components/table" },
