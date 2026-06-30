@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { CheckIcon, CopyIcon, PlusIcon, XIcon } from "lucide-react"
+import { AlertTriangle, CheckIcon, CircleCheck, CopyIcon, PlusIcon, XIcon } from "lucide-react"
 
 import { Button } from "@/primitives/button"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
@@ -212,6 +212,20 @@ export function ListField({
         Add
       </Button>
     </div>
+  )
+}
+
+export function PromptCopyStatus({ ready }: { ready: boolean }) {
+  return ready ? (
+    <span className="inline-flex items-center gap-1.5 text-primary">
+      <CircleCheck className="size-3.5" aria-hidden />
+      Ready to copy
+    </span>
+  ) : (
+    <span className="inline-flex items-center gap-1.5 text-yellow-600">
+      <AlertTriangle className="size-3.5" aria-hidden />
+      Fill all parameters
+    </span>
   )
 }
 

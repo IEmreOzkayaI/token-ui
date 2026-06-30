@@ -1,0 +1,63 @@
+# Dependencies (installed inside the image)
+node_modules/
+.pnpm-store/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs (generated during `next build`)
+.next/
+out/
+dist/
+build/
+.vercel/
+
+# Tests and coverage
+coverage/
+__tests__/
+__mocks__/
+*.test.*
+*.spec.*
+
+# Git and local dev tooling
+.git/
+.gitignore
+.vscode/
+.idea/
+*.swp
+*~
+*.log
+
+# Secrets and local env files
+.env
+.env*.local
+
+# Docker files (not needed in build context)
+Dockerfile*
+.dockerignore
+compose.yaml
+compose.yml
+docker-compose*.yaml
+docker-compose*.yml
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Caches and temp files
+.cache/
+.eslintcache
+.swc/
+.turbo/
+.tmp/
+*.tsbuildinfo
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor / agent metadata
+.cursor/
+.agents/
+AGENTS.md

@@ -18,7 +18,11 @@ import {
 
 const searchItems = getSearchItems()
 
-export function DocsSearch() {
+type DocsSearchProps = {
+  variant?: "default" | "compact"
+}
+
+export function DocsSearch({ variant = "default" }: DocsSearchProps) {
   const [open, setOpen] = useState(false)
   const router = useRouter()
 
@@ -52,16 +56,24 @@ export function DocsSearch() {
     return acc
   }, {})
 
+  const isCompact = variant === "compact"
+
   return (
     <>
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="hidden h-8 w-80 items-center gap-2 rounded-sm border bg-muted/40 px-3 text-sm text-muted-foreground transition-colors hover:bg-muted/60 md:flex"
+        className={
+          isCompact
+            ? "hidden h-8 items-center gap-2 rounded-md border border-[#e4e4e0] bg-[#f5f5f3] px-2.5 text-[#888884] transition-colors hover:bg-[#efefed] md:flex"
+            : "hidden h-8 w-80 items-center gap-2 rounded-sm border bg-muted/40 px-3 text-sm text-muted-foreground transition-colors hover:bg-muted/60 md:flex"
+        }
       >
-        <Search className="size-3.5 shrink-0 opacity-50" />
-        <span className="flex-1 text-left">Search documentation...</span>
-        <kbd className="pointer-events-none hidden select-none items-center gap-0.5 rounded border bg-background px-1.5 font-mono text-[10px] font-medium lg:flex">
+        <Search className="size-3.5 shrink-0 opacity-60" />
+        {!isCompact ? (
+          <span className="flex-1 text-left">Search documentation...</span>
+        ) : null}
+        <kbd className="pointer-events-none hidden select-none items-center gap-0.5 rounded border border-[#e4e4e0] bg-white px-1 font-mono text-[10px] font-medium lg:flex">
           <span>⌘</span>K
         </kbd>
       </button>

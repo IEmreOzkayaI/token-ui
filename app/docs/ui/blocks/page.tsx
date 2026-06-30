@@ -49,6 +49,30 @@ export default function BlocksPage() {
         <div className="space-y-6 text-sm">
           <div className="border rounded-lg p-4 bg-muted/20 hover:bg-muted/30 transition-colors">
             <a
+              href="/docs/ui/blocks/station-sales-dashboard"
+              className="font-semibold text-foreground hover:text-primary transition-colors"
+            >
+              Station Sales Dashboard
+            </a>
+            <p className="text-muted-foreground mt-2">
+              KPI strip, product sales chart, and station ranking for fuel retail analytics.
+              Includes loading and empty states with mock data.
+            </p>
+          </div>
+          <div className="border rounded-lg p-4 bg-muted/20 hover:bg-muted/30 transition-colors">
+            <a
+              href="/docs/ui/blocks/pastry-admin-dashboard"
+              className="font-semibold text-foreground hover:text-primary transition-colors"
+            >
+              Pastry Admin Dashboard
+            </a>
+            <p className="text-muted-foreground mt-2">
+              Executive admin panel for pastry, restaurant, and catering brands —
+              KPI strip, revenue overview, branch performance, operations, inventory, and AI insights.
+            </p>
+          </div>
+          <div className="border rounded-lg p-4 bg-muted/20 hover:bg-muted/30 transition-colors">
+            <a
               href="/docs/ui/blocks/admin-dashboard"
               className="font-semibold text-foreground hover:text-primary transition-colors"
             >
@@ -58,6 +82,28 @@ export default function BlocksPage() {
               Comprehensive dashboard with stats overview, dual line charts for sales/activity
               tracking, and transaction cards with step progress indicators. Ideal for fintech
               and SaaS admin panels.
+            </p>
+          </div>
+          <div className="border rounded-lg p-4 bg-muted/20 hover:bg-muted/30 transition-colors">
+            <a
+              href="/docs/ui/blocks/admin-dashboard-v2"
+              className="font-semibold text-foreground hover:text-primary transition-colors"
+            >
+              Admin Dashboard V2
+            </a>
+            <p className="text-muted-foreground mt-2">
+              Iteration of the admin dashboard with refined layout and chart composition.
+            </p>
+          </div>
+          <div className="border rounded-lg p-4 bg-muted/20 hover:bg-muted/30 transition-colors">
+            <a
+              href="/docs/ui/blocks/admin-dashboard-v3"
+              className="font-semibold text-foreground hover:text-primary transition-colors"
+            >
+              Admin Dashboard V3
+            </a>
+            <p className="text-muted-foreground mt-2">
+              Latest admin dashboard variant with updated visual hierarchy and data presentation.
             </p>
           </div>
         </div>

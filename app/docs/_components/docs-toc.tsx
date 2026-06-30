@@ -39,18 +39,18 @@ export function DocsToc({ items }: DocsTocProps) {
 
   return (
     <div className="hidden xl:block">
-      <div className="sticky top-20 space-y-2">
-        <p className="text-sm font-medium">On This Page</p>
-        <ul className="space-y-1 border-l text-sm">
+      <div className="sticky top-6 space-y-3">
+        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</p>
+        <ul className="space-y-1 border-l border-border/30 text-sm">
           {items.map((item) => (
             <li key={item.id}>
               <Link
                 href={`#${item.id}`}
                 className={cn(
-                  "block border-l border-transparent py-1 pl-3 transition-colors hover:text-foreground",
+                  "block border-l border-transparent py-1 pl-3 transition-all hover:text-foreground",
                   item.depth === 3 && "pl-6",
                   activeId === item.id
-                    ? "border-foreground font-medium text-foreground"
+                    ? "border-foreground/50 font-medium text-foreground"
                     : "text-muted-foreground"
                 )}
               >

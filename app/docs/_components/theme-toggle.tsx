@@ -9,13 +9,17 @@ export function ThemeToggle() {
   const [theme, setTheme] = useState<"light" | "dark">("light")
 
   useEffect(() => {
-    const isDark = document.documentElement.classList.contains("dark")
+    const stored = localStorage.getItem("theme")
+    const isDark =
+      stored === "dark" ||
+      (stored === null && document.documentElement.classList.contains("dark"))
     setTheme(isDark ? "dark" : "light")
   }, [])
 
   function toggleTheme() {
     const next = theme === "dark" ? "light" : "dark"
     document.documentElement.classList.toggle("dark", next === "dark")
+    localStorage.setItem("theme", next)
     setTheme(next)
   }
 
@@ -23,7 +27,7 @@ export function ThemeToggle() {
     <Button
       variant="ghost"
       size="icon-sm"
-      className="relative"
+      className="relative text-muted-foreground hover:text-foreground"
       onClick={toggleTheme}
       aria-label="Toggle theme"
     >

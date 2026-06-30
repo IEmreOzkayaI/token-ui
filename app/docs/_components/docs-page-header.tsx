@@ -12,6 +12,7 @@ type DocsPageHeaderProps = {
   description?: string
   children?: ReactNode
   className?: string
+  action?: ReactNode
 }
 
 export function DocsPageHeader({
@@ -19,6 +20,7 @@ export function DocsPageHeader({
   description,
   children,
   className,
+  action,
 }: DocsPageHeaderProps) {
   const [copied, setCopied] = useState(false)
 
@@ -30,29 +32,32 @@ export function DocsPageHeader({
   }
 
   return (
-    <div className={cn("space-y-2 pb-8", className)}>
+    <div className={cn("space-y-3 pb-10", className)}>
       <div className="flex items-start justify-between gap-4">
-        <div className="space-y-1">
-          <h1 className="scroll-m-20 text-4xl font-bold tracking-tight lg:text-4xl">
+        <div className="space-y-2">
+          <h1 className="scroll-m-20 text-5xl font-bold tracking-tight text-foreground">
             {title}
           </h1>
           {description && (
-            <p className="text-lg text-muted-foreground">{description}</p>
+            <p className="text-base leading-relaxed text-muted-foreground max-w-2xl">{description}</p>
           )}
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          className="hidden shrink-0 gap-2 sm:flex"
-          onClick={copyPage}
-        >
-          {copied ? (
-            <Check className="size-3.5 text-green-600" />
-          ) : (
-            <Copy className="size-3.5" />
-          )}
-          Copy Page
-        </Button>
+        <div className="hidden shrink-0 gap-2 sm:flex items-center">
+          {action}
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2"
+            onClick={copyPage}
+          >
+            {copied ? (
+              <Check className="size-3.5 text-primary" />
+            ) : (
+              <Copy className="size-3.5" />
+            )}
+            Copy Page
+          </Button>
+        </div>
       </div>
       {children}
     </div>

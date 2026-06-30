@@ -12,14 +12,14 @@ const examples = [
     title: "Balloon",
     description: "Compact chat bubble in bottom-right corner.",
     component: () => <MessageDefault variant="balloon" isDemo />,
-    sourcePath: "ui/components/message/default.tsx",
+    sourcePath: "ui/components/Message/default.tsx",
   },
   {
     id: "fullscreen",
     title: "Fullscreen",
     description: "Full-screen modal chat interface.",
     component: () => <MessageDefault variant="fullscreen" isDemo />,
-    sourcePath: "ui/components/message/default.tsx",
+    sourcePath: "ui/components/Message/default.tsx",
   },
 ] as const
 

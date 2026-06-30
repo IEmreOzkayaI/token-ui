@@ -25,18 +25,18 @@ export function DocsSection({
       data-nested={nested || undefined}
       className={cn(
         "docs-section scroll-mt-20 space-y-4",
-        nested ? "space-y-3" : "border-t border-border pt-10",
+        nested ? "space-y-3" : "border-t border-border/30 pt-10 mt-8",
         className
       )}
     >
-      <div className="space-y-1">
+      <div className="space-y-2">
         {nested ? (
-          <h3 className="text-lg font-medium tracking-tight">{title}</h3>
+          <h3 className="text-lg font-semibold tracking-tight text-foreground">{title}</h3>
         ) : (
-          <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-foreground">{title}</h2>
         )}
         {description && (
-          <p className="text-muted-foreground">{description}</p>
+          <p className="text-sm text-muted-foreground">{description}</p>
         )}
       </div>
       {children}

@@ -1,11 +1,12 @@
 "use client"
 
 import { Check, Copy, ChevronUp } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import { Button } from "@/primitives/button"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { cn } from "@/lib/utils"
+import { tokenizeJSON, getTokenColor } from "@/app/docs/_lib/syntax-highlighter"
 
 type CodeBlockProps = {
   code: string
@@ -13,6 +14,7 @@ type CodeBlockProps = {
   showCopy?: boolean
   showLineNumbers?: boolean
   variant?: "standalone" | "embedded"
+  language?: string
 }
 
 function CodeLines({
@@ -20,26 +22,43 @@ function CodeLines({
   showLineNumbers,
   startLine = 1,
   className,
+  isDark = true,
 }: {
   code: string
   showLineNumbers?: boolean
   startLine?: number
   className?: string
+  isDark?: boolean
 }) {
   const lines = code.split("\n")
 
   return (
     <code className={cn("block font-mono text-[13px] leading-6", className)}>
-      {lines.map((line, index) => (
-        <div key={`${startLine + index}-${line}`} className="flex">
-          {showLineNumbers && (
-            <span className="inline-block w-10 shrink-0 pr-4 text-right text-muted-foreground/50 select-none">
-              {startLine + index}
+      {lines.map((line, index) => {
+        const tokens = tokenizeJSON(line)
+        return (
+          <div key={`${startLine + index}-${line}`} className="flex">
+            {showLineNumbers && (
+              <span className={cn(
+                "inline-block w-10 shrink-0 pr-4 text-right select-none",
+                isDark ? "text-muted-foreground/50" : "text-muted-foreground/60"
+              )}>
+                {startLine + index}
+              </span>
+            )}
+            <span className="flex-1 whitespace-pre">
+              {tokens.map((token, i) => (
+                <span
+                  key={i}
+                  className={token.type === "whitespace" ? "" : getTokenColor(token.type, isDark)}
+                >
+                  {token.value}
+                </span>
+              ))}
             </span>
-          )}
-          <span className="flex-1 whitespace-pre">{line || " "}</span>
-        </div>
-      ))}
+          </div>
+        )
+      })}
     </code>
   )
 }
@@ -53,6 +72,11 @@ export function CodeBlock({
 }: CodeBlockProps) {
   const [copied, setCopied] = useState(false)
   const [failed, setFailed] = useState(false)
+  const [isDark, setIsDark] = useState(true)
+
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains("dark"))
+  }, [])
 
   async function copyCode() {
     const ok = await copyToClipboard(code)
@@ -85,7 +109,7 @@ export function CodeBlock({
           aria-label={failed ? "Copy failed" : "Copy code"}
         >
           {copied ? (
-            <Check className="size-3.5 text-green-600" />
+            <Check className="size-3.5 text-primary" />
           ) : (
             <Copy className="size-3.5" />
           )}
@@ -95,11 +119,11 @@ export function CodeBlock({
         className={cn(
           "overflow-x-auto p-4",
           isEmbedded
-            ? "max-h-[min(70vh,650px)] bg-muted/50"
-            : "rounded-lg border bg-muted/50"
+            ? "max-h-[min(70vh,650px)] bg-foreground/5"
+            : "rounded-lg border border-border/50 bg-foreground/5"
         )}
       >
-        <CodeLines code={code} showLineNumbers={showLineNumbers} />
+        <CodeLines code={code} showLineNumbers={showLineNumbers} isDark={isDark} />
       </pre>
     </div>
   )
@@ -109,16 +133,23 @@ const PEEK_LINES = 3
 
 type CollapsibleCodeBlockProps = {
   code: string
+  initialExpanded?: boolean
 }
 
-export function CollapsibleCodeBlock({ code }: CollapsibleCodeBlockProps) {
-  const [expanded, setExpanded] = useState(false)
+export function CollapsibleCodeBlock({ code, initialExpanded = false }: CollapsibleCodeBlockProps) {
+  const [expanded, setExpanded] = useState(initialExpanded)
+  const [isDark, setIsDark] = useState(true)
+
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains("dark"))
+  }, [])
+
   const lines = code.split("\n")
   const peek = lines.slice(0, PEEK_LINES).join("\n")
 
   if (expanded) {
     return (
-      <div className="border-t bg-muted/50 relative">
+      <div className="border-t border-border/30 bg-foreground/5 relative">
         <Button
           variant="ghost"
           size="icon-sm"
@@ -138,11 +169,11 @@ export function CollapsibleCodeBlock({ code }: CollapsibleCodeBlockProps) {
   }
 
   return (
-    <div className="relative border-t bg-muted/50">
+    <div className="relative border-t border-border/30 bg-foreground/5">
       <pre className="overflow-hidden px-4 pt-4 pb-12 font-mono text-[13px] leading-6 text-muted-foreground/40">
-        <CodeLines code={peek} showLineNumbers startLine={1} />
+        <CodeLines code={peek} showLineNumbers startLine={1} isDark={isDark} />
       </pre>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-muted/50 from-40% to-transparent px-4 pt-10 pb-4">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-foreground/5 from-40% to-transparent px-4 pt-10 pb-4">
         <Button
           variant="outline"
           size="sm"
