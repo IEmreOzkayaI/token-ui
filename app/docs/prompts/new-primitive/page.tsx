@@ -237,7 +237,7 @@ export default function NewPrimitivePage() {
           </div>
 
           <SheetFooter className="px-4 py-3 border-t">
-            <Button onClick={handleCopy} className="w-full gap-2 h-9">
+            <Button onClick={handleCopy} variant="outline" className="w-full gap-2 h-9">
               {copied ? (
                 <>
                   <Check className="size-4 text-primary" />
