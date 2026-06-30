@@ -28,17 +28,45 @@ Variant options:
 Accessibility requirements:
 {a11y_requirements}
 
-Guidelines:
-1. Use CVA (class-variance-authority) for variant management
-2. Add data-slot="{primitive_name}" to root element
-3. Support className prop for customization
-4. Use cn() utility to merge classes
-5. Export both component and {primitive_name}Variants
-6. Support asChild pattern if composition needed
-7. Include focus-visible and aria-invalid states
-8. Support light/dark modes via Tailwind
-9. Use CSS custom properties from app/globals.css for colors/spacing
-10. Add TypeScript types for all props
+---
+
+DESIGN TOKEN STANDARDS (mandatory — no hardcoded values allowed):
+
+Colors → use semantic CSS variables from app/globals.css:
+  --primary, --primary-foreground
+  --secondary, --secondary-foreground
+  --muted, --muted-foreground
+  --accent, --accent-foreground
+  --destructive, --destructive-foreground
+  --border, --input, --ring, --background, --foreground
+
+Typography → use token variables:
+  font-size: --font-size-xs | sm | base | lg | xl | 2xl ...
+  font-weight: --font-weight-normal | medium | semibold | bold
+  line-height: --leading-tight | normal | relaxed
+
+Spacing → use --space-* scale (--space-1 through --space-32):
+  padding/margin/gap via Tailwind: p-(--space-4), gap-(--space-2)
+
+Radius → use --radius-sm | md | lg | xl | full
+Border → always use --border or --input color token
+Shadow → use --shadow-sm | md | lg | xl | 2xl
+Transitions → use --transition-fast | base | slow
+
+---
+
+IMPLEMENTATION GUIDELINES:
+
+1. CVA (class-variance-authority) for all variants — export {primitive_name}Variants
+2. data-slot="{primitive_name}" on root element
+3. Support className prop via cn() merge
+4. Forward all HTML props with ...props spread
+5. asChild pattern support if composition needed (Slot from radix-ui)
+6. TypeScript: React.ComponentProps<"{base_element}"> & VariantProps<typeof {primitive_name}Variants>
+7. Accessibility: focus-visible:ring-3 focus-visible:ring-ring/50, aria-invalid states
+8. Dark mode: handled automatically via CSS variables (no dark: classes needed for colors)
+9. data-variant and data-size attributes for external styling hooks
+10. No inline styles — Tailwind + CSS variables only
 
 File location: ui/primitives/{primitive_name}.tsx
 
