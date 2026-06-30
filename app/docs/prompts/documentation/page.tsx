@@ -168,7 +168,7 @@ export default function DocumentationPage() {
         last = pattern.lastIndex
       }
       if (last < text.length) parts.push(text.slice(last))
-      return <>{}{}</>
+      return <>{parts}</>
     }
     const allLines = finalPrompt.split("\n")
     const lines = allLines.filter((line, idx) => line.trim() || allLines[idx - 1]?.trim())
