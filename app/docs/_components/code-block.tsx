@@ -133,10 +133,11 @@ const PEEK_LINES = 3
 
 type CollapsibleCodeBlockProps = {
   code: string
+  initialExpanded?: boolean
 }
 
-export function CollapsibleCodeBlock({ code }: CollapsibleCodeBlockProps) {
-  const [expanded, setExpanded] = useState(false)
+export function CollapsibleCodeBlock({ code, initialExpanded = false }: CollapsibleCodeBlockProps) {
+  const [expanded, setExpanded] = useState(initialExpanded)
   const [isDark, setIsDark] = useState(true)
 
   useEffect(() => {

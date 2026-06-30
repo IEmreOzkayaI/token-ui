@@ -75,17 +75,35 @@ const DOCS_ADDON = `
 
 ALSO GENERATE DOCUMENTATION:
 
-After creating the primitive, also create a full documentation page:
+After creating the primitive, create a complete documentation page with source code visibility:
 
 File: app/docs/ui/components/{primitive_name}/page.tsx
 
-1. Also create demo files in ui/components/{primitive_name}/
-   - default.tsx — default variant, no props
-   - demo.tsx — interactive example with useState
-   - size.tsx — all sizes side by side (if sizes defined)
-   - One file per variant (e.g. ghost.tsx, outline.tsx)
+1. Create demo files in ui/components/{primitive_name}/
+   - default.tsx
+   - demo.tsx (interactive with useState)
+   - size.tsx (all sizes side by side, if applicable)
+   - [variant].tsx (one per variant: ghost.tsx, outline.tsx, etc.)
 
-2. Then create the docs page:
+2. Create the docs page structure:
+   - DocsPageHeader (title, description)
+   - Overview section
+   - Examples section (ComponentExample for each demo)
+   - Props table
+   - Component Source section (REQUIRED - see below)
+   - Accessibility section
+   - Best Practices section
+
+3. Component Source Section (REQUIRED):
+   Add a "Component Source" DocsSection showing:
+   a) Primitive structure: Show index.tsx implementation
+   b) CVA Definition: Show the cva() setup with all variants and sizes
+   c) TypeScript Types: Show VariantProps usage
+   d) Export Pattern: Show how component and variantsCva are exported
+
+   Reference FuelPumpStatusCard docs for pattern: /docs/ui/components/fuel-pump-status-card#component-source
+
+Imports:
    - Import DocsPage, DocsPageHeader, DocsSection, DocsCallout from @/app/docs/_components/
    - Import ComponentExample from @/app/docs/_components/component-example
    - Import readSource from @/lib/read-source
@@ -332,6 +350,78 @@ export default function NewPrimitivePage() {
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
+
+      <DocsSection id="implementation" title="Implementation Guide">
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-semibold mb-3">Real-world example: FuelPumpStatusCard</h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Complete component combining multiple primitives. Shows structure, sub-components, and implementation patterns.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Component Structure</h4>
+              <pre className="text-xs overflow-x-auto p-3 rounded-lg border bg-muted/50"><code>{`ui/components/fuel-pump-status-card/
+  ├─ index.tsx              (main component + sub-components)
+  ├─ types.ts               (TypeScript types)
+  ├─ utils.ts               (formatting helpers)
+  ├─ _fixtures.ts           (test data)
+  ├─ usage.tsx              (real usage example)
+  └─ *.tsx                  (demo variants)`}</code></pre>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Component Implementation Pattern</h4>
+              <p className="text-xs text-muted-foreground mb-3">
+                See full source: <a href="/docs/ui/components/fuel-pump-status-card#component-source" className="text-primary hover:underline">FuelPumpStatusCard docs →</a>
+              </p>
+              <div className="overflow-x-auto rounded-lg border bg-background">
+                <pre className="text-xs p-4"><code>{`// Main component structure:
+export function YourComponent({
+  variant = "default",
+  size = "md",
+  className,
+  onClick,
+  ...props
+}: YourComponentProps) {
+  const isCompact = variant === "compact"
+
+  return (
+    <div
+      data-slot="your-component"
+      data-variant={variant}
+      data-size={size}
+      role={onClick ? "button" : undefined}
+      className={cn(yourComponentVariants({ variant, size }), className)}
+      onClick={onClick}
+      {...props}
+    >
+      <SubComponent1 />
+      {!isCompact && <SubComponent2 />}
+    </div>
+  )
+}
+
+export { yourComponentVariants }`}</code></pre>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Key Patterns</h4>
+              <ul className="text-xs space-y-2 text-muted-foreground list-disc pl-5">
+                <li><code className="text-foreground">data-slot</code> attributes on all elements for styling hooks</li>
+                <li>CVA (class-variance-authority) for variant management</li>
+                <li>Composable sub-components for complex layouts</li>
+                <li>TypeScript types exported alongside component</li>
+                <li>Formatting utilities in separate utils.ts file</li>
+                <li>Test data in _fixtures.ts for demos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </DocsSection>
         <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex h-dvh flex-col gap-0 overflow-hidden p-0">
           {/* Drag handle */}
           <div

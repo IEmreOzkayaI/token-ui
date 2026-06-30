@@ -148,7 +148,7 @@ export default function NewComponentPage() {
     result = result.replace(/\{features\}/g, values.features.filter(Boolean).map(f => `- ${f}`).join("\n") || "")
     result = result.replace(/\{state_management\}/g, values.state_management || "")
     result = result.replace(/\{documentation_examples\}/g, values.documentation_examples.filter(Boolean).map(f => `- ${f}`).join("\n") || "")
-    if (withDocs) result += `\n---\n\nALSO GENERATE DOCUMENTATION:\n\nAfter creating the component, also create a full documentation page:\n\nFile: app/docs/ui/components/${values.component_name || "{component_name}"}/page.tsx\n\n1. Create demo files in ui/components/${values.component_name || "{component_name}"}/ - default.tsx, demo.tsx, size.tsx, one per variant\n2. Create the docs page:\n   - Import DocsPage, DocsPageHeader, DocsSection, DocsCallout from @/app/docs/_components/\n   - Import ComponentExample from @/app/docs/_components/component-example\n   - Structure: DocsPageHeader → Overview → Examples (ComponentExample per demo) → Props table → Best Practices\n\nReturn: component files + demos + docs page.`
+    if (withDocs) result += `\n---\n\nALSO GENERATE DOCUMENTATION:\n\nAfter creating the component, create a complete documentation page with source code visibility:\n\nFile: app/docs/ui/components/${values.component_name || "{component_name}"}/page.tsx\n\n1. Structure:\n   - DocsPageHeader (title, description)\n   - Overview section explaining component purpose\n   - Examples section (DocsSection with ComponentExample for each demo)\n   - Props table documenting all props\n   - Data Shape section (if complex types/nested data)\n   - Component Source section (see below)\n   - Accessibility section\n   - Best Practices section (DocsCallout items)\n\n2. Component Source Section (REQUIRED):\n   Add a "Component Source" DocsSection showing:\n   a) File Structure: Directory tree showing index.tsx, sub-components, types.ts, utils.ts\n   b) Sub-Component Code: Show implementation of each internal sub-component (PumpStatusHeader, PumpCurrentTransaction, etc.)\n   c) Types Definition: Show the TypeScript interfaces/types\n   d) Utils/Helpers: Show formatting and utility functions\n   Include code blocks with syntax highlighting and explanations of what each part does.\n\n3. Create demo files:\n   - default.tsx (basic usage)\n   - [variant].tsx (each variant if applicable)\n   - size.tsx (size options)\n   - demo.tsx (interactive multi-example)\n   - usage.tsx (real-world usage with props)\n\n4. Imports in docs page:\n   - readSource from @/app/docs/_lib/read-source (to display actual source code)\n   - All demo components\n   - DocsPage, DocsSection, DocsCallout components\n   - ComponentExample for live previews\n\nReturn: component files + all demo files + complete docs page with Component Source section showing all sub-components.`
     return result
   }
 
@@ -236,6 +236,141 @@ export default function NewComponentPage() {
           }
           outputsTitle="Dosya yapısı"
         />
+      </DocsSection>
+
+      <DocsSection id="implementation" title="Implementation Guide">
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-semibold mb-3">Real-world example: FuelPumpStatusCard</h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Complete component combining Card, Badge, Button, Progress primitives. Shows structure, sub-components, and usage patterns.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Component Structure</h4>
+              <pre className="text-xs overflow-x-auto p-3 rounded-lg border bg-muted/50"><code>{`ui/components/fuel-pump-status-card/
+  ├─ index.tsx              (main component + sub-components)
+  ├─ types.ts               (TypeScript types)
+  ├─ utils.ts               (formatting helpers)
+  ├─ _fixtures.ts           (test data)
+  ├─ usage.tsx              (real usage example)
+  ├─ default.tsx            (demo)
+  ├─ online.tsx             (demo)
+  ├─ fueling.tsx            (demo)
+  ├─ offline.tsx            (demo)
+  ├─ error.tsx              (demo)
+  ├─ maintenance.tsx        (demo)
+  └─ size.tsx               (demo)`}</code></pre>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Component Implementation Pattern</h4>
+              <p className="text-xs text-muted-foreground mb-3">
+                See full FuelPumpStatusCard implementation:
+                <a href="/docs/ui/components/fuel-pump-status-card#component-source" className="text-primary hover:underline ml-1">
+                  Component Source →
+                </a>
+              </p>
+              <div className="overflow-x-auto rounded-lg border bg-background">
+                <pre className="text-xs p-4"><code>{`// Main component structure pattern:
+export function YourComponent({
+  prop1,
+  prop2,
+  variant = "default",
+  size = "md",
+  className,
+  onClick,
+  onAction,
+  ...props
+}: YourComponentProps) {
+  const isCompact = variant === "compact"
+
+  return (
+    <div
+      data-slot="your-component"
+      data-variant={variant}
+      data-size={size}
+      role={onClick ? "button" : undefined}
+      className={cn(yourComponentVariants({ variant, size }), className)}
+      onClick={onClick}
+      {...props}
+    >
+      {/* Sub-component 1 */}
+      <YourSubComponent1 prop={prop1} />
+
+      {/* Sub-component 2 - conditional */}
+      {!isCompact && <YourSubComponent2 prop={prop2} />}
+    </div>
+  )
+}
+
+// Export component + CVA
+export { yourComponentVariants }`}</code></pre>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">
+                Shows: CVA variants, data-slot attributes, keyboard handling, sub-component composition
+              </p>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Types Pattern</h4>
+              <div className="overflow-x-auto rounded-lg border bg-background">
+                <pre className="text-xs p-4"><code>{`// types.ts pattern
+export type YourComponentProps = {
+  // Identification
+  id: string
+
+  // Content/Display
+  title: string
+  description?: string
+
+  // State
+  status: "idle" | "active" | "error"
+
+  // Layout
+  variant?: "default" | "compact" | "elevated"
+  size?: "sm" | "md" | "lg"
+
+  // Handlers
+  onClick?: () => void
+  onAction?: (actionId: string) => void
+
+  // Styling
+  className?: string
+}`}</code></pre>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Utils/Helpers Pattern</h4>
+              <div className="overflow-x-auto rounded-lg border bg-background">
+                <pre className="text-xs p-4"><code>{`// utils.ts pattern
+export function formatDisplayValue(value: number): string {
+  // Currency, time, date formatting
+  return new Intl.NumberFormat("en-US").format(value)
+}
+
+export function getStatusLabel(status: Status): string {
+  const labels: Record<Status, string> = {
+    idle: "Idle",
+    active: "Active",
+    error: "Error",
+  }
+  return labels[status]
+}
+
+// Color/class mappings
+const STATUS_CONFIG: Record<Status, StatusConfig> = {
+  idle: { badgeClass: "...", iconClass: "..." },
+  active: { badgeClass: "...", iconClass: "..." },
+  error: { badgeClass: "...", iconClass: "..." },
+}`}</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

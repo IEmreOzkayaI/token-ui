@@ -34,7 +34,6 @@ export const LANDING = {
 export const LANDING_STRIPE = `repeating-linear-gradient(135deg, transparent 0 4px, color-mix(in oklch, ${css("foreground")} 3.5%, transparent) 4px 6px)`
 
 export const LANDING_NAV_LINKS = [
-  { label: "Süreç", href: "/#workflow" },
   { label: "Docs", href: "/docs/installation" },
   { label: "Components", href: "/docs/ui/components/button" },
 ] as const

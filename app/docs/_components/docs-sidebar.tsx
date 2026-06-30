@@ -22,6 +22,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
     Prompts: false,
     Changelog: false,
     Blocks: true,
+    "Domain Components": false,
     Components: true,
   })
 
@@ -30,8 +31,9 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
 
   const componentSection = docsNav.find((s) => s.title === "Components")
   const blocksSection = docsNav.find((s) => s.title === "Blocks")
+  const domainComponentsSection = docsNav.find((s) => s.title === "Domain Components")
   const otherSections = docsNav.filter(
-    (s) => s.title !== "Components" && s.title !== "Blocks"
+    (s) => s.title !== "Components" && s.title !== "Blocks" && s.title !== "Domain Components"
   )
 
   const filteredComponents = useMemo(() => {
@@ -222,9 +224,38 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
           </div>
         )}
 
+        {/* Domain Components */}
+        {domainComponentsSection && (
+          <div>
+            <Link
+              href={domainComponentsSection.href || "/docs/ui/domain"}
+              onClick={(e) => {
+                e.preventDefault()
+                toggleSection("Domain Components")
+                onNavigate?.()
+              }}
+              className={cn(
+                "group flex w-full items-center gap-2 rounded px-2 py-2 text-xs font-medium transition-all hover:bg-foreground/5",
+                expanded["Domain Components"]
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              <ChevronDown className={cn("size-3 shrink-0 transition-transform", !expanded["Domain Components"] && "-rotate-90")} />
+              {expanded["Domain Components"]
+                ? <FolderOpen className="size-3.5 shrink-0 text-primary" />
+                : <Folder className="size-3.5 shrink-0 text-primary" />
+              }
+              <span className="font-semibold">Domain Components</span>
+            </Link>
+
+            {expanded["Domain Components"] && renderItems(domainComponentsSection.items)}
+          </div>
+        )}
+
         {/* Components */}
         {componentSection && (
-          <div className="border-t border-border/30 pt-6">
+          <div>
             <Link
               href={componentSection.href || "/docs/ui/components/accordion"}
               onClick={(e) => {

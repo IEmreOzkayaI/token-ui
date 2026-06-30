@@ -1,26 +1,28 @@
 "use client"
 
-import { TooltipProvider } from "@/primitives/tooltip"
+import * as React from "react"
+import { cn } from "@/lib/utils"
 
 type ComponentPreviewProps = {
   children: React.ReactNode
   className?: string
 }
 
-export function ComponentPreview({
-  children,
-  className,
-}: ComponentPreviewProps) {
+export function ComponentPreview({ children, className }: ComponentPreviewProps) {
+  const containerRef = React.useRef<HTMLDivElement>(null)
+
   return (
-    <TooltipProvider>
+    <div className={cn("relative w-full", className)}>
+      {/* Preview area */}
       <div
-        className={
-          className ??
-          "docs-component-preview relative flex w-full items-center justify-center bg-background p-8 md:p-10 min-h-96"
-        }
+        ref={containerRef}
+        className="docs-component-preview relative w-full overflow-x-hidden bg-background"
+        style={{ minHeight: "24rem" }}
       >
-        {children}
+        <div className="flex min-h-96 items-center justify-center p-8 md:p-10">
+          {children}
+        </div>
       </div>
-    </TooltipProvider>
+    </div>
   )
 }

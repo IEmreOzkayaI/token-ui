@@ -1,5 +1,7 @@
 "use client"
 
+"use client"
+
 import { useState, type ReactNode } from "react"
 import { Button } from "@/primitives/button"
 import { Input } from "@/primitives/input"
@@ -49,6 +51,8 @@ ${RESPONSIVE_BREAKPOINTS_REFERENCE}
 Screen-specific responsive rules:
 {responsive_rules}
 ${RESPONSIVE_REQUIREMENTS_SECTION}
+import { readSource } from "@/app/docs/_lib/read-source"
+import { readSource } from "@/app/docs/_lib/read-source"
 
 ---
 
@@ -330,6 +334,78 @@ export default function BuildScreenPage() {
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
+
+      <DocsSection id="implementation" title="Implementation Guide">
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-semibold mb-3">Real-world example: FuelPumpStatusCard</h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Complete component combining multiple primitives. Shows structure, sub-components, and implementation patterns.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Component Structure</h4>
+              <pre className="text-xs overflow-x-auto p-3 rounded-lg border bg-muted/50"><code>{`ui/components/fuel-pump-status-card/
+  ├─ index.tsx              (main component + sub-components)
+  ├─ types.ts               (TypeScript types)
+  ├─ utils.ts               (formatting helpers)
+  ├─ _fixtures.ts           (test data)
+  ├─ usage.tsx              (real usage example)
+  └─ *.tsx                  (demo variants)`}</code></pre>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Component Implementation Pattern</h4>
+              <p className="text-xs text-muted-foreground mb-3">
+                See full source: <a href="/docs/ui/components/fuel-pump-status-card#component-source" className="text-primary hover:underline">FuelPumpStatusCard docs →</a>
+              </p>
+              <div className="overflow-x-auto rounded-lg border bg-background">
+                <pre className="text-xs p-4"><code>{`// Main component structure:
+export function YourComponent({
+  variant = "default",
+  size = "md",
+  className,
+  onClick,
+  ...props
+}: YourComponentProps) {
+  const isCompact = variant === "compact"
+
+  return (
+    <div
+      data-slot="your-component"
+      data-variant={variant}
+      data-size={size}
+      role={onClick ? "button" : undefined}
+      className={cn(yourComponentVariants({ variant, size }), className)}
+      onClick={onClick}
+      {...props}
+    >
+      <SubComponent1 />
+      {!isCompact && <SubComponent2 />}
+    </div>
+  )
+}
+
+export { yourComponentVariants }`}</code></pre>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Key Patterns</h4>
+              <ul className="text-xs space-y-2 text-muted-foreground list-disc pl-5">
+                <li><code className="text-foreground">data-slot</code> attributes on all elements for styling hooks</li>
+                <li>CVA (class-variance-authority) for variant management</li>
+                <li>Composable sub-components for complex layouts</li>
+                <li>TypeScript types exported alongside component</li>
+                <li>Formatting utilities in separate utils.ts file</li>
+                <li>Test data in _fixtures.ts for demos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </DocsSection>
         <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex h-dvh flex-col gap-0 overflow-hidden p-0">
           <div onMouseDown={handleResizeStart} className="absolute left-0 top-0 h-full w-3 cursor-col-resize z-50 flex items-center justify-center group">
             <div className="flex flex-col gap-[3px] opacity-30 group-hover:opacity-100 transition-opacity">
