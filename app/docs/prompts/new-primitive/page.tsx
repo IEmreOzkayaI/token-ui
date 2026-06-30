@@ -145,7 +145,7 @@ export default function NewPrimitivePage() {
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent className="w-full sm:max-w-2xl flex flex-col">
+        <SheetContent className="w-full sm:max-w-4xl flex flex-col">
           <SheetHeader className="space-y-3">
             <SheetTitle className="text-left">Generate Primitive Prompt</SheetTitle>
             <Button
@@ -169,7 +169,7 @@ export default function NewPrimitivePage() {
                   value={values.primitive_name}
                   onChange={(e) => setValues((prev) => ({ ...prev, primitive_name: e.target.value }))}
                   placeholder="e.g., toggle, badge, toggle-group"
-                  className="h-9 text-sm"
+                  className="h-9 text-sm focus-visible:ring-primary"
                 />
               </div>
 
@@ -180,7 +180,7 @@ export default function NewPrimitivePage() {
                   value={values.base_element}
                   onChange={(e) => setValues((prev) => ({ ...prev, base_element: e.target.value }))}
                   placeholder="e.g., button, div, input"
-                  className="h-9 text-sm"
+                  className="h-9 text-sm focus-visible:ring-primary"
                 />
               </div>
 
@@ -191,7 +191,7 @@ export default function NewPrimitivePage() {
                   value={values.features}
                   onChange={(e) => setValues((prev) => ({ ...prev, features: e.target.value }))}
                   placeholder="List features line by line"
-                  className="min-h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
+                  className="min-h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary resize-none"
                 />
               </div>
 
@@ -202,7 +202,7 @@ export default function NewPrimitivePage() {
                   value={values.variants}
                   onChange={(e) => setValues((prev) => ({ ...prev, variants: e.target.value }))}
                   placeholder="e.g., default, outline, ghost"
-                  className="min-h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
+                  className="min-h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary resize-none"
                 />
               </div>
 
@@ -213,7 +213,7 @@ export default function NewPrimitivePage() {
                   value={values.a11y_requirements}
                   onChange={(e) => setValues((prev) => ({ ...prev, a11y_requirements: e.target.value }))}
                   placeholder="Keyboard nav, ARIA labels, etc."
-                  className="min-h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring resize-none"
+                  className="min-h-20 rounded-lg border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary resize-none"
                 />
               </div>
             </div>
@@ -222,8 +222,10 @@ export default function NewPrimitivePage() {
           <div className="border-t">
             <div className="px-4 py-4 space-y-3">
               <h4 className="text-sm font-semibold">Generated Prompt</h4>
-              <div className="rounded-lg border border-border/50 bg-muted/30 overflow-hidden">
-                <CodeBlock code={finalPrompt} showLineNumbers={false} className="max-h-96 text-base leading-relaxed p-4" />
+              <div className="rounded-lg border border-border/50 bg-muted/30 overflow-y-auto max-h-96">
+                <pre className="text-base leading-relaxed p-4 whitespace-pre-wrap break-words font-mono text-foreground/80">
+                  {finalPrompt}
+                </pre>
               </div>
               <div className="text-xs text-muted-foreground">
                 {Object.values(values).some((v) => !v) ? (
