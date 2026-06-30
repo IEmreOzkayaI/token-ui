@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Search, X, ChevronDown, ChevronRight } from "lucide-react"
+import { Search, X, ChevronDown, ChevronRight, Folder, FolderOpen, FileText } from "lucide-react"
 
 import { docsNav } from "@/app/docs/_lib/nav"
 import { ScrollArea } from "@/primitives/scroll-area"
@@ -51,59 +51,51 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
 
   const renderItems = (items: typeof docsNav[0]["items"], level = 0): React.ReactNode => {
     return (
-      <ul className={cn(
-        "mt-2 mb-2",
-        level === 0 ? "ml-2 border-l border-border/30 pl-3" : "ml-4 border-l border-border/20 pl-3"
-      )}>
+      <ul className={cn("mt-1", level > 0 && "ml-3 border-l border-border/20 pl-2")}>
         {items.map((item, idx) => {
           const isActive = pathname === item.href
-          const isGroupHeader = item.label === item.label.toUpperCase() && item.label.length > 0
-          const isLast = idx === items.length - 1
           const hasChildren = item.items && item.items.length > 0
           const itemKey = `${level}-${item.href}-${idx}`
-          const isItemExpanded = treeExpanded[itemKey] || false
+          const isItemExpanded = treeExpanded[itemKey] ?? true
 
-          if (isGroupHeader) {
+          if (hasChildren) {
             return (
               <li key={itemKey}>
-                <div className="px-2 py-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground/70 mt-3">
-                  {item.label}
-                </div>
+                <button
+                  onClick={() => toggleTreeItem(itemKey)}
+                  className={cn(
+                    "flex w-full items-center gap-1.5 rounded px-2 py-1.5 text-xs transition-all hover:bg-foreground/5",
+                    isItemExpanded ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  <ChevronDown className={cn("size-3 shrink-0 transition-transform", !isItemExpanded && "-rotate-90")} />
+                  {isItemExpanded
+                    ? <FolderOpen className="size-3.5 shrink-0 text-yellow-500/80" />
+                    : <Folder className="size-3.5 shrink-0 text-yellow-500/60" />
+                  }
+                  <span className="font-medium">{item.label}</span>
+                </button>
+                {isItemExpanded && renderItems(item.items!, level + 1)}
               </li>
             )
           }
 
           return (
-            <li key={itemKey} className={cn("relative", !isLast && "pb-1")}>
-              <div className="absolute left-0 top-3 -ml-4 w-3 h-px bg-border/30" />
-              <div className="flex items-center gap-1">
-                {hasChildren && (
-                  <button
-                    onClick={() => toggleTreeItem(itemKey)}
-                    className="p-0 hover:opacity-70 transition-opacity"
-                  >
-                    {isItemExpanded ? (
-                      <ChevronDown className="size-3" />
-                    ) : (
-                      <ChevronRight className="size-3" />
-                    )}
-                  </button>
+            <li key={itemKey}>
+              <Link
+                href={item.href}
+                onClick={onNavigate}
+                className={cn(
+                  "flex items-center gap-1.5 rounded px-2 py-1.5 text-xs transition-all",
+                  isActive
+                    ? "font-medium text-foreground bg-foreground/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
                 )}
-                {!hasChildren && <div className="w-3" />}
-                <Link
-                  href={item.href}
-                  onClick={onNavigate}
-                  className={cn(
-                    "block rounded px-2 py-1.5 text-xs transition-all flex-1",
-                    isActive
-                      ? "font-medium text-foreground bg-foreground/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              </div>
-              {hasChildren && isItemExpanded && renderItems(item.items!, level + 1)}
+              >
+                <div className="size-3 shrink-0" />
+                <FileText className="size-3.5 shrink-0 text-muted-foreground/40" />
+                {item.label}
+              </Link>
             </li>
           )
         })}

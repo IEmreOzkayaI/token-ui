@@ -105,23 +105,35 @@ export const docsNav: NavSection[] = [
     href: "/docs/prompts",
     items: [
       { label: "Overview", href: "/docs/prompts" },
-      { label: "BUILDING", href: "#building" },
-      { label: "New Primitive", href: "/docs/prompts/new-primitive" },
-      { label: "Enhance Primitive", href: "/docs/prompts/enhance-primitive" },
-      { label: "New Component", href: "/docs/prompts/new-component" },
-      { label: "From Scratch", href: "/docs/prompts/from-scratch" },
-      { label: "EXTENDING", href: "#extending" },
-      { label: "Component Variant", href: "/docs/prompts/derive-variant" },
-      { label: "Modify Existing", href: "/docs/prompts/modify-existing" },
-      { label: "Demo Generation", href: "/docs/prompts/demo-generation" },
-      { label: "QUALITY & MAINTENANCE", href: "#quality" },
-      { label: "Refactor", href: "/docs/prompts/refactor" },
-      { label: "Migration", href: "/docs/prompts/migration" },
-      { label: "Design System Audit", href: "/docs/prompts/design-system-audit" },
-      { label: "Token Compliance", href: "/docs/prompts/token-compliance" },
-      { label: "Accessibility Review", href: "/docs/prompts/accessibility" },
-      { label: "DOCUMENTATION", href: "#documentation" },
-      { label: "Documentation", href: "/docs/prompts/documentation" },
+      {
+        label: "Building", href: "#building", items: [
+          { label: "New Primitive", href: "/docs/prompts/new-primitive" },
+          { label: "Enhance Primitive", href: "/docs/prompts/enhance-primitive" },
+          { label: "New Component", href: "/docs/prompts/new-component" },
+          { label: "From Scratch", href: "/docs/prompts/from-scratch" },
+        ]
+      },
+      {
+        label: "Extending", href: "#extending", items: [
+          { label: "Component Variant", href: "/docs/prompts/derive-variant" },
+          { label: "Modify Existing", href: "/docs/prompts/modify-existing" },
+          { label: "Demo Generation", href: "/docs/prompts/demo-generation" },
+        ]
+      },
+      {
+        label: "Quality & Maintenance", href: "#quality", items: [
+          { label: "Refactor", href: "/docs/prompts/refactor" },
+          { label: "Migration", href: "/docs/prompts/migration" },
+          { label: "Design System Audit", href: "/docs/prompts/design-system-audit" },
+          { label: "Token Compliance", href: "/docs/prompts/token-compliance" },
+          { label: "Accessibility Review", href: "/docs/prompts/accessibility" },
+        ]
+      },
+      {
+        label: "Documentation", href: "/docs/prompts/documentation", items: [
+          { label: "Documentation", href: "/docs/prompts/documentation" },
+        ]
+      },
     ],
   },
   {
