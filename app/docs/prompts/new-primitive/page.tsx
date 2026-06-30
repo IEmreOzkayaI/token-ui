@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/primitives/card"
 import { Button } from "@/primitives/button"
 import { Input } from "@/primitives/input"
 import { Label } from "@/primitives/label"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/primitives/sheet"
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
@@ -45,6 +46,7 @@ File location: ui/primitives/{primitive_name}.tsx
 Return complete, production-ready code.`
 
 export default function NewPrimitivePage() {
+  const [open, setOpen] = useState(false)
   const [copied, setCopied] = useState(false)
   const [values, setValues] = useState({
     primitive_name: "toggle-group",
@@ -82,18 +84,9 @@ export default function NewPrimitivePage() {
         title="New Primitive Generation"
         description="Create new base UI component from scratch"
         action={
-          <Button onClick={handleCopy} size="sm" variant="outline" className="gap-2">
-            {copied ? (
-              <>
-                <Check className="size-3.5 text-primary" />
-                Copied
-              </>
-            ) : (
-              <>
-                <Copy className="size-3.5" />
-                Create
-              </>
-            )}
+          <Button onClick={() => setOpen(true)} size="sm" variant="outline" className="gap-2">
+            <Copy className="size-3.5" />
+            Create
           </Button>
         }
       />
@@ -135,11 +128,19 @@ export default function NewPrimitivePage() {
       </DocsSection>
 
       <DocsSection id="create" title="Create Prompt">
-        <div className="grid gap-8 lg:grid-cols-2">
-          {/* Parameters */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-sm">Parameters</h3>
-            <div className="space-y-4">
+        <p className="text-muted-foreground mb-4">
+          Click "Create" button in the header to open the prompt generator.
+        </p>
+      </DocsSection>
+
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent className="w-full sm:max-w-2xl flex flex-col">
+          <SheetHeader>
+            <SheetTitle>Generate Primitive Prompt</SheetTitle>
+          </SheetHeader>
+
+          <div className="flex-1 overflow-y-auto px-4">
+            <div className="grid gap-6 py-4">
               <div className="grid gap-2">
                 <Label htmlFor="primitive-name">Primitive Name</Label>
                 <Input
@@ -195,40 +196,48 @@ export default function NewPrimitivePage() {
             </div>
           </div>
 
-          {/* Preview */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-sm">Generated Prompt</h3>
-            <div className="rounded-lg border border-border/50 bg-muted/30 overflow-hidden">
-              <div className="bg-muted/50 border-b border-border/30 px-4 py-2 flex items-center justify-between">
-                <span className="text-xs font-medium text-muted-foreground">prompt.txt</span>
-                <Button
-                  variant="ghost"
-                  size="icon-sm"
-                  onClick={handleCopy}
-                >
-                  {copied ? (
-                    <Check className="size-4 text-primary" />
-                  ) : (
-                    <Copy className="size-4" />
-                  )}
-                </Button>
-              </div>
-              <div className="overflow-auto max-h-96">
-                <pre className="p-4 text-xs leading-relaxed text-foreground/80 whitespace-pre-wrap break-words font-mono">
-                  {finalPrompt}
-                </pre>
-              </div>
+          <div className="border-t px-4 py-4">
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="text-sm font-semibold">Generated Prompt</h4>
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                onClick={handleCopy}
+              >
+                {copied ? (
+                  <Check className="size-4 text-primary" />
+                ) : (
+                  <Copy className="size-4" />
+                )}
+              </Button>
             </div>
-            <div className="text-xs text-muted-foreground">
+            <CodeBlock code={finalPrompt} showLineNumbers={false} className="max-h-48" />
+            <div className="text-xs text-muted-foreground mt-2">
               {Object.values(values).some((v) => !v) ? (
-                <span className="text-yellow-600">⚠️ Fill parameters to generate</span>
+                <span className="text-yellow-600">⚠️ Fill all parameters</span>
               ) : (
                 <span className="text-primary">✓ Ready to copy</span>
               )}
             </div>
           </div>
-        </div>
-      </DocsSection>
+
+          <SheetFooter className="px-4">
+            <Button onClick={handleCopy} className="w-full">
+              {copied ? (
+                <>
+                  <Check className="size-4 mr-2" />
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <Copy className="size-4 mr-2" />
+                  Copy Prompt
+                </>
+              )}
+            </Button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </DocsPage>
   )
 }
