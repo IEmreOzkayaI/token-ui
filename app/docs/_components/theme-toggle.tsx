@@ -18,7 +18,6 @@ export function ThemeToggle() {
     document.documentElement.classList.toggle("dark", next === "dark")
     localStorage.setItem("theme", next)
     setTheme(next)
-    window.location.reload()
   }
 
   return (
