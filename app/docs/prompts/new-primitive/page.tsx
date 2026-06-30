@@ -145,7 +145,7 @@ export default function NewPrimitivePage() {
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent className="w-full sm:max-w-4xl flex flex-col">
+        <SheetContent className="w-full sm:max-w-5xl lg:max-w-6xl flex flex-col">
           <SheetHeader className="space-y-3">
             <SheetTitle className="text-left">Generate Primitive Prompt</SheetTitle>
             <Button
