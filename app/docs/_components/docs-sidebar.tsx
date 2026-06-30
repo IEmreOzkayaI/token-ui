@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Search, X } from "lucide-react"
+import { Search, X, ChevronDown, ChevronRight } from "lucide-react"
 
 import { docsNav } from "@/app/docs/_lib/nav"
 import { ScrollArea } from "@/primitives/scroll-area"
@@ -49,11 +49,13 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
         {/* Sections */}
         {otherSections.map((section) => {
           const sectionButton = (
-            <div className="flex w-full items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wide">{section.title}</span>
-              <span className="text-sm leading-none opacity-60 group-hover:opacity-100 transition-opacity">
-                {expanded[section.title] ? "−" : "+"}
-              </span>
+            <div className="flex w-full items-center gap-2">
+              {expanded[section.title] ? (
+                <ChevronDown className="size-4 shrink-0 opacity-60" />
+              ) : (
+                <ChevronRight className="size-4 shrink-0 opacity-60" />
+              )}
+              <span className="text-sm font-semibold">{section.title}</span>
             </div>
           )
 
@@ -68,10 +70,10 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                     onNavigate?.()
                   }}
                   className={cn(
-                    "group flex w-full items-center justify-between rounded px-2 py-2 text-xs font-medium transition-all",
+                    "group flex w-full items-center rounded px-2 py-2 text-xs font-medium transition-all hover:bg-foreground/5",
                     expanded[section.title]
                       ? "text-foreground bg-foreground/5"
-                      : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
+                      : "text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {sectionButton}
@@ -81,10 +83,10 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                   type="button"
                   onClick={() => toggleSection(section.title)}
                   className={cn(
-                    "group flex w-full items-center justify-between rounded px-2 py-2 text-xs font-medium transition-all",
+                    "group flex w-full items-center rounded px-2 py-2 text-xs font-medium transition-all hover:bg-foreground/5",
                     expanded[section.title]
                       ? "text-foreground bg-foreground/5"
-                      : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
+                      : "text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {sectionButton}
