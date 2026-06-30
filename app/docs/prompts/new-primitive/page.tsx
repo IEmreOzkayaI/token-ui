@@ -149,9 +149,8 @@ export default function NewPrimitivePage() {
           <SheetHeader className="space-y-3">
             <SheetTitle className="text-left">Generate Primitive Prompt</SheetTitle>
             <Button
-              variant="outline"
               size="sm"
-              className="w-full gap-2 text-xs h-8 text-primary hover:text-primary"
+              className="w-full gap-2 text-xs h-8 bg-primary text-white hover:bg-primary/90"
               onClick={() => {
                 setShowExample(!showExample)
                 setValues(showExample ? EMPTY_VALUES : EXAMPLE_VALUES)
@@ -237,10 +236,10 @@ export default function NewPrimitivePage() {
           </div>
 
           <SheetFooter className="px-4 py-3 border-t">
-            <Button onClick={handleCopy} variant="outline" className="w-full gap-2 h-9 text-primary hover:text-primary">
+            <Button onClick={handleCopy} className="w-full gap-2 h-9 bg-primary text-white hover:bg-primary/90">
               {copied ? (
                 <>
-                  <Check className="size-4 text-primary" />
+                  <Check className="size-4" />
                   Copied to clipboard
                 </>
               ) : (
