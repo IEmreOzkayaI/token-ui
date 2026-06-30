@@ -1,15 +1,11 @@
 "use client"
 
-import { useState } from "react"
-import { Copy, Check } from "lucide-react"
-import { Button } from "@/primitives/button"
-import { Card, CardContent, CardHeader } from "@/primitives/card"
+import { Card, CardContent } from "@/primitives/card"
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
-import { CodeBlock } from "@/app/docs/_components/code-block"
-import { copyToClipboard } from "@/lib/copy-to-clipboard"
+import { PromptPlayground } from "@/app/docs/_components/prompt-playground"
 
 const PROMPT = `You are a Token UI design system engineer.
 
@@ -37,19 +33,10 @@ Guidelines:
 Return only the modified code sections with explanations.`
 
 export default function EnhancePrimitivePage() {
-  const [copied, setCopied] = useState(false)
-
-  async function copyPrompt() {
-    const ok = await copyToClipboard(PROMPT)
-    if (!ok) return
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
   return (
     <DocsPage toc={[
       { id: "overview", title: "Overview" },
-      { id: "usage", title: "Usage" },
+      { id: "playground", title: "Playground" },
     ]}>
       <DocsPageHeader
         title="Existing Primitive Enhancement"
@@ -66,7 +53,7 @@ export default function EnhancePrimitivePage() {
             <CardContent className="pt-6">
               <p className="text-sm font-medium mb-1">When to Use</p>
               <p className="text-xs text-muted-foreground">
-                Adding new variants, adding sizes, improving accessibility, refactoring styling, updating patterns
+                Adding new variants, sizes, improving accessibility, refactoring styling
               </p>
             </CardContent>
           </Card>
@@ -74,7 +61,7 @@ export default function EnhancePrimitivePage() {
             <CardContent className="pt-6">
               <p className="text-sm font-medium mb-1">When NOT to Use</p>
               <p className="text-xs text-muted-foreground">
-                Creating entirely new primitive (use New Primitive), simple bug fixes, style tweaks
+                Creating new primitive, simple bug fixes, style tweaks
               </p>
             </CardContent>
           </Card>
@@ -85,27 +72,45 @@ export default function EnhancePrimitivePage() {
             <li>• new-variant: Add new CVA variant option</li>
             <li>• new-size: Add new size option</li>
             <li>• a11y-improvement: Add accessibility features</li>
-            <li>• refactor: Improve code quality while keeping API stable</li>
+            <li>• refactor: Improve code quality</li>
           </ul>
         </DocsCallout>
       </DocsSection>
 
-      <DocsSection id="usage" title="Usage">
-        <p className="text-muted-foreground mb-4">
-          Copy and fill in the enhancement details:
-        </p>
-
-        <div className="relative mb-6">
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            onClick={copyPrompt}
-            className="absolute top-4 right-4 z-10"
-          >
-            {copied ? <Check className="size-4 text-primary" /> : <Copy className="size-4" />}
-          </Button>
-          <CodeBlock code={PROMPT} showLineNumbers={false} />
-        </div>
+      <DocsSection id="playground" title="Prompt Playground">
+        <PromptPlayground
+          basePrompt={PROMPT}
+          parameters={[
+            {
+              key: "primitive_name",
+              label: "Primitive Name",
+              placeholder: "e.g., button, input, badge",
+              type: "text",
+              defaultValue: "button",
+            },
+            {
+              key: "enhancement_type",
+              label: "Enhancement Type",
+              placeholder: "new-variant, new-size, a11y-improvement, or refactor",
+              type: "text",
+              defaultValue: "new-variant",
+            },
+            {
+              key: "changes",
+              label: "Changes Required",
+              placeholder: "Describe specific changes",
+              type: "textarea",
+              defaultValue: "Add 'premium' variant that uses accent colors and elevated shadow\nMake available for all sizes\nIncrease padding slightly",
+            },
+            {
+              key: "backwards_compatibility",
+              label: "Backwards Compatibility",
+              placeholder: "yes or no",
+              type: "text",
+              defaultValue: "yes",
+            },
+          ]}
+        />
       </DocsSection>
     </DocsPage>
   )
