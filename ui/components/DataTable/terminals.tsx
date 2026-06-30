@@ -13,6 +13,12 @@ import {
 } from "@/primitives/table"
 import { Button } from "@/primitives/button"
 import { Badge } from "@/primitives/badge"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/primitives/tooltip"
 
 type TerminalStatus = "Aktif" | "İnaktif" | "Hurda"
 
@@ -57,22 +63,61 @@ const generateTerminals = (count: number): Terminal[] => {
 
 const terminals = generateTerminals(100)
 
+const allModels = Array.from(new Set(terminals.map(t => t.deviceModel)))
+const allApps = Array.from(new Set(terminals.flatMap(t => t.installedApps)))
+const allStatuses: TerminalStatus[] = ["Aktif", "İnaktif", "Hurda"]
+
+const TerminalIcon = () => (
+  <svg viewBox="0 0 64 80" className="w-12 h-16 bg-gradient-to-b from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800 rounded p-1" xmlns="http://www.w3.org/2000/svg">
+    <rect x="8" y="4" width="48" height="40" rx="2" fill="currentColor" className="text-slate-600 dark:text-slate-400" />
+    <rect x="10" y="6" width="44" height="36" fill="#1e293b" />
+    <circle cx="32" cy="56" r="3" fill="currentColor" className="text-slate-600 dark:text-slate-400" />
+    <path d="M24 66 L40 66 M28 70 L36 70" stroke="currentColor" strokeWidth="2" className="text-slate-600 dark:text-slate-400" />
+  </svg>
+)
+
 export default function DataTableTerminals() {
   const [search, setSearch] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(10)
+  const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set())
+  const [selectedApps, setSelectedApps] = useState<Set<string>>(new Set())
+  const [selectedStatuses, setSelectedStatuses] = useState<Set<TerminalStatus>>(new Set())
 
   const filteredTerminals = useMemo(() => {
-    if (!search) return terminals
-    const query = search.toLowerCase()
-    return terminals.filter(
-      (terminal) =>
-        terminal.terminalId.toLowerCase().includes(query) ||
-        terminal.deviceModel.toLowerCase().includes(query) ||
-        terminal.installedApps.some((app) => app.toLowerCase().includes(query)) ||
-        terminal.status.toLowerCase().includes(query)
-    )
-  }, [search])
+    return terminals.filter((terminal) => {
+      // Search filter
+      if (search) {
+        const query = search.toLowerCase()
+        const matchesSearch =
+          terminal.terminalId.toLowerCase().includes(query) ||
+          terminal.deviceModel.toLowerCase().includes(query) ||
+          terminal.installedApps.some((app) => app.toLowerCase().includes(query)) ||
+          terminal.status.toLowerCase().includes(query)
+        if (!matchesSearch) return false
+      }
+
+      // Model filter
+      if (selectedModels.size > 0 && !selectedModels.has(terminal.deviceModel)) {
+        return false
+      }
+
+      // Status filter
+      if (selectedStatuses.size > 0 && !selectedStatuses.has(terminal.status)) {
+        return false
+      }
+
+      // App filter (match all selected apps)
+      if (selectedApps.size > 0) {
+        const hasAllApps = Array.from(selectedApps).every((app) =>
+          terminal.installedApps.includes(app)
+        )
+        if (!hasAllApps) return false
+      }
+
+      return true
+    })
+  }, [search, selectedModels, selectedApps, selectedStatuses])
 
   const totalPages = Math.ceil(filteredTerminals.length / itemsPerPage)
   const startIndex = (currentPage - 1) * itemsPerPage
@@ -112,43 +157,107 @@ export default function DataTableTerminals() {
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex gap-4 flex-col sm:flex-row">
-        <div className="relative flex-1">
-          <SearchIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder="Mali ID, Model, Uygulama veya Statüye göre ara..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="pl-9"
-            aria-label="Terminalleri ara"
-          />
+    <TooltipProvider>
+      <div className="space-y-4">
+        <div className="flex gap-4 flex-col sm:flex-row items-start sm:items-center">
+          <div className="relative flex-1">
+            <SearchIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              placeholder="Mali ID, Model, Uygulama veya Statüye göre ara..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-9"
+              aria-label="Terminalleri ara"
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <label htmlFor="items-per-page" className="text-sm text-muted-foreground whitespace-nowrap">
+              Göster
+            </label>
+            <select
+              id="items-per-page"
+              value={itemsPerPage}
+              onChange={(e) => {
+                setItemsPerPage(Number(e.target.value))
+                setCurrentPage(1)
+              }}
+              className="px-2 py-2 rounded-sm border text-sm outline-none transition-colors hover:border-foreground/20 focus:border-foreground/20 focus:ring-1 focus:ring-ring"
+              aria-label="Sayfa başına öğe sayısı"
+            >
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <label htmlFor="items-per-page" className="text-sm text-muted-foreground whitespace-nowrap">
-            Göster
-          </label>
-          <select
-            id="items-per-page"
-            value={itemsPerPage}
-            onChange={(e) => {
-              setItemsPerPage(Number(e.target.value))
-              setCurrentPage(1)
-            }}
-            className="px-2 py-2 rounded-sm border text-sm outline-none transition-colors hover:border-foreground/20 focus:border-foreground/20 focus:ring-1 focus:ring-ring"
-            aria-label="Sayfa başına öğe sayısı"
-          >
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-          </select>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label className="text-xs font-medium text-muted-foreground block mb-2">Cihaz Modeli</label>
+            <select
+              multiple
+              value={Array.from(selectedModels)}
+              onChange={(e) => {
+                setSelectedModels(new Set(Array.from(e.target.selectedOptions, (opt) => opt.value)))
+                setCurrentPage(1)
+              }}
+              className="w-full px-2 py-2 rounded-sm border text-xs outline-none transition-colors hover:border-foreground/20 focus:border-foreground/20 focus:ring-1 focus:ring-ring"
+              aria-label="Cihaz modeline göre filtrele"
+            >
+              {allModels.map((model) => (
+                <option key={model} value={model}>
+                  {model}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="text-xs font-medium text-muted-foreground block mb-2">Yüklü Uygulamalar</label>
+            <select
+              multiple
+              value={Array.from(selectedApps)}
+              onChange={(e) => {
+                setSelectedApps(new Set(Array.from(e.target.selectedOptions, (opt) => opt.value)))
+                setCurrentPage(1)
+              }}
+              className="w-full px-2 py-2 rounded-sm border text-xs outline-none transition-colors hover:border-foreground/20 focus:border-foreground/20 focus:ring-1 focus:ring-ring"
+              aria-label="Uygulamaya göre filtrele"
+            >
+              {allApps.map((app) => (
+                <option key={app} value={app}>
+                  {app}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="text-xs font-medium text-muted-foreground block mb-2">Statü</label>
+            <select
+              multiple
+              value={Array.from(selectedStatuses)}
+              onChange={(e) => {
+                setSelectedStatuses(new Set(Array.from(e.target.selectedOptions, (opt) => opt.value as TerminalStatus)))
+                setCurrentPage(1)
+              }}
+              className="w-full px-2 py-2 rounded-sm border text-xs outline-none transition-colors hover:border-foreground/20 focus:border-foreground/20 focus:ring-1 focus:ring-ring"
+              aria-label="Statüye göre filtrele"
+            >
+              {allStatuses.map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>
 
       <div className="rounded-lg border overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead className="w-16"></TableHead>
               <TableHead>Mali ID</TableHead>
               <TableHead className="hidden sm:table-cell">Cihaz Modeli</TableHead>
               <TableHead className="hidden md:table-cell">Yüklü Uygulamalar</TableHead>
@@ -159,28 +268,51 @@ export default function DataTableTerminals() {
           <TableBody>
             {paginatedTerminals.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="text-center py-8">
+                <TableCell colSpan={6} className="text-center py-8">
                   <p className="text-muted-foreground">Terminal bulunamadı</p>
                 </TableCell>
               </TableRow>
             ) : (
               paginatedTerminals.map((terminal) => (
-                <TableRow key={terminal.id}>
-                  <TableCell className="font-mono text-sm font-medium">{terminal.terminalId}</TableCell>
-                  <TableCell className="hidden sm:table-cell text-sm">{terminal.deviceModel}</TableCell>
-                  <TableCell className="hidden md:table-cell">
+                <TableRow key={terminal.id} className="h-20">
+                  <TableCell className="py-2">
+                    <div className="text-slate-600 dark:text-slate-400">
+                      <TerminalIcon />
+                    </div>
+                  </TableCell>
+                  <TableCell className="font-mono text-sm font-medium align-middle">{terminal.terminalId}</TableCell>
+                  <TableCell className="hidden sm:table-cell text-sm align-middle">{terminal.deviceModel}</TableCell>
+                  <TableCell className="hidden md:table-cell align-middle">
                     <div className="flex gap-1 flex-wrap max-w-xs">
-                      {terminal.installedApps.map((app) => (
+                      {terminal.installedApps.slice(0, 2).map((app) => (
                         <Badge key={app} variant="secondary" className="text-xs whitespace-nowrap">
                           {app}
                         </Badge>
                       ))}
+                      {terminal.installedApps.length > 2 && (
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Badge variant="outline" className="text-xs cursor-help">
+                              +{terminal.installedApps.length - 2}
+                            </Badge>
+                          </TooltipTrigger>
+                          <TooltipContent className="max-w-xs">
+                            <div className="space-y-1">
+                              {terminal.installedApps.slice(2).map((app) => (
+                                <div key={app} className="text-xs">
+                                  {app}
+                                </div>
+                              ))}
+                            </div>
+                          </TooltipContent>
+                        </Tooltip>
+                      )}
                     </div>
                   </TableCell>
-                  <TableCell className="hidden lg:table-cell text-sm text-muted-foreground">
+                  <TableCell className="hidden lg:table-cell text-sm text-muted-foreground align-middle">
                     {terminal.purchaseDate}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="align-middle">
                     <Badge className={`text-xs font-medium ${getStatusColor(terminal.status)}`}>
                       {terminal.status}
                     </Badge>
@@ -227,5 +359,6 @@ export default function DataTableTerminals() {
         </div>
       </div>
     </div>
+    </TooltipProvider>
   )
 }
