@@ -224,7 +224,36 @@ export default function NewPrimitivePage() {
               <h4 className="text-sm font-semibold">Generated Prompt</h4>
               <div className="rounded-lg border border-border/50 bg-muted/30 overflow-y-auto max-h-96">
                 <pre className="text-base leading-relaxed p-4 whitespace-pre-wrap break-words font-mono text-foreground/80">
-                  {finalPrompt}
+                  {(() => {
+                    let text = finalPrompt
+                    Object.entries(values).forEach(([, value]) => {
+                      if (value) {
+                        // Escape special regex chars and replace each line
+                        const lines = value.split('\n')
+                        lines.forEach(line => {
+                          if (line) {
+                            const escaped = line.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+                            text = text.replace(new RegExp(escaped, 'g'), `___PRIMARY___${line}___END___`)
+                          }
+                        })
+                      }
+                    })
+
+                    const parts = text.split(/(___PRIMARY___.*?___END___)/)
+                    return (
+                      <>
+                        {parts.map((part, i) =>
+                          part.startsWith('___PRIMARY___') ? (
+                            <span key={i} className="text-primary font-semibold">
+                              {part.slice(13, -7)}
+                            </span>
+                          ) : (
+                            part
+                          )
+                        )}
+                      </>
+                    )
+                  })()}
                 </pre>
               </div>
               <div className="text-xs text-muted-foreground">
