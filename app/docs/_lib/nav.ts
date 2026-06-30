@@ -19,11 +19,13 @@ export const docsNav: NavSection[] = [
   {
     title: "Foundations",
     items: [
+      { label: "Overview", href: "/docs/foundations" },
       { label: "Colors", href: "/docs/foundations/colors" },
       { label: "Typography", href: "/docs/foundations/typography" },
       { label: "Spacing", href: "/docs/foundations/spacing" },
-      { label: "Radius", href: "/docs/foundations/radius" },
       { label: "Shadows", href: "/docs/foundations/shadows" },
+      { label: "Radius", href: "/docs/foundations/radius" },
+      { label: "Icons", href: "/docs/foundations/icons" },
     ],
   },
   {
