@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronRight, Folder, FileText, Search, X } from "lucide-react"
+import { Search, X } from "lucide-react"
 
 import { docsNav } from "@/app/docs/_lib/nav"
 import { ScrollArea } from "@/primitives/scroll-area"
@@ -23,6 +23,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
     Foundations: pathname.startsWith("/docs/foundations"),
     Prompts: false,
     Changelog: false,
+    Components: false,
   })
 
   const hasQuery = query.trim().length > 0
@@ -45,102 +46,29 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
 
   return (
     <ScrollArea className={cn("h-full", className)}>
-      <div className="space-y-2 py-4 px-2">
-        {/* Sections - Tree Style */}
-        <div className="space-y-1">
-          {otherSections.map((section) => (
-            <div key={section.title}>
-              <button
-                type="button"
-                onClick={() => toggleSection(section.title)}
-                className={cn(
-                  "group flex w-full items-center gap-2 px-2 py-1.5 text-xs font-semibold rounded-md transition-colors",
-                  expanded[section.title]
-                    ? "text-foreground bg-muted/50"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
-                )}
-              >
-                <ChevronRight
-                  className={cn(
-                    "size-4 transition-transform flex-shrink-0",
-                    expanded[section.title] ? "rotate-90" : ""
-                  )}
-                />
-                <Folder className="size-4 flex-shrink-0" />
-                <span className="truncate uppercase tracking-wide">{section.title}</span>
-              </button>
-
-              {expanded[section.title] && (
-                <ul className="space-y-0.5 mt-1 ml-2">
-                  {section.items.map((item) => {
-                    const isActive = pathname === item.href
-                    return (
-                      <li key={item.href}>
-                        <Link
-                          href={item.href}
-                          onClick={onNavigate}
-                          className={cn(
-                            "flex items-center gap-2 px-2 py-1.5 text-xs rounded-md transition-colors",
-                            "border-l-2",
-                            isActive
-                              ? "font-medium text-foreground bg-muted/50 border-primary"
-                              : "text-muted-foreground hover:text-foreground hover:bg-muted/30 border-transparent"
-                          )}
-                        >
-                          <FileText className="size-3.5 flex-shrink-0" />
-                          <span className="truncate">{item.label}</span>
-                        </Link>
-                      </li>
-                    )
-                  })}
-                </ul>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Components - Tree Folder */}
-        {componentSection && (
-          <div className="border-t mt-4 pt-2 space-y-2">
+      <div className="space-y-1 py-6 px-4">
+        {/* Sections */}
+        {otherSections.map((section) => (
+          <div key={section.title}>
             <button
               type="button"
+              onClick={() => toggleSection(section.title)}
               className={cn(
-                "group flex w-full items-center gap-2 px-2 py-1.5 text-xs font-semibold rounded-md transition-colors",
-                "text-foreground bg-muted/50"
+                "flex w-full items-center justify-between px-0 py-2 text-sm font-medium transition-colors hover:text-foreground",
+                expanded[section.title]
+                  ? "text-foreground"
+                  : "text-muted-foreground"
               )}
             >
-              <ChevronRight className="size-4 flex-shrink-0 rotate-90 transition-transform" />
-              <Folder className="size-4 flex-shrink-0" />
-              <span className="truncate uppercase tracking-wide">Components</span>
+              <span>{section.title}</span>
+              <span className="text-lg leading-none">
+                {expanded[section.title] ? "−" : "+"}
+              </span>
             </button>
 
-            <div className="relative px-2">
-              <Search className="pointer-events-none absolute left-4 top-2.5 size-3.5 text-muted-foreground/50" />
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search..."
-                className="h-7 w-full rounded-md border border-border/50 bg-muted/40 pl-8 pr-2 text-xs outline-none placeholder:text-muted-foreground/40 focus:border-foreground/30 focus:bg-muted/60 transition-colors"
-              />
-              {hasQuery && (
-                <button
-                  type="button"
-                  onClick={() => setQuery("")}
-                  className="absolute right-3 top-2 text-muted-foreground/50 hover:text-foreground/70 transition-colors"
-                >
-                  <X className="size-3.5" />
-                </button>
-              )}
-            </div>
-
-            {filteredComponents.length === 0 && hasQuery ? (
-              <div className="px-3 py-2 text-xs text-muted-foreground/50 text-center">
-                No results
-              </div>
-            ) : (
-              <ul className="space-y-0.5 ml-2">
-                {filteredComponents.map((item) => {
+            {expanded[section.title] && (
+              <ul className="space-y-1 pl-4 mt-1 mb-4">
+                {section.items.map((item) => {
                   const isActive = pathname === item.href
                   return (
                     <li key={item.href}>
@@ -148,20 +76,91 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                         href={item.href}
                         onClick={onNavigate}
                         className={cn(
-                          "flex items-center gap-2 px-2 py-1.5 text-xs rounded-md transition-colors",
-                          "border-l-2",
+                          "block px-0 py-1.5 text-sm transition-colors",
                           isActive
-                            ? "font-medium text-foreground bg-muted/50 border-primary"
-                            : "text-muted-foreground hover:text-foreground hover:bg-muted/30 border-transparent"
+                            ? "font-medium text-foreground"
+                            : "text-muted-foreground hover:text-foreground"
                         )}
                       >
-                        <FileText className="size-3.5 flex-shrink-0" />
-                        <span className="truncate">{item.label}</span>
+                        {item.label}
                       </Link>
                     </li>
                   )
                 })}
               </ul>
+            )}
+          </div>
+        ))}
+
+        {/* Components */}
+        {componentSection && (
+          <div className="border-t mt-4 pt-4">
+            <button
+              type="button"
+              onClick={() => toggleSection("Components")}
+              className={cn(
+                "flex w-full items-center justify-between px-0 py-2 text-sm font-medium transition-colors hover:text-foreground",
+                expanded["Components"]
+                  ? "text-foreground"
+                  : "text-muted-foreground"
+              )}
+            >
+              <span>Components</span>
+              <span className="text-lg leading-none">
+                {expanded["Components"] ? "−" : "+"}
+              </span>
+            </button>
+
+            {expanded["Components"] && (
+              <div className="mt-3 space-y-3">
+                <div className="relative">
+                  <Search className="pointer-events-none absolute left-3 top-2.5 size-3.5 text-muted-foreground/50" />
+                  <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search..."
+                    className="h-8 w-full rounded-md border border-border/50 bg-muted/40 pl-9 pr-8 text-xs outline-none placeholder:text-muted-foreground/40 focus:border-foreground/30 focus:bg-muted/60 transition-colors"
+                  />
+                  {hasQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setQuery("")}
+                      className="absolute right-2.5 top-2 text-muted-foreground/50 hover:text-foreground/70 transition-colors"
+                    >
+                      <X className="size-4" />
+                    </button>
+                  )}
+                </div>
+
+                {filteredComponents.length === 0 && hasQuery ? (
+                  <div className="px-2 py-3 text-xs text-muted-foreground/50 text-center">
+                    No results
+                  </div>
+                ) : (
+                  <ul className="space-y-1">
+                    {filteredComponents.map((item) => {
+                      const isActive = pathname === item.href
+                      return (
+                        <li key={item.href}>
+                          <Link
+                            href={item.href}
+                            onClick={onNavigate}
+                            className={cn(
+                              "block px-0 py-1.5 text-sm transition-colors",
+                              isActive
+                                ? "font-medium text-foreground"
+                                : "text-muted-foreground hover:text-foreground"
+                            )}
+                          >
+                            {item.label}
+                          </Link>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                )}
+              </div>
             )}
           </div>
         )}
