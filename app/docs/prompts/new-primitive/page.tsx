@@ -146,12 +146,12 @@ export default function NewPrimitivePage() {
 
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent className="w-full sm:max-w-2xl flex flex-col">
-          <SheetHeader className="flex flex-row items-center justify-between pr-0">
-            <SheetTitle>Generate Primitive Prompt</SheetTitle>
+          <SheetHeader className="space-y-3">
+            <SheetTitle className="text-left">Generate Primitive Prompt</SheetTitle>
             <Button
               variant="ghost"
               size="sm"
-              className="gap-2 text-xs"
+              className="w-fit gap-2 text-xs h-8 px-2"
               onClick={() => {
                 setShowExample(!showExample)
                 setValues(showExample ? EMPTY_VALUES : EXAMPLE_VALUES)
@@ -222,21 +222,7 @@ export default function NewPrimitivePage() {
 
           <div className="border-t">
             <div className="px-4 py-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <h4 className="text-sm font-semibold">Generated Prompt</h4>
-                <Button
-                  variant="ghost"
-                  size="icon-sm"
-                  onClick={handleCopy}
-                  className="h-8 w-8"
-                >
-                  {copied ? (
-                    <Check className="size-4 text-primary" />
-                  ) : (
-                    <Copy className="size-4" />
-                  )}
-                </Button>
-              </div>
+              <h4 className="text-sm font-semibold">Generated Prompt</h4>
               <div className="rounded-lg border border-border/50 bg-muted/30 overflow-hidden">
                 <CodeBlock code={finalPrompt} showLineNumbers={false} className="max-h-40 text-xs" />
               </div>
@@ -251,11 +237,11 @@ export default function NewPrimitivePage() {
           </div>
 
           <SheetFooter className="px-4 py-3 border-t">
-            <Button onClick={handleCopy} className="w-full gap-2">
+            <Button onClick={handleCopy} className="w-full gap-2 h-9">
               {copied ? (
                 <>
-                  <Check className="size-4" />
-                  Copied!
+                  <Check className="size-4 text-primary" />
+                  Copied to clipboard
                 </>
               ) : (
                 <>
