@@ -82,16 +82,16 @@ export default function NewPrimitivePage() {
         title="New Primitive Generation"
         description="Create new base UI component from scratch"
         action={
-          <Button onClick={handleCopy} size="sm" variant="outline">
+          <Button onClick={handleCopy} size="sm" variant="outline" className="gap-2">
             {copied ? (
               <>
-                <Check className="size-3.5 mr-1.5" />
+                <Check className="size-3.5 text-primary" />
                 Copied
               </>
             ) : (
               <>
-                <Copy className="size-3.5 mr-1.5" />
-                Copy Prompt
+                <Copy className="size-3.5" />
+                Create
               </>
             )}
           </Button>

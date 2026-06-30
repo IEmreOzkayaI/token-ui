@@ -12,6 +12,7 @@ type DocsPageHeaderProps = {
   description?: string
   children?: ReactNode
   className?: string
+  action?: ReactNode
 }
 
 export function DocsPageHeader({
@@ -19,6 +20,7 @@ export function DocsPageHeader({
   description,
   children,
   className,
+  action,
 }: DocsPageHeaderProps) {
   const [copied, setCopied] = useState(false)
 
@@ -40,19 +42,22 @@ export function DocsPageHeader({
             <p className="text-base leading-relaxed text-muted-foreground max-w-2xl">{description}</p>
           )}
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          className="hidden shrink-0 gap-2 sm:flex"
-          onClick={copyPage}
-        >
-          {copied ? (
-            <Check className="size-3.5 text-primary" />
-          ) : (
-            <Copy className="size-3.5" />
-          )}
-          Copy Page
-        </Button>
+        <div className="hidden shrink-0 gap-2 sm:flex items-center">
+          {action}
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2"
+            onClick={copyPage}
+          >
+            {copied ? (
+              <Check className="size-3.5 text-primary" />
+            ) : (
+              <Copy className="size-3.5" />
+            )}
+            Copy Page
+          </Button>
+        </div>
       </div>
       {children}
     </div>
