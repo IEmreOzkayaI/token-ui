@@ -173,7 +173,7 @@ export default function NewPrimitivePage() {
   const [showExample, setShowExample] = useState(true)
   const [values, setValues] = useState<Values>(EXAMPLE_VALUES)
   const [sheetWidth, setSheetWidth] = useState(50)
-  const [withDocs, setWithDocs] = useState(false)
+  const [withDocs, setWithDocs] = useState(true)
 
   const handleResizeStart = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -404,26 +404,18 @@ export default function NewPrimitivePage() {
             </div>
           </div>
 
-          <SheetFooter className="px-6 py-4 border-t flex-col gap-3">
-            <label className="flex items-center gap-3 cursor-pointer w-full">
-              <div onClick={() => setWithDocs(!withDocs)} className={cn("relative w-8 h-4 rounded-full transition-colors shrink-0 cursor-pointer", withDocs ? "bg-primary" : "bg-muted-foreground/30")}>
-                <div className={cn("absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow transition-transform", withDocs && "translate-x-4")} />
-              </div>
-              <span className="text-xs text-muted-foreground">Also generate documentation</span>
-            </label>
-            <Button onClick={handleCopy} className="w-full gap-2 h-9 bg-primary text-white hover:bg-primary/90">
-              {copied ? (
-                <>
-                  <Check className="size-4" />
-                  Copied to clipboard
-                </>
-              ) : (
-                <>
-                  <Copy className="size-4" />
-                  Copy Prompt
-                </>
-              )}
-            </Button>
+          <SheetFooter className="px-6 py-4 border-t">
+            <div className="flex items-center gap-3 w-full">
+              <Button onClick={handleCopy} className="flex-1 gap-2 h-9 bg-primary text-white hover:bg-primary/90">
+                {copied ? <><Check className="size-4" />Copied to clipboard</> : <><Copy className="size-4" />Copy Prompt</>}
+              </Button>
+              <label className="flex items-center gap-2 cursor-pointer shrink-0">
+                <span className="text-xs text-muted-foreground whitespace-nowrap">Include docs</span>
+                <div onClick={() => setWithDocs(!withDocs)} className={cn("relative w-8 h-4 rounded-full transition-colors shrink-0 cursor-pointer", withDocs ? "bg-primary" : "bg-muted-foreground/30")}>
+                  <div className={cn("absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow transition-transform", withDocs && "translate-x-4")} />
+                </div>
+              </label>
+            </div>
           </SheetFooter>
         </SheetContent>
       </Sheet>
