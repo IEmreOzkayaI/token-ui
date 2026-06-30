@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent } from "@/primitives/card"
 import { Button } from "@/primitives/button"
 import { Input } from "@/primitives/input"
 import { Label } from "@/primitives/label"
@@ -9,10 +8,12 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/pri
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
-import { DocsCallout } from "@/app/docs/_components/docs-callout"
+import { PromptGuide, PromptGuideList } from "@/app/docs/_components/prompt-guide"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { Copy, Check, Plus, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PromptCopyStatus } from "@/app/docs/prompts/_components/prompt-fields"
+import { RESPONSIVE_REQUIREMENTS_SECTION } from "@/app/docs/prompts/_lib/responsive-requirements"
 
 const PROMPT = `You are a Token UI design system engineer.
 
@@ -58,6 +59,7 @@ Guidelines:
 5. Ensure accessibility maintained or improved
 6. Update exports if new variants added
 7. Keep component API stable
+${RESPONSIVE_REQUIREMENTS_SECTION}
 
 Return only the modified code sections with explanations.`
 
@@ -179,35 +181,50 @@ export default function EnhancePrimitivePage() {
   return (
     <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
-        title="Existing Primitive Enhancement"
-        description="Add variants, sizes, or improvements to existing primitive"
+        title="Extend Primitive"
+        description="Var olan primitive'e yeni variant, size veya erişilebilirlik ekler"
         action={<Button onClick={() => setOpen(true)} size="sm" className="gap-2"><Plus className="size-3.5" /> Create</Button>}
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">The primitives in ui/primitives/ are designed to grow. Use this when you need to extend one with a new variant, size, or accessibility improvement — the AI reads the file first so it follows the exact same patterns already there.</p>
-        <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to use</p><p className="text-xs text-muted-foreground">An existing primitive is missing a variant you need, lacks a size option, or has gaps in its accessibility states.</p></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to use</p><p className="text-xs text-muted-foreground">Don't use this to add completely new behavior. For new primitives use New Primitive; for component-level changes use Modify Existing.</p></CardContent></Card>
-        </div>
-        <DocsCallout title="Enhancement types" variant="info">
-          <ul className="space-y-1 text-sm">
-            <li>• new-variant — add a CVA variant option (e.g. 'premium', 'warning')</li>
-            <li>• new-size — add a size option (e.g. 'xs', '2xl')</li>
-            <li>• a11y-improvement — add missing ARIA states or keyboard behavior</li>
-            <li>• refactor — improve consistency without changing the API</li>
-          </ul>
-        </DocsCallout>
+        <PromptGuide
+          summary="Primitive zaten var ama eksik bir şey mi var? Yeni variant, size veya keyboard/ARIA iyileştirmesi — bu prompt mevcut dosyayı okuyup üzerine ekler, sıfırdan yazmaz."
+          useWhen="Button var ama premium stili yok. Input'ta xs size eksik. Badge'de focus state zayıf. Mevcut API bozulmadan genişletmek istiyorsun."
+          avoidWhen={
+            <>
+              Parça hiç yok → <strong>Create Primitive</strong>. Parçaları birleştirmek →{" "}
+              <strong>Compose Component</strong>. Sadece docs örneği → <strong>Add Doc Demo</strong>.
+            </>
+          }
+          example={
+            <>
+              &quot;Button&apos;a warning variant ekle — turuncu arka plan, destructive&apos;ten farklı ton.&quot;
+              <span className="mt-2 block text-muted-foreground">
+                → <code className="rounded bg-muted px-1.5 py-0.5 text-xs">button.tsx</code> CVA&apos;sına yeni satır eklenir
+              </span>
+            </>
+          }
+          outputs={
+            <PromptGuideList
+              items={[
+                "new-variant — CVA'ya yeni stil (premium, warning…)",
+                "new-size — yeni boyut seçeneği (xs, 2xl…)",
+                "a11y-improvement — eksik ARIA veya keyboard davranışı",
+                "refactor — API değiştirmeden tutarlılık iyileştirmesi",
+              ]}
+            />
+          }
+        />
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex flex-col">
+        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex h-dvh flex-col gap-0 overflow-hidden p-0">
           <div onMouseDown={handleResizeStart} className="absolute left-0 top-0 h-full w-3 cursor-col-resize z-50 flex items-center justify-center group">
             <div className="flex flex-col gap-[3px] opacity-30 group-hover:opacity-100 transition-opacity">
               {Array.from({ length: 6 }).map((_, i) => <div key={i} className="w-[3px] h-[3px] rounded-full bg-foreground group-hover:bg-primary transition-colors" />)}
             </div>
           </div>
-          <SheetHeader className="px-6 pt-5 pb-4 border-b">
+          <SheetHeader className="shrink-0 border-b px-6 pb-4 pt-5">
             <SheetTitle className="text-base font-semibold">Prompt Generator</SheetTitle>
             <div className="flex items-center gap-2">
               <p className="text-xs text-muted-foreground">Fill in parameters to generate your Token UI prompt</p>
@@ -216,8 +233,8 @@ export default function EnhancePrimitivePage() {
               </button>
             </div>
           </SheetHeader>
-          <div className="flex flex-1 overflow-hidden">
-            <div className="flex-1 overflow-y-auto border-r">
+          <div className="flex min-h-0 flex-1 overflow-hidden">
+            <div className="min-h-0 flex-1 overflow-y-auto border-r no-scrollbar">
               <div className="space-y-6 p-6">
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Primitive Name</Label><Input value={values.primitive_name} onChange={(e) => setValues(p => ({ ...p, primitive_name: e.target.value }))} placeholder="e.g., button, input, badge" className="h-9 text-sm focus-visible:ring-primary" /></div>
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Enhancement Type</Label><Input value={values.enhancement_type} onChange={(e) => setValues(p => ({ ...p, enhancement_type: e.target.value }))} placeholder="e.g., new-variant, new-size, a11y-improvement" className="h-9 text-sm focus-visible:ring-primary" /></div>
@@ -225,15 +242,15 @@ export default function EnhancePrimitivePage() {
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Backwards Compatibility</Label><Input value={values.backwards_compatibility} onChange={(e) => setValues(p => ({ ...p, backwards_compatibility: e.target.value }))} placeholder="e.g., yes, no" className="h-9 text-sm focus-visible:ring-primary" /></div>
               </div>
             </div>
-            <div className="flex-1 flex flex-col">
-              <div className="px-6 py-4 border-b flex items-center justify-between">
+            <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+              <div className="flex shrink-0 items-center justify-between border-b px-6 py-4">
                 <h4 className="text-sm font-semibold">Generated Prompt</h4>
-                <div className="text-xs"><span className="text-primary">✓ Ready to copy</span></div>
+                <div className="text-xs"><PromptCopyStatus ready /></div>
               </div>
-              <div className="flex-1 overflow-y-auto"><div className="p-6">{renderPrompt()}</div></div>
+              <div className="min-h-0 flex-1 overflow-y-auto no-scrollbar"><div className="p-6">{renderPrompt()}</div></div>
             </div>
           </div>
-          <SheetFooter className="px-6 py-4 border-t">
+          <SheetFooter className="shrink-0 border-t px-6 py-4">
             <div className="flex items-center gap-3 w-full">
               <Button onClick={handleCopy} className="flex-1 gap-2 h-9 bg-primary text-white hover:bg-primary/90">
                 {copied ? <><Check className="size-4" />Copied to clipboard</> : <><Copy className="size-4" />Copy Prompt</>}

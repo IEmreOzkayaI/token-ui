@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent } from "@/primitives/card"
 import { Button } from "@/primitives/button"
 import { Input } from "@/primitives/input"
 import { Label } from "@/primitives/label"
@@ -9,10 +8,12 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/pri
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
-import { DocsCallout } from "@/app/docs/_components/docs-callout"
+import { PromptGuide, PromptGuideList } from "@/app/docs/_components/prompt-guide"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { Copy, Check, Plus, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PromptCopyStatus } from "@/app/docs/prompts/_components/prompt-fields"
+import { RESPONSIVE_REQUIREMENTS_SECTION } from "@/app/docs/prompts/_lib/responsive-requirements"
 
 const PROMPT = `You are a Token UI design system engineer.
 
@@ -50,6 +51,9 @@ Existing components → ui/components/*
 Foundation docs → app/docs/foundations/*
   Read these to understand design decisions, token usage rules, and system constraints.
 
+Screen blocks → use Build Screen prompt (/docs/prompts/build-screen) — NOT this prompt.
+  Full dashboards decompose into ui/blocks/{slug}/_components/ with sub-component docs.
+
 ---
 
 Guidelines:
@@ -63,6 +67,7 @@ Guidelines:
 8. Add TypeScript types for all props
 9. Keep component API minimal and clear
 10. Create demo files (default.tsx, demo.tsx)
+${RESPONSIVE_REQUIREMENTS_SECTION}
 
 Return:
 1. Main component file(s)
@@ -192,36 +197,55 @@ export default function NewComponentPage() {
   return (
     <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
-        title="New Component Generation"
-        description="Create full-featured component combining primitives"
+        title="Compose Component"
+        description="Hazır primitive'leri birleştirerek yeni bileşen oluşturur"
         action={<Button onClick={() => setOpen(true)} size="sm" className="gap-2"><Plus className="size-3.5" /> Create</Button>}
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">Components sit on top of primitives. They combine Card + Label + Badge into something like a stat card, or Input + Button + Popover into a search field. The AI reads existing components first to understand how composition works in this codebase.</p>
-        <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to use</p><p className="text-xs text-muted-foreground">You need a full-featured domain-specific component (stat card, data table, upload zone) that combines existing primitives in a meaningful way.</p></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to use</p><p className="text-xs text-muted-foreground">If you're building a base element like a toggle or slider, use New Primitive instead. If requirements are complex with custom interactions, use From Scratch.</p></CardContent></Card>
-        </div>
-        <DocsCallout title="Component structure" variant="info">
-          <ul className="space-y-1 text-sm">
-            <li>• Location: ui/components/[name]/</li>
-            <li>• Files: default.tsx, demo.tsx, [variant].tsx</li>
-            <li>• Each demo is focused — one concept per file</li>
-            <li>• Imports primitives from ui/primitives/</li>
-            <li>• No CVA needed at component level unless adding new variants</li>
-          </ul>
-        </DocsCallout>
+        <PromptGuide
+          summary="Primitive'ler tek başına kullanılabilir; ama çoğu ekranda birleştirilmiş halleri gerekir. Bu prompt, mevcut parçaları (Card, Label, Badge…) kullanarak domain-specific bir component üretir. Özel klavye navigasyonu, async fetch veya karmaşık state machine yoksa doğru seçim budur."
+          useWhen="stat-card, user-avatar-group, pricing-card gibi — yapı basit, mevcut parçalar yeterli, props ile kontrol ediliyor."
+          avoidWhen={
+            <>
+              Temel parça eksik → <strong>Create Primitive</strong>. Combobox gibi ağır interaction →{" "}
+              <strong>Custom Build</strong>. Sadece button&apos;a stil → <strong>Add Variant</strong>.
+            </>
+          }
+          example={
+            <>
+              &quot;Revenue gösteren kart — label, büyük sayı, yukarı trend badge, loading skeleton.&quot;
+              <span className="mt-2 block text-muted-foreground">
+                → Card + Label + Badge birleşir,{" "}
+                <code className="rounded bg-muted px-1.5 py-0.5 text-xs">ui/components/stat-card/</code> oluşur
+              </span>
+            </>
+          }
+          outputs={
+            <PromptGuideList
+              items={[
+                <>
+                  Konum: <code className="rounded bg-muted px-1.5 py-0.5 text-xs">ui/components/[name]/</code>
+                </>,
+                "Dosyalar: default.tsx, demo.tsx, [variant].tsx",
+                "Her demo tek konsept — bir dosya bir fikir",
+                "Primitive'ler ui/primitives/ altından import edilir",
+                "Component seviyesinde CVA gerekmez (yeni variant yoksa)",
+              ]}
+            />
+          }
+          outputsTitle="Dosya yapısı"
+        />
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex flex-col">
+        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex h-dvh flex-col gap-0 overflow-hidden p-0">
           <div onMouseDown={handleResizeStart} className="absolute left-0 top-0 h-full w-3 cursor-col-resize z-50 flex items-center justify-center group">
             <div className="flex flex-col gap-[3px] opacity-30 group-hover:opacity-100 transition-opacity">
               {Array.from({ length: 6 }).map((_, i) => <div key={i} className="w-[3px] h-[3px] rounded-full bg-foreground group-hover:bg-primary transition-colors" />)}
             </div>
           </div>
-          <SheetHeader className="px-6 pt-5 pb-4 border-b">
+          <SheetHeader className="shrink-0 border-b px-6 pb-4 pt-5">
             <SheetTitle className="text-base font-semibold">Prompt Generator</SheetTitle>
             <div className="flex items-center gap-2">
               <p className="text-xs text-muted-foreground">Fill in parameters to generate your Token UI prompt</p>
@@ -230,8 +254,8 @@ export default function NewComponentPage() {
               </button>
             </div>
           </SheetHeader>
-          <div className="flex flex-1 overflow-hidden">
-            <div className="flex-1 overflow-y-auto border-r">
+          <div className="flex min-h-0 flex-1 overflow-hidden">
+            <div className="min-h-0 flex-1 overflow-y-auto border-r no-scrollbar">
               <div className="space-y-6 p-6">
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Component Name</Label><Input value={values.component_name} onChange={(e) => setValues(p => ({ ...p, component_name: e.target.value }))} placeholder="e.g., stat-card, data-table" className="h-9 text-sm focus-visible:ring-primary" /></div>
                 <MultiInput label="Primitives to Use" values={values.primitives_used} placeholder="e.g., Card (for container)" onChange={(v) => setValues(p => ({ ...p, primitives_used: v }))} />
@@ -240,15 +264,15 @@ export default function NewComponentPage() {
                 <MultiInput label="Usage Examples" values={values.documentation_examples} placeholder="e.g., Revenue stat with trend" onChange={(v) => setValues(p => ({ ...p, documentation_examples: v }))} />
               </div>
             </div>
-            <div className="flex-1 flex flex-col">
-              <div className="px-6 py-4 border-b flex items-center justify-between">
+            <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+              <div className="flex shrink-0 items-center justify-between border-b px-6 py-4">
                 <h4 className="text-sm font-semibold">Generated Prompt</h4>
-                <div className="text-xs"><span className="text-primary">✓ Ready to copy</span></div>
+                <div className="text-xs"><PromptCopyStatus ready /></div>
               </div>
-              <div className="flex-1 overflow-y-auto"><div className="p-6">{renderPrompt()}</div></div>
+              <div className="min-h-0 flex-1 overflow-y-auto no-scrollbar"><div className="p-6">{renderPrompt()}</div></div>
             </div>
           </div>
-          <SheetFooter className="px-6 py-4 border-t">
+          <SheetFooter className="shrink-0 border-t px-6 py-4">
             <div className="flex items-center gap-3 w-full">
               <Button onClick={handleCopy} className="flex-1 gap-2 h-9 bg-primary text-white hover:bg-primary/90">
                 {copied ? <><Check className="size-4" />Copied to clipboard</> : <><Copy className="size-4" />Copy Prompt</>}

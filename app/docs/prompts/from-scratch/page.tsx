@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent } from "@/primitives/card"
 import { Button } from "@/primitives/button"
 import { Input } from "@/primitives/input"
 import { Label } from "@/primitives/label"
@@ -9,10 +8,12 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/pri
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
-import { DocsCallout } from "@/app/docs/_components/docs-callout"
+import { PromptGuide, PromptGuideList, PromptGuideSplit } from "@/app/docs/_components/prompt-guide"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { Copy, Check, Plus, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PromptCopyStatus } from "@/app/docs/prompts/_components/prompt-fields"
+import { RESPONSIVE_REQUIREMENTS_SECTION } from "@/app/docs/prompts/_lib/responsive-requirements"
 
 const PROMPT = `You are a Token UI design system engineer.
 
@@ -44,6 +45,9 @@ Existing components → ui/components/*
 Foundation docs → app/docs/foundations/*
   Read these to understand design decisions, token usage rules, and system constraints.
 
+Screen blocks → use Build Screen prompt (/docs/prompts/build-screen) — NOT this prompt.
+  Full dashboards decompose into ui/blocks/{slug}/_components/ with sub-component docs.
+
 ---
 
 Build guidelines:
@@ -55,6 +59,7 @@ Build guidelines:
 6. Accessibility: focus-visible:ring-3 focus-visible:ring-ring/50, aria-invalid states
 7. No inline styles — Tailwind + CSS variables only
 8. Create demo file showing {variant_name} variant
+${RESPONSIVE_REQUIREMENTS_SECTION}
 
 Return complete, production-ready code.`
 
@@ -173,35 +178,67 @@ export default function FromScratchPage() {
   return (
     <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
-        title="Build From Scratch"
-        description="Build a brand new component or primitive with full spec"
+        title="Custom Build"
+        description="Karmaşık gereksinimler için sıfırdan primitive veya component yazar"
         action={<Button onClick={() => setOpen(true)} size="sm" className="gap-2"><Plus className="size-3.5" /> Create</Button>}
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">The most open-ended prompt. Give it a component name, a variant, and a list of requirements — it reads your existing primitives first, then builds exactly to spec. Best for complex components with specific interaction requirements.</p>
-        <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Primitive</p><p className="text-xs text-muted-foreground">Goes in ui/primitives/ — single CVA definition, data-slot, TypeScript types, accessibility states. Composes into components.</p></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Component</p><p className="text-xs text-muted-foreground">Goes in ui/components/ — combines primitives, can have internal state, includes demo files. Domain-specific.</p></CardContent></Card>
-        </div>
-        <DocsCallout title="Use this when" variant="info">
-          <ul className="space-y-1 text-sm">
-            <li>• Requirements are too complex for a simple variant</li>
-            <li>• You need custom interactions (drag, multi-step, async loading)</li>
-            <li>• Nothing in the existing codebase is close enough to extend</li>
-            <li>• You want maximum control over the generated code</li>
-          </ul>
-        </DocsCallout>
+        <PromptGuide
+          summary="En geniş kapsamlı prompt. Requirement listesi verirsin, AI sıfırdan yazar. Mevcut primitive'ler yetmediğinde veya özel davranış (arrow key navigasyon, async option loading, drag-drop, multi-step flow) gerektiğinde kullan."
+          useWhen="Requirement listesi uzun ve interaction odaklı. Mevcut codebase'de yakın örnek yok. Keyboard, async, drag veya multi-step gibi özel UX var."
+          avoidWhen={
+            <>
+              Card + Badge birleştirmek yeterli → <strong>Compose Component</strong>. Sadece variant eklemek →{" "}
+              <strong>Add Variant</strong>.
+            </>
+          }
+          example={
+            <>
+              &quot;Searchable combobox — input filtreler, arrow key ile gezin, escape kapatır, async loading spinner,
+              react-hook-form uyumlu.&quot;
+              <span className="mt-2 block text-muted-foreground">→ Compose yetmez, Custom Build gerekir.</span>
+            </>
+          }
+          outputs={
+            <div className="space-y-6">
+              <PromptGuideSplit
+                items={[
+                  {
+                    title: "Primitive olarak",
+                    description:
+                      "ui/primitives/ — tek dosya, CVA, data-slot. Diğer component'ler bunu import eder. Örnek: searchable combobox primitive.",
+                  },
+                  {
+                    title: "Component olarak",
+                    description:
+                      "ui/components/ — klasör, demo dosyaları, iç state olabilir. Örnek: multi-step onboarding wizard.",
+                  },
+                ]}
+              />
+              <PromptGuideList
+                title="Ne üretilir"
+                items={[
+                  "CVA variant tanımı ve data-slot attribute'ları",
+                  "TypeScript tipleri ve accessibility state'leri",
+                  "Demo dosyaları (component scope seçildiyse)",
+                  "İsteğe bağlı docs sayfası (Include docs açıksa)",
+                ]}
+              />
+            </div>
+          }
+          outputsTitle="Çıktı seçenekleri"
+        />
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex flex-col">
+        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex h-dvh flex-col gap-0 overflow-hidden p-0">
           <div onMouseDown={handleResizeStart} className="absolute left-0 top-0 h-full w-3 cursor-col-resize z-50 flex items-center justify-center group">
             <div className="flex flex-col gap-[3px] opacity-30 group-hover:opacity-100 transition-opacity">
               {Array.from({ length: 6 }).map((_, i) => <div key={i} className="w-[3px] h-[3px] rounded-full bg-foreground group-hover:bg-primary transition-colors" />)}
             </div>
           </div>
-          <SheetHeader className="px-6 pt-5 pb-4 border-b">
+          <SheetHeader className="shrink-0 border-b px-6 pb-4 pt-5">
             <SheetTitle className="text-base font-semibold">Prompt Generator</SheetTitle>
             <div className="flex items-center gap-2">
               <p className="text-xs text-muted-foreground">Fill in parameters to generate your Token UI prompt</p>
@@ -210,23 +247,23 @@ export default function FromScratchPage() {
               </button>
             </div>
           </SheetHeader>
-          <div className="flex flex-1 overflow-hidden">
-            <div className="flex-1 overflow-y-auto border-r">
+          <div className="flex min-h-0 flex-1 overflow-hidden">
+            <div className="min-h-0 flex-1 overflow-y-auto border-r no-scrollbar">
               <div className="space-y-6 p-6">
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Component Name</Label><Input value={values.component_name} onChange={(e) => setValues(p => ({ ...p, component_name: e.target.value }))} placeholder="e.g., combobox, date-picker" className="h-9 text-sm focus-visible:ring-primary" /></div>
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Variant Name</Label><Input value={values.variant_name} onChange={(e) => setValues(p => ({ ...p, variant_name: e.target.value }))} placeholder="e.g., searchable, multi-select" className="h-9 text-sm focus-visible:ring-primary" /></div>
                 <MultiInput label="Requirements" values={values.requirements} placeholder="e.g., Keyboard navigation with arrow keys" onChange={(v) => setValues(p => ({ ...p, requirements: v }))} />
               </div>
             </div>
-            <div className="flex-1 flex flex-col">
-              <div className="px-6 py-4 border-b flex items-center justify-between">
+            <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+              <div className="flex shrink-0 items-center justify-between border-b px-6 py-4">
                 <h4 className="text-sm font-semibold">Generated Prompt</h4>
-                <div className="text-xs"><span className="text-primary">✓ Ready to copy</span></div>
+                <div className="text-xs"><PromptCopyStatus ready /></div>
               </div>
-              <div className="flex-1 overflow-y-auto"><div className="p-6">{renderPrompt()}</div></div>
+              <div className="min-h-0 flex-1 overflow-y-auto no-scrollbar"><div className="p-6">{renderPrompt()}</div></div>
             </div>
           </div>
-          <SheetFooter className="px-6 py-4 border-t">
+          <SheetFooter className="shrink-0 border-t px-6 py-4">
             <div className="flex items-center gap-3 w-full">
               <Button onClick={handleCopy} className="flex-1 gap-2 h-9 bg-primary text-white hover:bg-primary/90">
                 {copied ? <><Check className="size-4" />Copied to clipboard</> : <><Copy className="size-4" />Copy Prompt</>}

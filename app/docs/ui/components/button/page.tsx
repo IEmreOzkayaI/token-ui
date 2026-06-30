@@ -1,4 +1,5 @@
 import { ComponentExample } from "@/app/docs/_components/component-example"
+import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
@@ -12,6 +13,7 @@ import ButtonGhost from "@/ui/components/button/ghost"
 import ButtonIcon from "@/ui/components/button/icon"
 import ButtonLink from "@/ui/components/button/link"
 import ButtonOutline from "@/ui/components/button/outline"
+import ButtonPremium from "@/ui/components/button/premium"
 import ButtonRounded from "@/ui/components/button/rounded"
 import ButtonSecondary from "@/ui/components/button/secondary"
 import ButtonSize from "@/ui/components/button/size"
@@ -67,6 +69,12 @@ const examples = [
     sourcePath: "ui/components/button/outline.tsx",
   },
   {
+    id: "premium",
+    title: "Premium",
+    component: ButtonPremium,
+    sourcePath: "ui/components/button/premium.tsx",
+  },
+  {
     id: "rounded",
     title: "Rounded",
     component: ButtonRounded,
@@ -104,10 +112,13 @@ const toc = [
   { id: "icon", title: "Icon", depth: 3 },
   { id: "link", title: "Link", depth: 3 },
   { id: "outline", title: "Outline", depth: 3 },
+  { id: "premium", title: "Premium", depth: 3 },
   { id: "rounded", title: "Rounded", depth: 3 },
   { id: "secondary", title: "Secondary", depth: 3 },
   { id: "size", title: "Size", depth: 3 },
   { id: "spinner", title: "Spinner", depth: 3 },
+  { id: "props", title: "Props" },
+  { id: "best-practices", title: "Best Practices" },
 ]
 
 export default function ButtonPage() {
@@ -156,6 +167,47 @@ export default function ButtonPage() {
             )
           })}
         </div>
+      </DocsSection>
+
+      <DocsSection id="props" title="Props">
+        <div className="space-y-4 text-sm">
+          <div>
+            <h4 className="mb-2 font-semibold">Button</h4>
+            <ul className="ml-4 space-y-2 text-muted-foreground">
+              <li>
+                <code className="rounded bg-muted px-2 py-1">variant</code>
+                <span className="ml-2">
+                  &quot;default&quot; | &quot;outline&quot; | &quot;secondary&quot; |
+                  &quot;ghost&quot; | &quot;destructive&quot; | &quot;link&quot; |
+                  &quot;premium&quot; (default: &quot;default&quot;)
+                </span>
+              </li>
+              <li>
+                <code className="rounded bg-muted px-2 py-1">size</code>
+                <span className="ml-2">
+                  &quot;default&quot; | &quot;xs&quot; | &quot;sm&quot; | &quot;lg&quot; |
+                  &quot;icon&quot; | &quot;icon-xs&quot; | &quot;icon-sm&quot; |
+                  &quot;icon-lg&quot; (default: &quot;default&quot;)
+                </span>
+              </li>
+              <li>
+                <code className="rounded bg-muted px-2 py-1">asChild</code>
+                <span className="ml-2">boolean — render as child element via Slot</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </DocsSection>
+
+      <DocsSection id="best-practices" title="Best Practices">
+        <DocsCallout title="Reserve premium for primary CTAs" variant="info">
+          Use <code>variant=&quot;premium&quot;</code> sparingly for high-emphasis actions
+          such as upgrades or trial starts. Overuse reduces visual hierarchy.
+        </DocsCallout>
+        <DocsCallout title="Pair with primary-foreground text" variant="info">
+          The premium variant uses <code>text-primary-foreground</code> on an accent →
+          primary gradient for WCAG AA contrast in both light and dark modes.
+        </DocsCallout>
       </DocsSection>
     </DocsPage>
   )

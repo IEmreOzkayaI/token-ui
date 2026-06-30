@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation"
 import { Search, X, ChevronDown, ChevronRight, Folder, FolderOpen, FileText } from "lucide-react"
 
 import { docsNav } from "@/app/docs/_lib/nav"
-import { ScrollArea } from "@/primitives/scroll-area"
 import { cn } from "@/lib/utils"
 
 type DocsSidebarProps = {
@@ -22,6 +21,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
     Foundations: false,
     Prompts: false,
     Changelog: false,
+    Blocks: true,
     Components: true,
   })
 
@@ -29,7 +29,10 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
   const q = query.toLowerCase()
 
   const componentSection = docsNav.find((s) => s.title === "Components")
-  const otherSections = docsNav.filter((s) => s.title !== "Components")
+  const blocksSection = docsNav.find((s) => s.title === "Blocks")
+  const otherSections = docsNav.filter(
+    (s) => s.title !== "Components" && s.title !== "Blocks"
+  )
 
   const filteredComponents = useMemo(() => {
     if (!componentSection) return []
@@ -53,28 +56,57 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
     return (
       <ul className={cn("mt-1 ml-3 border-l border-primary/30 pl-2")}>
         {items.map((item, idx) => {
-          const isActive = pathname === item.href
+          const isActive =
+            pathname === item.href ||
+            (item.items?.length ? false : pathname.startsWith(`${item.href}/`))
           const hasChildren = item.items && item.items.length > 0
           const itemKey = `${level}-${item.href}-${idx}`
           const isItemExpanded = treeExpanded[itemKey] ?? true
 
           if (hasChildren) {
+            const isChildRoute =
+              pathname === item.href || pathname.startsWith(`${item.href}/`)
+
             return (
               <li key={itemKey}>
-                <button
-                  onClick={() => toggleTreeItem(itemKey)}
+                <div
                   className={cn(
-                    "flex w-full items-center gap-1.5 rounded px-2 py-1.5 text-xs transition-all hover:bg-foreground/5",
-                    isItemExpanded ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                    "flex w-full items-center rounded transition-all hover:bg-foreground/5",
+                    isChildRoute && "bg-primary/10"
                   )}
                 >
-                  <ChevronDown className={cn("size-3 shrink-0 transition-transform", !isItemExpanded && "-rotate-90")} />
-                  {isItemExpanded
-                    ? <FolderOpen className="size-3.5 shrink-0 text-primary" />
-                    : <Folder className="size-3.5 shrink-0 text-primary" />
-                  }
-                  <span className="font-medium">{item.label}</span>
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => toggleTreeItem(itemKey)}
+                    aria-expanded={isItemExpanded}
+                    aria-label={`${isItemExpanded ? "Daralt" : "Genişlet"}: ${item.label}`}
+                    className={cn(
+                      "flex shrink-0 items-center justify-center rounded p-2 text-muted-foreground transition-colors hover:text-foreground",
+                      isChildRoute && "text-primary"
+                    )}
+                  >
+                    <ChevronDown
+                      className={cn("size-3 transition-transform", !isItemExpanded && "-rotate-90")}
+                    />
+                  </button>
+                  <Link
+                    href={item.href}
+                    onClick={onNavigate}
+                    className={cn(
+                      "flex min-w-0 flex-1 items-center gap-1.5 rounded-r py-1.5 pr-2 text-xs transition-all",
+                      isChildRoute
+                        ? "font-medium text-primary"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {isItemExpanded ? (
+                      <FolderOpen className="size-3.5 shrink-0 text-primary" />
+                    ) : (
+                      <Folder className="size-3.5 shrink-0 text-primary" />
+                    )}
+                    <span className="truncate font-medium">{item.label}</span>
+                  </Link>
+                </div>
                 {isItemExpanded && renderItems(item.items!, level + 1)}
               </li>
             )
@@ -104,8 +136,11 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
   }
 
   return (
-    <ScrollArea className={cn("h-full", className)}>
-      <div className="space-y-0.5 py-4 px-4">
+    <nav
+      aria-label="Docs navigation"
+      className={cn("h-full min-h-0 overflow-y-auto no-scrollbar", className)}
+    >
+      <div className="space-y-0.5 px-4 py-4">
         {/* Sections */}
         {otherSections.map((section) => {
           const sectionButton = (
@@ -157,6 +192,35 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
             </div>
           )
         })}
+
+        {/* Blocks */}
+        {blocksSection && (
+          <div className="border-t border-border/30 pt-6">
+            <Link
+              href={blocksSection.href || "/docs/ui/blocks"}
+              onClick={(e) => {
+                e.preventDefault()
+                toggleSection("Blocks")
+                onNavigate?.()
+              }}
+              className={cn(
+                "group flex w-full items-center gap-2 rounded px-2 py-2 text-xs font-medium transition-all hover:bg-foreground/5",
+                expanded["Blocks"]
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              <ChevronDown className={cn("size-3 shrink-0 transition-transform", !expanded["Blocks"] && "-rotate-90")} />
+              {expanded["Blocks"]
+                ? <FolderOpen className="size-3.5 shrink-0 text-primary" />
+                : <Folder className="size-3.5 shrink-0 text-primary" />
+              }
+              <span className="font-semibold">Blocks</span>
+            </Link>
+
+            {expanded["Blocks"] && renderItems(blocksSection.items)}
+          </div>
+        )}
 
         {/* Components */}
         {componentSection && (
@@ -217,6 +281,6 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
           </div>
         )}
       </div>
-    </ScrollArea>
+    </nav>
   )
 }

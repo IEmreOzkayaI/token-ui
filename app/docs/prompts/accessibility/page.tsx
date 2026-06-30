@@ -12,6 +12,8 @@ import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { Copy, Check, Plus, X } from "lucide-react"
+import { PromptCopyStatus } from "@/app/docs/prompts/_components/prompt-fields"
+import { RESPONSIVE_REQUIREMENTS_SECTION } from "@/app/docs/prompts/_lib/responsive-requirements"
 
 const PROMPT = `You are a Token UI accessibility specialist.
 
@@ -76,6 +78,12 @@ A11Y Checklist:
 6. INTERACTIVE ELEMENTS
    - Proper focus states
    - Touch targets >= 44x44px
+
+7. RESPONSIVE & MOBILE A11Y
+   - Layout reflow without loss of content or functionality
+   - Touch targets remain usable when stacked on mobile
+   - No horizontal scroll traps; chart/table regions scroll intentionally
+${RESPONSIVE_REQUIREMENTS_SECTION}
 
 Return:
 1. Current a11y status
@@ -289,7 +297,7 @@ export default function AccessibilityPage() {
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex flex-col">
+        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex h-dvh flex-col gap-0 overflow-hidden p-0">
           <div
             onMouseDown={handleResizeStart}
             className="absolute left-0 top-0 h-full w-3 cursor-col-resize z-50 flex items-center justify-center group"
@@ -300,7 +308,7 @@ export default function AccessibilityPage() {
               ))}
             </div>
           </div>
-          <SheetHeader className="px-6 pt-5 pb-4 border-b">
+          <SheetHeader className="shrink-0 border-b px-6 pb-4 pt-5">
             <SheetTitle className="text-base font-semibold">Prompt Generator</SheetTitle>
             <div className="flex items-center gap-2 justify-between w-full">
               <p className="text-xs text-muted-foreground">Fill in parameters to generate your Token UI prompt</p>
@@ -316,8 +324,8 @@ export default function AccessibilityPage() {
             </div>
           </SheetHeader>
 
-          <div className="flex flex-1 overflow-hidden">
-            <div className="flex-1 overflow-y-auto border-r">
+          <div className="flex min-h-0 flex-1 overflow-hidden">
+            <div className="min-h-0 flex-1 overflow-y-auto border-r no-scrollbar">
               <div className="space-y-6 p-6">
                 <div className="grid gap-2">
                   <Label htmlFor="target" className="text-xs font-semibold">Target</Label>
@@ -357,18 +365,14 @@ export default function AccessibilityPage() {
               </div>
             </div>
 
-            <div className="flex-1 flex flex-col">
-              <div className="px-6 py-4 border-b flex items-center justify-between">
+            <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+              <div className="flex shrink-0 items-center justify-between border-b px-6 py-4">
                 <h4 className="text-sm font-semibold">Generated Prompt</h4>
                 <div className="text-xs text-muted-foreground">
-                  {!allFilled ? (
-                    <span className="text-yellow-600">⚠ Fill all parameters</span>
-                  ) : (
-                    <span className="text-primary">✓ Ready to copy</span>
-                  )}
+                  <PromptCopyStatus ready={Boolean(allFilled)} />
                 </div>
               </div>
-              <div className="flex-1 overflow-y-auto">
+              <div className="min-h-0 flex-1 overflow-y-auto no-scrollbar">
                 <pre className="text-sm leading-relaxed p-6 whitespace-pre-wrap break-words font-mono text-foreground/80">
                   {renderPrompt()}
                 </pre>
@@ -376,7 +380,7 @@ export default function AccessibilityPage() {
             </div>
           </div>
 
-          <SheetFooter className="px-6 py-4 border-t">
+          <SheetFooter className="shrink-0 border-t px-6 py-4">
             <Button onClick={handleCopy} className="w-full gap-2 h-9 bg-primary text-white hover:bg-primary/90">
               {copied ? (
                 <>

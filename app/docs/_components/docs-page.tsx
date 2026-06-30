@@ -19,7 +19,7 @@ export function DocsPage({ children, toc = [], className }: DocsPageProps) {
         <DocsPager />
       </div>
       <div className="hidden w-56 shrink-0 xl:block">
-        <div className="sticky top-20">
+        <div className="sticky top-6">
           <DocsToc items={toc} />
         </div>
       </div>

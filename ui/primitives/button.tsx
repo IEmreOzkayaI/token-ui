@@ -19,6 +19,8 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        premium:
+          "bg-[linear-gradient(135deg,var(--accent),var(--primary))] text-primary-foreground shadow-md hover:shadow-lg hover:opacity-90 active:shadow-sm",
       },
       size: {
         default:
@@ -34,6 +36,12 @@ const buttonVariants = cva(
         "icon-lg": "size-9",
       },
     },
+    compoundVariants: [
+      { variant: "premium", size: "xs", class: "px-2.5" },
+      { variant: "premium", size: "sm", class: "px-3" },
+      { variant: "premium", size: "default", class: "px-3" },
+      { variant: "premium", size: "lg", class: "px-3.5" },
+    ],
     defaultVariants: {
       variant: "default",
       size: "default",

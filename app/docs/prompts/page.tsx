@@ -7,47 +7,60 @@ import { Card, CardContent } from "@/primitives/card"
 
 const PROMPTS = [
   {
-    group: "Building",
+    group: "Building — Sıfırdan üret",
     items: [
       {
         href: "/docs/prompts/new-primitive",
-        title: "New Primitive",
-        description: "Build a base component from scratch — CVA, data-slot, TypeScript, accessibility. Use this when nothing in ui/primitives/ fits.",
+        title: "Create Primitive",
+        description:
+          "Sistemde hiç olmayan temel parçayı sıfırdan yazar. Örnek: yeni bir toggle veya file-input → ui/primitives/",
       },
       {
         href: "/docs/prompts/enhance-primitive",
-        title: "Enhance Primitive",
-        description: "Add variants, sizes, or accessibility improvements to an existing primitive without breaking existing usage.",
+        title: "Extend Primitive",
+        description:
+          "Zaten var olan parçaya yeni stil/boyut ekler. Örnek: button'a premium variant veya badge'e yeni size.",
       },
       {
         href: "/docs/prompts/new-component",
-        title: "New Component",
-        description: "Compose a full-featured UI element from existing primitives. For domain-specific components like stat cards, data tables, carousels.",
+        title: "Compose Component",
+        description:
+          "Hazır parçaları birleştirir. Örnek: Card + Label + Badge → stat-card. Özel klavye/async logic yoksa bunu seç.",
       },
       {
         href: "/docs/prompts/from-scratch",
-        title: "From Scratch",
-        description: "Build anything — primitive or component — with a detailed spec. Best when requirements are complex or involve multiple interactions.",
+        title: "Custom Build",
+        description:
+          "Kompleks, özel davranışlı şeyi sıfırdan yazar. Örnek: searchable combobox, multi-step wizard, drag-drop zone.",
+      },
+      {
+        href: "/docs/prompts/build-screen",
+        title: "Build Screen",
+        description:
+          "Tam dashboard/ekran: KPI + chart + filtre + tablo. Örnek: istasyon satış paneli → ui/blocks/",
       },
     ],
   },
   {
-    group: "Extending",
+    group: "Extending — Var olanı geliştir",
     items: [
       {
         href: "/docs/prompts/derive-variant",
-        title: "Component Variant",
-        description: "Add a new visual variant to an existing component's CVA definition. Includes a focused demo file.",
+        title: "Add Variant",
+        description:
+          "Aynı component'e yeni görünüm seçeneği ekler. Örnek: <Button variant=\"premium\" />. Yapı değişmez, sadece stil.",
       },
       {
         href: "/docs/prompts/modify-existing",
-        title: "Modify Existing",
-        description: "Apply targeted, scoped changes to one component or variant. Preserves all surrounding code.",
+        title: "Targeted Edit",
+        description:
+          "Listelediğin küçük değişiklikleri yapar, geri kalanına dokunmaz. Örnek: success badge rengini token'a çevir.",
       },
       {
         href: "/docs/prompts/demo-generation",
-        title: "Demo Generation",
-        description: "Create a focused demo file for a component — variant, size, interactive, or state. One concept per file.",
+        title: "Add Doc Demo",
+        description:
+          "Sadece docs'ta gösterilecek örnek dosyası yazar. Component zaten hazır — kod değişmez, showcase eklenir.",
       },
     ],
   },
@@ -57,27 +70,32 @@ const PROMPTS = [
       {
         href: "/docs/prompts/refactor",
         title: "Refactor",
-        description: "Improve code quality — consistency, simplification, modernization, or performance — while keeping Token UI standards intact.",
+        description:
+          "Kodu temizler ve standartlara uygun hale getirir. Davranış aynı kalır, yapı iyileşir.",
       },
       {
         href: "/docs/prompts/migration",
         title: "Migration",
-        description: "Convert legacy or external components (shadcn, other design systems) to Token UI patterns.",
+        description:
+          "Harici veya eski component'i Token UI pattern'lerine taşır. Örnek: shadcn → Token UI.",
       },
       {
         href: "/docs/prompts/design-system-audit",
         title: "Design System Audit",
-        description: "Audit a component for naming, architecture, token usage, accessibility, and documentation compliance.",
+        description:
+          "Bir component'i isimlendirme, token, a11y ve docs uyumu açısından denetler.",
       },
       {
         href: "/docs/prompts/token-compliance",
         title: "Token Compliance",
-        description: "Scan a file for hardcoded values (hex colors, px spacing, arbitrary shadows) and get token replacements.",
+        description:
+          "Hardcoded hex/px değerlerini bulur ve design token karşılığını önerir.",
       },
       {
         href: "/docs/prompts/accessibility",
         title: "Accessibility Review",
-        description: "Audit keyboard navigation, screen reader support, ARIA attributes, color contrast, and touch targets against WCAG AA.",
+        description:
+          "Klavye, ekran okuyucu, kontrast ve ARIA uyumunu WCAG AA'ya göre kontrol eder.",
       },
     ],
   },
@@ -87,7 +105,8 @@ const PROMPTS = [
       {
         href: "/docs/prompts/documentation",
         title: "Documentation",
-        description: "Generate a complete docs page for a component — live examples, props table, usage patterns, best practices.",
+        description:
+          "Tam docs sayfası üretir: canlı örnekler, props tablosu, best practices.",
       },
     ],
   },
@@ -102,22 +121,86 @@ export default function PromptsPage() {
     ]}>
       <DocsPageHeader
         title="Prompt Framework"
-        description="Ready-made prompts that instruct AI to build Token UI components correctly — following your exact codebase patterns."
+        description="AI'a Token UI kurallarını okutup doğru kod ürettiren hazır prompt şablonları."
       />
 
       <DocsSection id="overview" title="Overview">
         <p className="text-muted-foreground mb-4">
-          Token UI's prompt framework solves a specific problem: AI models write generic React components by default. They don't know your CVA structure, your CSS variable names, your data-slot conventions, or which primitives already exist.
+          AI varsayılan olarak generic React yazar — CVA yapını, CSS variable isimlerini ve data-slot convention'ını bilmez. Bu prompt'ların her birinde <strong className="text-foreground">CODEBASE REFERENCE</strong> bölümü ve ortak <strong className="text-foreground">RESPONSIVE DESIGN</strong> gereksinimleri var; AI önce <code className="text-xs bg-muted px-1 py-0.5 rounded">globals.css</code>, <code className="text-xs bg-muted px-1 py-0.5 rounded">ui/primitives/*</code> ve mevcut component'leri okur, mobile/tablet/desktop kırılımlarında çalışan kod yazar.
         </p>
-        <p className="text-muted-foreground mb-6">
-          Each prompt in this framework includes a <strong className="text-foreground">CODEBASE REFERENCE</strong> section that tells the AI to read your actual files before writing anything — <code className="text-xs bg-muted px-1 py-0.5 rounded">app/globals.css</code>, <code className="text-xs bg-muted px-1 py-0.5 rounded">ui/primitives/*</code>, <code className="text-xs bg-muted px-1 py-0.5 rounded">ui/components/*</code>, and <code className="text-xs bg-muted px-1 py-0.5 rounded">app/docs/foundations/*</code>. The result is code that looks like it was written by someone who knows the codebase.
-        </p>
-        <DocsCallout title="When to use these prompts" variant="info">
-          <ul className="space-y-1 text-sm">
-            <li>• Use the <strong>interactive generator</strong> on each prompt page to fill in your parameters</li>
-            <li>• Copy the generated prompt and paste it into Claude Code, Cursor, or any AI coding tool</li>
-            <li>• The AI reads your codebase first, then produces code that matches your patterns</li>
-          </ul>
+
+        <DocsCallout title="Hangisini seçmeliyim?" variant="info">
+          <div className="space-y-4 text-sm">
+            <div>
+              <p className="font-medium text-foreground mb-1">Yeni bir şey mi yapıyorsun?</p>
+              <ul className="space-y-2 ml-4 text-muted-foreground">
+                <li>
+                  <strong className="text-foreground">Create Primitive</strong> — Temel parça yok mu? (toggle, slider…)
+                  <br />
+                  <span className="text-xs">→ ui/primitives/button.tsx gibi tek dosya</span>
+                </li>
+                <li>
+                  <strong className="text-foreground">Extend Primitive</strong> — Parça var ama variant/size eksik mi?
+                  <br />
+                  <span className="text-xs">→ Mevcut dosyaya ekleme, sıfırdan yazma değil</span>
+                </li>
+                <li>
+                  <strong className="text-foreground">Compose Component</strong> — Parçalar var, birleştirmek yeterli mi?
+                  <br />
+                  <span className="text-xs">→ stat-card = Card + Label + Badge</span>
+                </li>
+                <li>
+                  <strong className="text-foreground">Custom Build</strong> — Karmaşık UX mi? (keyboard nav, async, multi-step)
+                  <br />
+                  <span className="text-xs">→ Compose yetmezse bunu kullan</span>
+                </li>
+                <li>
+                  <strong className="text-foreground">Build Screen</strong> — Dashboard veya analitik ekran mı? (KPI + chart + filtre)
+                  <br />
+                  <span className="text-xs">→ ui/blocks/ altına tam ekran üretir</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-medium text-foreground mb-1">Hızlı kural</p>
+              <ul className="space-y-2 ml-4 text-muted-foreground">
+                <li>
+                  Dashboard veya analitik ekran → <strong className="text-foreground">Build Screen</strong>
+                </li>
+                <li>
+                  Tek widget → <strong className="text-foreground">Compose Component</strong>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-medium text-foreground mb-1">Var olanı mı değiştiriyorsun?</p>
+              <ul className="space-y-2 ml-4 text-muted-foreground">
+                <li>
+                  <strong className="text-foreground">Add Variant</strong> — Yeni görsel stil mi? (premium button)
+                  <br />
+                  <span className="text-xs">→ CVA'ya variant ekler + demo dosyası</span>
+                </li>
+                <li>
+                  <strong className="text-foreground">Targeted Edit</strong> — Küçük, net düzeltme mi? (renk, padding, icon slot)
+                  <br />
+                  <span className="text-xs">→ Sadece yazdığın maddeler değişir</span>
+                </li>
+                <li>
+                  <strong className="text-foreground">Add Doc Demo</strong> — Kod tamam, sadece docs örneği mi eksik?
+                  <br />
+                  <span className="text-xs">→ ui/components/button/premium.tsx gibi showcase</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </DocsCallout>
+
+        <DocsCallout title="Nasıl kullanılır?" variant="default">
+          <ol className="space-y-1 text-sm list-decimal ml-4">
+            <li>İlgili prompt sayfasında <strong>Create</strong> butonuna bas</li>
+            <li>Formu doldur, prompt'u kopyala</li>
+            <li>Cursor veya Claude Code'a yapıştır — AI codebase'i okuyup üretir</li>
+          </ol>
         </DocsCallout>
       </DocsSection>
 
@@ -125,26 +208,23 @@ export default function PromptsPage() {
         <div className="grid gap-4 sm:grid-cols-3 mb-6">
           <Card>
             <CardContent className="pt-6">
-              <p className="text-sm font-semibold mb-1">1. Fill in the form</p>
-              <p className="text-xs text-muted-foreground">Each prompt page has a generator. Open it with the "Create" button and fill in your component name, features, variants, etc.</p>
+              <p className="text-sm font-semibold mb-1">1. Formu doldur</p>
+              <p className="text-xs text-muted-foreground">Component adı, özellikler, variant — sayfaya özel alanlar.</p>
             </CardContent>
           </Card>
           <Card>
             <CardContent className="pt-6">
-              <p className="text-sm font-semibold mb-1">2. Copy the prompt</p>
-              <p className="text-xs text-muted-foreground">The right panel shows the formatted prompt with your values highlighted. Copy it with one click.</p>
+              <p className="text-sm font-semibold mb-1">2. Prompt'u kopyala</p>
+              <p className="text-xs text-muted-foreground">Sağ panelde değerlerin vurgulandığı hazır prompt görünür.</p>
             </CardContent>
           </Card>
           <Card>
             <CardContent className="pt-6">
-              <p className="text-sm font-semibold mb-1">3. Paste into AI</p>
-              <p className="text-xs text-muted-foreground">The AI reads your codebase files, learns your patterns, and produces code that fits — no manual corrections needed.</p>
+              <p className="text-sm font-semibold mb-1">3. AI'a yapıştır</p>
+              <p className="text-xs text-muted-foreground">Dosya sistemi erişimi olan araçlarda en iyi sonuç: Cursor, Claude Code.</p>
             </CardContent>
           </Card>
         </div>
-        <DocsCallout title="Works best with Claude Code or Cursor" variant="default">
-          <p className="text-sm">These prompts assume the AI has filesystem access to read your codebase. They work with any tool that can read files — Claude Code, Cursor, Windsurf, or Copilot Workspace.</p>
-        </DocsCallout>
       </DocsSection>
 
       <DocsSection id="prompts" title="Prompts">
@@ -157,7 +237,7 @@ export default function PromptsPage() {
                   <Link key={item.href} href={item.href} className="block">
                     <Card className="h-full hover:border-primary/50 transition-colors cursor-pointer">
                       <CardContent className="pt-5 pb-5">
-                        <p className="text-sm font-semibold mb-1">{item.title}</p>
+                        <p className="text-sm font-semibold mb-1.5">{item.title}</p>
                         <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
                       </CardContent>
                     </Card>

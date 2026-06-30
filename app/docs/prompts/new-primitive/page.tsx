@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent } from "@/primitives/card"
 import { Button } from "@/primitives/button"
 import { Input } from "@/primitives/input"
 import { Label } from "@/primitives/label"
@@ -9,10 +8,12 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/pri
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
-import { DocsCallout } from "@/app/docs/_components/docs-callout"
+import { PromptGuide, PromptGuideList } from "@/app/docs/_components/prompt-guide"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { Copy, Check, Plus, X, Trash2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PromptCopyStatus } from "@/app/docs/prompts/_components/prompt-fields"
+import { RESPONSIVE_REQUIREMENTS_SECTION } from "@/app/docs/prompts/_lib/responsive-requirements"
 
 const PROMPT = `You are a Token UI design system engineer.
 
@@ -65,6 +66,7 @@ IMPLEMENTATION GUIDELINES:
 9. No inline styles — Tailwind + CSS variables only
 
 File location: ui/primitives/{primitive_name}.tsx
+${RESPONSIVE_REQUIREMENTS_SECTION}
 
 Return complete, production-ready code.`
 
@@ -278,8 +280,8 @@ export default function NewPrimitivePage() {
       { id: "overview", title: "Overview" },
     ]}>
       <DocsPageHeader
-        title="New Primitive Generation"
-        description="Create new base UI component from scratch"
+        title="Create Primitive"
+        description="Sistemde olmayan temel UI parçasını sıfırdan oluşturur"
         action={
           <Button onClick={() => setOpen(true)} size="sm" className="gap-2">
             <Plus className="size-3.5" />
@@ -289,24 +291,48 @@ export default function NewPrimitivePage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">Primitives are the atoms of Token UI — they live in ui/primitives/ and are composed into everything else. Use this prompt when you need to add a new one that follows the exact same structure as button, input, badge, and the other ~40 primitives already in the system.</p>
-        <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to use</p><p className="text-xs text-muted-foreground">Nothing in ui/primitives/ covers your need. You're building a foundational element — a toggle, a slider, a file input — that other components will compose on top of.</p></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to use</p><p className="text-xs text-muted-foreground">Use Enhance Primitive if you just need a new variant or size. Use New Component if you're composing existing primitives together.</p></CardContent></Card>
-        </div>
-        <DocsCallout title="What gets generated" variant="info">
-          <ul className="space-y-1 text-sm">
-            <li>• CVA variant definition exported as [name]Variants</li>
-            <li>• data-slot on root + all child elements</li>
-            <li>• TypeScript: React.ComponentProps & VariantProps</li>
-            <li>• focus-visible, aria-invalid, proper ARIA roles</li>
-            <li>• Export: named component + variants object</li>
-          </ul>
-        </DocsCallout>
+        <PromptGuide
+          summary={
+            <>
+              Token UI&apos;nin en küçük yapı taşları{" "}
+              <code className="rounded bg-muted px-1.5 py-0.5 text-xs text-foreground">
+                ui/primitives/
+              </code>{" "}
+              altında durur. Bu prompt, sistemde <strong className="text-foreground">hiç olmayan</strong>{" "}
+              yeni bir temel parça yazdırmak içindir.
+            </>
+          }
+          useWhen="İhtiyacın olan parça primitives klasöründe yok — toggle-group, file-upload, rating gibi. Başka component'ler bunun üstüne kurulacak."
+          avoidWhen={
+            <>
+              Button var, sadece premium stili lazım → <strong>Extend Primitive</strong> veya{" "}
+              <strong>Add Variant</strong>. Card + Badge birleştirmek → <strong>Compose Component</strong>.
+            </>
+          }
+          example={
+            <>
+              &quot;Rating component lazım — 1-5 yıldız, keyboard ile seçilebilir, aria-label&apos;lı.&quot;
+              <span className="mt-2 block text-muted-foreground">
+                → <code className="rounded bg-muted px-1.5 py-0.5 text-xs">ui/primitives/rating.tsx</code> üretilir
+              </span>
+            </>
+          }
+          outputs={
+            <PromptGuideList
+              items={[
+                "CVA variant tanımı — [name]Variants olarak export",
+                "data-slot root ve child element'lerde",
+                "TypeScript: React.ComponentProps & VariantProps",
+                "focus-visible, aria-invalid, ARIA rolleri",
+                "Named export: component + variants object",
+              ]}
+            />
+          }
+        />
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex flex-col">
+        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex h-dvh flex-col gap-0 overflow-hidden p-0">
           {/* Drag handle */}
           <div
             onMouseDown={handleResizeStart}
@@ -318,7 +344,7 @@ export default function NewPrimitivePage() {
               ))}
             </div>
           </div>
-          <SheetHeader className="px-6 pt-5 pb-4 border-b">
+          <SheetHeader className="shrink-0 border-b px-6 pb-4 pt-5">
             <SheetTitle className="text-base font-semibold">Prompt Generator</SheetTitle>
             <div className="flex items-center gap-2 justify-between w-full">
               <p className="text-xs text-muted-foreground">Fill in parameters to generate your Token UI prompt</p>
@@ -334,9 +360,9 @@ export default function NewPrimitivePage() {
             </div>
           </SheetHeader>
 
-          <div className="flex flex-1 overflow-hidden">
+          <div className="flex min-h-0 flex-1 overflow-hidden">
             {/* Left: Form */}
-            <div className="flex-1 overflow-y-auto border-r">
+            <div className="min-h-0 flex-1 overflow-y-auto border-r no-scrollbar">
               <div className="space-y-6 p-6">
                 <div className="grid gap-2">
                   <Label htmlFor="primitive-name" className="text-xs font-semibold">Primitive Name</Label>
@@ -385,18 +411,14 @@ export default function NewPrimitivePage() {
             </div>
 
             {/* Right: Preview */}
-            <div className="flex-1 flex flex-col">
-              <div className="px-6 py-4 border-b flex items-center justify-between">
+            <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+              <div className="flex shrink-0 items-center justify-between border-b px-6 py-4">
                 <h4 className="text-sm font-semibold">Generated Prompt</h4>
                 <div className="text-xs text-muted-foreground">
-                  {!allFilled ? (
-                    <span className="text-yellow-600">⚠ Fill all parameters</span>
-                  ) : (
-                    <span className="text-primary">✓ Ready to copy</span>
-                  )}
+                  <PromptCopyStatus ready={Boolean(allFilled)} />
                 </div>
               </div>
-              <div className="flex-1 overflow-y-auto">
+              <div className="min-h-0 flex-1 overflow-y-auto no-scrollbar">
                 <pre className="text-sm leading-relaxed p-6 whitespace-pre-wrap break-words font-mono text-foreground/80">
                   {renderPrompt()}
                 </pre>
@@ -404,7 +426,7 @@ export default function NewPrimitivePage() {
             </div>
           </div>
 
-          <SheetFooter className="px-6 py-4 border-t">
+          <SheetFooter className="shrink-0 border-t px-6 py-4">
             <div className="flex items-center gap-3 w-full">
               <Button onClick={handleCopy} className="flex-1 gap-2 h-9 bg-primary text-white hover:bg-primary/90">
                 {copied ? <><Check className="size-4" />Copied to clipboard</> : <><Copy className="size-4" />Copy Prompt</>}

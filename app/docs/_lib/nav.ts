@@ -1,3 +1,5 @@
+import { blockDocsToNavItems } from "@/app/docs/_lib/block-subcomponents"
+
 export type NavItem = {
   label: string
   href: string
@@ -87,6 +89,7 @@ export const docsNav: NavSection[] = [
       { label: "Slider", href: "/docs/ui/components/slider" },
       { label: "Sonner", href: "/docs/ui/components/sonner" },
       { label: "Spinner", href: "/docs/ui/components/spinner" },
+      { label: "Stat Card", href: "/docs/ui/components/stat-card" },
       { label: "Switch", href: "/docs/ui/components/switch" },
       { label: "Table", href: "/docs/ui/components/table" },
       { label: "Tabs", href: "/docs/ui/components/tabs" },
@@ -94,10 +97,17 @@ export const docsNav: NavSection[] = [
       { label: "Toggle", href: "/docs/ui/components/toggle" },
       { label: "Toggle Group", href: "/docs/ui/components/toggle-group" },
       { label: "Tooltip", href: "/docs/ui/components/tooltip" },
-      { label: "─ Blocks", href: "/docs/ui/blocks" },
-      { label: "─ Admin Dashboard", href: "/docs/ui/blocks/admin-dashboard" },
-      { label: "─ Admin Dashboard V2", href: "/docs/ui/blocks/admin-dashboard-v2" },
-      { label: "─ Admin Dashboard V3", href: "/docs/ui/blocks/admin-dashboard-v3" },
+    ],
+  },
+  {
+    title: "Blocks",
+    href: "/docs/ui/blocks",
+    items: [
+      { label: "Overview", href: "/docs/ui/blocks" },
+      ...blockDocsToNavItems(),
+      { label: "Admin Dashboard", href: "/docs/ui/blocks/admin-dashboard" },
+      { label: "Admin Dashboard V2", href: "/docs/ui/blocks/admin-dashboard-v2" },
+      { label: "Admin Dashboard V3", href: "/docs/ui/blocks/admin-dashboard-v3" },
     ],
   },
   {
@@ -107,17 +117,18 @@ export const docsNav: NavSection[] = [
       { label: "Overview", href: "/docs/prompts" },
       {
         label: "Building", href: "#building", items: [
-          { label: "New Primitive", href: "/docs/prompts/new-primitive" },
-          { label: "Enhance Primitive", href: "/docs/prompts/enhance-primitive" },
-          { label: "New Component", href: "/docs/prompts/new-component" },
-          { label: "From Scratch", href: "/docs/prompts/from-scratch" },
+          { label: "Create Primitive", href: "/docs/prompts/new-primitive" },
+          { label: "Extend Primitive", href: "/docs/prompts/enhance-primitive" },
+          { label: "Compose Component", href: "/docs/prompts/new-component" },
+          { label: "Custom Build", href: "/docs/prompts/from-scratch" },
+          { label: "Build Screen", href: "/docs/prompts/build-screen" },
         ]
       },
       {
         label: "Extending", href: "#extending", items: [
-          { label: "Component Variant", href: "/docs/prompts/derive-variant" },
-          { label: "Modify Existing", href: "/docs/prompts/modify-existing" },
-          { label: "Demo Generation", href: "/docs/prompts/demo-generation" },
+          { label: "Add Variant", href: "/docs/prompts/derive-variant" },
+          { label: "Targeted Edit", href: "/docs/prompts/modify-existing" },
+          { label: "Add Doc Demo", href: "/docs/prompts/demo-generation" },
         ]
       },
       {

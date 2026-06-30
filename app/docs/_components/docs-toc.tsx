@@ -39,7 +39,7 @@ export function DocsToc({ items }: DocsTocProps) {
 
   return (
     <div className="hidden xl:block">
-      <div className="sticky top-20 space-y-3">
+      <div className="sticky top-6 space-y-3">
         <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">On This Page</p>
         <ul className="space-y-1 border-l border-border/30 text-sm">
           {items.map((item) => (

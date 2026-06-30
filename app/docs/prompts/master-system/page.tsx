@@ -10,6 +10,8 @@ import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
+import { RESPONSIVE_REQUIREMENTS_SECTION } from "@/app/docs/prompts/_lib/responsive-requirements"
+import { BLOCK_SUBCOMPONENT_STRUCTURE_SECTION } from "@/app/docs/prompts/_lib/block-subcomponent-requirements"
 
 const PROMPT = `# Token UI Design System Engineer
 
@@ -37,6 +39,15 @@ Maintain consistency, quality, and best practices across all Token UI developmen
 ### Components (ui/components/~50 folders)
 - Structure: [variant-name].tsx + size.tsx + demo.tsx
 - Pattern: Imports from primitives, simple focused demos
+
+### Blocks (ui/blocks/*)
+- Structure: _components/ + demo-props.ts + subcomponent-demos/ + root orchestrator
+- Pattern: Screen-level composition; KPI via StatCard, charts via ChartContainer
+- Sub-component docs: register every _components/ export in app/docs/_lib/block-subcomponents.ts (PascalCase slugs)
+- Demo map: app/docs/_components/block-subcomponent-demo-map.tsx
+- Routes: app/docs/ui/blocks/[blockSlug]/[part]/page.tsx reads registry automatically
+- Nav: blockDocsToNavItems() in app/docs/_lib/nav.ts
+- Full screen blocks: use /docs/prompts/build-screen prompt
 
 ### Documentation (app/docs/)
 - Pattern: examples array → ComponentExample → live preview
@@ -87,6 +98,7 @@ export { Component, componentVariants }
 ✅ Make composable components
 ✅ Forward all HTML props
 ✅ Use TypeScript
+✅ Implement responsive layouts at mobile, tablet portrait, tablet landscape, and desktop breakpoints
 
 ### Never Do
 ❌ Hardcode colors/spacing
@@ -105,15 +117,20 @@ When creating new:
 2. **Component**: Combine primitives → keep minimal → create demos
 3. **Demo**: Single file → simple → focused on one concept
 4. **Docs**: examples array → ComponentExample → readSource
+5. **Block/Screen**: Decompose _components/ → demo-props + subcomponent-demos per export → registry + demo-map → root docs with Sub-components section
+${BLOCK_SUBCOMPONENT_STRUCTURE_SECTION}
 
 ## Common Tasks
 
 Use specific prompts for:
-- New Primitive: /docs/prompts/new-primitive
-- Enhance Primitive: /docs/prompts/enhance-primitive
-- New Component: /docs/prompts/new-component
-- New Variant: /docs/prompts/component-variant
-- New Demo: /docs/prompts/demo-generation
+- Create Primitive: /docs/prompts/new-primitive
+- Extend Primitive: /docs/prompts/enhance-primitive
+- Compose Component: /docs/prompts/new-component
+- Custom Build: /docs/prompts/from-scratch
+- Add Variant: /docs/prompts/derive-variant
+- Targeted Edit: /docs/prompts/modify-existing
+- Add Doc Demo: /docs/prompts/demo-generation
+- Build Screen: /docs/prompts/build-screen
 - Documentation: /docs/prompts/documentation
 - Audit: /docs/prompts/design-system-audit
 - Refactor: /docs/prompts/refactor
@@ -128,7 +145,9 @@ Use specific prompts for:
 - A11y: WCAG AA minimum
 - Demos: Simple, focused, one concept per file
 - Docs: Complete examples, usage patterns
-- Tokens: All colors/spacing from app/globals.css`
+- Tokens: All colors/spacing from app/globals.css
+- Responsive: Mobile (<640px), tablet portrait (640–1024px), tablet landscape (~1024px), desktop (≥1280px)
+${RESPONSIVE_REQUIREMENTS_SECTION}`
 
 export default function MasterSystemPage() {
   const [copied, setCopied] = useState(false)
@@ -192,7 +211,9 @@ export default function MasterSystemPage() {
                 <li>• ui/primitives/ — 40+ base components</li>
                 <li>• ui/components/ — 50+ full components</li>
                 <li>• app/globals.css — Design tokens</li>
-                <li>• app/docs/ui/components/ — Documentation</li>
+                <li>• app/docs/ui/components/ — Component documentation</li>
+                <li>• app/docs/ui/blocks/ — Screen block documentation</li>
+                <li>• ui/blocks/ — Screen blocks with _components/ decomposition</li>
               </ul>
             </CardContent>
           </Card>

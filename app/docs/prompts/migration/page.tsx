@@ -12,6 +12,8 @@ import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { Copy, Check, Plus, X } from "lucide-react"
+import { PromptCopyStatus } from "@/app/docs/prompts/_components/prompt-fields"
+import { RESPONSIVE_REQUIREMENTS_SECTION } from "@/app/docs/prompts/_lib/responsive-requirements"
 
 const PROMPT = `You are a Token UI migration specialist.
 
@@ -71,6 +73,7 @@ Token UI Standards (target format):
    - focus-visible states
    - aria-invalid states
    - Proper roles and labels
+${RESPONSIVE_REQUIREMENTS_SECTION}
 
 Return:
 1. Migrated component(s)
@@ -184,13 +187,13 @@ export default function MigrationPage() {
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex flex-col">
+        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex h-dvh flex-col gap-0 overflow-hidden p-0">
           <div onMouseDown={handleResizeStart} className="absolute left-0 top-0 h-full w-3 cursor-col-resize z-50 flex items-center justify-center group">
             <div className="flex flex-col gap-[3px] opacity-30 group-hover:opacity-100 transition-opacity">
               {Array.from({ length: 6 }).map((_, i) => <div key={i} className="w-[3px] h-[3px] rounded-full bg-foreground group-hover:bg-primary transition-colors" />)}
             </div>
           </div>
-          <SheetHeader className="px-6 pt-5 pb-4 border-b">
+          <SheetHeader className="shrink-0 border-b px-6 pb-4 pt-5">
             <SheetTitle className="text-base font-semibold">Prompt Generator</SheetTitle>
             <div className="flex items-center gap-2">
               <p className="text-xs text-muted-foreground">Fill in parameters to generate your Token UI prompt</p>
@@ -199,23 +202,23 @@ export default function MigrationPage() {
               </button>
             </div>
           </SheetHeader>
-          <div className="flex flex-1 overflow-hidden">
-            <div className="flex-1 overflow-y-auto border-r">
+          <div className="flex min-h-0 flex-1 overflow-hidden">
+            <div className="min-h-0 flex-1 overflow-y-auto border-r no-scrollbar">
               <div className="space-y-6 p-6">
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Source Component</Label><Input value={values.source_component} onChange={(e) => setValues(p => ({ ...p, source_component: e.target.value }))} placeholder="e.g., app/old/dialog-old.tsx" className="h-9 text-sm focus-visible:ring-primary" /></div>
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Target Name</Label><Input value={values.target_name} onChange={(e) => setValues(p => ({ ...p, target_name: e.target.value }))} placeholder="e.g., dialog" className="h-9 text-sm focus-visible:ring-primary" /></div>
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Migration Scope</Label><Input value={values.migration_scope} onChange={(e) => setValues(p => ({ ...p, migration_scope: e.target.value }))} placeholder="e.g., primitive, component" className="h-9 text-sm focus-visible:ring-primary" /></div>
               </div>
             </div>
-            <div className="flex-1 flex flex-col">
-              <div className="px-6 py-4 border-b flex items-center justify-between">
+            <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+              <div className="flex shrink-0 items-center justify-between border-b px-6 py-4">
                 <h4 className="text-sm font-semibold">Generated Prompt</h4>
-                <div className="text-xs"><span className="text-primary">✓ Ready to copy</span></div>
+                <div className="text-xs"><PromptCopyStatus ready /></div>
               </div>
-              <div className="flex-1 overflow-y-auto"><div className="p-6">{renderPrompt()}</div></div>
+              <div className="min-h-0 flex-1 overflow-y-auto no-scrollbar"><div className="p-6">{renderPrompt()}</div></div>
             </div>
           </div>
-          <SheetFooter className="px-6 py-4 border-t">
+          <SheetFooter className="shrink-0 border-t px-6 py-4">
             <Button onClick={handleCopy} className="w-full gap-2 h-9 bg-primary text-white hover:bg-primary/90">
               {copied ? <><Check className="size-4" />Copied to clipboard</> : <><Copy className="size-4" />Copy Prompt</>}
             </Button>

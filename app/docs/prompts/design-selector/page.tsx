@@ -11,6 +11,7 @@ import { DocsSection } from "@/app/docs/_components/docs-section"
 import { CodeBlock } from "@/app/docs/_components/code-block"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { cn } from "@/lib/utils"
+import { RESPONSIVE_REQUIREMENTS_SECTION } from "@/app/docs/prompts/_lib/responsive-requirements"
 
 const SAMPLE_PROMPT = `You are a Token UI design system engineer.
 
@@ -31,7 +32,8 @@ Accessibility requirements:
 - Keyboard navigation
 
 Guidelines:
-[full guidelines...]`
+[full guidelines...]
+${RESPONSIVE_REQUIREMENTS_SECTION}`
 
 const PARAMETERS = [
   { key: "primitive_name", label: "Primitive Name", value: "toggle-group" },

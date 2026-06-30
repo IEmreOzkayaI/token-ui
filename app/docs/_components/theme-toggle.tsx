@@ -6,10 +6,13 @@ import { useEffect, useState } from "react"
 import { Button } from "@/primitives/button"
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark")
+  const [theme, setTheme] = useState<"light" | "dark">("light")
 
   useEffect(() => {
-    const isDark = document.documentElement.classList.contains("dark")
+    const stored = localStorage.getItem("theme")
+    const isDark =
+      stored === "dark" ||
+      (stored === null && document.documentElement.classList.contains("dark"))
     setTheme(isDark ? "dark" : "light")
   }, [])
 
