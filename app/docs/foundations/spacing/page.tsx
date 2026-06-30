@@ -1,20 +1,17 @@
-import { DocsCallout } from "@/app/docs/_components/docs-callout"
+"use client"
+
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
-import {
-  DocsTable,
-  DocsTableCell,
-  DocsTableRow,
-} from "@/app/docs/_components/docs-table"
 import { CodeBlock } from "@/app/docs/_components/code-block"
-import { spacingScale } from "@/app/docs/_lib/design-tokens"
+import { FoundationViewer } from "@/app/docs/_components/foundation-viewer"
 
 const toc = [
   { id: "overview", title: "Overview" },
   { id: "scale", title: "Scale" },
-  { id: "patterns", title: "Common Patterns" },
-  { id: "guidelines", title: "Guidelines" },
+  { id: "patterns", title: "Patterns" },
+  { id: "component", title: "Component" },
+  { id: "usage", title: "Usage" },
 ]
 
 export default function SpacingPage() {
@@ -22,105 +19,94 @@ export default function SpacingPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Spacing"
-        description="A 4px base grid creates predictable rhythm between elements. Spacing tokens map directly to Tailwind's default scale."
+        description="4px base unit scale. Patterns: compact, normal, relaxed, loose. Component-specific presets."
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground">
-          Spacing is not defined as custom CSS variables in this system. Instead,
-          we use Tailwind's spacing scale where each unit equals{" "}
-          <code>0.25rem (4px)</code>. This keeps layouts aligned to a shared grid
-          without maintaining a parallel token file.
+        <p className="text-muted-foreground mb-4">
+          Token UI spacing uses a 4px base unit scale ensuring predictable, proportional spacing across all components.
         </p>
-        <DocsCallout variant="tip">
-          When reviewing designs, translate pixel values to the nearest scale
-          step: 20px → <code>p-5</code> (20px), 24px → <code>p-6</code> (24px).
-        </DocsCallout>
-      </DocsSection>
-
-      <DocsSection
-        id="scale"
-        title="Scale"
-        description="Most frequently used spacing values in the component library."
-      >
-        <div className="space-y-3">
-          {spacingScale.map((item) => (
-            <div
-              key={item.token}
-              className="flex items-center gap-4 rounded-xl border p-4"
-            >
-              <code className="w-16 shrink-0 text-sm">{item.className}</code>
-              <div className="flex flex-1 items-center gap-3">
-                <div
-                  className="h-8 rounded bg-primary/20"
-                  style={{ width: item.value }}
-                />
-                <span className="text-sm text-muted-foreground">
-                  {item.value}
-                </span>
-              </div>
-              <span className="hidden text-sm text-muted-foreground sm:block">
-                {item.usage}
-              </span>
-            </div>
-          ))}
+        <div className="space-y-2 text-sm text-muted-foreground">
+          <p>📍 <strong>Source:</strong> <code className="bg-muted px-2 py-1 rounded">ui/foundations/spacing.ts</code></p>
+          <p>📏 <strong>Base Unit:</strong> 4px (0.25rem)</p>
+          <p>📊 <strong>Scale:</strong> 0 → 96 (0 → 384px)</p>
+          <p>🎯 <strong>Patterns:</strong> compact, normal, relaxed, loose</p>
         </div>
-
-        <DocsTable headers={["Token", "Class", "Value", "Usage"]} className="mt-6">
-          {spacingScale.map((item) => (
-            <DocsTableRow key={item.token}>
-              <DocsTableCell mono>{item.token}</DocsTableCell>
-              <DocsTableCell mono>{item.className}</DocsTableCell>
-              <DocsTableCell mono>{item.value}</DocsTableCell>
-              <DocsTableCell className="text-muted-foreground">
-                {item.usage}
-              </DocsTableCell>
-            </DocsTableRow>
-          ))}
-        </DocsTable>
       </DocsSection>
 
-      <DocsSection id="patterns" title="Common Patterns">
-        <CodeBlock
-          code={`// Card internal padding
-<div className="p-6">...</div>
-
-// Stack sections on a page
-<div className="space-y-8">...</div>
-
-// Form field gaps
-<div className="space-y-4">
-  <Label />
-  <Input />
-</div>
-
-// Inline button groups
-<div className="flex gap-2">...</div>
-
-// Page margins
-<main className="px-4 py-6 md:px-6 lg:px-8">...</main>`}
-        />
+      <DocsSection id="scale" title="Scale">
+        <p className="text-muted-foreground mb-6">
+          Proportional spacing scale from 0 to 96 (384px).
+        </p>
+        <FoundationViewer type="spacing" />
       </DocsSection>
 
-      <DocsSection id="guidelines" title="Guidelines">
-        <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
-          <li>
-            Use <code>space-y-*</code> for vertical stacks and{" "}
-            <code>gap-*</code> for flex/grid — never margin on every child.
-          </li>
-          <li>
-            Prefer <code>p-4</code> or <code>p-6</code> for card interiors;
-            <code>p-8</code>+ for marketing sections only.
-          </li>
-          <li>
-            Keep horizontal page padding consistent:{" "}
-            <code>px-4 md:px-6 lg:px-8</code> matches the docs layout.
-          </li>
-          <li>
-            When two elements feel "almost right", go up one step on the scale
-            rather than using arbitrary values like <code>p-[18px]</code>.
-          </li>
-        </ul>
+      <DocsSection id="patterns" title="Patterns">
+        <p className="text-muted-foreground mb-6">
+          Spacing patterns for different layout densities.
+        </p>
+        <CodeBlock code={`import { spacingPatterns } from "@/ui/foundations"
+
+// Compact: tight spacing (8px gap)
+spacingPatterns.compact.gap      // 8px
+spacingPatterns.compact.padding  // 8px
+
+// Normal: standard spacing (16px gap)
+spacingPatterns.normal.gap       // 16px
+spacingPatterns.normal.padding   // 16px
+
+// Relaxed: comfortable spacing (24px gap)
+spacingPatterns.relaxed.gap      // 24px
+spacingPatterns.relaxed.padding  // 24px
+
+// Loose: spacious spacing (32px gap)
+spacingPatterns.loose.gap        // 32px
+spacingPatterns.loose.padding    // 32px`} />
+      </DocsSection>
+
+      <DocsSection id="component" title="Component Presets">
+        <p className="text-muted-foreground mb-6">
+          Component-specific spacing presets for consistency.
+        </p>
+        <CodeBlock code={`import { componentSpacing } from "@/ui/foundations"
+
+// Button padding
+componentSpacing.button.padding   // 8px 16px
+
+// Card padding
+componentSpacing.card.padding     // 24px
+
+// Form input padding
+componentSpacing.form.padding     // 12px
+
+// List item spacing
+componentSpacing.list.gap         // 12px
+componentSpacing.list.padding     // 16px`} />
+      </DocsSection>
+
+      <DocsSection id="usage" title="Usage">
+        <p className="text-muted-foreground mb-6">
+          Apply spacing tokens consistently across layouts.
+        </p>
+        <CodeBlock code={`import { spacing, spacingPatterns, componentSpacing } from "@/ui/foundations"
+
+// Direct scale
+<div style={{
+  padding: spacing[4],   // 16px
+  gap: spacing[3],       // 12px
+  margin: spacing[2],    // 8px
+}}>Content</div>
+
+// Patterns
+<div style={spacingPatterns.normal}>Normal density layout</div>
+
+// Component presets
+<button style={{
+  padding: componentSpacing.button.padding
+}}>Click</button>
+
+// Tailwind
+<div class="p-4 gap-3 mb-2">Spaced content</div>`} />
       </DocsSection>
     </DocsPage>
   )

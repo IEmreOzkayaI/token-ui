@@ -1,21 +1,17 @@
-import { DocsCallout } from "@/app/docs/_components/docs-callout"
+"use client"
+
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
-import {
-  DocsTable,
-  DocsTableCell,
-  DocsTableRow,
-} from "@/app/docs/_components/docs-table"
 import { CodeBlock } from "@/app/docs/_components/code-block"
-import { radiusTokens } from "@/app/docs/_lib/design-tokens"
+import { FoundationViewer } from "@/app/docs/_components/foundation-viewer"
 
 const toc = [
   { id: "overview", title: "Overview" },
-  { id: "base", title: "Base Radius" },
   { id: "scale", title: "Scale" },
+  { id: "semantic", title: "Semantic" },
+  { id: "component", title: "Component" },
   { id: "usage", title: "Usage" },
-  { id: "guidelines", title: "Guidelines" },
 ]
 
 export default function RadiusPage() {
@@ -23,125 +19,94 @@ export default function RadiusPage() {
     <DocsPage toc={toc}>
       <DocsPageHeader
         title="Border Radius"
-        description="A single base radius generates seven derived tokens. Change --radius once to reskin every button, input, and card in the system."
+        description="Base 0.625rem (10px) scale. Semantic values: sharp, subtle, standard, soft, round, pill, circle."
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground">
-          Border radius tokens live in <code>app/globals.css</code> under{" "}
-          <code>@theme inline</code>. Components reference Tailwind classes like{" "}
-          <code>rounded-lg</code> and <code>rounded-2xl</code> — not raw pixel
-          values.
+        <p className="text-muted-foreground mb-4">
+          Token UI border radius uses a systematic scale from sharp edges to full circles for consistent corner rounding.
         </p>
+        <div className="space-y-2 text-sm text-muted-foreground">
+          <p>📍 <strong>Source:</strong> <code className="bg-muted px-2 py-1 rounded">ui/foundations/radius.ts</code></p>
+          <p>📏 <strong>Base:</strong> 0.625rem (10px)</p>
+          <p>🎯 <strong>Scales:</strong> sm → 4xl + full</p>
+          <p>🔤 <strong>Semantic:</strong> sharp, subtle, standard, soft, round, pill, circle</p>
+        </div>
       </DocsSection>
 
-      <DocsSection id="base" title="Base Radius">
-        <div className="flex items-center gap-6 rounded-xl border p-6">
-          <div
-            className="size-24 shrink-0 border-2 border-primary bg-primary/10"
-            style={{ borderRadius: "var(--radius)" }}
-          />
-          <div className="space-y-1">
-            <code className="text-sm">--radius: 0.625rem</code>
-            <p className="text-sm text-muted-foreground">
-              10px base. All other radius tokens are calculated from this value.
-            </p>
-          </div>
-        </div>
-        <CodeBlock
-          className="mt-4"
-          code={`:root {
-  --radius: 0.625rem;
-}
-
-@theme inline {
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-sm: calc(var(--radius) * 0.6);
-  /* … */
-}`}
-        />
+      <DocsSection id="scale" title="Scale">
+        <p className="text-muted-foreground mb-6">
+          Proportional border radius scale from minimal to full.
+        </p>
+        <FoundationViewer type="radius" />
       </DocsSection>
 
-      <DocsSection
-        id="scale"
-        title="Scale"
-        description="Visual reference for each radius level."
-      >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {radiusTokens.map((item) => (
-            <div
-              key={item.token}
-              className="flex items-center gap-4 rounded-xl border p-4"
-            >
-              <div
-                className={`size-16 shrink-0 border-2 border-foreground/20 bg-muted ${item.className}`}
-              />
-              <div className="min-w-0">
-                <code className="text-sm">{item.className}</code>
-                <p className="text-xs text-muted-foreground">
-                  {item.value} · {item.formula}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+      <DocsSection id="semantic" title="Semantic Values">
+        <p className="text-muted-foreground mb-6">
+          Semantic radius names for common use cases.
+        </p>
+        <CodeBlock code={`import { semanticRadius } from "@/ui/foundations"
 
-        <DocsTable
-          headers={["Token", "CSS Variable", "Formula", "Value", "Class"]}
-          className="mt-6"
-        >
-          {radiusTokens.map((item) => (
-            <DocsTableRow key={item.token}>
-              <DocsTableCell mono>{item.token}</DocsTableCell>
-              <DocsTableCell mono>{item.cssVar}</DocsTableCell>
-              <DocsTableCell className="text-muted-foreground">
-                {item.formula}
-              </DocsTableCell>
-              <DocsTableCell mono>{item.value}</DocsTableCell>
-              <DocsTableCell mono>{item.className}</DocsTableCell>
-            </DocsTableRow>
-          ))}
-        </DocsTable>
+// Sharp: minimal rounding
+semanticRadius.sharp       // 0px
+
+// Subtle: barely noticeable
+semanticRadius.subtle      // 4px
+
+// Standard: common default
+semanticRadius.standard    // 8px
+
+// Soft: comfortable rounding
+semanticRadius.soft        // 12px
+
+// Round: fully rounded
+semanticRadius.round       // 16px
+
+// Pill: maximum horizontal
+semanticRadius.pill        // 9999px (rounded button)
+
+// Circle: fully circular
+semanticRadius.circle      // 9999px (avatar)`} />
+      </DocsSection>
+
+      <DocsSection id="component" title="Component Radius">
+        <p className="text-muted-foreground mb-6">
+          Component-specific border radius defaults.
+        </p>
+        <CodeBlock code={`import { componentRadius } from "@/ui/foundations"
+
+// Common components
+componentRadius.button     // Standard button rounding
+componentRadius.card       // Card container rounding
+componentRadius.input      // Form input rounding
+componentRadius.badge      // Badge pill shape
+componentRadius.avatar     // Avatar circle
+componentRadius.modal      // Modal dialog corners
+componentRadius.dropdown   // Dropdown menu corners
+componentRadius.tooltip    // Tooltip corners`} />
       </DocsSection>
 
       <DocsSection id="usage" title="Usage">
-        <DocsTable headers={["Component", "Typical radius", "Rationale"]}>
-          <DocsTableRow>
-            <DocsTableCell>Button, Input, Badge</DocsTableCell>
-            <DocsTableCell mono>rounded-lg</DocsTableCell>
-            <DocsTableCell className="text-muted-foreground">
-              Nova-style controls with consistent corner radius
-            </DocsTableCell>
-          </DocsTableRow>
-          <DocsTableRow>
-            <DocsTableCell>Card, Dialog</DocsTableCell>
-            <DocsTableCell mono>rounded-xl</DocsTableCell>
-            <DocsTableCell className="text-muted-foreground">
-              Elevated surfaces with visible corners
-            </DocsTableCell>
-          </DocsTableRow>
-          <DocsTableRow>
-            <DocsTableCell>Avatar, Switch thumb</DocsTableCell>
-            <DocsTableCell mono>rounded-full</DocsTableCell>
-            <DocsTableCell className="text-muted-foreground">
-              Circular elements
-            </DocsTableCell>
-          </DocsTableRow>
-        </DocsTable>
-      </DocsSection>
-
-      <DocsSection id="guidelines" title="Guidelines">
-        <DocsCallout variant="tip">
-          To make the entire system sharper or rounder, change only{" "}
-          <code>--radius</code> in <code>globals.css</code>. Derived tokens
-          update automatically.
-        </DocsCallout>
-        <p className="mt-4 text-muted-foreground">
-          Avoid mixing unrelated radius sizes on sibling elements (e.g.{" "}
-          <code>rounded-sm</code> button inside a <code>rounded-3xl</code> card)
-          unless there is a deliberate visual reason.
+        <p className="text-muted-foreground mb-6">
+          Apply border radius consistently across components.
         </p>
+        <CodeBlock code={`import { borderRadius, semanticRadius, componentRadius } from "@/ui/foundations"
+
+// Direct scale
+<div style={{ borderRadius: borderRadius.md }}>Rounded box</div>
+
+// Semantic
+<button style={{ borderRadius: semanticRadius.pill }}>Pill button</button>
+<img style={{ borderRadius: semanticRadius.circle }} />
+
+// Component presets
+<div style={{ borderRadius: componentRadius.card }}>Card</div>
+<button style={{ borderRadius: componentRadius.button }}>Button</button>
+
+// Tailwind
+<div class="rounded-lg">Rounded</div>
+<button class="rounded-full">Pill</button>
+<img class="rounded-full" />`} />
       </DocsSection>
     </DocsPage>
   )
