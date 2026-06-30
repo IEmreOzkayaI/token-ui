@@ -124,6 +124,25 @@ export default function NewPrimitivePage() {
   const [copied, setCopied] = useState(false)
   const [showExample, setShowExample] = useState(true)
   const [values, setValues] = useState<Values>(EXAMPLE_VALUES)
+  const [sheetWidth, setSheetWidth] = useState(90)
+
+  const handleResizeStart = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const startX = e.clientX
+    const startWidth = sheetWidth
+
+    const onMove = (ev: MouseEvent) => {
+      const delta = startX - ev.clientX
+      const newWidth = Math.min(98, Math.max(30, startWidth + (delta / window.innerWidth) * 100))
+      setSheetWidth(newWidth)
+    }
+    const onUp = () => {
+      window.removeEventListener("mousemove", onMove)
+      window.removeEventListener("mouseup", onUp)
+    }
+    window.addEventListener("mousemove", onMove)
+    window.addEventListener("mouseup", onUp)
+  }
 
   const generatePrompt = () => {
     let result = PROMPT
@@ -233,7 +252,14 @@ export default function NewPrimitivePage() {
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="right" className="!w-[90vw] !max-w-none flex flex-col">
+        <SheetContent side="right" style={{ width: `${sheetWidth}vw` }} className="!max-w-none flex flex-col">
+          {/* Drag handle */}
+          <div
+            onMouseDown={handleResizeStart}
+            className="absolute left-0 top-0 h-full w-1.5 cursor-col-resize z-50 group hover:bg-primary/30 transition-colors"
+          >
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-12 rounded-full bg-border group-hover:bg-primary transition-colors" />
+          </div>
           <SheetHeader className="space-y-3 px-6 pt-6 pb-4 border-b">
             <div className="flex items-center justify-between">
               <SheetTitle>Generate Primitive Prompt</SheetTitle>
