@@ -216,17 +216,6 @@ export default function FromScratchPage() {
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Component Name</Label><Input value={values.component_name} onChange={(e) => setValues(p => ({ ...p, component_name: e.target.value }))} placeholder="e.g., combobox, date-picker" className="h-9 text-sm focus-visible:ring-primary" /></div>
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Variant Name</Label><Input value={values.variant_name} onChange={(e) => setValues(p => ({ ...p, variant_name: e.target.value }))} placeholder="e.g., searchable, multi-select" className="h-9 text-sm focus-visible:ring-primary" /></div>
                 <MultiInput label="Requirements" values={values.requirements} placeholder="e.g., Keyboard navigation with arrow keys" onChange={(v) => setValues(p => ({ ...p, requirements: v }))} />
-                <div className="border-t pt-4">
-                  <label className="flex items-center gap-3 cursor-pointer">
-                    <div onClick={() => setWithDocs(!withDocs)} className={cn("relative w-9 h-5 rounded-full transition-colors shrink-0 cursor-pointer", withDocs ? "bg-primary" : "bg-muted-foreground/30")}>
-                      <div className={cn("absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform", withDocs && "translate-x-4")} />
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold">Also generate documentation</p>
-                      <p className="text-xs text-muted-foreground">Appends demo files + docs page generation to the prompt</p>
-                    </div>
-                  </label>
-                </div>
               </div>
             </div>
             <div className="flex-1 flex flex-col">
@@ -237,7 +226,13 @@ export default function FromScratchPage() {
               <div className="flex-1 overflow-y-auto"><div className="p-6">{renderPrompt()}</div></div>
             </div>
           </div>
-          <SheetFooter className="px-6 py-4 border-t">
+          <SheetFooter className="px-6 py-4 border-t flex-col gap-3">
+            <label className="flex items-center gap-3 cursor-pointer w-full">
+              <div onClick={() => setWithDocs(!withDocs)} className={cn("relative w-8 h-4 rounded-full transition-colors shrink-0 cursor-pointer", withDocs ? "bg-primary" : "bg-muted-foreground/30")}>
+                <div className={cn("absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow transition-transform", withDocs && "translate-x-4")} />
+              </div>
+              <span className="text-xs text-muted-foreground">Also generate documentation</span>
+            </label>
             <Button onClick={handleCopy} className="w-full gap-2 h-9 bg-primary text-white hover:bg-primary/90">
               {copied ? <><Check className="size-4" />Copied to clipboard</> : <><Copy className="size-4" />Copy Prompt</>}
             </Button>
