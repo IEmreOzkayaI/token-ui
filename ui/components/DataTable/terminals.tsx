@@ -75,11 +75,24 @@ const allApps = Array.from(new Set(terminals.flatMap(t => t.installedApps)))
 const allStatuses: TerminalStatus[] = ["Aktif", "İnaktif", "Hurda"]
 
 const TerminalIcon = () => (
-  <svg viewBox="0 0 64 80" className="w-12 h-16 bg-gradient-to-b from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800 rounded p-1" xmlns="http://www.w3.org/2000/svg">
-    <rect x="8" y="4" width="48" height="40" rx="2" fill="currentColor" className="text-slate-600 dark:text-slate-400" />
-    <rect x="10" y="6" width="44" height="36" fill="#1e293b" />
-    <circle cx="32" cy="56" r="3" fill="currentColor" className="text-slate-600 dark:text-slate-400" />
-    <path d="M24 66 L40 66 M28 70 L36 70" stroke="currentColor" strokeWidth="2" className="text-slate-600 dark:text-slate-400" />
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="w-12 h-16 text-slate-700 dark:text-slate-300"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {/* Screen */}
+    <rect x="2" y="3" width="20" height="14" rx="2" />
+    {/* Screen shine effect */}
+    <line x1="2" y1="5" x2="22" y2="5" />
+    {/* Stand */}
+    <path d="M8 17 L8 21 L16 21 L16 17" />
+    {/* Button */}
+    <circle cx="12" cy="22" r="0.5" fill="currentColor" />
   </svg>
 )
 
