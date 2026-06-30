@@ -30,14 +30,14 @@ export function DocsPageHeader({
   }
 
   return (
-    <div className={cn("space-y-2 pb-8", className)}>
+    <div className={cn("space-y-3 pb-10", className)}>
       <div className="flex items-start justify-between gap-4">
-        <div className="space-y-1">
-          <h1 className="scroll-m-20 text-4xl font-bold tracking-tight lg:text-4xl">
+        <div className="space-y-2">
+          <h1 className="scroll-m-20 text-5xl font-bold tracking-tight text-foreground">
             {title}
           </h1>
           {description && (
-            <p className="text-lg text-muted-foreground">{description}</p>
+            <p className="text-base leading-relaxed text-muted-foreground max-w-2xl">{description}</p>
           )}
         </div>
         <Button

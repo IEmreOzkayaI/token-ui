@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactNode, useState } from "react"
+import { ReactNode, useState, useEffect } from "react"
 
 import { DocsHeader } from "@/app/docs/_components/docs-header"
 import { DocsSidebar } from "@/app/docs/_components/docs-sidebar"
@@ -9,8 +9,12 @@ import { cn } from "@/lib/utils"
 export function DocsShell({ children }: { children: ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
+  useEffect(() => {
+    document.documentElement.classList.add("dark")
+  }, [])
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background dark">
       <DocsHeader
         mobileOpen={mobileOpen}
         onToggleMobile={() => setMobileOpen((open) => !open)}
@@ -27,7 +31,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
 
           <aside
             className={cn(
-              "fixed top-14 z-50 h-[calc(100vh-3.5rem)] w-64 shrink-0 border-r bg-background transition-transform duration-200",
+              "fixed top-14 z-50 h-[calc(100vh-3.5rem)] w-64 shrink-0 border-r border-border/50 bg-background/95 transition-transform duration-200",
               "lg:relative lg:top-0 lg:z-0 lg:h-auto lg:translate-x-0",
               mobileOpen ? "translate-x-0" : "-translate-x-full"
             )}

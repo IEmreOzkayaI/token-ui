@@ -45,13 +45,13 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
 
   return (
     <ScrollArea className={cn("h-full", className)}>
-      <div className="space-y-1 py-6 px-4">
+      <div className="space-y-6 py-8 px-4">
         {/* Sections */}
         {otherSections.map((section) => {
           const sectionButton = (
             <div className="flex w-full items-center justify-between">
-              <span>{section.title}</span>
-              <span className="text-lg leading-none">
+              <span className="text-xs font-semibold uppercase tracking-wide">{section.title}</span>
+              <span className="text-sm leading-none opacity-60 group-hover:opacity-100 transition-opacity">
                 {expanded[section.title] ? "−" : "+"}
               </span>
             </div>
@@ -68,10 +68,10 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                     onNavigate?.()
                   }}
                   className={cn(
-                    "flex w-full items-center justify-between px-0 py-2 text-sm font-medium transition-colors hover:text-foreground",
+                    "group flex w-full items-center justify-between rounded px-2 py-2 text-xs font-medium transition-all",
                     expanded[section.title]
-                      ? "text-foreground"
-                      : "text-muted-foreground"
+                      ? "text-foreground bg-foreground/5"
+                      : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
                   )}
                 >
                   {sectionButton}
@@ -81,10 +81,10 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                   type="button"
                   onClick={() => toggleSection(section.title)}
                   className={cn(
-                    "flex w-full items-center justify-between px-0 py-2 text-sm font-medium transition-colors hover:text-foreground",
+                    "group flex w-full items-center justify-between rounded px-2 py-2 text-xs font-medium transition-all",
                     expanded[section.title]
-                      ? "text-foreground"
-                      : "text-muted-foreground"
+                      ? "text-foreground bg-foreground/5"
+                      : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
                   )}
                 >
                   {sectionButton}
@@ -92,7 +92,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
               )}
 
               {expanded[section.title] && (
-                <ul className="space-y-1 pl-4 mt-1 mb-4">
+                <ul className="space-y-1 pl-2 mt-2 mb-2">
                   {section.items.map((item) => {
                     const isActive = pathname === item.href
                     return (
@@ -101,10 +101,10 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                           href={item.href}
                           onClick={onNavigate}
                           className={cn(
-                            "block px-0 py-1.5 text-sm transition-colors",
+                            "block rounded px-2 py-1.5 text-xs transition-all",
                             isActive
-                              ? "font-medium text-foreground"
-                              : "text-muted-foreground hover:text-foreground"
+                              ? "font-medium text-foreground bg-foreground/10"
+                              : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
                           )}
                         >
                           {item.label}
@@ -120,7 +120,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
 
         {/* Components */}
         {componentSection && (
-          <div className="border-t mt-4 pt-4">
+          <div className="border-t border-border/30 pt-6">
             <Link
               href={componentSection.href || "/docs/ui/components/accordion"}
               onClick={(e) => {
@@ -129,14 +129,14 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                 onNavigate?.()
               }}
               className={cn(
-                "flex w-full items-center justify-between px-0 py-2 text-sm font-medium transition-colors hover:text-foreground",
+                "group flex w-full items-center justify-between rounded px-2 py-2 text-xs font-medium font-semibold uppercase tracking-wide transition-all",
                 expanded["Components"]
-                  ? "text-foreground"
-                  : "text-muted-foreground"
+                  ? "text-foreground bg-foreground/5"
+                  : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
               )}
             >
               <span>Components</span>
-              <span className="text-lg leading-none">
+              <span className="text-sm leading-none opacity-60 group-hover:opacity-100 transition-opacity">
                 {expanded["Components"] ? "−" : "+"}
               </span>
             </Link>
@@ -150,7 +150,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search..."
-                    className="h-8 w-full rounded-md border border-border/50 bg-muted/40 pl-9 pr-8 text-xs outline-none placeholder:text-muted-foreground/40 focus:border-foreground/30 focus:bg-muted/60 transition-colors"
+                    className="h-8 w-full rounded-md border border-border/50 bg-foreground/5 pl-9 pr-8 text-xs outline-none placeholder:text-muted-foreground/40 focus:border-foreground/30 focus:bg-foreground/10 transition-colors"
                   />
                   {hasQuery && (
                     <button
@@ -177,10 +177,10 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                             href={item.href}
                             onClick={onNavigate}
                             className={cn(
-                              "block px-0 py-1.5 text-sm transition-colors",
+                              "block rounded px-2 py-1.5 text-xs transition-all",
                               isActive
-                                ? "font-medium text-foreground"
-                                : "text-muted-foreground hover:text-foreground"
+                                ? "font-medium text-foreground bg-foreground/10"
+                                : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
                             )}
                           >
                             {item.label}

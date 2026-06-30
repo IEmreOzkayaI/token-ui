@@ -9,9 +9,9 @@ type DocsCalloutProps = {
 }
 
 const variants = {
-  info: "border-border bg-muted/40",
-  tip: "border-primary/20 bg-primary/5",
-  warning: "border-destructive/20 bg-destructive/5",
+  info: "border-border/50 bg-foreground/5",
+  tip: "border-primary/20 bg-primary/10",
+  warning: "border-destructive/20 bg-destructive/10",
 }
 
 export function DocsCallout({
