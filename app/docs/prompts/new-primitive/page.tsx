@@ -30,12 +30,24 @@ Accessibility requirements:
 
 ---
 
-DESIGN TOKEN STANDARDS (mandatory — no hardcoded values):
+CODEBASE REFERENCE (read before writing any code):
 
-Read app/globals.css for all available tokens. Use only CSS variables defined there.
-Token categories: colors, typography (font-size, weight, leading), spacing (--space-*),
-radius (--radius-*), shadows (--shadow-*), borders (--border, --input), transitions (--transition-*).
-Dark mode is automatic via CSS variables — no dark: Tailwind classes needed for colors.
+Design tokens  → app/globals.css
+  All CSS variables are defined here. No hardcoded values allowed.
+  Token categories: colors, typography, spacing (--space-*), radius (--radius-*),
+  shadows (--shadow-*), borders (--border, --input), transitions (--transition-*).
+  Dark mode is automatic via CSS variables — no dark: Tailwind classes for colors.
+
+Existing primitives → ui/primitives/*
+  Read these files to understand CVA structure, import paths, data-slot usage,
+  export format, and TypeScript types. Follow the exact same patterns.
+  Key reference: ui/primitives/button.tsx
+
+Existing components → ui/components/*
+  Read these to understand how primitives are composed and used together.
+
+Foundation docs → app/docs/foundations/*
+  Read these to understand design decisions, token usage rules, and system constraints.
 
 ---
 
