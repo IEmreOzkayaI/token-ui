@@ -161,7 +161,7 @@ export default function NewPrimitivePage() {
           </SheetHeader>
 
           <div className="flex-1 overflow-y-auto">
-            <div className="space-y-5 px-4 py-4">
+            <div className="space-y-4 px-4 py-4 max-w-2xl">
               <div className="grid gap-2">
                 <Label htmlFor="primitive-name" className="text-xs font-semibold">Primitive Name</Label>
                 <Input
