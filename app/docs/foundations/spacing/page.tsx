@@ -49,6 +49,29 @@ export default function SpacingPage() {
         <p className="text-muted-foreground mb-6">
           Proportional spacing scale from 0 to 32rem (512px) for consistent layout rhythm.
         </p>
+
+        <div className="mb-6 space-y-2 bg-foreground/5 p-6 rounded-lg border border-border/50">
+          <div className="text-xs font-medium text-muted-foreground mb-4">Visual spacing demonstration:</div>
+          <div className="space-y-2">
+            {[
+              { name: "space-2", px: "8px", bg: "h-2" },
+              { name: "space-3", px: "12px", bg: "h-3" },
+              { name: "space-4", px: "16px", bg: "h-4" },
+              { name: "space-6", px: "24px", bg: "h-6" },
+              { name: "space-8", px: "32px", bg: "h-8" },
+              { name: "space-12", px: "48px", bg: "h-12" },
+              { name: "space-16", px: "64px", bg: "h-16" },
+              { name: "space-20", px: "80px", bg: "h-20" },
+            ].map((item) => (
+              <div key={item.name} className="flex items-center gap-3">
+                <div className="w-24 text-xs font-medium">{item.name}</div>
+                <div className={`${item.bg} bg-primary rounded`}></div>
+                <div className="text-xs text-muted-foreground">{item.px}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <CodeBlock code={`/* Spacing Scale (8px base) */
 --space-0: 0;          /* 0px - reset */
 --space-1: 0.25rem;    /* 4px - tiny spacing */

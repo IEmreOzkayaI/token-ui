@@ -49,6 +49,38 @@ export default function RadiusPage() {
         <p className="text-muted-foreground mb-6">
           7-level semantic border radius scale from minimal to full circles.
         </p>
+
+        <div className="mb-6 grid gap-4 sm:grid-cols-2 bg-foreground/5 p-6 rounded-lg border border-border/50">
+          <div className="space-y-2 text-center">
+            <div className="h-20 bg-primary rounded-sm mx-auto" style={{ width: "160px" }}></div>
+            <p className="text-xs">sm (4px)</p>
+          </div>
+          <div className="space-y-2 text-center">
+            <div className="h-20 bg-primary rounded mx-auto" style={{ width: "160px", borderRadius: "6px" }}></div>
+            <p className="text-xs">md (6px)</p>
+          </div>
+          <div className="space-y-2 text-center">
+            <div className="h-20 bg-primary rounded-lg mx-auto" style={{ width: "160px" }}></div>
+            <p className="text-xs">lg (8px) - default</p>
+          </div>
+          <div className="space-y-2 text-center">
+            <div className="h-20 bg-primary rounded-xl mx-auto" style={{ width: "160px" }}></div>
+            <p className="text-xs">xl (12px)</p>
+          </div>
+          <div className="space-y-2 text-center">
+            <div className="h-20 bg-primary rounded-2xl mx-auto" style={{ width: "160px" }}></div>
+            <p className="text-xs">2xl (16px)</p>
+          </div>
+          <div className="space-y-2 text-center">
+            <div className="h-20 bg-primary rounded-3xl mx-auto" style={{ width: "160px" }}></div>
+            <p className="text-xs">3xl (24px)</p>
+          </div>
+          <div className="space-y-2 text-center sm:col-span-2">
+            <div className="h-20 bg-primary rounded-full mx-auto" style={{ width: "160px" }}></div>
+            <p className="text-xs">full (circle/pill)</p>
+          </div>
+        </div>
+
         <CodeBlock code={`/* Border Radius Scale */
 --radius-sm: 0.25rem;      /* 4px - minimal rounding (sharp) */
 --radius-md: 0.375rem;     /* 6px - subtle rounding */

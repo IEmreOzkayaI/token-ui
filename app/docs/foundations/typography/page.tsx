@@ -51,6 +51,21 @@ export default function TypographyPage() {
         <p className="text-muted-foreground mb-6">
           11-level font size scale from xs (12px) to 7xl (72px) for all text elements.
         </p>
+
+        <div className="space-y-3 mb-6 bg-foreground/5 p-6 rounded-lg border border-border/50">
+          <div className="text-xs">xs (12px)</div>
+          <div className="text-sm">sm (14px)</div>
+          <div className="text-base">base (16px) - default body</div>
+          <div className="text-lg">lg (18px)</div>
+          <div className="text-xl">xl (20px)</div>
+          <div className="text-2xl">2xl (24px)</div>
+          <div className="text-3xl">3xl (30px)</div>
+          <div className="text-4xl">4xl (36px)</div>
+          <div className="text-5xl">5xl (48px)</div>
+          <div className="text-6xl">6xl (60px)</div>
+          <div className="text-7xl">7xl (72px)</div>
+        </div>
+
         <CodeBlock code={`/* Font Size Scale */
 --font-size-xs: 0.75rem;      /* 12px - captions, tiny text */
 --font-size-sm: 0.875rem;     /* 14px - small labels */
@@ -74,6 +89,15 @@ export default function TypographyPage() {
         <p className="text-muted-foreground mb-6">
           5 font weights for typographic emphasis and hierarchy.
         </p>
+
+        <div className="space-y-2 mb-6 bg-foreground/5 p-6 rounded-lg border border-border/50">
+          <div className="font-light text-base">Light (300) - delicate, reduced emphasis</div>
+          <div className="font-normal text-base">Normal (400) - standard body text</div>
+          <div className="font-medium text-base">Medium (500) - slightly emphasized</div>
+          <div className="font-semibold text-base">Semibold (600) - labels, subheadings</div>
+          <div className="font-bold text-base">Bold (700) - strong emphasis, headings</div>
+        </div>
+
         <CodeBlock code={`/* Font Weights */
 --font-weight-light: 300;      /* Delicate, reduced emphasis */
 --font-weight-normal: 400;     /* Standard body text weight */

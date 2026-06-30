@@ -49,6 +49,31 @@ export default function ShadowsPage() {
         <p className="text-muted-foreground mb-6">
           7 elevation levels for progressive depth perception. Higher elevations indicate components that float above the page.
         </p>
+
+        <div className="mb-6 grid gap-4 bg-foreground/5 p-6 rounded-lg border border-border/50">
+          <div className="h-24 bg-card border border-border rounded-lg flex items-center justify-center font-medium">
+            none (base)
+          </div>
+          <div className="h-24 bg-card shadow-xs rounded-lg flex items-center justify-center font-medium">
+            shadow-xs
+          </div>
+          <div className="h-24 bg-card shadow-sm rounded-lg flex items-center justify-center font-medium">
+            shadow-sm
+          </div>
+          <div className="h-24 bg-card shadow-md rounded-lg flex items-center justify-center font-medium">
+            shadow-md (default)
+          </div>
+          <div className="h-24 bg-card shadow-lg rounded-lg flex items-center justify-center font-medium">
+            shadow-lg
+          </div>
+          <div className="h-24 bg-card shadow-xl rounded-lg flex items-center justify-center font-medium">
+            shadow-xl
+          </div>
+          <div className="h-24 bg-card shadow-2xl rounded-lg flex items-center justify-center font-medium">
+            shadow-2xl
+          </div>
+        </div>
+
         <CodeBlock code={`/* Shadow Elevation Levels */
 
 --shadow-none: 0 0 #0000;
