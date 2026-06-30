@@ -51,7 +51,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
 
   const renderItems = (items: typeof docsNav[0]["items"], level = 0): React.ReactNode => {
     return (
-      <ul className={cn("mt-1", level > 0 && "ml-3 border-l border-border/20 pl-2")}>
+      <ul className={cn("mt-1", level > 0 && "ml-3 border-l border-primary/30 pl-2")}>
         {items.map((item, idx) => {
           const isActive = pathname === item.href
           const hasChildren = item.items && item.items.length > 0
@@ -70,8 +70,8 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                 >
                   <ChevronDown className={cn("size-3 shrink-0 transition-transform", !isItemExpanded && "-rotate-90")} />
                   {isItemExpanded
-                    ? <FolderOpen className="size-3.5 shrink-0 text-yellow-500/80" />
-                    : <Folder className="size-3.5 shrink-0 text-yellow-500/60" />
+                    ? <FolderOpen className="size-3.5 shrink-0 text-primary" />
+                    : <Folder className="size-3.5 shrink-0 text-primary/60" />
                   }
                   <span className="font-medium">{item.label}</span>
                 </button>
@@ -93,7 +93,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                 )}
               >
                 <div className="size-3 shrink-0" />
-                <FileText className="size-3.5 shrink-0 text-muted-foreground/40" />
+                <FileText className="size-3.5 shrink-0 text-muted-foreground/60" />
                 {item.label}
               </Link>
             </li>
