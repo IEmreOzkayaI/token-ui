@@ -195,13 +195,19 @@ export default function DocumentationPage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">Generate complete documentation pages with live examples, prop tables, and best practices.</p>
+        <p className="text-muted-foreground mb-6">Token UI docs are generated from actual code — ComponentExample renders live previews, readSource() shows the implementation. This prompt produces a complete, structured docs page that imports all your demo files and documents every prop.</p>
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Documentation Structure</p><ul className="text-xs text-muted-foreground space-y-1"><li>• Header with title and description</li><li>• Overview of component purpose</li><li>• Live examples (ComponentExample)</li><li>• Props table and documentation</li><li>• Best practices (DocsCallout)</li></ul></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to Use</p><ul className="text-xs text-muted-foreground space-y-1"><li>• After creating new component</li><li>• Adding to docs site</li><li>• Updating existing docs</li></ul></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">What gets generated</p><p className="text-xs text-muted-foreground">Full docs page with live component examples, props table, usage patterns, and best practices callout</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">File location</p><p className="text-xs text-muted-foreground">app/docs/ui/components/[name]/page.tsx — structured with DocsPageHeader, DocsSection, ComponentExample, CodeBlock</p></CardContent></Card>
         </div>
-        <DocsCallout title="Key Tools" variant="info">
-          <ul className="space-y-1 text-sm"><li>• ComponentExample: renders live preview + source</li><li>• readSource(): displays code from file</li><li>• DocsCallout: info/warning/tip boxes</li><li>• DocsSection: structured content sections</li></ul>
+        <DocsCallout title="Docs page structure" variant="info">
+          <ul className="space-y-1 text-sm">
+            <li>• DocsPageHeader — title + description</li>
+            <li>• Overview section — when to use, key features</li>
+            <li>• Examples section — ComponentExample for each demo file</li>
+            <li>• Props section — typed props table</li>
+            <li>• Best Practices — DocsCallout with do/don't</li>
+          </ul>
         </DocsCallout>
       </DocsSection>
 

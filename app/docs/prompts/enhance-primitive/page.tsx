@@ -182,13 +182,18 @@ export default function EnhancePrimitivePage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">Use this when enhancing an existing primitive with new variants, sizes, or accessibility improvements.</p>
+        <p className="text-muted-foreground mb-6">The primitives in ui/primitives/ are designed to grow. Use this when you need to extend one with a new variant, size, or accessibility improvement — the AI reads the file first so it follows the exact same patterns already there.</p>
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to Use</p><p className="text-xs text-muted-foreground">Adding new variants, sizes, improving accessibility, refactoring styling of existing primitive</p></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to Use</p><p className="text-xs text-muted-foreground">Creating new primitive, simple bug fixes without API change, style-only tweaks</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to use</p><p className="text-xs text-muted-foreground">An existing primitive is missing a variant you need, lacks a size option, or has gaps in its accessibility states.</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to use</p><p className="text-xs text-muted-foreground">Don't use this to add completely new behavior. For new primitives use New Primitive; for component-level changes use Modify Existing.</p></CardContent></Card>
         </div>
-        <DocsCallout title="Enhancement Types" variant="info">
-          <ul className="space-y-1 text-sm"><li>• new-variant: Add new CVA variant option</li><li>• new-size: Add new size option</li><li>• a11y-improvement: Add accessibility features</li><li>• refactor: Improve code quality and consistency</li></ul>
+        <DocsCallout title="Enhancement types" variant="info">
+          <ul className="space-y-1 text-sm">
+            <li>• new-variant — add a CVA variant option (e.g. 'premium', 'warning')</li>
+            <li>• new-size — add a size option (e.g. 'xs', '2xl')</li>
+            <li>• a11y-improvement — add missing ARIA states or keyboard behavior</li>
+            <li>• refactor — improve consistency without changing the API</li>
+          </ul>
         </DocsCallout>
       </DocsSection>
 

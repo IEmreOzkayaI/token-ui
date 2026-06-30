@@ -195,13 +195,19 @@ export default function NewComponentPage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">Components are full-featured UI elements built by combining one or more primitives. Use this for domain-specific components.</p>
+        <p className="text-muted-foreground mb-6">Components sit on top of primitives. They combine Card + Label + Badge into something like a stat card, or Input + Button + Popover into a search field. The AI reads existing components first to understand how composition works in this codebase.</p>
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to Use</p><p className="text-xs text-muted-foreground">Full-featured component, combines multiple primitives, domain-specific (DataTable, Carousel, etc.)</p></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to Use</p><p className="text-xs text-muted-foreground">Creating base primitives (use New Primitive), just adding demo files, adding to existing</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to use</p><p className="text-xs text-muted-foreground">You need a full-featured domain-specific component (stat card, data table, upload zone) that combines existing primitives in a meaningful way.</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to use</p><p className="text-xs text-muted-foreground">If you're building a base element like a toggle or slider, use New Primitive instead. If requirements are complex with custom interactions, use From Scratch.</p></CardContent></Card>
         </div>
-        <DocsCallout title="Component Structure" variant="info">
-          <ul className="space-y-1 text-sm"><li>• Location: ui/components/{`{component_name}`}/</li><li>• Files: default.tsx, demo.tsx, [variant].tsx</li><li>• Each demo focused on one concept</li><li>• Use existing primitives as building blocks</li></ul>
+        <DocsCallout title="Component structure" variant="info">
+          <ul className="space-y-1 text-sm">
+            <li>• Location: ui/components/[name]/</li>
+            <li>• Files: default.tsx, demo.tsx, [variant].tsx</li>
+            <li>• Each demo is focused — one concept per file</li>
+            <li>• Imports primitives from ui/primitives/</li>
+            <li>• No CVA needed at component level unless adding new variants</li>
+          </ul>
         </DocsCallout>
       </DocsSection>
 

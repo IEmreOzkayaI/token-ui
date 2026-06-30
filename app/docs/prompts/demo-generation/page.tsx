@@ -9,6 +9,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/pri
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
+import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { Copy, Check, Plus, X } from "lucide-react"
 
@@ -189,28 +190,20 @@ export default function DemoGenerationPage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">
-          Create focused demo files showcasing single variant, sizes, or interactive examples.
-        </p>
-
+        <p className="text-muted-foreground mb-6">Demo files power the live examples in the docs. Each file exports a single React component with no props — just a focused illustration of one concept. Use this prompt to generate them quickly and correctly.</p>
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card>
-            <CardContent className="pt-6">
-              <p className="text-sm font-medium mb-1">When to Use</p>
-              <p className="text-xs text-muted-foreground">
-                New variant demo, size variants, interactive demo with state
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-6">
-              <p className="text-sm font-medium mb-1">Demo Types</p>
-              <p className="text-xs text-muted-foreground">
-                variant, size, interactive, state
-              </p>
-            </CardContent>
-          </Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Demo types</p><p className="text-xs text-muted-foreground">variant — show one variant; size — all sizes side by side; interactive — with useState; state — loading/error/empty states</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">File location</p><p className="text-xs text-muted-foreground">ui/components/[name]/[demo-name].tsx — one file per concept, imported by the docs page as a live example</p></CardContent></Card>
         </div>
+        <DocsCallout title="One concept per file" variant="info">
+          <ul className="space-y-1 text-sm">
+            <li>• default.tsx — the default variant</li>
+            <li>• [variant].tsx — one variant per file</li>
+            <li>• size.tsx — all sizes together</li>
+            <li>• demo.tsx — interactive example with state</li>
+            <li>• icon.tsx — icon usage patterns</li>
+          </ul>
+        </DocsCallout>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

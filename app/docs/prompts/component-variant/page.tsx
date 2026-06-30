@@ -53,7 +53,7 @@ Guidelines:
 2. Follow existing variant naming pattern
 3. Ensure proper contrast (WCAG AA)
 4. Support light/dark mode
-5. Add to component file: ui/components/{component_name}/{variant_name}.tsx
+5. Add to component file: ui/components/{component_name}/[variant_name].tsx
 6. Keep variant file minimal (just demo)
 
 Return:

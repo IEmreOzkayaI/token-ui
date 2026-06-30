@@ -262,37 +262,18 @@ export default function NewPrimitivePage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">
-          Use this prompt when creating a new foundational primitive component. A primitive is a base UI component that combines with others to create full-featured components.
-        </p>
-
+        <p className="text-muted-foreground mb-6">Primitives are the atoms of Token UI — they live in ui/primitives/ and are composed into everything else. Use this prompt when you need to add a new one that follows the exact same structure as button, input, badge, and the other ~40 primitives already in the system.</p>
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card>
-            <CardContent className="pt-6">
-              <p className="text-sm font-medium mb-1">When to Use</p>
-              <p className="text-xs text-muted-foreground">
-                Creating foundational component, converting external library component to Token UI, building new base element
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-6">
-              <p className="text-sm font-medium mb-1">When NOT to Use</p>
-              <p className="text-xs text-muted-foreground">
-                Adding to existing primitive, creating full-featured component, just adding a variant
-              </p>
-            </CardContent>
-          </Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to use</p><p className="text-xs text-muted-foreground">Nothing in ui/primitives/ covers your need. You're building a foundational element — a toggle, a slider, a file input — that other components will compose on top of.</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to use</p><p className="text-xs text-muted-foreground">Use Enhance Primitive if you just need a new variant or size. Use New Component if you're composing existing primitives together.</p></CardContent></Card>
         </div>
-
-        <DocsCallout title="Key Points" variant="info">
+        <DocsCallout title="What gets generated" variant="info">
           <ul className="space-y-1 text-sm">
-            <li>• Primitives are base components in ui/primitives/</li>
-            <li>• Use CVA (class-variance-authority) for variants</li>
-            <li>• Add data-slot attributes to all elements</li>
-            <li>• Export both component and variants CVA</li>
-            <li>• Support composable sub-components if needed</li>
-            <li>• Include accessibility features from the start</li>
+            <li>• CVA variant definition exported as [name]Variants</li>
+            <li>• data-slot on root + all child elements</li>
+            <li>• TypeScript: React.ComponentProps & VariantProps</li>
+            <li>• focus-visible, aria-invalid, proper ARIA roles</li>
+            <li>• Export: named component + variants object</li>
           </ul>
         </DocsCallout>
       </DocsSection>

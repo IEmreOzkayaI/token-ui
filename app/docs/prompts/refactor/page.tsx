@@ -187,13 +187,19 @@ export default function RefactorPage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">Refactor code to improve quality, consistency, and maintainability while preserving Token UI standards.</p>
+        <p className="text-muted-foreground mb-6">Refactoring in Token UI means improving code quality while keeping the external API stable. Use this when a component has accumulated inconsistencies — mixed styling approaches, missing tokens, naming that doesn't match other primitives.</p>
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Refactor Types</p><ul className="text-xs text-muted-foreground space-y-1"><li>• modernize: Update to latest patterns</li><li>• simplify: Reduce complexity</li><li>• performance: Optimize execution</li><li>• consistency: Align with standards</li></ul></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to Use</p><ul className="text-xs text-muted-foreground space-y-1"><li>• Technical debt cleanup</li><li>• Pattern standardization</li><li>• Performance optimization</li><li>• Pre-migration prep</li></ul></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to use</p><p className="text-xs text-muted-foreground">Code works but doesn't follow current standards — hardcoded values, inconsistent naming, missing accessibility states, or outdated patterns.</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to use</p><p className="text-xs text-muted-foreground">Bug fixes don't need a refactor prompt — just fix it. New features go in Enhance Primitive or From Scratch.</p></CardContent></Card>
         </div>
-        <DocsCallout title="Standards to Maintain" variant="info">
-          <ul className="space-y-1 text-sm"><li>• CVA for variant management</li><li>• data-slot attributes on all elements</li><li>• Accessibility states (focus-visible, aria-invalid)</li><li>• CSS variables from app/globals.css</li><li>• TypeScript strict types</li></ul>
+        <DocsCallout title="Standards preserved throughout" variant="info">
+          <ul className="space-y-1 text-sm">
+            <li>• CVA variant structure stays intact</li>
+            <li>• data-slot attributes maintained</li>
+            <li>• TypeScript types preserved or improved</li>
+            <li>• Accessibility states kept (focus-visible, aria-invalid)</li>
+            <li>• CSS variables replace any hardcoded values</li>
+          </ul>
         </DocsCallout>
       </DocsSection>
 

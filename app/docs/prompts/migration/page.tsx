@@ -167,13 +167,19 @@ export default function MigrationPage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">Migrate legacy or external components to Token UI patterns and standards.</p>
+        <p className="text-muted-foreground mb-6">Bringing in a shadcn component or migrating from another design system? This prompt maps the existing component's props and styles to Token UI patterns — CVA variants, CSS variable tokens, data-slot attributes — and produces a migration guide alongside the code.</p>
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Scope Options</p><ul className="text-xs text-muted-foreground space-y-1"><li>• primitive: Base component in ui/primitives/</li><li>• component: Full component in ui/components/</li></ul></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to Use</p><ul className="text-xs text-muted-foreground space-y-1"><li>• Converting shadcn components</li><li>• Migrating from other design systems</li><li>• Upgrading legacy components</li></ul></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Scope: primitive</p><p className="text-xs text-muted-foreground">Output goes to ui/primitives/ — CVA definition, data-slot, TypeScript types. Suitable for simple components.</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Scope: component</p><p className="text-xs text-muted-foreground">Output goes to ui/components/ — can compose primitives, includes demo files. Suitable for complex components.</p></CardContent></Card>
         </div>
-        <DocsCallout title="Migration Steps" variant="info">
-          <ul className="space-y-1 text-sm"><li>• Analyze existing component props and structure</li><li>• Map to Token UI CVA variant pattern</li><li>• Convert styling to Tailwind + CSS variables</li><li>• Add data-slot and accessibility features</li><li>• Create demo files and documentation</li></ul>
+        <DocsCallout title="Migration steps" variant="info">
+          <ul className="space-y-1 text-sm">
+            <li>• AI reads the source component in full</li>
+            <li>• Maps existing props to Token UI variant/size props</li>
+            <li>• Converts styling to Tailwind + CSS variables</li>
+            <li>• Adds data-slot, accessibility states, TypeScript types</li>
+            <li>• Produces migration guide with breaking changes list</li>
+          </ul>
         </DocsCallout>
       </DocsSection>
 

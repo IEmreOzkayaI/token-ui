@@ -172,13 +172,17 @@ export default function TokenCompliancePage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">Ensure components use design tokens correctly and avoid hardcoded values in colors, spacing, shadows, and more.</p>
+        <p className="text-muted-foreground mb-6">Token UI's design system only works if everything uses CSS variables from app/globals.css. One hardcoded hex color breaks dark mode. One px value breaks the spacing scale. This prompt scans a file and returns exact replacements for every non-compliant value.</p>
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Token Categories</p><ul className="text-xs text-muted-foreground space-y-1"><li>• colors — --primary, --border, --muted, etc.</li><li>• spacing — --space-* scale</li><li>• radius — --radius-sm through --radius-full</li><li>• shadows — --shadow-* levels</li><li>• transitions — --transition-fast/base/slow</li></ul></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to Use</p><ul className="text-xs text-muted-foreground space-y-1"><li>• Before shipping new component</li><li>• Migrating legacy components</li><li>• Code review checklist</li><li>• Consistency audits</li></ul></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">What it checks</p><p className="text-xs text-muted-foreground">Colors (no hex/rgb), spacing (--space-* only), radius (--radius-*), shadows (--shadow-*), transitions (--transition-*), opacity (--opacity-*)</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">What you get</p><p className="text-xs text-muted-foreground">Compliance percentage, list of hardcoded values found, exact token replacements, and a migration plan</p></CardContent></Card>
         </div>
-        <DocsCallout title="Zero Hardcoded Values" variant="info">
-          <ul className="space-y-1 text-sm"><li>• No hex colors — use --primary, --border, etc.</li><li>• No px spacing — use --space-* via Tailwind</li><li>• No arbitrary shadows — use --shadow-* tokens</li><li>• Dark mode works automatically via CSS variables</li></ul>
+        <DocsCallout title="Why this matters" variant="info">
+          <ul className="space-y-1 text-sm">
+            <li>• Hardcoded values break dark mode — CSS variables switch automatically</li>
+            <li>• Tokens ensure consistent spacing and scale across the system</li>
+            <li>• Compliance makes future token updates (e.g. rebrand) apply everywhere at once</li>
+          </ul>
         </DocsCallout>
       </DocsSection>
 

@@ -178,13 +178,19 @@ export default function ModifyExistingPage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">Apply precise, scoped changes to an existing component while preserving all surrounding code and standards.</p>
+        <p className="text-muted-foreground mb-6">The most precise prompt in the system. Use it for surgical changes — swapping a color token, adjusting padding on one variant, adding an icon slot to a specific component. The AI doesn't refactor or clean up anything you didn't ask for.</p>
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to Use</p><p className="text-xs text-muted-foreground">Small targeted changes, fixing specific behavior, updating visual style of one variant</p></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to Use</p><p className="text-xs text-muted-foreground">Adding new variant (use Derive Variant), full refactor (use Refactor), new feature (use From Scratch)</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to use</p><p className="text-xs text-muted-foreground">Small, targeted changes to one component or variant. Fixing a specific behavior, swapping a token, adjusting spacing.</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to use</p><p className="text-xs text-muted-foreground">For adding a new variant use Derive Variant. For broader cleanup use Refactor. For new functionality use From Scratch.</p></CardContent></Card>
         </div>
-        <DocsCallout title="Modify Safely" variant="info">
-          <ul className="space-y-1 text-sm"><li>• Scope changes tightly — don't touch unrelated code</li><li>• Preserve backwards compatibility unless breaking intentional</li><li>• Keep data-slot attributes and TypeScript types intact</li><li>• Verify light + dark mode still work after changes</li></ul>
+        <DocsCallout title="Modify safely" variant="info">
+          <ul className="space-y-1 text-sm">
+            <li>• AI reads the full file before touching anything</li>
+            <li>• Only listed changes get applied — surrounding code untouched</li>
+            <li>• Backwards compatibility preserved unless breaking change is explicit</li>
+            <li>• data-slot attributes and TypeScript types stay intact</li>
+            <li>• Light/dark mode verified after changes</li>
+          </ul>
         </DocsCallout>
       </DocsSection>
 

@@ -176,13 +176,18 @@ export default function FromScratchPage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">Build any new component or primitive from scratch with precise requirements. The AI reads existing code first to match patterns exactly.</p>
+        <p className="text-muted-foreground mb-6">The most open-ended prompt. Give it a component name, a variant, and a list of requirements — it reads your existing primitives first, then builds exactly to spec. Best for complex components with specific interaction requirements.</p>
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Primitives</p><p className="text-xs text-muted-foreground">Base components in ui/primitives/ — CVA, data-slot, composable sub-components, TypeScript types</p></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Components</p><p className="text-xs text-muted-foreground">Full-featured in ui/components/ — combines primitives, domain-specific, includes demos</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Primitive</p><p className="text-xs text-muted-foreground">Goes in ui/primitives/ — single CVA definition, data-slot, TypeScript types, accessibility states. Composes into components.</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Component</p><p className="text-xs text-muted-foreground">Goes in ui/components/ — combines primitives, can have internal state, includes demo files. Domain-specific.</p></CardContent></Card>
         </div>
-        <DocsCallout title="From Scratch Checklist" variant="info">
-          <ul className="space-y-1 text-sm"><li>• Read existing primitives before writing</li><li>• CVA for all variants, export variants object</li><li>• data-slot on every element</li><li>• Accessibility: focus-visible, aria-invalid, keyboard nav</li><li>• No hardcoded colors/spacing — CSS variables only</li></ul>
+        <DocsCallout title="Use this when" variant="info">
+          <ul className="space-y-1 text-sm">
+            <li>• Requirements are too complex for a simple variant</li>
+            <li>• You need custom interactions (drag, multi-step, async loading)</li>
+            <li>• Nothing in the existing codebase is close enough to extend</li>
+            <li>• You want maximum control over the generated code</li>
+          </ul>
         </DocsCallout>
       </DocsSection>
 

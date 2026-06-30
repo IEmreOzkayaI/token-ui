@@ -51,7 +51,7 @@ Guidelines:
 2. Add new variant following existing naming pattern
 3. Ensure proper contrast (WCAG AA)
 4. Support light/dark mode via CSS variables
-5. Add demo file: ui/components/{component_name}/{variant_name}.tsx
+5. Add demo file: ui/components/{component_name}/[variant_name].tsx
 6. Keep demo focused (one concept only)
 
 Return:
@@ -181,13 +181,19 @@ export default function DeriveVariantPage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">Add a new visual variant to an existing component by extending its CVA definition and creating a focused demo.</p>
+        <p className="text-muted-foreground mb-6">Every primitive in Token UI uses CVA for variant management. Adding a new visual style means adding one entry to that CVA definition. This prompt handles that cleanly — reads the existing file, extends it, and creates a focused demo.</p>
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to Use</p><p className="text-xs text-muted-foreground">Adding new visual style, alternative look for a specific use case, state variants (loading, success, error)</p></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to Use</p><p className="text-xs text-muted-foreground">Adding size option (use Enhance Primitive), changing existing behavior, creating new component</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to use</p><p className="text-xs text-muted-foreground">You need a new visual style for an existing component — a gradient button, a warning badge, a loading state. The component structure stays the same, only the look changes.</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When NOT to use</p><p className="text-xs text-muted-foreground">If you need new behavior or a different HTML structure, use Modify Existing or From Scratch instead.</p></CardContent></Card>
         </div>
-        <DocsCallout title="Variant Checklist" variant="info">
-          <ul className="space-y-1 text-sm"><li>• Add to CVA in ui/primitives/{"{component_name}"}.tsx</li><li>• Follow existing variant naming conventions</li><li>• Ensure WCAG AA contrast</li><li>• Support light + dark mode via CSS variables</li><li>• Create demo: ui/components/{"{component_name}"}/{"{variant_name}"}.tsx</li></ul>
+        <DocsCallout title="What happens" variant="info">
+          <ul className="space-y-1 text-sm">
+            <li>• New variant added to CVA in ui/primitives/[name].tsx</li>
+            <li>• Variant follows existing naming conventions</li>
+            <li>• WCAG AA contrast verified</li>
+            <li>• Light + dark mode supported via CSS variables</li>
+            <li>• Demo file created: ui/components/[name]/[variant].tsx</li>
+          </ul>
         </DocsCallout>
       </DocsSection>
 

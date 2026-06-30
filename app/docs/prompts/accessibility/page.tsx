@@ -9,6 +9,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/pri
 import { DocsPage } from "@/app/docs/_components/docs-page"
 import { DocsPageHeader } from "@/app/docs/_components/docs-page-header"
 import { DocsSection } from "@/app/docs/_components/docs-section"
+import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { Copy, Check, Plus, X } from "lucide-react"
 
@@ -271,18 +272,20 @@ export default function AccessibilityPage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">
-          Audit components for accessibility compliance and WCAG standards.
-        </p>
-
-        <Card>
-          <CardContent className="pt-6">
-            <p className="text-sm font-medium mb-2">Compliance Levels</p>
-            <p className="text-xs text-muted-foreground">
-              AA (minimum) or AAA (enhanced). Most components should target AA.
-            </p>
-          </CardContent>
-        </Card>
+        <p className="text-muted-foreground mb-6">Accessibility isn't optional. This prompt audits a component against WCAG 2.1 AA — keyboard navigation, screen reader support, ARIA attributes, color contrast — and returns specific code changes ranked by severity.</p>
+        <div className="grid gap-4 sm:grid-cols-2 mb-6">
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">What gets audited</p><p className="text-xs text-muted-foreground">Keyboard navigation, tab order, focus visibility, screen reader support, ARIA roles and labels, color contrast, touch target sizes</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Output</p><p className="text-xs text-muted-foreground">Issues ranked by severity, specific code fixes, WCAG 2.1 AA compliance status, testing recommendations</p></CardContent></Card>
+        </div>
+        <DocsCallout title="WCAG AA minimum" variant="info">
+          <ul className="space-y-1 text-sm">
+            <li>• Text contrast ≥ 4.5:1 (normal), ≥ 3:1 (large)</li>
+            <li>• All interactive elements keyboard accessible</li>
+            <li>• No keyboard traps</li>
+            <li>• Touch targets ≥ 44×44px</li>
+            <li>• Color not the only information method</li>
+          </ul>
+        </DocsCallout>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

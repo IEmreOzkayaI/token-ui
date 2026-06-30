@@ -190,13 +190,19 @@ export default function DesignSystemAuditPage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">Audit components and code for compliance with Token UI standards and best practices.</p>
+        <p className="text-muted-foreground mb-6">Before shipping a component, run an audit. This prompt checks everything — naming conventions, CVA structure, token usage, accessibility, documentation — and returns a prioritized list of issues with specific fixes.</p>
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Scope Options</p><ul className="text-xs text-muted-foreground space-y-1"><li>• primitive: Single base component</li><li>• component: Full component</li><li>• documentation: Docs page</li><li>• full: Entire directory</li></ul></CardContent></Card>
-          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">When to Use</p><ul className="text-xs text-muted-foreground space-y-1"><li>• Before shipping new component</li><li>• Code review preparation</li><li>• Migration assessment</li></ul></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Full audit</p><p className="text-xs text-muted-foreground">Checks naming conventions, CVA structure, data-slot usage, token compliance, accessibility, TypeScript types, and documentation completeness.</p></CardContent></Card>
+          <Card><CardContent className="pt-6"><p className="text-sm font-medium mb-1">Focused audit</p><p className="text-xs text-muted-foreground">Specify focus areas to target just colors, just accessibility, or just documentation — faster and more actionable.</p></CardContent></Card>
         </div>
-        <DocsCallout title="Audit Areas" variant="info">
-          <ul className="space-y-1 text-sm"><li>• Naming conventions (kebab-case, PascalCase exports)</li><li>• Architecture (CVA, data-slot, className support)</li><li>• Token compliance (no hardcoded values)</li><li>• Accessibility (focus-visible, aria-invalid, contrast)</li><li>• Styling (Tailwind + data-attribute selectors)</li></ul>
+        <DocsCallout title="Audit checklist" variant="info">
+          <ul className="space-y-1 text-sm">
+            <li>• Naming: kebab-case primitives, PascalCase exports, data-slot format</li>
+            <li>• Architecture: CVA, data-slot, composable sub-components</li>
+            <li>• Tokens: no hardcoded values, CSS variables from app/globals.css</li>
+            <li>• A11y: focus-visible, aria-invalid, WCAG AA contrast</li>
+            <li>• Docs: examples, props, best practices</li>
+          </ul>
         </DocsCallout>
       </DocsSection>
 
