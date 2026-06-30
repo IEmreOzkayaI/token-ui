@@ -180,7 +180,7 @@ export default function NewPrimitivePage() {
       ...values.features.filter(Boolean),
       ...values.variants.filter(Boolean),
       ...values.a11y_requirements.filter(Boolean),
-    ].filter(Boolean)
+    ].filter(Boolean).sort((a, b) => b.length - a.length)
 
     allValues.forEach(val => {
       const escaped = val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
