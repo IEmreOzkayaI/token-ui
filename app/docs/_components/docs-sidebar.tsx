@@ -92,16 +92,28 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
               )}
 
               {expanded[section.title] && (
-                <ul className="space-y-1 pl-2 mt-2 mb-2">
+                <ul className="space-y-1 mt-2 mb-2">
                   {section.items.map((item) => {
                     const isActive = pathname === item.href
+                    const isGroupHeader = item.label === item.label.toUpperCase() && item.label.length > 0
+
+                    if (isGroupHeader) {
+                      return (
+                        <li key={item.href}>
+                          <div className="px-2 py-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground/70 mt-3">
+                            {item.label}
+                          </div>
+                        </li>
+                      )
+                    }
+
                     return (
                       <li key={item.href}>
                         <Link
                           href={item.href}
                           onClick={onNavigate}
                           className={cn(
-                            "block rounded px-2 py-1.5 text-xs transition-all",
+                            "block rounded px-3 py-1.5 text-xs transition-all ml-2",
                             isActive
                               ? "font-medium text-foreground bg-foreground/10"
                               : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
