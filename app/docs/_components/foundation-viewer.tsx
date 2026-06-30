@@ -4,7 +4,8 @@ import {
   colorTokens,
   semanticColors,
   intentColors,
-  typography,
+  fontSizes,
+  fontWeights,
   spacing,
   shadows,
   borderRadius,
@@ -114,7 +115,7 @@ export function FoundationViewer({ type, title, description }: FoundationViewerP
         <div>
           <h3 className="text-lg font-semibold mb-4">Type Scale</h3>
           <div className="space-y-4">
-            {Object.entries(typography.fontSizes).map(([key, size]) => (
+            {Object.entries(fontSizes).map(([key, size]) => (
               <div key={key} className="border-b pb-3 last:border-0">
                 <div style={{ fontSize: size }} className="font-semibold mb-1">
                   {key}
@@ -130,7 +131,7 @@ export function FoundationViewer({ type, title, description }: FoundationViewerP
         <div>
           <h3 className="text-lg font-semibold mb-4">Font Weights</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {Object.entries(typography.fontWeights).map(([name, weight]) => (
+            {Object.entries(fontWeights).map(([name, weight]) => (
               <div key={name}>
                 <div style={{ fontWeight: weight }}>Example Text</div>
                 <div className="text-xs text-muted-foreground">
