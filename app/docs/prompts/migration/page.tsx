@@ -159,7 +159,7 @@ export default function MigrationPage() {
   }
 
   return (
-    <DocsPage toc={[{ id: "overview", title: "Overview" }, { id: "create", title: "Create Prompt" }]}>
+    <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
         title="Component Migration"
         description="Convert legacy components to Token UI standard"
@@ -175,10 +175,6 @@ export default function MigrationPage() {
         <DocsCallout title="Migration Steps" variant="info">
           <ul className="space-y-1 text-sm"><li>• Analyze existing component props and structure</li><li>• Map to Token UI CVA variant pattern</li><li>• Convert styling to Tailwind + CSS variables</li><li>• Add data-slot and accessibility features</li><li>• Create demo files and documentation</li></ul>
         </DocsCallout>
-      </DocsSection>
-
-      <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground">Click "Create" button in the header to open the prompt generator.</p>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

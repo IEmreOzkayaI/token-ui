@@ -173,7 +173,7 @@ export default function DeriveVariantPage() {
   }
 
   return (
-    <DocsPage toc={[{ id: "overview", title: "Overview" }, { id: "create", title: "Create Prompt" }]}>
+    <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
         title="Component Variant Generation"
         description="Add new visual variant to existing component"
@@ -189,10 +189,6 @@ export default function DeriveVariantPage() {
         <DocsCallout title="Variant Checklist" variant="info">
           <ul className="space-y-1 text-sm"><li>• Add to CVA in ui/primitives/{"{component_name}"}.tsx</li><li>• Follow existing variant naming conventions</li><li>• Ensure WCAG AA contrast</li><li>• Support light + dark mode via CSS variables</li><li>• Create demo: ui/components/{"{component_name}"}/{"{variant_name}"}.tsx</li></ul>
         </DocsCallout>
-      </DocsSection>
-
-      <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground">Click "Create" button in the header to open the prompt generator.</p>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

@@ -187,7 +187,7 @@ export default function DocumentationPage() {
   }
 
   return (
-    <DocsPage toc={[{ id: "overview", title: "Overview" }, { id: "create", title: "Create Prompt" }]}>
+    <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
         title="Documentation Generation"
         description="Create documentation page for a component"
@@ -203,10 +203,6 @@ export default function DocumentationPage() {
         <DocsCallout title="Key Tools" variant="info">
           <ul className="space-y-1 text-sm"><li>• ComponentExample: renders live preview + source</li><li>• readSource(): displays code from file</li><li>• DocsCallout: info/warning/tip boxes</li><li>• DocsSection: structured content sections</li></ul>
         </DocsCallout>
-      </DocsSection>
-
-      <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground">Click "Create" button in the header to open the prompt generator.</p>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

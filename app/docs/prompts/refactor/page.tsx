@@ -179,7 +179,7 @@ export default function RefactorPage() {
   }
 
   return (
-    <DocsPage toc={[{ id: "overview", title: "Overview" }, { id: "create", title: "Create Prompt" }]}>
+    <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
         title="Refactor Prompt"
         description="Improve code quality and consistency"
@@ -195,10 +195,6 @@ export default function RefactorPage() {
         <DocsCallout title="Standards to Maintain" variant="info">
           <ul className="space-y-1 text-sm"><li>• CVA for variant management</li><li>• data-slot attributes on all elements</li><li>• Accessibility states (focus-visible, aria-invalid)</li><li>• CSS variables from app/globals.css</li><li>• TypeScript strict types</li></ul>
         </DocsCallout>
-      </DocsSection>
-
-      <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground">Click "Create" button in the header to open the prompt generator.</p>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

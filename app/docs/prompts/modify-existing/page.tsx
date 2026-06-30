@@ -170,7 +170,7 @@ export default function ModifyExistingPage() {
   }
 
   return (
-    <DocsPage toc={[{ id: "overview", title: "Overview" }, { id: "create", title: "Create Prompt" }]}>
+    <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
         title="Modify Existing"
         description="Apply targeted changes to an existing component or variant"
@@ -186,10 +186,6 @@ export default function ModifyExistingPage() {
         <DocsCallout title="Modify Safely" variant="info">
           <ul className="space-y-1 text-sm"><li>• Scope changes tightly — don't touch unrelated code</li><li>• Preserve backwards compatibility unless breaking intentional</li><li>• Keep data-slot attributes and TypeScript types intact</li><li>• Verify light + dark mode still work after changes</li></ul>
         </DocsCallout>
-      </DocsSection>
-
-      <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground">Click "Create" button in the header to open the prompt generator.</p>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

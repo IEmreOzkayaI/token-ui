@@ -242,7 +242,6 @@ export default function ComponentVariantPage() {
   return (
     <DocsPage toc={[
       { id: "overview", title: "Overview" },
-      { id: "create", title: "Create Prompt" },
     ]}>
       <DocsPageHeader
         title="Component Variant Generation"
@@ -278,12 +277,6 @@ export default function ComponentVariantPage() {
             </CardContent>
           </Card>
         </div>
-      </DocsSection>
-
-      <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground">
-          Click "Create" button in the header to open the prompt generator.
-        </p>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

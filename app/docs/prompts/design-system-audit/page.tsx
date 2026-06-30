@@ -182,7 +182,7 @@ export default function DesignSystemAuditPage() {
   }
 
   return (
-    <DocsPage toc={[{ id: "overview", title: "Overview" }, { id: "create", title: "Create Prompt" }]}>
+    <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
         title="Design System Audit"
         description="Review code for Token UI standards compliance"
@@ -198,10 +198,6 @@ export default function DesignSystemAuditPage() {
         <DocsCallout title="Audit Areas" variant="info">
           <ul className="space-y-1 text-sm"><li>• Naming conventions (kebab-case, PascalCase exports)</li><li>• Architecture (CVA, data-slot, className support)</li><li>• Token compliance (no hardcoded values)</li><li>• Accessibility (focus-visible, aria-invalid, contrast)</li><li>• Styling (Tailwind + data-attribute selectors)</li></ul>
         </DocsCallout>
-      </DocsSection>
-
-      <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground">Click "Create" button in the header to open the prompt generator.</p>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

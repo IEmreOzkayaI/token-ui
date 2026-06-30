@@ -168,7 +168,7 @@ export default function FromScratchPage() {
   }
 
   return (
-    <DocsPage toc={[{ id: "overview", title: "Overview" }, { id: "create", title: "Create Prompt" }]}>
+    <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
         title="Build From Scratch"
         description="Build a brand new component or primitive with full spec"
@@ -184,10 +184,6 @@ export default function FromScratchPage() {
         <DocsCallout title="From Scratch Checklist" variant="info">
           <ul className="space-y-1 text-sm"><li>• Read existing primitives before writing</li><li>• CVA for all variants, export variants object</li><li>• data-slot on every element</li><li>• Accessibility: focus-visible, aria-invalid, keyboard nav</li><li>• No hardcoded colors/spacing — CSS variables only</li></ul>
         </DocsCallout>
-      </DocsSection>
-
-      <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground">Click "Create" button in the header to open the prompt generator.</p>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

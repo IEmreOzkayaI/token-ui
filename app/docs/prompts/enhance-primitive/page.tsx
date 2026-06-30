@@ -174,7 +174,7 @@ export default function EnhancePrimitivePage() {
   }
 
   return (
-    <DocsPage toc={[{ id: "overview", title: "Overview" }, { id: "create", title: "Create Prompt" }]}>
+    <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
         title="Existing Primitive Enhancement"
         description="Add variants, sizes, or improvements to existing primitive"
@@ -190,10 +190,6 @@ export default function EnhancePrimitivePage() {
         <DocsCallout title="Enhancement Types" variant="info">
           <ul className="space-y-1 text-sm"><li>• new-variant: Add new CVA variant option</li><li>• new-size: Add new size option</li><li>• a11y-improvement: Add accessibility features</li><li>• refactor: Improve code quality and consistency</li></ul>
         </DocsCallout>
-      </DocsSection>
-
-      <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground">Click "Create" button in the header to open the prompt generator.</p>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

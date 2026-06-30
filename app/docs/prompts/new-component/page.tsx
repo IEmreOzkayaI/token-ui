@@ -187,7 +187,7 @@ export default function NewComponentPage() {
   }
 
   return (
-    <DocsPage toc={[{ id: "overview", title: "Overview" }, { id: "create", title: "Create Prompt" }]}>
+    <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
         title="New Component Generation"
         description="Create full-featured component combining primitives"
@@ -203,10 +203,6 @@ export default function NewComponentPage() {
         <DocsCallout title="Component Structure" variant="info">
           <ul className="space-y-1 text-sm"><li>• Location: ui/components/{`{component_name}`}/</li><li>• Files: default.tsx, demo.tsx, [variant].tsx</li><li>• Each demo focused on one concept</li><li>• Use existing primitives as building blocks</li></ul>
         </DocsCallout>
-      </DocsSection>
-
-      <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground">Click "Create" button in the header to open the prompt generator.</p>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

@@ -258,7 +258,6 @@ export default function AccessibilityPage() {
   return (
     <DocsPage toc={[
       { id: "overview", title: "Overview" },
-      { id: "create", title: "Create Prompt" },
     ]}>
       <DocsPageHeader
         title="Accessibility Review"
@@ -284,12 +283,6 @@ export default function AccessibilityPage() {
             </p>
           </CardContent>
         </Card>
-      </DocsSection>
-
-      <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground">
-          Click "Create" button in the header to open the prompt generator.
-        </p>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>

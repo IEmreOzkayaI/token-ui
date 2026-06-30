@@ -164,7 +164,7 @@ export default function TokenCompliancePage() {
   }
 
   return (
-    <DocsPage toc={[{ id: "overview", title: "Overview" }, { id: "create", title: "Create Prompt" }]}>
+    <DocsPage toc={[{ id: "overview", title: "Overview" }]}>
       <DocsPageHeader
         title="Token Compliance Review"
         description="Check design token usage and avoid hardcoded values"
@@ -180,10 +180,6 @@ export default function TokenCompliancePage() {
         <DocsCallout title="Zero Hardcoded Values" variant="info">
           <ul className="space-y-1 text-sm"><li>• No hex colors — use --primary, --border, etc.</li><li>• No px spacing — use --space-* via Tailwind</li><li>• No arbitrary shadows — use --shadow-* tokens</li><li>• Dark mode works automatically via CSS variables</li></ul>
         </DocsCallout>
-      </DocsSection>
-
-      <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground">Click "Create" button in the header to open the prompt generator.</p>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
