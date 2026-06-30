@@ -412,13 +412,13 @@ export default function NewPrimitivePage() {
               <button
                 onClick={() => setWithDocs(!withDocs)}
                 className={cn(
-                  "flex items-center gap-1.5 px-3 h-9 rounded-md text-xs font-medium transition-colors shrink-0 border",
+                  "flex items-center gap-1.5 h-8 px-2.5 rounded-md text-xs font-medium transition-colors shrink-0",
                   withDocs
-                    ? "bg-primary text-white border-primary"
-                    : "bg-transparent text-muted-foreground border-border hover:text-foreground hover:border-foreground/30"
+                    ? "bg-primary text-white"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                {withDocs && <Check className="size-3.5" />}
+                {withDocs && <Check className="size-3" />}
                 Include docs
               </button>
             </div>
