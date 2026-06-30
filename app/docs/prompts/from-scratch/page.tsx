@@ -12,6 +12,7 @@ import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { Copy, Check, Plus, X } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 const PROMPT = `You are a Token UI design system engineer.
 
@@ -105,6 +106,7 @@ export default function FromScratchPage() {
   const [showExample, setShowExample] = useState(true)
   const [values, setValues] = useState<Values>(EXAMPLE_VALUES)
   const [sheetWidth, setSheetWidth] = useState(50)
+  const [withDocs, setWithDocs] = useState(false)
 
   const handleResizeStart = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -124,6 +126,7 @@ export default function FromScratchPage() {
     result = result.replace(/\{component_name\}/g, values.component_name || "")
     result = result.replace(/\{variant_name\}/g, values.variant_name || "")
     result = result.replace(/\{requirements\}/g, values.requirements.filter(Boolean).map(f => `- ${f}`).join("\n") || "")
+    if (withDocs) result += `\n---\n\nALSO GENERATE DOCUMENTATION:\n\nAfter building the component, also create a full documentation page:\n\nFile: app/docs/ui/components/${values.component_name || "{component_name}"}/page.tsx\n\n1. Create demo files in ui/components/${values.component_name || "{component_name}"}/ - default.tsx, demo.tsx, size.tsx, one per variant\n2. Create the docs page:\n   - Import DocsPage, DocsPageHeader, DocsSection, DocsCallout from @/app/docs/_components/\n   - Import ComponentExample from @/app/docs/_components/component-example\n   - Structure: DocsPageHeader → Overview → Examples (ComponentExample per demo) → Props table → Best Practices\n\nReturn: all component files + demos + docs page.`
     return result
   }
 
@@ -213,6 +216,17 @@ export default function FromScratchPage() {
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Component Name</Label><Input value={values.component_name} onChange={(e) => setValues(p => ({ ...p, component_name: e.target.value }))} placeholder="e.g., combobox, date-picker" className="h-9 text-sm focus-visible:ring-primary" /></div>
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Variant Name</Label><Input value={values.variant_name} onChange={(e) => setValues(p => ({ ...p, variant_name: e.target.value }))} placeholder="e.g., searchable, multi-select" className="h-9 text-sm focus-visible:ring-primary" /></div>
                 <MultiInput label="Requirements" values={values.requirements} placeholder="e.g., Keyboard navigation with arrow keys" onChange={(v) => setValues(p => ({ ...p, requirements: v }))} />
+                <div className="border-t pt-4">
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <div onClick={() => setWithDocs(!withDocs)} className={cn("relative w-9 h-5 rounded-full transition-colors shrink-0 cursor-pointer", withDocs ? "bg-primary" : "bg-muted-foreground/30")}>
+                      <div className={cn("absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform", withDocs && "translate-x-4")} />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold">Also generate documentation</p>
+                      <p className="text-xs text-muted-foreground">Appends demo files + docs page generation to the prompt</p>
+                    </div>
+                  </label>
+                </div>
               </div>
             </div>
             <div className="flex-1 flex flex-col">
@@ -231,18 +245,6 @@ export default function FromScratchPage() {
         </SheetContent>
       </Sheet>
     
-      <DocsSection title="Next Step" className="mt-12 pt-8 border-t">
-        <DocsCallout title="Generate Documentation" variant="default">
-          <p className="text-sm mb-2">Once your component or primitive is complete, use the <strong>Documentation</strong> prompt to generate a full docs page. It will:</p>
-          <ul className="space-y-1 text-sm">
-            <li>• Create app/docs/ui/components/[name]/page.tsx</li>
-            <li>• Import all your demo files as live examples</li>
-            <li>• Generate a props table from your TypeScript types</li>
-            <li>• Document when to use, best practices, accessibility notes</li>
-          </ul>
-        </DocsCallout>
-      </DocsSection>
-
     </DocsPage>
   )
 }

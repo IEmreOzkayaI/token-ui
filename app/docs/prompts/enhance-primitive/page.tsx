@@ -12,6 +12,7 @@ import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { Copy, Check, Plus, X } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 const PROMPT = `You are a Token UI design system engineer.
 
@@ -110,6 +111,7 @@ export default function EnhancePrimitivePage() {
   const [showExample, setShowExample] = useState(true)
   const [values, setValues] = useState<Values>(EXAMPLE_VALUES)
   const [sheetWidth, setSheetWidth] = useState(50)
+  const [withDocs, setWithDocs] = useState(false)
 
   const handleResizeStart = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -130,6 +132,7 @@ export default function EnhancePrimitivePage() {
     result = result.replace(/\{enhancement_type\}/g, values.enhancement_type || "")
     result = result.replace(/\{changes\}/g, values.changes.filter(Boolean).map(f => `- ${f}`).join("\n") || "")
     result = result.replace(/\{backwards_compatibility\}/g, values.backwards_compatibility || "")
+    if (withDocs) result += `\n---\n\nALSO GENERATE DOCUMENTATION:\n\nAfter completing the enhancement, also update/create the documentation page:\n\nFile: app/docs/ui/components/${values.primitive_name || "{primitive_name}"}/page.tsx\n\n1. Create/update demo files in ui/components/${values.primitive_name || "{primitive_name}"}/ to showcase new variants/sizes\n2. Update or create the docs page:\n   - Import DocsPage, DocsPageHeader, DocsSection, DocsCallout from @/app/docs/_components/\n   - Import ComponentExample from @/app/docs/_components/component-example\n   - Show all demos including new ones added by this enhancement\n   - Update props table to include new variant/size options\n\nReturn: updated primitive + new/updated demos + docs page.`
     return result
   }
 
@@ -220,6 +223,17 @@ export default function EnhancePrimitivePage() {
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Enhancement Type</Label><Input value={values.enhancement_type} onChange={(e) => setValues(p => ({ ...p, enhancement_type: e.target.value }))} placeholder="e.g., new-variant, new-size, a11y-improvement" className="h-9 text-sm focus-visible:ring-primary" /></div>
                 <MultiInput label="Changes Required" values={values.changes} placeholder="e.g., Add premium variant with accent colors" onChange={(v) => setValues(p => ({ ...p, changes: v }))} />
                 <div className="grid gap-2"><Label className="text-xs font-semibold">Backwards Compatibility</Label><Input value={values.backwards_compatibility} onChange={(e) => setValues(p => ({ ...p, backwards_compatibility: e.target.value }))} placeholder="e.g., yes, no" className="h-9 text-sm focus-visible:ring-primary" /></div>
+                <div className="border-t pt-4">
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <div onClick={() => setWithDocs(!withDocs)} className={cn("relative w-9 h-5 rounded-full transition-colors shrink-0 cursor-pointer", withDocs ? "bg-primary" : "bg-muted-foreground/30")}>
+                      <div className={cn("absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform", withDocs && "translate-x-4")} />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold">Also generate documentation</p>
+                      <p className="text-xs text-muted-foreground">Appends demo files + docs page generation to the prompt</p>
+                    </div>
+                  </label>
+                </div>
               </div>
             </div>
             <div className="flex-1 flex flex-col">
@@ -238,18 +252,6 @@ export default function EnhancePrimitivePage() {
         </SheetContent>
       </Sheet>
     
-      <DocsSection title="Next Step" className="mt-12 pt-8 border-t">
-        <DocsCallout title="Generate Documentation" variant="default">
-          <p className="text-sm mb-2">Once your component or primitive is complete, use the <strong>Documentation</strong> prompt to generate a full docs page. It will:</p>
-          <ul className="space-y-1 text-sm">
-            <li>• Create app/docs/ui/components/[name]/page.tsx</li>
-            <li>• Import all your demo files as live examples</li>
-            <li>• Generate a props table from your TypeScript types</li>
-            <li>• Document when to use, best practices, accessibility notes</li>
-          </ul>
-        </DocsCallout>
-      </DocsSection>
-
     </DocsPage>
   )
 }

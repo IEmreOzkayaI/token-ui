@@ -12,6 +12,7 @@ import { DocsSection } from "@/app/docs/_components/docs-section"
 import { DocsCallout } from "@/app/docs/_components/docs-callout"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
 import { Copy, Check, Plus, X, Trash2 } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 const PROMPT = `You are a Token UI design system engineer.
 
@@ -66,6 +67,30 @@ IMPLEMENTATION GUIDELINES:
 File location: ui/primitives/{primitive_name}.tsx
 
 Return complete, production-ready code.`
+
+const DOCS_ADDON = `
+---
+
+ALSO GENERATE DOCUMENTATION:
+
+After creating the primitive, also create a full documentation page:
+
+File: app/docs/ui/components/{primitive_name}/page.tsx
+
+1. Also create demo files in ui/components/{primitive_name}/
+   - default.tsx — default variant, no props
+   - demo.tsx — interactive example with useState
+   - size.tsx — all sizes side by side (if sizes defined)
+   - One file per variant (e.g. ghost.tsx, outline.tsx)
+
+2. Then create the docs page:
+   - Import DocsPage, DocsPageHeader, DocsSection, DocsCallout from @/app/docs/_components/
+   - Import ComponentExample from @/app/docs/_components/component-example
+   - Import readSource from @/lib/read-source
+   - Create examples array importing all demo files
+   - Structure: DocsPageHeader → Overview → Examples (ComponentExample per demo) → Props table → Best Practices (DocsCallout)
+
+Return all files: primitive + demos + docs page.`
 
 const EXAMPLE_VALUES = {
   primitive_name: "toggle-group",
@@ -148,6 +173,7 @@ export default function NewPrimitivePage() {
   const [showExample, setShowExample] = useState(true)
   const [values, setValues] = useState<Values>(EXAMPLE_VALUES)
   const [sheetWidth, setSheetWidth] = useState(50)
+  const [withDocs, setWithDocs] = useState(false)
 
   const handleResizeStart = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -174,6 +200,7 @@ export default function NewPrimitivePage() {
     result = result.replace(/\{features\}/g, values.features.filter(Boolean).map(f => `- ${f}`).join("\n") || "")
     result = result.replace(/\{variants\}/g, values.variants.filter(Boolean).map(v => `- ${v}`).join("\n") || "")
     result = result.replace(/\{a11y_requirements\}/g, values.a11y_requirements.filter(Boolean).map(a => `- ${a}`).join("\n") || "")
+    if (withDocs) result += DOCS_ADDON.replace(/\{primitive_name\}/g, values.primitive_name || "")
     return result
   }
 
@@ -353,6 +380,27 @@ export default function NewPrimitivePage() {
                   placeholder="e.g., ARIA roles for button group"
                   onChange={(v) => setValues((prev) => ({ ...prev, a11y_requirements: v }))}
                 />
+
+                <div className="border-t pt-4">
+                  <label className="flex items-center gap-3 cursor-pointer group">
+                    <div
+                      onClick={() => setWithDocs(!withDocs)}
+                      className={cn(
+                        "relative w-9 h-5 rounded-full transition-colors shrink-0",
+                        withDocs ? "bg-primary" : "bg-muted-foreground/30"
+                      )}
+                    >
+                      <div className={cn(
+                        "absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform",
+                        withDocs && "translate-x-4"
+                      )} />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold">Also generate documentation</p>
+                      <p className="text-xs text-muted-foreground">Appends demo files + docs page generation to the prompt</p>
+                    </div>
+                  </label>
+                </div>
               </div>
             </div>
 
@@ -394,18 +442,6 @@ export default function NewPrimitivePage() {
         </SheetContent>
       </Sheet>
     
-      <DocsSection title="Next Step" className="mt-12 pt-8 border-t">
-        <DocsCallout title="Generate Documentation" variant="default">
-          <p className="text-sm mb-2">Once your component or primitive is complete, use the <strong>Documentation</strong> prompt to generate a full docs page. It will:</p>
-          <ul className="space-y-1 text-sm">
-            <li>• Create app/docs/ui/components/[name]/page.tsx</li>
-            <li>• Import all your demo files as live examples</li>
-            <li>• Generate a props table from your TypeScript types</li>
-            <li>• Document when to use, best practices, accessibility notes</li>
-          </ul>
-        </DocsCallout>
-      </DocsSection>
-
     </DocsPage>
   )
 }
