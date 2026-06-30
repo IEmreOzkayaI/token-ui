@@ -103,45 +103,68 @@ export default function NewPrimitivePage() {
       />
 
       <DocsSection id="overview" title="Overview">
-        <p className="text-muted-foreground mb-6">
+        <p className="text-muted-foreground mb-8 text-base leading-relaxed">
           Use this prompt when creating a new foundational primitive component. A primitive is a base UI component that combines with others to create full-featured components.
         </p>
 
-        <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          <Card>
+        <div className="grid gap-5 sm:grid-cols-2 mb-8">
+          <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
             <CardContent className="pt-6">
-              <p className="text-sm font-medium mb-1">When to Use</p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-sm font-semibold mb-2 text-primary">When to Use</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 Creating foundational component, converting external library component to Token UI, building new base element
               </p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border-destructive/20 bg-gradient-to-br from-destructive/5 to-transparent">
             <CardContent className="pt-6">
-              <p className="text-sm font-medium mb-1">When NOT to Use</p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-sm font-semibold mb-2 text-destructive">When NOT to Use</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 Adding to existing primitive, creating full-featured component, just adding a variant
               </p>
             </CardContent>
           </Card>
         </div>
 
-        <DocsCallout title="Key Points" variant="info">
-          <ul className="space-y-1 text-sm">
-            <li>• Primitives are base components in ui/primitives/</li>
-            <li>• Use CVA (class-variance-authority) for variants</li>
-            <li>• Add data-slot attributes to all elements</li>
-            <li>• Export both component and variants CVA</li>
-            <li>• Support composable sub-components if needed</li>
-            <li>• Include accessibility features from the start</li>
+        <DocsCallout title="Key Points" variant="info" className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-primary/30">
+          <ul className="space-y-2 text-sm">
+            <li className="flex items-start gap-2">
+              <span className="text-primary font-bold">•</span>
+              <span>Primitives are base components in <code className="text-xs bg-foreground/10 px-1.5 py-0.5 rounded">ui/primitives/</code></span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary font-bold">•</span>
+              <span>Use CVA (class-variance-authority) for variants</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary font-bold">•</span>
+              <span>Add data-slot attributes to all elements</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary font-bold">•</span>
+              <span>Export both component and variants CVA</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary font-bold">•</span>
+              <span>Support composable sub-components if needed</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary font-bold">•</span>
+              <span>Include accessibility features from the start</span>
+            </li>
           </ul>
         </DocsCallout>
       </DocsSection>
 
       <DocsSection id="create" title="Create Prompt">
-        <p className="text-muted-foreground mb-4">
-          Click "Create" button in the header to open the prompt generator.
-        </p>
+        <div className="bg-gradient-to-r from-primary/10 via-transparent to-transparent border border-primary/20 rounded-lg p-6">
+          <p className="text-muted-foreground mb-3 text-base">
+            Click the <span className="font-semibold text-foreground">Create</span> button in the header to open the interactive prompt generator.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Fill in your primitive details, see live examples, and copy the generated prompt to use with Claude.
+          </p>
+        </div>
       </DocsSection>
 
       <Sheet open={open} onOpenChange={setOpen}>
