@@ -16,7 +16,7 @@ function CodeBlock({ children }: { children: string }) {
         }}
         className="absolute top-2 right-2 p-2 rounded-lg hover:bg-muted transition-colors"
       >
-        {copied ? <Check className="size-4 text-green-600" /> : <Copy className="size-4" />}
+        {copied ? <Check className="size-4 text-primary" /> : <Copy className="size-4" />}
       </button>
       <Card className="p-4">
         <pre className="text-sm overflow-x-auto font-mono pr-12">{children}</pre>

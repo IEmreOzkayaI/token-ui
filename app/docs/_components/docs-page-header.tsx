@@ -47,7 +47,7 @@ export function DocsPageHeader({
           onClick={copyPage}
         >
           {copied ? (
-            <Check className="size-3.5 text-green-600" />
+            <Check className="size-3.5 text-primary" />
           ) : (
             <Copy className="size-3.5" />
           )}
