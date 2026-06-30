@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:1
-
 ARG NODE_VERSION=22-slim
 
 # ============================================
@@ -11,8 +9,7 @@ WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
 
-RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
-  corepack enable pnpm && pnpm install --frozen-lockfile
+RUN corepack enable pnpm && pnpm install --frozen-lockfile
 
 # ============================================
 # Stage 2: Build application
@@ -27,8 +24,7 @@ COPY . .
 ENV NODE_ENV=production
 # ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN --mount=type=cache,target=/app/.next/cache \
-  corepack enable pnpm && pnpm build
+RUN corepack enable pnpm && pnpm build
 
 # ============================================
 # Stage 3: Production runtime
