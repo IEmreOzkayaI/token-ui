@@ -171,7 +171,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
               className={cn(
                 "group flex w-full items-center gap-2 rounded px-2 py-2 text-xs font-medium transition-all hover:bg-foreground/5",
                 expanded["Components"]
-                  ? "text-foreground bg-foreground/5"
+                  ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
