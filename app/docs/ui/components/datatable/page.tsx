@@ -8,6 +8,7 @@ import DataTableDefault from "@/ui/components/DataTable/Default"
 import DataTablePaginated from "@/ui/components/DataTable/Paginated"
 import DataTableCollapsible from "@/ui/components/DataTable/Collapsible"
 import DataTableProduct from "@/ui/components/DataTable/Product"
+import DataTableTerminals from "@/ui/components/DataTable/terminals"
 
 const examples = [
   {
@@ -33,6 +34,12 @@ const examples = [
     title: "Product",
     component: DataTableProduct,
     sourcePath: "ui/components/DataTable/Product.tsx",
+  },
+  {
+    id: "terminals",
+    title: "Terminals",
+    component: DataTableTerminals,
+    sourcePath: "ui/components/DataTable/terminals.tsx",
   },
 ] as const
 
@@ -65,7 +72,7 @@ export default function DataTablePage() {
         description="Import and compose the component."
       >
         <CodeBlock
-          code={`import DataTableDefault from "@/ui/components/DataTable/Default"\nimport DataTablePaginated from "@/ui/components/DataTable/Paginated"\nimport DataTableCollapsible from "@/ui/components/DataTable/Collapsible"\nimport DataTableProduct from "@/ui/components/DataTable/Product"`}
+          code={`import DataTableDefault from "@/ui/components/DataTable/Default"\nimport DataTablePaginated from "@/ui/components/DataTable/Paginated"\nimport DataTableCollapsible from "@/ui/components/DataTable/Collapsible"\nimport DataTableProduct from "@/ui/components/DataTable/Product"\nimport DataTableTerminals from "@/ui/components/DataTable/terminals"`}
         />
       </DocsSection>
 
