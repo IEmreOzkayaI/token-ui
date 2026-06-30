@@ -71,7 +71,7 @@ export function getTokenColor(type: string, isDark: boolean): string {
       case "key":
         return "text-blue-400"
       case "string":
-        return "text-green-400"
+        return "text-primary"
       case "number":
         return "text-orange-400"
       case "boolean":
@@ -88,7 +88,7 @@ export function getTokenColor(type: string, isDark: boolean): string {
       case "key":
         return "text-blue-600"
       case "string":
-        return "text-green-600"
+        return "text-primary"
       case "number":
         return "text-orange-600"
       case "boolean":
