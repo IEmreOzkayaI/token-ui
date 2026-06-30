@@ -223,7 +223,7 @@ export default function NewPrimitivePage() {
             <div className="px-4 py-4 space-y-3">
               <h4 className="text-sm font-semibold">Generated Prompt</h4>
               <div className="rounded-lg border border-border/50 bg-muted/30 overflow-hidden">
-                <CodeBlock code={finalPrompt} showLineNumbers={false} className="max-h-40 text-xs" />
+                <CodeBlock code={finalPrompt} showLineNumbers={false} className="max-h-40 text-sm leading-relaxed" />
               </div>
               <div className="text-xs text-muted-foreground">
                 {Object.values(values).some((v) => !v) ? (
