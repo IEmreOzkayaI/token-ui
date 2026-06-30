@@ -19,6 +19,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/primitives/tooltip"
+import { ChevronDownIcon, XIcon } from "lucide-react"
+import { Checkbox } from "@/primitives/checkbox"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/primitives/popover"
 
 type TerminalStatus = "Aktif" | "İnaktif" | "Hurda"
 
@@ -75,6 +82,78 @@ const TerminalIcon = () => (
     <path d="M24 66 L40 66 M28 70 L36 70" stroke="currentColor" strokeWidth="2" className="text-slate-600 dark:text-slate-400" />
   </svg>
 )
+
+interface MultiSelectDropdownProps {
+  label: string
+  options: string[]
+  selected: Set<string>
+  onChange: (selected: Set<string>) => void
+  placeholder?: string
+}
+
+function MultiSelectDropdown({ label, options, selected, onChange, placeholder = "Seç..." }: MultiSelectDropdownProps) {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" className="w-full justify-between h-10 px-3 py-2 text-sm font-normal">
+          <span className="flex items-center gap-2 flex-wrap">
+            {selected.size === 0 ? (
+              <span className="text-muted-foreground">{placeholder}</span>
+            ) : selected.size <= 2 ? (
+              Array.from(selected).map((item) => (
+                <Badge key={item} variant="secondary" className="text-xs">
+                  {item}
+                </Badge>
+              ))
+            ) : (
+              <Badge variant="secondary" className="text-xs">
+                {selected.size} seçili
+              </Badge>
+            )}
+          </span>
+          <ChevronDownIcon className="h-4 w-4 opacity-50 shrink-0 ml-auto" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent align="start" className="w-56 p-0">
+        <div className="p-4 space-y-3">
+          <div className="text-sm font-medium">{label}</div>
+          <div className="space-y-2 max-h-64 overflow-y-auto">
+            {options.map((option) => (
+              <div key={option} className="flex items-center gap-2">
+                <Checkbox
+                  id={option}
+                  checked={selected.has(option)}
+                  onCheckedChange={(checked) => {
+                    const newSelected = new Set(selected)
+                    if (checked) {
+                      newSelected.add(option)
+                    } else {
+                      newSelected.delete(option)
+                    }
+                    onChange(newSelected)
+                  }}
+                />
+                <label htmlFor={option} className="text-sm cursor-pointer flex-1">
+                  {option}
+                </label>
+              </div>
+            ))}
+          </div>
+          {selected.size > 0 && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="w-full text-xs h-8"
+              onClick={() => onChange(new Set())}
+            >
+              Temizle
+            </Button>
+          )}
+        </div>
+      </PopoverContent>
+    </Popover>
+  )
+}
 
 export default function DataTableTerminals() {
   const [search, setSearch] = useState("")
@@ -193,63 +272,42 @@ export default function DataTableTerminals() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label className="text-xs font-medium text-muted-foreground block mb-2">Cihaz Modeli</label>
-            <select
-              multiple
-              value={Array.from(selectedModels)}
-              onChange={(e) => {
-                setSelectedModels(new Set(Array.from(e.target.selectedOptions, (opt) => opt.value)))
+            <MultiSelectDropdown
+              label="Cihaz Modeli"
+              options={allModels}
+              selected={selectedModels}
+              onChange={(selected) => {
+                setSelectedModels(selected)
                 setCurrentPage(1)
               }}
-              className="w-full px-2 py-2 rounded-sm border text-xs outline-none transition-colors hover:border-foreground/20 focus:border-foreground/20 focus:ring-1 focus:ring-ring"
-              aria-label="Cihaz modeline göre filtrele"
-            >
-              {allModels.map((model) => (
-                <option key={model} value={model}>
-                  {model}
-                </option>
-              ))}
-            </select>
+              placeholder="Model seç..."
+            />
           </div>
 
           <div>
-            <label className="text-xs font-medium text-muted-foreground block mb-2">Yüklü Uygulamalar</label>
-            <select
-              multiple
-              value={Array.from(selectedApps)}
-              onChange={(e) => {
-                setSelectedApps(new Set(Array.from(e.target.selectedOptions, (opt) => opt.value)))
+            <MultiSelectDropdown
+              label="Yüklü Uygulamalar"
+              options={allApps}
+              selected={selectedApps}
+              onChange={(selected) => {
+                setSelectedApps(selected)
                 setCurrentPage(1)
               }}
-              className="w-full px-2 py-2 rounded-sm border text-xs outline-none transition-colors hover:border-foreground/20 focus:border-foreground/20 focus:ring-1 focus:ring-ring"
-              aria-label="Uygulamaya göre filtrele"
-            >
-              {allApps.map((app) => (
-                <option key={app} value={app}>
-                  {app}
-                </option>
-              ))}
-            </select>
+              placeholder="Uygulama seç..."
+            />
           </div>
 
           <div>
-            <label className="text-xs font-medium text-muted-foreground block mb-2">Statü</label>
-            <select
-              multiple
-              value={Array.from(selectedStatuses)}
-              onChange={(e) => {
-                setSelectedStatuses(new Set(Array.from(e.target.selectedOptions, (opt) => opt.value as TerminalStatus)))
+            <MultiSelectDropdown
+              label="Statü"
+              options={allStatuses}
+              selected={selectedStatuses}
+              onChange={(selected) => {
+                setSelectedStatuses(selected as Set<TerminalStatus>)
                 setCurrentPage(1)
               }}
-              className="w-full px-2 py-2 rounded-sm border text-xs outline-none transition-colors hover:border-foreground/20 focus:border-foreground/20 focus:ring-1 focus:ring-ring"
-              aria-label="Statüye göre filtrele"
-            >
-              {allStatuses.map((status) => (
-                <option key={status} value={status}>
-                  {status}
-                </option>
-              ))}
-            </select>
+              placeholder="Statü seç..."
+            />
           </div>
         </div>
 
