@@ -124,7 +124,7 @@ export default function NewPrimitivePage() {
   const [copied, setCopied] = useState(false)
   const [showExample, setShowExample] = useState(true)
   const [values, setValues] = useState<Values>(EXAMPLE_VALUES)
-  const [sheetWidth, setSheetWidth] = useState(90)
+  const [sheetWidth, setSheetWidth] = useState(50)
 
   const handleResizeStart = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -192,7 +192,7 @@ export default function NewPrimitivePage() {
       <>
         {parts.map((part, i) =>
           part.startsWith("___P___") ? (
-            <span key={i} className="text-primary font-semibold">{part.slice(7, -5)}</span>
+            <span key={i} className="text-primary font-semibold">{part.slice(7, -7)}</span>
           ) : (
             part
           )
@@ -264,28 +264,30 @@ export default function NewPrimitivePage() {
           {/* Drag handle */}
           <div
             onMouseDown={handleResizeStart}
-            className="absolute left-0 top-0 h-full w-1.5 cursor-col-resize z-50 group hover:bg-primary/30 transition-colors"
+            className="absolute left-0 top-0 h-full w-3 cursor-col-resize z-50 flex items-center justify-center group"
           >
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-12 rounded-full bg-border group-hover:bg-primary transition-colors" />
+            <div className="flex flex-col gap-[3px] opacity-30 group-hover:opacity-100 transition-opacity">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="w-[3px] h-[3px] rounded-full bg-foreground group-hover:bg-primary transition-colors" />
+              ))}
+            </div>
           </div>
-          <SheetHeader className="space-y-3 px-6 pt-6 pb-4 border-b">
+          <SheetHeader className="px-6 pt-6 pb-4 border-b">
             <div className="flex items-center justify-between">
               <SheetTitle>Generate Primitive Prompt</SheetTitle>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-8 gap-1.5 text-xs text-muted-foreground hover:text-foreground"
-                  onClick={() => {
-                    setShowExample(!showExample)
-                    setValues(showExample ? EMPTY_VALUES : EXAMPLE_VALUES)
-                  }}
-                >
-                  <Trash2 className="size-3" />
-                  {showExample ? "Clear" : "See Example"}
-                </Button>
-              </div>
             </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="w-fit h-7 gap-1.5 text-xs text-muted-foreground hover:text-foreground px-1"
+              onClick={() => {
+                setShowExample(!showExample)
+                setValues(showExample ? EMPTY_VALUES : EXAMPLE_VALUES)
+              }}
+            >
+              <Trash2 className="size-3" />
+              {showExample ? "Clear" : "See Example"}
+            </Button>
           </SheetHeader>
 
           <div className="flex flex-1 overflow-hidden">
