@@ -1,7 +1,7 @@
 "use client"
 
 import { Check, Copy, ChevronUp } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import { Button } from "@/primitives/button"
 import { copyToClipboard } from "@/lib/copy-to-clipboard"
@@ -74,7 +74,7 @@ export function CodeBlock({
   const [failed, setFailed] = useState(false)
   const [isDark, setIsDark] = useState(true)
 
-  useState(() => {
+  useEffect(() => {
     setIsDark(document.documentElement.classList.contains("dark"))
   }, [])
 
@@ -139,7 +139,7 @@ export function CollapsibleCodeBlock({ code }: CollapsibleCodeBlockProps) {
   const [expanded, setExpanded] = useState(false)
   const [isDark, setIsDark] = useState(true)
 
-  useState(() => {
+  useEffect(() => {
     setIsDark(document.documentElement.classList.contains("dark"))
   }, [])
 

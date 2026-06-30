@@ -164,38 +164,3 @@ Focus state:          show ring without radius change`} />
     </DocsPage>
   )
 }
-componentRadius.button     // Standard button rounding
-componentRadius.card       // Card container rounding
-componentRadius.input      // Form input rounding
-componentRadius.badge      // Badge pill shape
-componentRadius.avatar     // Avatar circle
-componentRadius.modal      // Modal dialog corners
-componentRadius.dropdown   // Dropdown menu corners
-componentRadius.tooltip    // Tooltip corners`} />
-      </DocsSection>
-
-      <DocsSection id="usage" title="Usage">
-        <p className="text-muted-foreground mb-6">
-          Apply border radius consistently across components.
-        </p>
-        <CodeBlock code={`import { borderRadius, semanticRadius, componentRadius } from "@/ui/foundations"
-
-// Direct scale
-<div style={{ borderRadius: borderRadius.md }}>Rounded box</div>
-
-// Semantic
-<button style={{ borderRadius: semanticRadius.pill }}>Pill button</button>
-<img style={{ borderRadius: semanticRadius.circle }} />
-
-// Component presets
-<div style={{ borderRadius: componentRadius.card }}>Card</div>
-<button style={{ borderRadius: componentRadius.button }}>Button</button>
-
-// Tailwind
-<div class="rounded-lg">Rounded</div>
-<button class="rounded-full">Pill</button>
-<img class="rounded-full" />`} />
-      </DocsSection>
-    </DocsPage>
-  )
-}

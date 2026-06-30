@@ -75,6 +75,34 @@ export default function ColorsPage() {
         <p className="text-muted-foreground mb-6">
           Semantic color roles assign purpose to colors. Each role has both foreground and background variants for contrast.
         </p>
+
+        <div className="grid gap-4 sm:grid-cols-2 mb-6">
+          <div className="space-y-2">
+            <div className="h-20 rounded-lg border border-border/50 bg-primary flex items-center justify-center">
+              <span className="text-primary-foreground font-medium">Primary</span>
+            </div>
+            <p className="text-xs text-muted-foreground">Interactive, primary actions</p>
+          </div>
+          <div className="space-y-2">
+            <div className="h-20 rounded-lg border border-border/50 bg-secondary flex items-center justify-center">
+              <span className="text-secondary-foreground font-medium">Secondary</span>
+            </div>
+            <p className="text-xs text-muted-foreground">Secondary actions</p>
+          </div>
+          <div className="space-y-2">
+            <div className="h-20 rounded-lg border border-border/50 bg-accent flex items-center justify-center">
+              <span className="text-accent-foreground font-medium">Accent</span>
+            </div>
+            <p className="text-xs text-muted-foreground">Highlights, emphasis</p>
+          </div>
+          <div className="space-y-2">
+            <div className="h-20 rounded-lg border border-border/50 bg-muted flex items-center justify-center">
+              <span className="text-muted-foreground font-medium">Muted</span>
+            </div>
+            <p className="text-xs text-muted-foreground">Disabled, placeholders</p>
+          </div>
+        </div>
+
         <CodeBlock code={`/* Light Mode (:root) */
 --primary: oklch(0.488 0.243 264.376);              /* Interactive, primary actions */
 --primary-foreground: oklch(0.97 0.014 254.604);   /* Text on primary bg */
@@ -105,6 +133,28 @@ export default function ColorsPage() {
         <p className="text-muted-foreground mb-6">
           Status colors communicate outcomes and states. Each has foreground text color for contrast.
         </p>
+
+        <div className="grid gap-4 sm:grid-cols-3 mb-6">
+          <div className="space-y-2">
+            <div className="h-20 rounded-lg border border-border/50 bg-success flex items-center justify-center">
+              <span className="text-success-foreground font-medium">Success</span>
+            </div>
+            <p className="text-xs text-muted-foreground">Confirmation, success</p>
+          </div>
+          <div className="space-y-2">
+            <div className="h-20 rounded-lg border border-border/50 bg-warning flex items-center justify-center">
+              <span className="text-warning-foreground font-medium">Warning</span>
+            </div>
+            <p className="text-xs text-muted-foreground">Caution, attention needed</p>
+          </div>
+          <div className="space-y-2">
+            <div className="h-20 rounded-lg border border-border/50 bg-destructive flex items-center justify-center">
+              <span className="text-destructive-foreground font-medium">Destructive</span>
+            </div>
+            <p className="text-xs text-muted-foreground">Alerts, errors</p>
+          </div>
+        </div>
+
         <CodeBlock code={`/* Light Mode Status Colors */
 --warning: oklch(0.715 0.171 70.08);               /* Caution, attention needed */
 --warning-foreground: oklch(0.145 0 0);            /* Dark text on warning */
