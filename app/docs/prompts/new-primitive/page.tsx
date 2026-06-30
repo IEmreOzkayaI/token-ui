@@ -393,6 +393,19 @@ export default function NewPrimitivePage() {
           </SheetFooter>
         </SheetContent>
       </Sheet>
+    
+      <DocsSection title="Next Step" className="mt-12 pt-8 border-t">
+        <DocsCallout title="Generate Documentation" variant="default">
+          <p className="text-sm mb-2">Once your component or primitive is complete, use the <strong>Documentation</strong> prompt to generate a full docs page. It will:</p>
+          <ul className="space-y-1 text-sm">
+            <li>• Create app/docs/ui/components/[name]/page.tsx</li>
+            <li>• Import all your demo files as live examples</li>
+            <li>• Generate a props table from your TypeScript types</li>
+            <li>• Document when to use, best practices, accessibility notes</li>
+          </ul>
+        </DocsCallout>
+      </DocsSection>
+
     </DocsPage>
   )
 }
