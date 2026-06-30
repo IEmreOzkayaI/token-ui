@@ -194,7 +194,7 @@ export default function NewPrimitivePage() {
     values.variants.some(Boolean) &&
     values.a11y_requirements.some(Boolean)
 
-  // Highlight all user-entered values in prompt (single-pass regex, no nested replacement)
+  // Highlight + format prompt with sections, lists, code blocks
   const renderPrompt = () => {
     const allValues = [
       values.primitive_name,
@@ -204,23 +204,45 @@ export default function NewPrimitivePage() {
       ...values.a11y_requirements.filter(Boolean),
     ].filter(Boolean).sort((a, b) => b.length - a.length)
 
-    if (!allValues.length) return <>{finalPrompt}</>
-
-    const pattern = new RegExp(
+    const pattern = allValues.length ? new RegExp(
       allValues.map(v => v.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"),
       "g"
-    )
+    ) : null
 
-    const parts: (string | JSX.Element)[] = []
-    let last = 0
-    let match: RegExpExecArray | null
-    while ((match = pattern.exec(finalPrompt)) !== null) {
-      if (match.index > last) parts.push(finalPrompt.slice(last, match.index))
-      parts.push(<span key={match.index} className="text-primary font-semibold">{match[0]}</span>)
-      last = pattern.lastIndex
+    const highlightText = (text: string) => {
+      if (!pattern) return text
+      const parts: (string | JSX.Element)[] = []
+      let last = 0
+      let match: RegExpExecArray | null
+      while ((match = pattern.exec(text)) !== null) {
+        if (match.index > last) parts.push(text.slice(last, match.index))
+        parts.push(<span key={match.index} className="text-primary font-semibold">{match[0]}</span>)
+        last = pattern.lastIndex
+      }
+      if (last < text.length) parts.push(text.slice(last))
+      return parts.length ? parts : text
     }
-    if (last < finalPrompt.length) parts.push(finalPrompt.slice(last))
-    return <>{parts}</>
+
+    const lines = finalPrompt.split("\n")
+    return (
+      <div className="space-y-3">
+        {lines.map((line, i) => {
+          if (!line.trim()) return <div key={i} className="h-2" />
+          if (line.startsWith("---")) return <div key={i} className="border-t border-border/30 my-1" />
+          if (line.match(/^\d+\./)) {
+            const [num, ...rest] = line.split(/\s+/)
+            return <div key={i} className="flex gap-3 text-sm"><span className="font-semibold min-w-fit">{num}</span><div>{highlightText(rest.join(" "))}</div></div>
+          }
+          if (line.startsWith("  ")) return <div key={i} className="text-sm pl-4 text-foreground/80">{highlightText(line.trim())}</div>
+          if (line.startsWith("- ")) return <div key={i} className="flex gap-2 text-sm"><span>•</span><div>{highlightText(line.slice(2))}</div></div>
+          if (line.includes(" → ")) {
+            const [label, desc] = line.split(" → ")
+            return <div key={i} className="text-sm space-y-1"><div className="font-semibold text-foreground">{highlightText(label)}</div></div>
+          }
+          return <div key={i} className="text-sm">{highlightText(line)}</div>
+        })}
+      </div>
+    )
   }
 
   return (
@@ -296,7 +318,7 @@ export default function NewPrimitivePage() {
           </div>
           <SheetHeader className="px-6 pt-5 pb-4 border-b">
             <SheetTitle className="text-base font-semibold">Prompt Generator</SheetTitle>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 justify-between w-full">
               <p className="text-xs text-muted-foreground">Fill in parameters to generate your Token UI prompt</p>
               <button
                 className="shrink-0 text-xs text-primary/70 underline underline-offset-2 hover:text-primary transition-colors"
