@@ -76,36 +76,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Features Section */}
-      <section id="features" className="relative py-32 px-6 border-t border-border/40">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-16 text-center">Everything You Need</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: "Design Tokens", desc: "Colors, typography, spacing, shadows, radius, icons", icon: "🎨" },
-              { title: "Components", desc: "40+ React components, fully typed, accessible", icon: "📦" },
-              { title: "Documentation", desc: "Live examples, interactive guides, premium UI", icon: "📚" }
-            ].map((item) => (
-              <div
-                key={item.title}
-                onMouseEnter={() => setHoveredCard(item.title)}
-                onMouseLeave={() => setHoveredCard(null)}
-                className={`p-8 rounded-xl border transition-all duration-300 cursor-pointer
-                  ${hoveredCard === item.title
-                    ? 'border-primary bg-primary/10 shadow-lg'
-                    : 'border-border/40 bg-card/50 hover:bg-card'
-                  }`}
-              >
-                <div className="text-4xl mb-4">{item.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-muted-foreground">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="border-t border-border/40 py-12 px-6">
         <div className="max-w-6xl mx-auto text-center text-sm text-muted-foreground">
