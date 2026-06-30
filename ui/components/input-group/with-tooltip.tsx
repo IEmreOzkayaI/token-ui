@@ -38,6 +38,7 @@ import {
 import {
   Tooltip,
   TooltipContent,
+  TooltipProvider,
   TooltipTrigger,
 } from "@/primitives/tooltip"
 
@@ -49,7 +50,8 @@ export default function InputGroupWithTooltip({
   setCountry: (value: string) => void
 }) {
   return (
-    <FieldGroup>
+    <TooltipProvider>
+      <FieldGroup>
       <Field>
         <FieldLabel htmlFor="input-tooltip-20">Tooltip</FieldLabel>
         <InputGroup>
@@ -156,6 +158,7 @@ export default function InputGroupWithTooltip({
           This is a description of the input group.
         </FieldDescription>
       </Field>
-    </FieldGroup>
+      </FieldGroup>
+    </TooltipProvider>
   )
 }

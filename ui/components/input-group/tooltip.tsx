@@ -9,12 +9,14 @@ import {
 import {
   Tooltip,
   TooltipContent,
+  TooltipProvider,
   TooltipTrigger,
 } from "@/primitives/tooltip"
 
 export default function InputGroupTooltip() {
   return (
-    <div className="grid w-full max-w-sm gap-4">
+    <TooltipProvider>
+      <div className="grid w-full max-w-sm gap-4">
       <InputGroup>
         <InputGroupInput placeholder="Enter password" type="password" />
         <InputGroupAddon align="inline-end">
@@ -72,6 +74,7 @@ export default function InputGroupTooltip() {
           </TooltipContent>
         </Tooltip>
       </InputGroup>
-    </div>
+      </div>
+    </TooltipProvider>
   )
 }
