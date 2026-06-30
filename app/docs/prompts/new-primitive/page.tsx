@@ -149,7 +149,7 @@ export default function NewPrimitivePage() {
           <SheetHeader className="space-y-3">
             <SheetTitle className="text-left">Generate Primitive Prompt</SheetTitle>
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
               className="w-fit gap-2 text-xs h-8 px-2"
               onClick={() => {
