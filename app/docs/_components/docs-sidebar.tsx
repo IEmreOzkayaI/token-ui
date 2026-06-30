@@ -90,33 +90,30 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                   {sectionButton}
                 </button>
               )}
-            </div>
-          )
-        })
 
-            {expanded[section.title] && (
-              <ul className="space-y-1 pl-4 mt-1 mb-4">
-                {section.items.map((item) => {
-                  const isActive = pathname === item.href
-                  return (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        onClick={onNavigate}
-                        className={cn(
-                          "block px-0 py-1.5 text-sm transition-colors",
-                          isActive
-                            ? "font-medium text-foreground"
-                            : "text-muted-foreground hover:text-foreground"
-                        )}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-            )}
+              {expanded[section.title] && (
+                <ul className="space-y-1 pl-4 mt-1 mb-4">
+                  {section.items.map((item) => {
+                    const isActive = pathname === item.href
+                    return (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          onClick={onNavigate}
+                          className={cn(
+                            "block px-0 py-1.5 text-sm transition-colors",
+                            isActive
+                              ? "font-medium text-foreground"
+                              : "text-muted-foreground hover:text-foreground"
+                          )}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              )}
             </div>
           )
         })}
