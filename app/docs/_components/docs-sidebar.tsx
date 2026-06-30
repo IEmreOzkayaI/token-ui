@@ -51,7 +51,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
 
   const renderItems = (items: typeof docsNav[0]["items"], level = 0): React.ReactNode => {
     return (
-      <ul className={cn("mt-1", level > 0 && "ml-3 border-l border-primary/30 pl-2")}>
+      <ul className={cn("mt-1 ml-3 border-l border-primary/30 pl-2")}>
         {items.map((item, idx) => {
           const isActive = pathname === item.href
           const hasChildren = item.items && item.items.length > 0
