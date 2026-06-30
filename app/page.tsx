@@ -2,9 +2,16 @@
 
 import Link from "next/link"
 import { useState, useEffect } from "react"
+import { Moon, Sun } from "lucide-react"
 
 export default function Home() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [isDark, setIsDark] = useState(true)
+
+  useEffect(() => {
+    document.documentElement.classList.add("dark")
+    setIsDark(true)
+  }, [])
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -13,6 +20,13 @@ export default function Home() {
     window.addEventListener("mousemove", handleMouseMove)
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
+
+  function toggleTheme() {
+    const next = !isDark
+    document.documentElement.classList.toggle("dark", next)
+    localStorage.setItem("theme", next ? "dark" : "light")
+    setIsDark(next)
+  }
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground overflow-hidden">
@@ -41,18 +55,27 @@ export default function Home() {
       </div>
 
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/60 border-b border-border/20">
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/95 border-b border-border/30">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Token UI
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <a href="/docs" className="text-sm hover:text-primary transition">Docs</a>
-            <a href="/docs/foundations" className="text-sm hover:text-primary transition">Foundations</a>
+            <a href="/docs" className="text-sm text-foreground/80 hover:text-foreground transition-colors">Docs</a>
+            <a href="/docs/foundations" className="text-sm text-foreground/80 hover:text-foreground transition-colors">Foundations</a>
           </div>
-          <Link href="/docs" className="px-6 py-2 bg-primary/90 text-primary-foreground rounded-full text-sm font-medium hover:bg-primary shadow-lg hover:shadow-xl transition-all hover:scale-105">
-            Get Started
-          </Link>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-foreground/10 transition-colors text-foreground/70 hover:text-foreground"
+              aria-label="Toggle theme"
+            >
+              {isDark ? <Sun className="size-5" /> : <Moon className="size-5" />}
+            </button>
+            <Link href="/docs" className="px-6 py-2 bg-primary/90 text-primary-foreground rounded-full text-sm font-medium hover:bg-primary shadow-lg hover:shadow-xl transition-all hover:scale-105">
+              Get Started
+            </Link>
+          </div>
         </div>
       </nav>
 
@@ -64,7 +87,7 @@ export default function Home() {
           <div className="absolute top-1/4 left-10 group">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all" />
-              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl px-6 py-4 hover:border-primary/50 transition-all">
+              <div className="backdrop-blur-xl bg-foreground/5 border border-foreground/10 rounded-2xl px-6 py-4 hover:border-primary/50 hover:bg-foreground/10 transition-all">
                 <div className="text-xs text-primary font-semibold">Design Tokens</div>
                 <div className="text-2xl font-bold mt-2">100K+</div>
               </div>
@@ -75,7 +98,7 @@ export default function Home() {
           <div className="absolute bottom-1/4 right-10 group">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all" />
-              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl px-6 py-4 hover:border-accent/50 transition-all">
+              <div className="backdrop-blur-xl bg-foreground/5 border border-foreground/10 rounded-2xl px-6 py-4 hover:border-accent/50 hover:bg-foreground/10 transition-all">
                 <div className="text-xs text-accent font-semibold">Components</div>
                 <div className="text-2xl font-bold mt-2">40+</div>
               </div>
@@ -87,7 +110,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center space-y-12 relative z-10">
           {/* Eyebrow */}
           <div className="inline-block">
-            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-full px-4 py-2 text-xs font-semibold text-primary hover:bg-white/10 transition-all">
+            <div className="backdrop-blur-xl bg-foreground/5 border border-foreground/20 rounded-full px-4 py-2 text-xs font-semibold text-primary hover:bg-foreground/10 transition-all">
               ✨ Premium Design System
             </div>
           </div>
@@ -118,7 +141,7 @@ export default function Home() {
             </a>
             <Link
               href="/docs/foundations"
-              className="group px-8 py-4 backdrop-blur-xl bg-white/5 border border-white/20 text-foreground font-semibold rounded-full hover:bg-white/10 hover:border-primary/50 transition-all hover:shadow-lg"
+              className="group px-8 py-4 backdrop-blur-xl bg-foreground/5 border border-foreground/20 text-foreground font-semibold rounded-full hover:bg-foreground/10 hover:border-primary/50 transition-all hover:shadow-lg"
             >
               Explore Foundations
             </Link>
@@ -127,8 +150,8 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-border/20 py-12 px-6 backdrop-blur-xl bg-background/40">
-        <div className="max-w-6xl mx-auto text-center text-xs text-muted-foreground">
+      <footer className="border-t border-border/30 py-12 px-6 backdrop-blur-xl bg-background/40">
+        <div className="max-w-6xl mx-auto text-center text-xs text-muted-foreground/80">
           <p>Built with React 19 • Next.js 16 • Tailwind CSS</p>
         </div>
       </footer>
