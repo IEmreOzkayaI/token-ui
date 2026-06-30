@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { TooltipProvider } from "@/primitives/tooltip"
 import { cn } from "@/lib/utils"
 
 type ComponentPreviewProps = {
@@ -20,7 +21,7 @@ export function ComponentPreview({ children, className }: ComponentPreviewProps)
         style={{ minHeight: "24rem" }}
       >
         <div className="flex min-h-96 items-center justify-center p-8 md:p-10">
-          {children}
+          <TooltipProvider>{children}</TooltipProvider>
         </div>
       </div>
     </div>
