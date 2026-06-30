@@ -10,12 +10,14 @@ import { Label } from "@/primitives/label"
 import {
   Tooltip,
   TooltipContent,
+  TooltipProvider,
   TooltipTrigger,
 } from "@/primitives/tooltip"
 
 export default function InputGroupLabel() {
   return (
-    <div className="grid w-full max-w-sm gap-4">
+    <TooltipProvider>
+      <div className="grid w-full max-w-sm gap-4">
       <InputGroup>
         <InputGroupInput id="email" placeholder="shadcn" />
         <InputGroupAddon>
@@ -45,6 +47,7 @@ export default function InputGroupLabel() {
           </Tooltip>
         </InputGroupAddon>
       </InputGroup>
-    </div>
+      </div>
+    </TooltipProvider>
   )
 }
