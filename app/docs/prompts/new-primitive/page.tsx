@@ -273,21 +273,18 @@ export default function NewPrimitivePage() {
             </div>
           </div>
           <SheetHeader className="px-6 pt-6 pb-4 border-b">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
               <SheetTitle>Generate Primitive Prompt</SheetTitle>
+              <button
+                className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground transition-colors"
+                onClick={() => {
+                  setShowExample(!showExample)
+                  setValues(showExample ? EMPTY_VALUES : EXAMPLE_VALUES)
+                }}
+              >
+                {showExample ? "Clear" : "See Example"}
+              </button>
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="w-fit h-7 gap-1.5 text-xs text-muted-foreground hover:text-foreground px-1"
-              onClick={() => {
-                setShowExample(!showExample)
-                setValues(showExample ? EMPTY_VALUES : EXAMPLE_VALUES)
-              }}
-            >
-              <Trash2 className="size-3" />
-              {showExample ? "Clear" : "See Example"}
-            </Button>
           </SheetHeader>
 
           <div className="flex flex-1 overflow-hidden">
